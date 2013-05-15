@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\laurena\archives\iarchive.hpp" />
+    <ClInclude Include="src\laurena\archives\oarchive.hpp" />
+    <ClInclude Include="src\laurena\constants\const_charsets.hpp" />
+    <ClInclude Include="src\laurena\constants\const_strings.hpp" />
+    <ClInclude Include="src\laurena\debug\debug.hpp" />
+    <ClInclude Include="src\laurena\debug\debug_stream.hpp" />
+    <ClInclude Include="src\laurena\debug\testunit.hpp" />
+    <ClInclude Include="src\laurena\descriptors\any_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\bitset_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\classes.hpp" />
+    <ClInclude Include="src\laurena\descriptors\descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\features\any_feature.hpp" />
+    <ClInclude Include="src\laurena\descriptors\features\class_feature.hpp" />
+    <ClInclude Include="src\laurena\descriptors\features\class_features.hpp" />
+    <ClInclude Include="src\laurena\descriptors\features\container_feature.hpp" />
+    <ClInclude Include="src\laurena\descriptors\features\keymapper_feature.hpp" />
+    <ClInclude Include="src\laurena\descriptors\features\polymorphic_feature.hpp" />
+    <ClInclude Include="src\laurena\descriptors\field.hpp" />
+    <ClInclude Include="src\laurena\descriptors\list_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\map_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\method_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\numeric_type_descriptors.hpp" />
+    <ClInclude Include="src\laurena\descriptors\polymorphic_class_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\simple_type_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\standard_class_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\string_array_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\string_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\variable_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\vector_descriptor.hpp" />
+    <ClInclude Include="src\laurena\exceptions\bad_cast_exception.hpp" />
+    <ClInclude Include="src\laurena\exceptions\exception.hpp" />
+    <ClInclude Include="src\laurena\exceptions\failed_parsing_exception.hpp" />
+    <ClInclude Include="src\laurena\exceptions\file_not_found_exception.hpp" />
+    <ClInclude Include="src\laurena\exceptions\null_pointer_exception.hpp" />
+    <ClInclude Include="src\laurena\exceptions\unimplemented_exception.hpp" />
+    <ClInclude Include="src\laurena\formatting\formats.hpp" />
+    <ClInclude Include="src\laurena\formatting\format.hpp" />
+    <ClInclude Include="src\laurena\formatting\tab.hpp" />
+    <ClInclude Include="src\laurena\formatting\writer.hpp" />
+    <ClInclude Include="src\laurena\functions\parameter.hpp" />
+    <ClInclude Include="src\laurena\includes\includes.hpp" />
+    <ClInclude Include="src\laurena\includes\types.hpp" />
+    <ClInclude Include="src\laurena\laurena.hpp" />
+    <ClInclude Include="src\laurena\memory\memory_functions.hpp" />
+    <ClInclude Include="src\laurena\parsing\basic_parsers.hpp" />
+    <ClInclude Include="src\laurena\parsing\file_location.hpp" />
+    <ClInclude Include="src\laurena\parsing\parser.hpp" />
+    <ClInclude Include="src\laurena\parsing\token.hpp" />
+    <ClInclude Include="src\laurena\parsing\tokenizer.hpp" />
+    <ClInclude Include="src\laurena\toolboxes\bitset.hpp" />
+    <ClInclude Include="src\laurena\toolboxes\cstring.hpp" />
+    <ClInclude Include="src\laurena\toolboxes\filename.hpp" />
+    <ClInclude Include="src\laurena\toolboxes\loader.hpp" />
+    <ClInclude Include="src\laurena\toolboxes\stdstream.hpp" />
+    <ClInclude Include="src\laurena\toolboxes\stdstring.hpp" />
+    <ClInclude Include="src\laurena\traits\basetype.hpp" />
+    <ClInclude Include="src\laurena\traits\laurena_traits.hpp" />
+    <ClInclude Include="src\laurena\traits\voidptr.hpp" />
+    <ClInclude Include="src\laurena\types\any.hpp" />
+    <ClInclude Include="src\laurena\types\charset.hpp" />
+    <ClInclude Include="src\laurena\types\context.hpp" />
+    <ClInclude Include="src\laurena\types\literator.hpp" />
+    <ClInclude Include="src\laurena\types\string_array.hpp" />
+    <ClInclude Include="src\laurena\types\variable.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\laurena\archives\iarchive.cpp" />
+    <ClCompile Include="src\laurena\archives\oarchive.cpp" />
+    <ClCompile Include="src\laurena\constants\const_charsets.cpp" />
+    <ClCompile Include="src\laurena\constants\const_strings.cpp" />
+    <ClCompile Include="src\laurena\debug\debug.cpp" />
+    <ClCompile Include="src\laurena\debug\debug_stream.cpp" />
+    <ClCompile Include="src\laurena\debug\testunit.cpp" />
+    <ClCompile Include="src\laurena\descriptors\any_descriptor.cpp" />
+    <ClCompile Include="src\laurena\descriptors\bitset_descriptor.cpp" />
+    <ClCompile Include="src\laurena\descriptors\classes.cpp" />
+    <ClCompile Include="src\laurena\descriptors\descriptor.cpp" />
+    <ClCompile Include="src\laurena\descriptors\features\class_feature.cpp" />
+    <ClCompile Include="src\laurena\descriptors\features\polymorphic_feature.cpp" />
+    <ClCompile Include="src\laurena\descriptors\field.cpp" />
+    <ClCompile Include="src\laurena\descriptors\list_descriptor.cpp" />
+    <ClCompile Include="src\laurena\descriptors\numeric_type_descriptors.cpp" />
+    <ClCompile Include="src\laurena\descriptors\polymorphic_class_descriptor.cpp" />
+    <ClCompile Include="src\laurena\descriptors\standard_class_descriptor.cpp" />
+    <ClCompile Include="src\laurena\descriptors\string_array_descriptor.cpp" />
+    <ClCompile Include="src\laurena\descriptors\string_descriptor.cpp" />
+    <ClCompile Include="src\laurena\descriptors\variable_descriptor.cpp" />
+    <ClCompile Include="src\laurena\descriptors\vector_descriptor.cpp" />
+    <ClCompile Include="src\laurena\exceptions\bad_cast_exception.cpp" />
+    <ClCompile Include="src\laurena\exceptions\exception.cpp" />
+    <ClCompile Include="src\laurena\exceptions\failed_parsing_exception.cpp" />
+    <ClCompile Include="src\laurena\exceptions\file_not_found_exception.cpp" />
+    <ClCompile Include="src\laurena\exceptions\null_pointer_exception.cpp" />
+    <ClCompile Include="src\laurena\exceptions\unimplemented_exception.cpp" />
+    <ClCompile Include="src\laurena\formatting\format.cpp" />
+    <ClCompile Include="src\laurena\formatting\formats.cpp" />
+    <ClCompile Include="src\laurena\formatting\tab.cpp" />
+    <ClCompile Include="src\laurena\functions\parameter.cpp" />
+    <ClCompile Include="src\laurena\memory\memory_functions.cpp" />
+    <ClCompile Include="src\laurena\parsing\file_location.cpp" />
+    <ClCompile Include="src\laurena\parsing\basic_parsers.cpp" />
+    <ClCompile Include="src\laurena\parsing\token.cpp" />
+    <ClCompile Include="src\laurena\parsing\tokenizer.cpp" />
+    <ClCompile Include="src\laurena\toolboxes\bitset.cpp" />
+    <ClCompile Include="src\laurena\toolboxes\cstring.cpp" />
+    <ClCompile Include="src\laurena\toolboxes\filename.cpp" />
+    <ClCompile Include="src\laurena\toolboxes\loader.cpp" />
+    <ClCompile Include="src\laurena\toolboxes\stdstream.cpp" />
+    <ClCompile Include="src\laurena\toolboxes\stdstring.cpp" />
+    <ClCompile Include="src\laurena\types\any.cpp" />
+    <ClCompile Include="src\laurena\types\charset.cpp" />
+    <ClCompile Include="src\laurena\types\literator.cpp" />
+    <ClCompile Include="src\laurena\types\string_array.cpp" />
+    <ClCompile Include="src\laurena\types\variable.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="todo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Makefile" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E4E38395-6C22-4954-9C6C-6F772979279D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>laurena</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\programming\cpp\boost;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy src ..\include /S /R /Y /EXCLUDE:..\xcopy_exclus.txt
+copy $(TargetPath) $(ProjectDir)..\bin\$(Configuration)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

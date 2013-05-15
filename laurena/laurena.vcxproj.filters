@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\includes">
+      <UniqueIdentifier>{0387f00c-e3be-41a3-b080-1297cc64e4e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\debug">
+      <UniqueIdentifier>{4becefd9-e352-449e-b3bc-30d187737de6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\debug">
+      <UniqueIdentifier>{50b757db-b0e2-421d-a707-11777b7b44e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\exceptions">
+      <UniqueIdentifier>{35bc03e8-a0c3-4a21-83b4-78ceda355243}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\exceptions">
+      <UniqueIdentifier>{82c4a625-361b-4ceb-92a8-d758c499ffd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\memory">
+      <UniqueIdentifier>{dde9f963-067d-4b53-a47b-8b7a0da4dfd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\memory">
+      <UniqueIdentifier>{4f181ca3-8586-468d-ab2c-c8b6d9f04d04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\descriptors">
+      <UniqueIdentifier>{79c170d3-90e3-4f28-b00c-4977741e7053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\descriptors">
+      <UniqueIdentifier>{402990e9-2a75-4beb-aaec-b394fd2e06e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\types">
+      <UniqueIdentifier>{527b0aa1-9171-4a44-bbf3-5e732151e53f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\types">
+      <UniqueIdentifier>{90668e0e-241d-480d-bfcc-86f5b4dbf5a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\constants">
+      <UniqueIdentifier>{3dfb2bdd-bdee-4f42-841d-f0434d490e49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\constants">
+      <UniqueIdentifier>{191f716d-c311-4544-8f7c-1dcaf77f182d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\toolboxes">
+      <UniqueIdentifier>{f46a9b32-abd5-44d1-b723-fbf5fa556047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\toolboxes">
+      <UniqueIdentifier>{eda0f865-c011-47bc-893c-175d6ed7b35e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\traits">
+      <UniqueIdentifier>{7e45d30f-2861-4529-9c72-f0ba6aadb528}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\descriptors\features">
+      <UniqueIdentifier>{efb174da-b9b4-4736-b29d-23e79ab83a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\descriptors\features">
+      <UniqueIdentifier>{7a966ffb-c5ab-4395-82a2-008813b0282b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\templates">
+      <UniqueIdentifier>{9ec72eb6-0a81-4d86-a5cc-438da7ead08e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\archives">
+      <UniqueIdentifier>{d9e001a5-7244-4866-8917-fdc2ca14cf6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\archives">
+      <UniqueIdentifier>{610e06fc-d245-458d-a860-88dd1b3af8df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\parsing">
+      <UniqueIdentifier>{ee84a041-d1a0-4ad0-958a-f9e561f61b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\parsing">
+      <UniqueIdentifier>{5bf1e46d-6563-479e-95cd-1757c5a4bb62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\formatting">
+      <UniqueIdentifier>{7dea2f0c-677b-4574-8cb9-04db0240fd23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\formatting">
+      <UniqueIdentifier>{d36f9ecd-7f29-4934-b7bb-130a6bf3853b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\functions">
+      <UniqueIdentifier>{01d40b19-596f-48b1-b89e-c5456c9a4fd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\functions">
+      <UniqueIdentifier>{1b7cec9f-b381-409b-8edf-e3b27e967e83}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\laurena\includes\includes.hpp">
+      <Filter>Fichiers d%27en-tête\includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\includes\types.hpp">
+      <Filter>Fichiers d%27en-tête\includes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\debug\debug.hpp">
+      <Filter>Fichiers d%27en-tête\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\exceptions\exception.hpp">
+      <Filter>Fichiers d%27en-tête\exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\memory\memory_functions.hpp">
+      <Filter>Fichiers d%27en-tête\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\types\any.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\field.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\types\string_array.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\exceptions\null_pointer_exception.hpp">
+      <Filter>Fichiers d%27en-tête\exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\types\charset.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\constants\const_charsets.hpp">
+      <Filter>Fichiers d%27en-tête\constants</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\toolboxes\bitset.hpp">
+      <Filter>Fichiers d%27en-tête\toolboxes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\constants\const_strings.hpp">
+      <Filter>Fichiers d%27en-tête\constants</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\exceptions\failed_parsing_exception.hpp">
+      <Filter>Fichiers d%27en-tête\exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\traits\basetype.hpp">
+      <Filter>Fichiers d%27en-tête\traits</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\traits\voidptr.hpp">
+      <Filter>Fichiers d%27en-tête\traits</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\classes.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\exceptions\bad_cast_exception.hpp">
+      <Filter>Fichiers d%27en-tête\exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\features\class_feature.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors\features</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\features\polymorphic_feature.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors\features</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\features\class_features.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors\features</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\method_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\exceptions\unimplemented_exception.hpp">
+      <Filter>Fichiers d%27en-tête\exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\debug\testunit.hpp">
+      <Filter>Fichiers d%27en-tête\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\laurena.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\debug\debug_stream.hpp">
+      <Filter>Fichiers d%27en-tête\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\polymorphic_class_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\standard_class_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\traits\laurena_traits.hpp">
+      <Filter>Fichiers d%27en-tête\traits</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\string_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\simple_type_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\numeric_type_descriptors.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\archives\oarchive.hpp">
+      <Filter>Fichiers d%27en-tête\archives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\toolboxes\stdstring.hpp">
+      <Filter>Fichiers d%27en-tête\toolboxes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\features\any_feature.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors\features</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\features\container_feature.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors\features</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\types\variable.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\any_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\variable_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\list_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\types\literator.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\features\keymapper_feature.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors\features</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\vector_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\string_array_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\map_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\bitset_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\archives\iarchive.hpp">
+      <Filter>Fichiers d%27en-tête\archives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\parsing\token.hpp">
+      <Filter>Fichiers d%27en-tête\parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\parsing\parser.hpp">
+      <Filter>Fichiers d%27en-tête\parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\parsing\tokenizer.hpp">
+      <Filter>Fichiers d%27en-tête\parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\parsing\file_location.hpp">
+      <Filter>Fichiers d%27en-tête\parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\toolboxes\cstring.hpp">
+      <Filter>Fichiers d%27en-tête\toolboxes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\toolboxes\loader.hpp">
+      <Filter>Fichiers d%27en-tête\toolboxes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\exceptions\file_not_found_exception.hpp">
+      <Filter>Fichiers d%27en-tête\exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\toolboxes\filename.hpp">
+      <Filter>Fichiers d%27en-tête\toolboxes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\formatting\writer.hpp">
+      <Filter>Fichiers d%27en-tête\formatting</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\formatting\format.hpp">
+      <Filter>Fichiers d%27en-tête\formatting</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\formatting\formats.hpp">
+      <Filter>Fichiers d%27en-tête\formatting</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\formatting\tab.hpp">
+      <Filter>Fichiers d%27en-tête\formatting</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\functions\parameter.hpp">
+      <Filter>Fichiers d%27en-tête\functions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\types\context.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\toolboxes\stdstream.hpp">
+      <Filter>Fichiers d%27en-tête\toolboxes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\parsing\basic_parsers.hpp">
+      <Filter>Fichiers d%27en-tête\parsing</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\laurena\debug\debug.cpp">
+      <Filter>Fichiers sources\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\exceptions\exception.cpp">
+      <Filter>Fichiers sources\exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\memory\memory_functions.cpp">
+      <Filter>Fichiers sources\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\field.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\types\string_array.cpp">
+      <Filter>Fichiers sources\types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\exceptions\null_pointer_exception.cpp">
+      <Filter>Fichiers sources\exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\types\charset.cpp">
+      <Filter>Fichiers sources\types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\constants\const_charsets.cpp">
+      <Filter>Fichiers sources\constants</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\toolboxes\bitset.cpp">
+      <Filter>Fichiers sources\toolboxes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\constants\const_strings.cpp">
+      <Filter>Fichiers sources\constants</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\exceptions\failed_parsing_exception.cpp">
+      <Filter>Fichiers sources\exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\classes.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\exceptions\bad_cast_exception.cpp">
+      <Filter>Fichiers sources\exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\features\class_feature.cpp">
+      <Filter>Fichiers sources\descriptors\features</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\features\polymorphic_feature.cpp">
+      <Filter>Fichiers sources\descriptors\features</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\exceptions\unimplemented_exception.cpp">
+      <Filter>Fichiers sources\exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\debug\testunit.cpp">
+      <Filter>Fichiers sources\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\debug\debug_stream.cpp">
+      <Filter>Fichiers sources\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\polymorphic_class_descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\standard_class_descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\string_descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\numeric_type_descriptors.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\archives\oarchive.cpp">
+      <Filter>Fichiers sources\archives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\toolboxes\stdstring.cpp">
+      <Filter>Fichiers sources\toolboxes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\types\variable.cpp">
+      <Filter>Fichiers sources\types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\any_descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\variable_descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\list_descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\types\literator.cpp">
+      <Filter>Fichiers sources\types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\types\any.cpp">
+      <Filter>Fichiers sources\types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\vector_descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\string_array_descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\bitset_descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\archives\iarchive.cpp">
+      <Filter>Fichiers sources\archives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\parsing\token.cpp">
+      <Filter>Fichiers sources\parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\parsing\file_location.cpp">
+      <Filter>Fichiers sources\parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\toolboxes\cstring.cpp">
+      <Filter>Fichiers sources\toolboxes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\parsing\tokenizer.cpp">
+      <Filter>Fichiers sources\parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\toolboxes\loader.cpp">
+      <Filter>Fichiers sources\toolboxes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\exceptions\file_not_found_exception.cpp">
+      <Filter>Fichiers sources\exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\toolboxes\filename.cpp">
+      <Filter>Fichiers sources\toolboxes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\formatting\format.cpp">
+      <Filter>Fichiers sources\formatting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\formatting\formats.cpp">
+      <Filter>Fichiers sources\formatting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\formatting\tab.cpp">
+      <Filter>Fichiers sources\formatting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\functions\parameter.cpp">
+      <Filter>Fichiers sources\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\toolboxes\stdstream.cpp">
+      <Filter>Fichiers sources\toolboxes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\parsing\basic_parsers.cpp">
+      <Filter>Fichiers sources\parsing</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="todo.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Makefile">
+      <Filter>Fichiers de ressources</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,1 @@
+- dans memory_functions, passez offset en inline
