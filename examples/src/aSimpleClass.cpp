@@ -19,10 +19,9 @@ class cat
 public:
 
 	std::string		_name;
-	word8			_age;
-
-	word32			_birds;
-	word32			_mouses;
+	unsigned char	_age;
+	unsigned int	_birds;
+	unsigned int	_mouses;
 
 	bool operator==(const cat& c)
 	{
@@ -53,15 +52,14 @@ void ASimpleClass ()
 	kitty._mouses = 14;
 
 	// Let's serialize it into json
-	std::string destination;
-	json::json::serialize(destination,"cat",&kitty);
+	std::string destination = json::json::serialize(kitty);
 
 	// Let's display my jsoned cat :
 	GLOG << "Here is my cat details:" << std::endl << destination << std::endl;
 
 	// let's create a new cat from our serialized kitty 
 	cat kimmie;
-	json::json::parse(destination,"cat",kimmie);
+	json::json::parse(destination,kimmie);
 	GLOG << "Kimmie is named " << kimmie._name << ", has " << ((int)kimmie._age) << " years, killed " << kimmie._birds << " birds and " << kimmie._mouses << " mouses." << std::endl;
 
 	if (kimmie == kitty)

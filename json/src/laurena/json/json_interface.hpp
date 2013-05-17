@@ -52,6 +52,24 @@ public:
 		return laurena::json::json::serialize(destination,name,a,flags);
 	}
 
+	template<class T>
+	static std::string serialize(const T* value, word32 flags =0)
+	{
+		any a = value;
+		std::string destination;
+		laurena::json::json::serialize(destination,a.desc()->name(),a,flags);
+		return destination;
+	}
+
+	template<class T>
+	static std::string serialize(const T& value, word32 flags =0)
+	{
+		any a = &value;
+		std::string destination;
+		laurena::json::json::serialize(destination,a.desc()->name(),a,flags);
+		return destination;
+	}
+
 	//! Parsing
 	
 
@@ -60,6 +78,14 @@ public:
 	{
 		any a = &destination;
 		laurena::json::json::parse<any>(json,expected_name,a);
+		return destination;
+	}
+
+	template <class T>
+	static T& parse(const std::string& json, T& destination)
+	{
+		any a = &destination;
+		laurena::json::json::parse<any>(json,a.desc()->name(),a);
 		return destination;
 	}
 
