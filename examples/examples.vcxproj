@@ -80,6 +80,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\aPolymorphicClass.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\aSimpleClass.cpp" />
   </ItemGroup>

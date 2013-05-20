@@ -196,8 +196,8 @@ public:
     /*          static functions                                                */ 
     /****************************************************************************/ 
     public:
-    static standard_class_descriptor<T>* build(const char* name, word8 nbFields =0, const descriptor* parentClassDescriptor=nullptr)
-    {
+    static standard_class_descriptor<T>* build(const char* name, const descriptor* parentClassDescriptor=nullptr, word8 nbFields =0)
+	{
         standard_class_descriptor<T>* cd = new standard_class_descriptor<T>(name,nbFields, parentClassDescriptor);
         cd->constructor([](){return new T;});
         classes::add(cd);        

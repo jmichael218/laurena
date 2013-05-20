@@ -17,6 +17,7 @@ debug_stream GLOG;
 
 //external functions
 void ASimpleClass ();
+void APolymorphicClass();
 
 int main ()
 {
@@ -28,7 +29,10 @@ int main ()
 	json::JSON::init();
 
 	// to test ASimpleClass ();
-	ASimpleClass();
+	//ASimpleClass();
+
+	// to test APolymorphicClass ();
+	APolymorphicClass();
 
 	return 0;
 
