@@ -48,7 +48,7 @@ class classes
     /****************************************************************************/ 
     /*          tool functions                                                  */ 
     /****************************************************************************/ 
-    static void logClasses ();
+    static void logClasses (std::ostream& destination);
     static bool areParents(const descriptor& c1, const descriptor& c2);
 
     static void init ();

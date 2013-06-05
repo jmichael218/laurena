@@ -53,9 +53,13 @@ const descriptor*  classes::byType(const type_info& type)
     
 }
 
-void classes::logClasses ()
+void classes::logClasses (std::ostream& destination)
 {
-
+	for (auto i = _classes_by_typeid.begin(); i != _classes_by_typeid.end(); i ++)
+	{
+		const descriptor* d = i->second;
+		destination << d->name() << " ";
+	}
 }
 
 bool classes::areParents(const descriptor& c1, const descriptor& c2)

@@ -27,6 +27,8 @@ bool string_descriptor::has(descriptor::Flags flag) const
 {
 	if (flag == Flags::STRING_CAST)
 		return true;
+	if (flag == Flags::TINY)
+		return true;
 	return this->descriptor::has(flag);
 }
 

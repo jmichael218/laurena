@@ -10,6 +10,8 @@
 #include <laurena/laurena.hpp>
 #include <laurena/json/json.hpp>
 
+#include "classesExamples.hpp"
+
 using namespace laurena;
 
 // global log
@@ -18,6 +20,7 @@ debug_stream GLOG;
 //external functions
 void ASimpleClass ();
 void APolymorphicClass();
+void AListClass ();
 
 int main ()
 {
@@ -28,11 +31,22 @@ int main ()
     classes::init();
 	json::JSON::init();
 
+	buildClassDescriptor_SimpleCat();
+	buildClassDescriptor_Animal();
+	buildClassDescriptor_Cat();
+	buildClassDescriptor_Zoo();
+
+	classes::logClasses(GLOG);
+	GLOG << std::endl;
+
 	// to test ASimpleClass ();
-	//ASimpleClass();
+	ASimpleClass();
 
 	// to test APolymorphicClass ();
 	APolymorphicClass();
+
+	// To test lists
+	AListClass();
 
 	return 0;
 

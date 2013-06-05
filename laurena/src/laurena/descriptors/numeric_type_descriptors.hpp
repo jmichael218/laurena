@@ -44,7 +44,9 @@ public:
     // ACCESSORS
     virtual bool    has(descriptor::Flags flag) const 
     {
-        return (flag == descriptor::Flags::NUMERIC_VALUE) ? true : this->simple_type_descriptor<T>::has(flag);
+        return (flag == descriptor::Flags::NUMERIC_VALUE || flag == descriptor::Flags::TINY) ? 
+			true : 
+			this->simple_type_descriptor<T>::has(flag) ;
     }
 };
 

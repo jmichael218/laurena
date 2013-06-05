@@ -28,7 +28,7 @@ namespace laurena {
 namespace json {
 
 /***********************************************************************************/ 
-/* Class IArchive                                                                   */ 
+/* Class IArchive                                                                  */ 
 /***********************************************************************************/ 
 
 class iarchive_json : public iarchive
@@ -65,6 +65,7 @@ public:
 
 	void parseObject(any& destination);
 	void parseElements(any& object);
+	void parseValue(any& object,const field* fdesc = nullptr);
 
 
     /****************************************************************************/ 

@@ -95,7 +95,13 @@ public:
     virtual void push(any& container, any& element) const
     {
         CONTAINER* c = anycast<CONTAINER*>(container);
-        c->push_back(anycast<ELEMENT>(element));
+		if (boost::is_pointer<ELEMENT>::value || element.desc()->has(descriptor::Flags::TINY))
+			c->push_back(anycast<ELEMENT>(element));
+		else
+		{
+			ELEMENT* e = anycast<ELEMENT*>(element);
+			c->push_back(*e);
+		}
         
     }
 
@@ -129,7 +135,13 @@ public:
         return (featureId == Feature::CONTAINER ? &this->_container_class_feature : this->standard_class_descriptor<CONTAINER>::feature(featureId)) ;
     }
 
-
+	static list_descriptor<CONTAINER,ELEMENT>* build(const char* name, const descriptor* parentClassDescriptor=nullptr)
+	{
+		auto cd = new list_descriptor<CONTAINER,ELEMENT>(name, 0, parentClassDescriptor );
+        cd->constructor([](){return new CONTAINER;});
+        classes::add(cd);        
+        return cd;
+	}
     /****************************************************************************/ 
     /*          protected data                                                  */ 
     /****************************************************************************/ 

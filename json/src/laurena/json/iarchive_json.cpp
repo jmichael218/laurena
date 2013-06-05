@@ -106,11 +106,72 @@ std::string keyword;
 		throw LAURENA_FAILED_PARSING_EXCEPTION("object names doesn't match", this->_tokenizer._ptr);
 	
 	this->readExpected(t,JSON::TOKEN_DPOINTS);
-	this->readExpected(t,JSON::TOKEN_BRACKET_OPEN);
-	this->parseObject(destination);
+	this->parseValue(destination);
 	this->readExpected(t,JSON::TOKEN_BRACKET_CLOSE);
 
 	return destination;
+}
+
+void iarchive_json::parseValue(any& object,const field* fdesc)
+{
+token t;
+
+	this->readExpected(t,JSON::TOKEN_SINGLE_STRING, JSON::TOKEN_INTEGER, JSON::TOKEN_ARRAY_BRACKET_OPEN, JSON::TOKEN_BRACKET_OPEN);
+
+	switch (t._token_id)
+	{
+		case JSON::TOKEN_SINGLE_STRING :
+		case JSON::TOKEN_INTEGER :
+			fdesc->set(object,t);
+			break;
+
+		case JSON::TOKEN_BRACKET_OPEN:
+			if (!fdesc)
+				this->parseObject(object);
+			else 
+			if (fdesc->isPointer())
+			{
+				any newO;
+				fdesc->desc().create(newO);
+
+				this->parseObject(newO);
+				fdesc->set(object,newO);
+			}
+			else
+			{
+				any v;
+				fdesc->get(object,v);
+
+				this->parseObject(v);
+			}
+			break;
+
+		case JSON::TOKEN_ARRAY_BRACKET_OPEN:
+			if (!fdesc)
+				this->parseElements(object);
+			else 
+			if (fdesc->isPointer())
+			{
+				any newO;
+				fdesc->desc().create(newO);
+
+				this->parseElements(newO);
+				fdesc->set(object,newO);
+			}
+			else
+			{
+				any v;
+				fdesc->get(object,v);
+
+				this->parseElements(v);
+			}
+			break;
+
+
+		default:
+			throw LAURENA_FAILED_PARSING_EXCEPTION("Error in JSON implementation", this->_tokenizer._ptr);
+			break;
+	}
 }
 
 void iarchive_json::parseElements(any& object)
@@ -136,10 +197,7 @@ any key;
 		if (t._token_id == JSON::TOKEN_COLON)
 			this->readExpected(t,JSON::TOKEN_BRACKET_OPEN);
 
-		if (elems_are_pointers)		
-			ecd->create(element);
-		else
-			element = *it;
+		ecd->create(element);
 		
 		this->parseObject(element);
 
@@ -179,45 +237,7 @@ const field* f;
 
 		this->readExpected(t,JSON::TOKEN_DPOINTS);
 
-		this->readExpected(t,JSON::TOKEN_SINGLE_STRING, JSON::TOKEN_INTEGER, JSON::TOKEN_ARRAY_BRACKET_OPEN, JSON::TOKEN_BRACKET_OPEN);
-
-		switch (t._token_id)
-		{
-			case JSON::TOKEN_SINGLE_STRING :
-			case JSON::TOKEN_INTEGER :
-				f->set(object,t);
-				break;
-
-			case JSON::TOKEN_BRACKET_OPEN:
-			case JSON::TOKEN_ARRAY_BRACKET_OPEN:
-				if (f->isPointer())
-				{
-					any newO;
-					f->desc().create(newO);
-
-					if (t._token_id == JSON::TOKEN_ARRAY_BRACKET_OPEN)
-						this->parseElements(newO);
-					else
-						this->parseObject(newO);
-					f->set(object,newO);
-				}
-				else
-				{
-					any v;
-					f->get(object,v);
-
-					if (t._token_id == JSON::TOKEN_ARRAY_BRACKET_OPEN)
-						this->parseElements(v);
-					else
-						this->parseObject(v);
-				}
-				break;
-
-
-			default:
-				throw LAURENA_FAILED_PARSING_EXCEPTION("Error in JSON implementation", this->_tokenizer._ptr);
-				break;
-		}
+		this->parseValue(object,f);
 
 		this->readExpected(t,JSON::TOKEN_BRACKET_CLOSE, JSON::TOKEN_COLON);
 

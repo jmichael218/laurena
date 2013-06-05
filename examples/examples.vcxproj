@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\cpp\boost;$(IncludePath)</IncludePath>
+    <IncludePath>C:\programming\cpp\boost;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -80,9 +80,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\aListClass.cpp" />
     <ClCompile Include="src\aPolymorphicClass.cpp" />
+    <ClCompile Include="src\classesExamples.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\aSimpleClass.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\classesExamples.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
