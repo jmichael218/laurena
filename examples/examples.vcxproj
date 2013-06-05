@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClCompile Include="src\aListClass.cpp" />
     <ClCompile Include="src\aPolymorphicClass.cpp" />
+    <ClCompile Include="src\aVectorClass.cpp" />
     <ClCompile Include="src\classesExamples.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\aSimpleClass.cpp" />

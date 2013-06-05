@@ -103,7 +103,15 @@ public:
 		if (index >= c->size())
 			c->resize(index+1);
 
-		(*c) [index] = anycast<ELEMENT>(element);
+		if (boost::is_pointer<ELEMENT>::value || element.desc()->has(descriptor::Flags::TINY))
+			(*c) [index] = anycast<ELEMENT>(element);
+		else
+		{
+			ELEMENT* e = anycast<ELEMENT*>(element);
+			(*c) [index] = *e ;
+		}
+
+		
 	}
 
     virtual void get(any& container, const any& key, any& element) const
@@ -141,6 +149,16 @@ public:
         return (featureId == Feature::CONTAINER ? &this->_container_class_feature : this->standard_class_descriptor<CONTAINER>::feature(featureId)) ;
     }
 
+	/****************************************************************************/ 
+	/*			static functions												*/ 
+	/****************************************************************************/ 
+	static vector_descriptor<CONTAINER,ELEMENT>* build(const char* name, const descriptor* parentClassDescriptor=nullptr)
+	{
+		auto cd = new vector_descriptor<CONTAINER,ELEMENT>(name, 0, parentClassDescriptor );
+        cd->constructor([](){return new CONTAINER;});
+        classes::add(cd);        
+        return cd;
+	}
 
     /****************************************************************************/ 
     /*          protected data                                                  */ 

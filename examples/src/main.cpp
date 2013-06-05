@@ -21,6 +21,7 @@ debug_stream GLOG;
 void ASimpleClass ();
 void APolymorphicClass();
 void AListClass ();
+void AVectorClass ();
 
 int main ()
 {
@@ -35,6 +36,7 @@ int main ()
 	buildClassDescriptor_Animal();
 	buildClassDescriptor_Cat();
 	buildClassDescriptor_Zoo();
+	buildClassDescriptor_Circus();
 
 	classes::logClasses(GLOG);
 	GLOG << std::endl;
@@ -47,6 +49,9 @@ int main ()
 
 	// To test lists
 	AListClass();
+
+	// To test vector
+	AVectorClass ();
 
 	return 0;
 

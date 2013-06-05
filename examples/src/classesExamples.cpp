@@ -54,3 +54,9 @@ void buildClassDescriptor_Zoo()
 	auto d_zoo = list_descriptor<zoo,animal>::build("zoo");
 }
 
+void buildClassDescriptor_Circus()
+{
+	auto d = vector_descriptor<circus,animal>::build("circus");
+}
+
+//End of file

@@ -62,6 +62,11 @@ class zoo : public std::list<animal>
 };
 void buildClassDescriptor_Zoo();
 
+class circus : public std::vector<animal>
+{
+};
+void buildClassDescriptor_Circus();
+
 class cat : public animal
 {
 public:

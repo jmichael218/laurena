@@ -19,7 +19,6 @@ extern debug_stream GLOG;
 void AListClass ()
 {
 
-	// That's all. Now cat class is serializable in and from any supported language !
 	zoo z;
 
 	animal a;
