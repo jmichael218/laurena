@@ -23,6 +23,7 @@ void APolymorphicClass();
 void AListClass ();
 void AVectorClass ();
 void AnEnumExample ();
+void ABitSetExample();
 
 int main ()
 {
@@ -39,6 +40,8 @@ int main ()
 	buildClassDescriptor_Zoo();
 	buildClassDescriptor_Circus();
 	buildClassDescriptor_User();
+	buildClassDescriptor_Dragon();
+
 
 	classes::logClasses(GLOG);
 	GLOG << std::endl;
@@ -57,6 +60,9 @@ int main ()
 
 	// Example of an enum field
 	AnEnumExample();
+
+	// Example of bitset fields
+	ABitSetExample();
 
 	return 0;
 

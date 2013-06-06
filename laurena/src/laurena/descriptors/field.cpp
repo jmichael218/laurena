@@ -202,7 +202,8 @@ void* ptrAttribute = this->ptr(ptrObject);
         else if (this->_descriptor->type() == typeid(boost::dynamic_bitset<>))
         {
             boost::dynamic_bitset<>* p = (boost::dynamic_bitset<>*) ptrAttribute;
-            p->resize(this->_values->size());
+			if (p->size() != this->_values->size())
+				p->resize(this->_values->size());
             bitset::parse(*p,*this->_values,CHARSET_VARNAME,svalue);
         }
         else

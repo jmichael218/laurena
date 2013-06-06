@@ -86,8 +86,8 @@ class user
 {
 public:
 	
-	unsigned char	_gender;
-	unsigned int	_type;
+	unsigned char	_gender; // 0 for male, 1 for female
+	unsigned int	_type;   // 0 for student, 1 for professor, 2 for visitor
 	unsigned int	_age;
 	std::string	_name;
 
@@ -97,6 +97,19 @@ void buildClassDescriptor_User();
 extern laurena::string_array genders ;
 extern laurena::string_array user_types ;
 
+class dragon 
+{
+public:
+
+	dragon () : _state(0), _name() { _foods.resize(5); };
+
+	unsigned char			_state;	// mask are 1 for 'happy', 2 for 'hungry', 3 for 'sleepy'
+	boost::dynamic_bitset<>	_foods; // 0 for knight, 1 for princess, 2 for cow, 3 for peasant, 4 for horse
+	std::string				_name;
+};
+void buildClassDescriptor_Dragon();
+extern laurena::string_array dragon_states;
+extern laurena::string_array dragon_foods;
 
 
 

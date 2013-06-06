@@ -71,4 +71,15 @@ void buildClassDescriptor_User()
 	d->init_field(user,"age",_age);
 	d->init_field(user,"name",_name);
 }
+
+string_array dragon_states = "happy hungry sleepy";
+string_array dragon_foods  = "knight princess cow peasant horse" ;
+void buildClassDescriptor_Dragon()
+{
+    // create class descriptor for the class 'dragon'
+	auto d = standard_class_descriptor<dragon>::build("dragon");
+	d->init_field(dragon,"name",_name);
+	d->init_field(dragon,"state",_state).isBitField(dragon_states);
+	d->init_field(dragon,"food",_foods).isBitField(dragon_foods);
+}
 //End of file

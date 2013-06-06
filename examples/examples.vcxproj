@@ -80,6 +80,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ABitSetExample.cpp" />
     <ClCompile Include="src\aListClass.cpp" />
     <ClCompile Include="src\anEnumExample.cpp" />
     <ClCompile Include="src\aPolymorphicClass.cpp" />

@@ -135,8 +135,8 @@ char c;
 word32 i = 0;
 std::string key;
 
-    destination.resize(bitnames.size());
-    destination.clear();
+	if (destination.size() != bitnames.size())
+		destination.resize(bitnames.size());
 
     while (*p)
     {
