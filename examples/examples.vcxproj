@@ -81,6 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\aListClass.cpp" />
+    <ClCompile Include="src\anEnumExample.cpp" />
     <ClCompile Include="src\aPolymorphicClass.cpp" />
     <ClCompile Include="src\aVectorClass.cpp" />
     <ClCompile Include="src\classesExamples.cpp" />

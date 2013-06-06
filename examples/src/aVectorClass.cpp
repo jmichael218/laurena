@@ -39,7 +39,7 @@ void AVectorClass ()
 	std::string destination = json::json::serialize(c);
 
 	// Let's display my jsoned circus :
-	GLOG << "Here is my zoo:" << std::endl << destination << std::endl;
+	GLOG << "Here is my circus:" << std::endl << destination << std::endl;
 	
 	// Now let's instancing the circus
 	circus c2;

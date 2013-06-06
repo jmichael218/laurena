@@ -59,4 +59,16 @@ void buildClassDescriptor_Circus()
 	auto d = vector_descriptor<circus,animal>::build("circus");
 }
 
+string_array genders = "male female" ;
+string_array user_types = "student professor visitor" ;
+
+void buildClassDescriptor_User()
+{
+    // create class descriptor for the class 'user'
+	auto d = standard_class_descriptor<user>::build("user");
+	d->init_field(user,"gender",_gender).isEnum(genders);
+    d->init_field(user,"type",_type).isEnum(user_types);
+	d->init_field(user,"age",_age);
+	d->init_field(user,"name",_name);
+}
 //End of file

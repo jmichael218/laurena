@@ -22,6 +22,7 @@ void ASimpleClass ();
 void APolymorphicClass();
 void AListClass ();
 void AVectorClass ();
+void AnEnumExample ();
 
 int main ()
 {
@@ -37,6 +38,7 @@ int main ()
 	buildClassDescriptor_Cat();
 	buildClassDescriptor_Zoo();
 	buildClassDescriptor_Circus();
+	buildClassDescriptor_User();
 
 	classes::logClasses(GLOG);
 	GLOG << std::endl;
@@ -52,6 +54,9 @@ int main ()
 
 	// To test vector
 	AVectorClass ();
+
+	// Example of an enum field
+	AnEnumExample();
 
 	return 0;
 

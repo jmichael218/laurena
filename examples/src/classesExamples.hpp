@@ -82,6 +82,22 @@ public:
 };
 void buildClassDescriptor_Cat();
 
+class user
+{
+public:
+	
+	unsigned char	_gender;
+	unsigned int	_type;
+	unsigned int	_age;
+	std::string	_name;
+
+};
+
+void buildClassDescriptor_User();
+extern laurena::string_array genders ;
+extern laurena::string_array user_types ;
+
+
 
 
 
