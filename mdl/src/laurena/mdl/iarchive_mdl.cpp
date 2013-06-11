@@ -148,7 +148,7 @@ const class_feature* ft;
 
     if (f.isEnum())
 	    this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD);
-    else if (f.isBitField())
+    else if (f.isBitSet())
 		this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD_LIST);
     else if ((ft = fd.feature(Feature::ANY)))
     {

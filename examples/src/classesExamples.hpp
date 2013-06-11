@@ -103,7 +103,7 @@ public:
 
 	dragon () : _state(0), _name() { _foods.resize(5); };
 
-	unsigned char			_state;	// mask are 1 for 'happy', 2 for 'hungry', 3 for 'sleepy'
+	unsigned char			_state;	// mask are 1 for 'happy', 2 for 'hungry', 4 for 'sleepy'
 	boost::dynamic_bitset<>	_foods; // 0 for knight, 1 for princess, 2 for cow, 3 for peasant, 4 for horse
 	std::string				_name;
 };
@@ -112,6 +112,23 @@ extern laurena::string_array dragon_states;
 extern laurena::string_array dragon_foods;
 
 
+class building
+{
+public:
+
+	building () : _floors(1), _name() {}
+	
+	inline void floors (unsigned char value)	{ this->_floors = value; }
+	inline const unsigned char floors () const  { return this->_floors;}
+
+	inline void name(const std::string& value)  { this->_name = value; }
+	inline const std::string& name()            { return this->_name; }
+
+	protected:
+	unsigned char	_floors;
+	std::string		_name;
+};
+void buildClassDescriptor_Building();
 
 
 /********************************************************************************/ 

@@ -21,30 +21,21 @@
 using namespace laurena;
 
 
-field::field() : _flags(field::FLAGS_MAX,0)
+field::field() : _flags(field::FLAGS_MAX,0), _setter(nullptr), _getter(nullptr)
 {
     _descriptor = nullptr;
     _values = nullptr;
 
-	_set_callback = nullptr;
-    _get_callback = nullptr;
 }
 
-field::field (const char* name, const descriptor* cd, word32 offset) : _name(name) , _offset(offset), _descriptor(cd), _flags (field::FLAGS_MAX,0)
+field::field (const char* name, const descriptor* cd, word32 offset) : _name(name) , _offset(offset), _descriptor(cd), _flags (field::FLAGS_MAX,0),  _setter(nullptr), _getter(nullptr)
 {
     _values = nullptr;
 
-	_set_callback = nullptr;
-    _get_callback = nullptr;
 }
 
 field::~field()
 {
-	if(_set_callback)
-		delete _set_callback;
-
-	if(_get_callback)
-		delete _get_callback;
 }
 
 field& field::init (const char* name, const descriptor* cd, word32 offset)
@@ -83,11 +74,31 @@ field& field::init (field& source)
     return *this;
 }
     
+field& field::init (const char* name, const descriptor* cd, setter setfunction, getter getfunction)
+{
+    if ( cd == nullptr ) 
+    {
+        std::string message;
+        message = "In field::init, you can't pass a nullptr descriptor for class " ;
+        message.append(name);
+        throw new LAURENA_NULL_POINTER_EXCEPTION (  message.c_str());
+    }
+
+    this->_name = name ;
+    this->_descriptor = cd ;
+	this->_setter = setfunction;
+	this->_getter = getfunction;
+
+    return *this;
+}
+
 void field::set(any& o, const any& value) const
 {
-	if (this->_set_callback != nullptr)
+	if (this->_setter != nullptr)
 	{
-		this->_set_callback->call(o,(any&)value);
+		any v = value;
+		this->desc().cast(v);
+		this->_setter (o,v);
 		return;
 	}
 
@@ -116,9 +127,9 @@ void field::set(any& o, const any& value) const
 
 any& field::get(const any& object, any& value) const
 {
-	if (this->_get_callback != nullptr)
+	if (this->_getter != nullptr)
 	{
-		this->_get_callback->call((any&) object,value);
+		this->_getter ((any&) object,value);
 		return value;
 	}
 
@@ -134,10 +145,10 @@ std::string& field::toString(const any& object, std::string& destination) const
 {
     any value;
 
-    if ( this->_get_callback )
+    if ( this->_getter )
     {
         any anydest;
-        this->_get_callback->call((any&)object,anydest);
+        this->_getter((any&)object,anydest);
         anydest.desc()->toString(anydest,destination);
         return destination;
     }
@@ -152,7 +163,7 @@ std::string& field::toString(const any& object, std::string& destination) const
         word32 index = boost::lexical_cast<word32,std::string>(destination);
         destination = this->_values->operator[](index);
     }
-    else if (this->_flags.test(field::FLAGS_IS_BITFIELD))
+    else if (this->_flags.test(field::FLAGS_IS_BITSET))
     {
         if (this->_descriptor->has(descriptor::Flags::NUMERIC_VALUE))
         {
@@ -191,7 +202,7 @@ void* ptrAttribute = this->ptr(ptrObject);
         value = index;
         this->_descriptor->set(ptrAttribute,value);
     }
-    else if (this->_flags.test(field::FLAGS_IS_BITFIELD))
+    else if (this->_flags.test(field::FLAGS_IS_BITSET))
     {
         if (this->_descriptor->has(descriptor::Flags::NUMERIC_VALUE))
         {
@@ -228,16 +239,16 @@ bool field::isEnum() const
     return this->_flags.test(field::FLAGS_IS_ENUM);
 }    
 
-field& field::isBitField(const string_array& values)
+field& field::isBitSet(const string_array& values)
 {
-    this->_flags.set(field::FLAGS_IS_BITFIELD);
+    this->_flags.set(field::FLAGS_IS_BITSET);
     _values = &values;
     return *this;
 }
 
-bool field::isBitField() const
+bool field::isBitSet() const
 {
-   return this->_flags.test(field::FLAGS_IS_BITFIELD);
+   return this->_flags.test(field::FLAGS_IS_BITSET);
 }
 
 /********************************************************************************/ 

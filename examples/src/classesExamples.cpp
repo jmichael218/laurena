@@ -79,7 +79,20 @@ void buildClassDescriptor_Dragon()
     // create class descriptor for the class 'dragon'
 	auto d = standard_class_descriptor<dragon>::build("dragon");
 	d->init_field(dragon,"name",_name);
-	d->init_field(dragon,"state",_state).isBitField(dragon_states);
-	d->init_field(dragon,"food",_foods).isBitField(dragon_foods);
+	d->init_field(dragon,"state",_state).isBitSet(dragon_states);
+	d->init_field(dragon,"food",_foods).isBitSet(dragon_foods);
+}
+
+void buildClassDescriptor_Building()
+{
+	auto d = standard_class_descriptor<building>::build("building");
+
+	field::getter sgname = [] (const any& object, any& value) { building* b = anycast<building*>(object); value = b->name(); };
+	field::setter ssname = [] (any& object, const any& value) { building* b = anycast<building*>(object); b->name(anycast<const std::string&>(value));};
+	d->init_virtual_field("name",std::string,ssname,sgname);
+
+	field::getter sgfloors = [] (const any& object, any& value) { building* b = anycast<building*>(object); value = b->floors(); };
+	field::setter ssfloors = [] (any& object, const any& value) { building* b = anycast<building*>(object); b->floors(anycast<unsigned char>(value));};
+	d->init_virtual_field("floors",unsigned char,ssfloors, sgfloors);
 }
 //End of file

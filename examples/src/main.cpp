@@ -24,6 +24,7 @@ void AListClass ();
 void AVectorClass ();
 void AnEnumExample ();
 void ABitSetExample();
+void AGetterAndSetterExample();
 
 int main ()
 {
@@ -41,6 +42,7 @@ int main ()
 	buildClassDescriptor_Circus();
 	buildClassDescriptor_User();
 	buildClassDescriptor_Dragon();
+	buildClassDescriptor_Building();
 
 
 	classes::logClasses(GLOG);
@@ -63,6 +65,11 @@ int main ()
 
 	// Example of bitset fields
 	ABitSetExample();
+
+	// example to use getter and setter class
+	AGetterAndSetterExample();
+
+
 
 	return 0;
 

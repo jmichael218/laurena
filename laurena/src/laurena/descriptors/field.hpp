@@ -53,7 +53,7 @@ public:
         FLAGS_IS_UNIQUE               = 4,  // Is unique
         FLAGS_IS_SERIAL               = 5,  // Is serial ( primary key for all serializables objects )
         FLAGS_IS_ENUM                 = 6,  // Is an enum integer type
-        FLAGS_IS_BITFIELD             = 8,  // Is a bitfield (integer or boost::dynamic_biset) type
+        FLAGS_IS_BITSET               = 8,  // Is a bitset (integer or boost::dynamic_biset) type
         FLAGS_IS_OWNER_SERIAL         = 9,
         FLAGS_MAX                     = 9,
     };
@@ -62,7 +62,10 @@ public:
     /****************************************************************************/ 
     /*          callback to simulate accessors                                  */ 
     /****************************************************************************/ 
+	typedef std::function<void(const any& obj, any& value)> getter;
+	typedef std::function<void(any& obj, const any& value)> setter;
 
+	/*
     class get_accessor 
     {
        public:
@@ -92,7 +95,7 @@ public:
 
       friend class field;
     };
-        
+       */
         
 
     /****************************************************************************/ 
@@ -108,6 +111,7 @@ public:
     /****************************************************************************/ 
     field& init (const char* name, const descriptor* cd, word32 offset);
     field& init (field& source);
+	field& init (const char* name, const descriptor* cd, setter setfunction, getter getfunction);
 
     void        set(any& object, const any& value)  const;
     any&        get(const any& object, any& value)        const;
@@ -136,8 +140,8 @@ public:
     field&        isEnum(const string_array& values);
     bool                    isEnum() const;
 
-    field&        isBitField(const string_array& values);
-    bool                    isBitField() const;
+    field&        isBitSet(const string_array& values);
+    bool                    isBitSet() const;
 
     field&        dontArchive(bool mode);
     bool                    dontArchive() const;
@@ -148,8 +152,8 @@ public:
     std::string&            toString(const any& object, std::string& destination) const;
     void                    fromString(any& object, const std::string& svalue) const;
 
-	field&		setCallback(set_accessor* callback);
-	field&		getCallback(get_accessor* callback);
+	field&		hasSetter(setter callback);
+	field&		hasGetter(getter callback);
 
     const any&              defaultValue () const;
     field&        defaultValue(const any&);
@@ -162,16 +166,16 @@ public:
     /****************************************************************************/ 
     protected:
 
-    std::string                   _name;
-    word32                        _offset;
-    const descriptor*             _descriptor;
-    boost::dynamic_bitset<>       _flags;
-    const string_array*            _values;
+    std::string                 _name;
+    word32                      _offset;
+    const descriptor*           _descriptor;
+    boost::dynamic_bitset<>     _flags;
+    const string_array*         _values;
 
-	set_accessor*      _set_callback;
-	get_accessor*	  _get_callback;
+	setter						_setter;
+	getter						_getter;
 
-    any                           _default_value;
+    any                         _default_value;
 };
 
 /********************************************************************************/ 
@@ -321,22 +325,21 @@ field& field::dontArchive(bool mode)
 
 
 inline
-field& field::setCallback(set_accessor* callback)
+field& field::hasSetter(setter callback)
 {
-	this->_set_callback = callback;
-    callback->_field = this;
+	this->_setter = callback;
 	return *this;
 }
 
 inline
-field& field::getCallback(get_accessor* callback)
+field& field::hasGetter(getter callback)
 {
-	this->_get_callback = callback;
-    callback->_field = this;
+	this->_getter = callback;
 	return *this;
 }
 
-#define init_field(CLASSNAME,NAME,FIELD) editFields().unused().init(NAME, field_descriptor(CLASSNAME,FIELD), field_offset(CLASSNAME,FIELD)).isPointer(field_is_pointer(CLASSNAME,FIELD))
+#define init_field(CLASSNAME,NAME,FIELD)	editFields().unused().init(NAME, field_descriptor(CLASSNAME,FIELD), offsetof(CLASSNAME,FIELD)).isPointer(field_is_pointer(CLASSNAME,FIELD))
+#define init_virtual_field(NAME,FIELDCLASS,SETTER,GETTER)    editFields().unused().init(NAME,classes::byType(typeid(FIELDCLASS)),SETTER,GETTER)
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

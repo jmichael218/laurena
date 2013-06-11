@@ -78,7 +78,7 @@ void buildTestClassDescriptors ()
     /****************************************************************************/
     auto d4 = standard_class_descriptor<test_bitset_bitfield>::build("test_bitset_bitfield");
     d4->init_field(test_bitset_bitfield,"w16",_w16);
-    d4->init_field(test_bitset_bitfield,"bitset",_bitset).isBitField(the_tens);
+    d4->init_field(test_bitset_bitfield,"bitset",_bitset).isBitSet(the_tens);
     d4->init_field(test_bitset_bitfield,"i64",_i64);
 
 }
