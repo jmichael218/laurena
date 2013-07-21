@@ -167,7 +167,11 @@ tokenizer& tokenizer::operator >> (int32& i)
     std::string svalue;
     word32 v = cstring::readInteger(this->_ptr,svalue);
     if (v)
-        i = boost::lexical_cast<int32,std::string>(svalue);       
+	{
+        i = boost::lexical_cast<int32,std::string>(svalue);
+		this->_ptr += svalue.length();
+		this->_location.process(svalue);
+	}
     else
         this->syntaxError("Was expecting a signed integer");
     return *this;
@@ -178,7 +182,11 @@ tokenizer& tokenizer::operator >> (word32& w)
     std::string svalue;
     word32 v = cstring::readInteger(this->_ptr,svalue);
     if (v)
-        w = boost::lexical_cast<word32,std::string>(svalue);       
+	{
+        w = boost::lexical_cast<word32,std::string>(svalue);     
+		this->_ptr += svalue.length();
+		this->_location.process(svalue);
+	}
     else
         this->syntaxError("Was expecting a signed integer");
     return *this;
@@ -189,7 +197,11 @@ tokenizer& tokenizer::operator>>  (int16& i)
     std::string svalue;
     word32 v = cstring::readInteger(this->_ptr,svalue);
     if (v)
+	{
         i = boost::lexical_cast<int16,std::string>(svalue);       
+		this->_ptr += svalue.length();
+		this->_location.process(svalue);
+	}
     else
         this->syntaxError("Was expecting a signed integer");
     return *this;
@@ -200,7 +212,11 @@ tokenizer& tokenizer::operator>>  (word16& w)
     std::string svalue;
     word32 v = cstring::readInteger(this->_ptr,svalue);
     if (v)
+	{
         w = boost::lexical_cast<word16,std::string>(svalue);       
+		this->_ptr += svalue.length();
+		this->_location.process(svalue);
+	}
     else
         this->syntaxError("Was expecting a signed integer");
     return *this;

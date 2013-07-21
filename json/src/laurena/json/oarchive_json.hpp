@@ -66,7 +66,6 @@ class oarchive_json : public oarchive{
     protected:
     tab						_tab;
     bool					_compact ;
-    const archive_format*   _format;
     word16					_nb_fields;         // nb of serialized fields in a level
 	word32					_depth;
     

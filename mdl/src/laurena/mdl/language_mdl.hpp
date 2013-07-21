@@ -69,6 +69,8 @@ public:
 
     };
 
+	static const std::string ANNOTATION_NAME;
+
     static void init ();
 
     static inline const parsers&                            units ()                    { return MDL::_parsers ; }

@@ -14,7 +14,6 @@ using namespace json;
 
 oarchive_json::oarchive_json() : oarchive () , _compact (false) , _tab ("\t"), _nb_fields(0), _depth(0)
 {
-    this->_format = formats.get("json");
 }
 
 
@@ -70,21 +69,24 @@ const any_feature* acf = NULL;
 
 
 
-        if (this->_format)
-        {
-            const format* fieldFormat = this->_format->find_field(att);
-            if ( fieldFormat )
-            {                
-                fieldFormat->write(this->_data , fieldValue);               
-                continue;
-            }
+		const format* fieldFormat = dynamic_cast<const format*>(att.annotations().get(JSON::ANNOTATION_NAME));
+        if ( fieldFormat )
+        {                
+			this->printFieldName(att);
+			this->_data << "\"";
+            fieldFormat->write(this->_data , fieldValue);               
+			this->_data << "\"";
+            continue;
+        }
 
-            const format* typeFormat = this->_format->find_type(att.desc());
-            if (typeFormat)
-            {               
-                typeFormat->write(this->_data,fieldValue);                
-                continue;
-            }
+        const format* typeFormat = dynamic_cast<const format*>(att.desc().annotations().get(JSON::ANNOTATION_NAME));
+        if (typeFormat)
+        {               
+			this->printFieldName(att);
+			this->_data << "\"";
+            typeFormat->write(this->_data,fieldValue);                
+			this->_data << "\"";
+            continue;            
         }
 
         const descriptor& acd = att.desc();
@@ -183,7 +185,7 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(cd.feature
 
         element = *it;
        
-        const format* typeFormat = this->_format ? this->_format->find_type(*ecd) : nullptr;
+        const format* typeFormat = dynamic_cast<const format*>(ecd->annotations().get(JSON::ANNOTATION_NAME));
         if (typeFormat)
         {
             this->_data << this->_tab << keystr << " = " ;

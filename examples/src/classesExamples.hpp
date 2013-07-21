@@ -130,6 +130,29 @@ public:
 };
 void buildClassDescriptor_Building();
 
+class ivertex
+{
+public:
+
+	ivertex () : _x (0), _y (0) {}
+	int _x, _y;
+};
+
+std::ostream& operator << (std::ostream& dest, const ivertex& v);
+std::istream& operator >> (std::istream& source, ivertex& v);
+laurena::tokenizer& operator >> (laurena::tokenizer& source, ivertex& v);
+
+void buildClassDescriptor_IVertex();
+
+class itriangle
+{
+public:
+
+	itriangle () : _v0 (), _v1 (), _v2 () {}
+	ivertex	 _v0, _v1, _v2;
+};
+void buildClassDescriptor_ITriangle();
+
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

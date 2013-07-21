@@ -11,6 +11,8 @@
 using namespace laurena;
 using namespace json;
 
+const std::string&  JSON::ANNOTATION_NAME = "json" ;
+
 
 parsers                 JSON::_parsers;
 bool                    JSON::_init               = false;
@@ -37,6 +39,7 @@ void JSON::init ()
     r [ JSON::TOKEN_ARRAY_BRACKET_OPEN ]  = new single_character_parser('[');
     r [ JSON::TOKEN_ARRAY_BRACKET_CLOSE ] = new single_character_parser(']');
     r [ JSON::TOKEN_COLON ]               = new single_character_parser(',');
+	r [ JSON::TOKEN_DQUOTE ]			  = new single_character_parser('"');
     r [ JSON::TOKEN_INTEGER ]             = new signed_integer_parser();
     r [ JSON::TOKEN_FLOAT ]               = new signed_integer_parser();
     r [ JSON::TOKEN_TRUE ]                = new keyword_parser("true");

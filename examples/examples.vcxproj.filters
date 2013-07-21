@@ -42,6 +42,9 @@
     <ClCompile Include="src\APrivateClass.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\ACustomizedTypeFormat.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\classesExamples.hpp">

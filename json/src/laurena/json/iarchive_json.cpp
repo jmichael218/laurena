@@ -115,12 +115,40 @@ std::string keyword;
 void iarchive_json::parseValue(any& object,const field* fdesc)
 {
 token t;
+any a;
+
+	if (fdesc)
+	{
+		const format* fieldFormat = dynamic_cast<const format*>(fdesc->annotations().get(JSON::ANNOTATION_NAME));
+		if ( fieldFormat )
+		{
+			this->readExpected(t,JSON::TOKEN_DQUOTE);
+			fieldFormat->read(this->_tokenizer,fdesc->get(object,a),true);
+			this->readExpected(t,JSON::TOKEN_DQUOTE);
+			fdesc->set(object,t);
+			return;
+		}
+
+
+		const format* typeFormat = dynamic_cast<const format*>(fdesc->desc().annotations().get(JSON::ANNOTATION_NAME));
+		if (typeFormat)
+		{  
+			this->readExpected(t,JSON::TOKEN_DQUOTE);
+			typeFormat->read(this->_tokenizer,fdesc ? fdesc->get(object,a) : object,true);
+			this->readExpected(t,JSON::TOKEN_DQUOTE);
+			fdesc->set(object,t);
+			return;
+		}
+	}
 
 	this->readExpected(t,JSON::TOKEN_SINGLE_STRING, JSON::TOKEN_INTEGER, JSON::TOKEN_ARRAY_BRACKET_OPEN, JSON::TOKEN_BRACKET_OPEN);
 
 	switch (t._token_id)
 	{
 		case JSON::TOKEN_SINGLE_STRING :
+			fdesc->set(object,t);
+			break;
+
 		case JSON::TOKEN_INTEGER :
 			fdesc->set(object,t);
 			break;
@@ -131,18 +159,14 @@ token t;
 			else 
 			if (fdesc->isPointer())
 			{
-				any newO;
-				fdesc->desc().create(newO);
-
-				this->parseObject(newO);
-				fdesc->set(object,newO);
+				fdesc->desc().create(a);
+				this->parseObject(a);
+				fdesc->set(object,a);
 			}
 			else
 			{
-				any v;
-				fdesc->get(object,v);
-
-				this->parseObject(v);
+				fdesc->get(object,a);
+				this->parseObject(a);
 			}
 			break;
 
@@ -152,18 +176,15 @@ token t;
 			else 
 			if (fdesc->isPointer())
 			{
-				any newO;
-				fdesc->desc().create(newO);
-
-				this->parseElements(newO);
-				fdesc->set(object,newO);
+				fdesc->desc().create(a);
+				this->parseElements(a);
+				fdesc->set(object,a);
 			}
 			else
 			{
-				any v;
-				fdesc->get(object,v);
 
-				this->parseElements(v);
+				fdesc->get(object,a);
+				this->parseElements(a);
 			}
 			break;
 

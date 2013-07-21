@@ -60,9 +60,7 @@ class oarchive_mdl : public oarchive{
     protected:
     std::string     _tab;
     bool            _injection ;
-    const archive_format*   _format;
-    
-        
+
 };
 
 

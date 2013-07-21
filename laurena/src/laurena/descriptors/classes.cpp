@@ -22,44 +22,30 @@
 using namespace laurena;
 
 std::unordered_map<std::string,const descriptor*>      classes::_classes_by_name;
-std::unordered_map<word64,const descriptor*>           classes::_classes_by_typeid;
+std::unordered_map<std::type_index,const descriptor*>           classes::_classes_by_typeid;
 
 void classes::add(const descriptor* myClass)
 {
     _classes_by_name[myClass->name()] = myClass;
-    _classes_by_typeid[(word64)&myClass->type()] = myClass;
+    _classes_by_typeid[std::type_index(myClass->type())] = myClass;
 }
 
 const descriptor*  classes::byName(const std::string& name)
 {
-    return _classes_by_name [name];
+	auto i = classes::_classes_by_name.find(name);
+	return i == classes::_classes_by_name.end () ? nullptr : i->second;    
 }
 
 const descriptor*  classes::byType(const type_info& type)
 {
-    #ifdef LAURENA_DEBUG_CLASSES
-        const descriptor* res = _classes_by_typeid[(word64)&type];
-        if (!res)
-        {
-            std::string msg = "In classes::byType, failed to find class ";
-            msg.append(type.name());
-            debug::println(msg);
-            assert(false);
-        }
-        return res;
-    #else
-        return _classes_by_typeid[(word64)&type];
-    #endif
-    
+    auto i = classes::_classes_by_typeid.find(std::type_index(type));
+	return i == classes::_classes_by_typeid.end () ? nullptr : i->second;  
 }
 
 void classes::logClasses (std::ostream& destination)
 {
-	for (auto i = _classes_by_typeid.begin(); i != _classes_by_typeid.end(); i ++)
-	{
-		const descriptor* d = i->second;
-		destination << d->name() << " ";
-	}
+	for (auto p : classes::_classes_by_typeid)
+		destination << p.second->name() << " ";	
 }
 
 bool classes::areParents(const descriptor& c1, const descriptor& c2)

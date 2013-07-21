@@ -30,6 +30,7 @@
 #include <laurena/memory/memory_functions.hpp>
 #include <laurena/traits/laurena_traits.hpp>
 #include <laurena/types/string_array.hpp>
+#include <laurena/descriptors/descriptable.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -39,7 +40,7 @@ namespace laurena {
 /*********************************************************************************/
 /*          class field                                                          */ 
 /*********************************************************************************/ 
-class field {
+class field : public descriptable {
 public:
 
     /****************************************************************************/ 
@@ -120,7 +121,6 @@ public:
     /*              accessors                                                   */ 
     /****************************************************************************/ 
 
-    const std::string&      name()              const;
     const descriptor&       desc()              const;
     word32                  offset()            const;
     void*                   ptr(void* object)   const;
@@ -166,7 +166,6 @@ public:
     /****************************************************************************/ 
     protected:
 
-    std::string                 _name;
     word32                      _offset;
     const descriptor*           _descriptor;
     boost::dynamic_bitset<>     _flags;
@@ -205,12 +204,6 @@ public:
 /*              inline function                                                 */ 
 /*                                                                              */ 
 /********************************************************************************/ 
-
-inline
-const std::string& field::name () const
-{
-    return this->_name;
-}
 
 inline 
 const descriptor& field::desc() const 

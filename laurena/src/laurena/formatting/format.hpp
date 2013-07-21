@@ -28,6 +28,7 @@
 #include <laurena/parsing/parser.hpp>
 #include <laurena/parsing/tokenizer.hpp>
 #include <laurena/formatting/writer.hpp>
+#include <laurena/descriptors/annotation.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -37,14 +38,14 @@ namespace laurena {
 /*********************************************************************************/
 /*          base class for all parser classes                                    */ 
 /*********************************************************************************/ 
-class format
+class format : public annotation
 {
 public:    
 
     /****************************************************************************/ 
     /*      constructor, destructor                                             */ 
     /****************************************************************************/ 
-    format (writer* w, parser* f);
+    format (const char* language, writer* w, parser* f);
 
     /****************************************************************************/ 
     /*          getters                                                         */ 
@@ -61,13 +62,6 @@ public:
     parser*     _parser;
 };
 
-
-class format_map : public std::unordered_map<std::string,format*>
-{
-public:
-
-    const format* get(const std::string& key) const;
-};
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

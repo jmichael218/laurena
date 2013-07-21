@@ -25,6 +25,8 @@
 #include <laurena/includes/types.hpp>
 
 #include <laurena/descriptors/features/class_features.hpp>
+#include <laurena/descriptors/annotation.hpp>
+#include <laurena/descriptors/descriptable.hpp>
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
@@ -45,7 +47,7 @@ class fields;
 /*********************************************************************************/
 /*          descriptor                                                           */ 
 /*********************************************************************************/ 
-class descriptor {
+class descriptor : public descriptable {
 
 	/****************************************************************************/
 	/*			enum for flags												    */ 
@@ -81,9 +83,6 @@ class descriptor {
     /****************************************************************************/ 
     /*          getters                                                         */ 
     /****************************************************************************/ 
-
-    //! Return reference to the class name.
-    inline const std::string& name() const { return _name ; }
 
     //! Return type_info structure of the class described.
     inline const type_info&   type() const { return _type; }
@@ -242,16 +241,20 @@ class descriptor {
     //! Call default constructor of the described class
     virtual any& create(any& destination) const;
 
+	/****************************************************************************/
+	/*																			*/
+	/*					ANNOTATIONS												*/ 
+	/*																			*/ 
+	/****************************************************************************/ 
 
     /****************************************************************************/ 
     /*          protected datas                                                 */ 
     /****************************************************************************/ 
     protected:
 
-	
-    std::string                     _name;		/*!< The class name				*/
     const std::type_info&           _type;		/*!< type_info of the class		*/    
     method_table*					_methods;	/*!< array of class methods		*/ 
+	
 };
 
 

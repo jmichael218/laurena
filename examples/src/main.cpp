@@ -25,6 +25,7 @@ void AVectorClass ();
 void AnEnumExample ();
 void ABitSetExample();
 void AGetterAndSetterExample();
+void ACustomizedTypeFormat ();
 
 int main ()
 {
@@ -43,6 +44,8 @@ int main ()
 	buildClassDescriptor_User();
 	buildClassDescriptor_Dragon();
 	buildClassDescriptor_Building();
+	buildClassDescriptor_IVertex();
+	buildClassDescriptor_ITriangle();
 
 
 	classes::logClasses(GLOG);
@@ -69,7 +72,8 @@ int main ()
 	// example to use getter and setter class
 	AGetterAndSetterExample();
 
-
+	// Example for a customized compact output
+	ACustomizedTypeFormat ();
 
 	return 0;
 

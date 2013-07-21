@@ -300,13 +300,6 @@ class any
         return anycast<const nonref &>(const_cast<any &>(operand));
     }
 
-    template<typename VALUECAST>
-    void convert(any& operand)
-    {
-        
-    }
-
-
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

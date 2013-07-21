@@ -52,10 +52,11 @@ public:
         TOKEN_SINGLE_STRING  ,        
         TOKEN_EOL            ,
         TOKEN_TABS           ,
+		TOKEN_DQUOTE		 ,
         TOKEN_MAX           
     };
 
-
+	static const std::string& ANNOTATION_NAME ;
 
     static void init ();
 

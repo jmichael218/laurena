@@ -91,7 +91,8 @@
 #include <fstream>
 #include <functional>
 #include <unordered_map>
-
+#include <typeindex>			// used in classes.hpp
+		
 /********************************************************************************/ 
 /* boost includes                                                               */ 
 /********************************************************************************/ 

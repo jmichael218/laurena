@@ -270,9 +270,6 @@
     <ClInclude Include="src\laurena\formatting\format.hpp">
       <Filter>Fichiers d%27en-tête\formatting</Filter>
     </ClInclude>
-    <ClInclude Include="src\laurena\formatting\formats.hpp">
-      <Filter>Fichiers d%27en-tête\formatting</Filter>
-    </ClInclude>
     <ClInclude Include="src\laurena\formatting\tab.hpp">
       <Filter>Fichiers d%27en-tête\formatting</Filter>
     </ClInclude>
@@ -287,6 +284,12 @@
     </ClInclude>
     <ClInclude Include="src\laurena\parsing\basic_parsers.hpp">
       <Filter>Fichiers d%27en-tête\parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\annotation.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\descriptable.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -419,9 +422,6 @@
     <ClCompile Include="src\laurena\formatting\format.cpp">
       <Filter>Fichiers sources\formatting</Filter>
     </ClCompile>
-    <ClCompile Include="src\laurena\formatting\formats.cpp">
-      <Filter>Fichiers sources\formatting</Filter>
-    </ClCompile>
     <ClCompile Include="src\laurena\formatting\tab.cpp">
       <Filter>Fichiers sources\formatting</Filter>
     </ClCompile>
@@ -433,6 +433,12 @@
     </ClCompile>
     <ClCompile Include="src\laurena\parsing\basic_parsers.cpp">
       <Filter>Fichiers sources\parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\annotation.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\descriptable.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

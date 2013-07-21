@@ -95,4 +95,32 @@ void buildClassDescriptor_Building()
 	field::setter ssfloors = [] (any& object, const any& value) { building* b = anycast<building*>(object); b->floors(anycast<unsigned char>(value));};
 	d->init_virtual_field("floors",unsigned char,ssfloors, sgfloors);
 }
+
+std::ostream& operator << (std::ostream& dest, const ivertex& v)
+{
+    return dest << "(" << v._x << "," << v._y << ")" ;
+}
+
+tokenizer& operator >> (tokenizer& source, ivertex& v)
+{
+    return source >> '(' >> v._x >> ',' >> v._y >> ')' ;
+}
+
+void buildClassDescriptor_IVertex()
+{
+	auto d = standard_class_descriptor<ivertex>::build("ivertex");
+    d->init_field(ivertex,"x",_x);
+    d->init_field(ivertex,"y",_y);
+	d->annotate(new format("json",new generic_writer<ivertex> () , new generic_parser<ivertex> () ));
+}
+
+
+void buildClassDescriptor_ITriangle()
+{
+	auto d = standard_class_descriptor<itriangle>::build("itriangle");
+	d->init_field(itriangle,"v0",_v0);
+	d->init_field(itriangle,"v1",_v1);
+	d->init_field(itriangle,"v2",_v2);
+};
+
 //End of file

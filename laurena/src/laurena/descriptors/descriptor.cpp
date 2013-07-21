@@ -22,16 +22,16 @@ using namespace laurena;
 /*                                                                              */ 
 /********************************************************************************/ 
 
-descriptor::descriptor(const char* name, const type_info& type) : _name(name), _type (type), _methods (nullptr)   
+descriptor::descriptor(const char* name, const type_info& type) : descriptable (name), _type (type), _methods (nullptr) 
 {
 }
 
 descriptor::~descriptor()
 {
-    if (_methods)
+    if ( this->_methods)
     {
-        delete _methods;
-        _methods = nullptr;
+        delete this->_methods;
+        this->_methods = nullptr;
     }
 }
 

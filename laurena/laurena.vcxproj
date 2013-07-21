@@ -18,9 +18,11 @@
     <ClInclude Include="src\laurena\debug\debug.hpp" />
     <ClInclude Include="src\laurena\debug\debug_stream.hpp" />
     <ClInclude Include="src\laurena\debug\testunit.hpp" />
+    <ClInclude Include="src\laurena\descriptors\annotation.hpp" />
     <ClInclude Include="src\laurena\descriptors\any_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\bitset_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\classes.hpp" />
+    <ClInclude Include="src\laurena\descriptors\descriptable.hpp" />
     <ClInclude Include="src\laurena\descriptors\descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\features\any_feature.hpp" />
     <ClInclude Include="src\laurena\descriptors\features\class_feature.hpp" />
@@ -46,7 +48,6 @@
     <ClInclude Include="src\laurena\exceptions\file_not_found_exception.hpp" />
     <ClInclude Include="src\laurena\exceptions\null_pointer_exception.hpp" />
     <ClInclude Include="src\laurena\exceptions\unimplemented_exception.hpp" />
-    <ClInclude Include="src\laurena\formatting\formats.hpp" />
     <ClInclude Include="src\laurena\formatting\format.hpp" />
     <ClInclude Include="src\laurena\formatting\tab.hpp" />
     <ClInclude Include="src\laurena\formatting\writer.hpp" />
@@ -84,9 +85,11 @@
     <ClCompile Include="src\laurena\debug\debug.cpp" />
     <ClCompile Include="src\laurena\debug\debug_stream.cpp" />
     <ClCompile Include="src\laurena\debug\testunit.cpp" />
+    <ClCompile Include="src\laurena\descriptors\annotation.cpp" />
     <ClCompile Include="src\laurena\descriptors\any_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\bitset_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\classes.cpp" />
+    <ClCompile Include="src\laurena\descriptors\descriptable.cpp" />
     <ClCompile Include="src\laurena\descriptors\descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\features\class_feature.cpp" />
     <ClCompile Include="src\laurena\descriptors\features\polymorphic_feature.cpp" />
@@ -106,7 +109,6 @@
     <ClCompile Include="src\laurena\exceptions\null_pointer_exception.cpp" />
     <ClCompile Include="src\laurena\exceptions\unimplemented_exception.cpp" />
     <ClCompile Include="src\laurena\formatting\format.cpp" />
-    <ClCompile Include="src\laurena\formatting\formats.cpp" />
     <ClCompile Include="src\laurena\formatting\tab.cpp" />
     <ClCompile Include="src\laurena\functions\parameter.cpp" />
     <ClCompile Include="src\laurena\memory\memory_functions.cpp" />

@@ -12,6 +12,7 @@
 using namespace laurena;
 using namespace mdl;
 
+ const std::string		MDL::ANNOTATION_NAME = "mdl" ;
 
 parsers                 MDL::_parsers;
 bool                    MDL::_init               = false;

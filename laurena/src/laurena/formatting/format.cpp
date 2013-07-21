@@ -12,7 +12,7 @@
 
 using namespace laurena;
 
-format::format (writer* w, parser* f) : _writer(w) , _parser(f) {}
+format::format (const char* language, writer* w, parser* f) : annotation(language), _writer(w) , _parser(f) {}
 
 bool format::write (std::ostream& output, any& value) const
 {
@@ -24,9 +24,4 @@ bool format::read (tokenizer& tokenizer, any& value, bool consume) const
     return this->_parser->read (tokenizer,value,consume);
 }
 
-const format* format_map::get(const std::string& key) const
-{
-    auto it = this->find(key);
-    return it == this->end() ? nullptr : it->second;
-}
 //End of file
