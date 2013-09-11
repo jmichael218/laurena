@@ -159,7 +159,7 @@ any a;
 			else 
 			if (fdesc->isPointer())
 			{
-				fdesc->desc().create(a);
+				a = std::move(fdesc->desc().create());
 				this->parseObject(a);
 				fdesc->set(object,a);
 			}
@@ -176,7 +176,7 @@ any a;
 			else 
 			if (fdesc->isPointer())
 			{
-				fdesc->desc().create(a);
+				a = std::move(fdesc->desc().create());
 				this->parseElements(a);
 				fdesc->set(object,a);
 			}
@@ -218,7 +218,7 @@ any key;
 		if (t._token_id == JSON::TOKEN_COLON)
 			this->readExpected(t,JSON::TOKEN_BRACKET_OPEN);
 
-		ecd->create(element);
+		element = std::move(ecd->create());
 		
 		this->parseObject(element);
 

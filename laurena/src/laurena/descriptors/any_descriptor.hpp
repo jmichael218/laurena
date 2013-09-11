@@ -87,11 +87,7 @@ public:
 
     // TO/FROM STRING SERIALIZATION 
     //! Serialization to a string     
-    virtual std::string& toString(const any& value, std::string& destination) const;
-
-    //! Unserialization from string    
-	virtual any& fromString(any& value, const std::string& string_value) const;
-    
+    virtual std::string atos(const any& value) const;
 
     /****************************************************************************/ 
     /*          protected datas                                                 */ 

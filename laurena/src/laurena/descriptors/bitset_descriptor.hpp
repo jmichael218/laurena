@@ -46,7 +46,7 @@ public:
 	virtual bool has(descriptor::Flags flag) const;
 
 	//CAST
-	virtual any& cast (any& value) const;
+	virtual any cast (const any& value) const;
 
 	// OPERATORS
 	virtual bool equals(const any& a0, const any& a1) const;
@@ -56,11 +56,11 @@ public:
     virtual any&            get(void* ptr, any& value)  const;
 
     // TO/FROM STRING SERIALIZATION 
-    virtual std::string&    toString(const any& value, std::string& destination) const;
-	virtual any&            fromString(any& value, const std::string& string_value) const;    
+    virtual std::string     atos(const any& value) const;
+	virtual any&            stoa(const std::string& string_value, any& value) const;    
     
     // OBJECT CONSTRUCTOR FOR INJECTION 
-    virtual any& create(any& destination) const;
+    virtual any create() const;
     
 
 };

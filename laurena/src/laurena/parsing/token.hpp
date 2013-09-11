@@ -41,6 +41,12 @@ public:
 
     token ();   
 
+	token& operator=(const token& t);
+	token& operator==(const token&& t);
+
+	token& operator=(const any& value);
+	token& operator=(const any&& value);
+
     /****************************************************************************/ 
     /*          protected data                                                  */ 
     /****************************************************************************/ 

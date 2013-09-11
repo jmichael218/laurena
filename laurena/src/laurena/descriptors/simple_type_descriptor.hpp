@@ -56,7 +56,7 @@ public:
     virtual bool    has(descriptor::Flags flag) const;
 
 	//CAST
-	virtual any& cast (any& value) const;
+	virtual any		cast (const any& value) const;
 
     // RAW VALUE SERIALIZATION
     virtual void            set(void* ptr, const any& value)  const;
@@ -66,12 +66,12 @@ public:
 	virtual bool equals(const any& a0, const any& a1) const;
 
     // TO/FROM STRING SERIALIZATION 
-    virtual std::string&    toString(const any& value, std::string& destination) const;
-	virtual any&            fromString(any& value, const std::string& string_value) const;
+    virtual std::string     atos(const any& value) const;
+	virtual any&            stoa(const std::string& string_value, any& value) const;
        
     // OBJECT CONSTRUCTOR FOR INJECTION 
     virtual any& clear(any& value) const;
-    virtual any& create(any& destination) const;
+    virtual any create() const;
 };
 
 /********************************************************************************/ 
@@ -102,7 +102,7 @@ bool simple_type_descriptor<T>::has(descriptor::Flags flag) const
 
 // CAST
 template<typename T>
-any& simple_type_descriptor<T>::cast (any& value) const
+any simple_type_descriptor<T>::cast (const any& value) const
 {
     if(value.type() == this->type())
         return value ;
@@ -111,9 +111,10 @@ any& simple_type_descriptor<T>::cast (any& value) const
     if (value.type() == typeid(std::string))
         svalue = anycast<std::string>(value);
     else
-		svalue = value.desc()->toString(value,svalue);
+		svalue = std::move(value.desc()->atos(value));
 
-	return this->fromString(value,svalue);
+	any destination;
+	return this->stoa(svalue, destination);
 }
 
 // RAW VALUE SERIALIZATION
@@ -122,9 +123,8 @@ void simple_type_descriptor<T>::set(void* ptr,const any& value) const
 {
     T t ;
 	if (value.desc() != this)
-	{
-		any a = value;
-		t = anycast<T>(this->cast(a));
+	{		
+		t = anycast<T>(this->cast(value));
 	}
 	else 
 		t = anycast<T>(value);
@@ -153,31 +153,30 @@ any& simple_type_descriptor<T>::clear(any& value) const
 }
 
 template<typename T>
-any& simple_type_descriptor<T>::create(any& value) const
+any simple_type_descriptor<T>::create() const
 {
     T t;
-    return value = t;
+    return any(t);
 }
 
 template<typename T>
-std::string& simple_type_descriptor<T>::toString(const any& value, std::string& destination) const
+std::string simple_type_descriptor<T>::atos(const any& value) const
 {
     T t;
     if (value.desc() != this)
-	{
-		any a = value;
-        t = anycast<T>(this->cast(a));    
+	{		
+        t = anycast<T>(this->cast(value));    
 	}
     else
         t = anycast<T>(value);
 
-    return destination = boost::lexical_cast<std::string>(t);
+    return boost::lexical_cast<std::string>(t);
 }
 
 
 
 template<typename T>
-any& simple_type_descriptor<T>::fromString(any& value, const std::string& string_value) const
+any& simple_type_descriptor<T>::stoa(const std::string& string_value, any& value) const
 {
     T t = boost::lexical_cast<T,std::string>(string_value);
     return value = t;

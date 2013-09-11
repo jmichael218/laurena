@@ -15,6 +15,8 @@ using namespace laurena;
 using namespace test;
 using namespace json;
 
+#include <boost/spirit/include/qi.hpp>
+
 void testBasicJsonSerialization ()
 {
     character bob;

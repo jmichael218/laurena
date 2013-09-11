@@ -177,11 +177,13 @@ boost::dynamic_bitset<>& bitset::parse(boost::dynamic_bitset<>& destination, con
     return destination;
 }
 
-std::string& bitset::toString(const boost::dynamic_bitset<>& bits, std::string& destination)
+std::string bitset::tos(const boost::dynamic_bitset<>& bits)
 {
-    destination.assign (bits.size(),'0');
+	std::string destination;
     if (bits.size() <= 0)    
-        return destination;   
+        return destination; 
+
+    destination.assign (bits.size(),'0');
 
     for ( word32 i = 0 ; i < bits.size() ; i ++ )
         if ( bits.test(i))

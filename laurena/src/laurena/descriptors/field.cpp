@@ -96,8 +96,7 @@ void field::set(any& o, const any& value) const
 {
 	if (this->_setter != nullptr)
 	{
-		any v = value;
-		this->desc().cast(v);
+		any v = this->desc().cast(value);		
 		this->_setter (o,v);
 		return;
 	}
@@ -149,15 +148,14 @@ std::string& field::toString(const any& object, std::string& destination) const
     {
         any anydest;
         this->_getter((any&)object,anydest);
-        anydest.desc()->toString(anydest,destination);
-        return destination;
+        return destination = std::move (anydest.desc()->atos(anydest));
     }
 
 
     this->get(object,value);
 
 
-    this->_descriptor->toString(value,destination);
+    destination = std::move(this->_descriptor->atos(value));
     if (this->_flags.test(field::FLAGS_IS_ENUM))
     {
         word32 index = boost::lexical_cast<word32,std::string>(destination);

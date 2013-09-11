@@ -65,8 +65,8 @@ public:
     word8_type_descriptor ();
 
     // TO/FROM STRING SERIALIZATION 
-    virtual std::string&    toString(const any& value, std::string& destination) const;
-	virtual any&            fromString(any& value, const std::string& string_value) const;        
+    virtual std::string     atos(const any& value) const;
+	virtual any&            stoa(const std::string& string_value, any& value) const;        
 };
 
 template<> 
@@ -97,8 +97,8 @@ public:
     int8_type_descriptor ();
 
     // TO/FROM STRING SERIALIZATION 
-    virtual std::string&    toString(const any& value, std::string& destination) const;
-	virtual any&            fromString(any& value, const std::string& string_value) const;        
+    virtual std::string     atos(const any& value) const;
+	virtual any&            stoa(const std::string& string_value, any& value) const;         
 };
 
 template<> 

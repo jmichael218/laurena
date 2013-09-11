@@ -33,15 +33,9 @@ bool string_descriptor::has(descriptor::Flags flag) const
 }
 
 //CAST
-any& string_descriptor::cast (any& value) const
+any string_descriptor::cast (const any& value) const
 {
-	if (value.desc() != this)
-	{
-		std::string svalue; 
-		value = value.desc()->toString(value,svalue);
-	}
-
-	return value;
+	return (value.desc() == this) ? value : any(value.tos());
 }
 
 // OPERATORS
@@ -55,7 +49,7 @@ void string_descriptor::set(void* ptr, const any& value)  const
 {
 	std::string* destination = (std::string*) ptr; 
 	if (value.desc() != this)	
-		value.desc()->toString(value,*destination);
+		*destination = std::move(value.desc()->atos(value));
 	else
 		*destination = anycast<std::string>(value);
 }
@@ -67,20 +61,20 @@ any& string_descriptor::get(void* ptr, any& value)  const
 }
 
 // TO/FROM STRING SERIALIZATION
-std::string& string_descriptor::toString(const any& value, std::string& destination) const
+std::string string_descriptor::atos(const any& value) const
 {
-    return destination = anycast<std::string>(value);
+    return anycast<std::string>(value);
 }
 
-any& string_descriptor::fromString(any& value, const std::string& string_value) const
+any& string_descriptor::stoa(const std::string& string_value, any& value) const
 {
     return value = string_value;
 }    
 
 // OBJECT CONSTRUCTOR FOR INJECTION
-any& string_descriptor::create(any& destination) const
+any string_descriptor::create() const
 {
-    return 	destination = std::string("");
+    return  any(std::string(""));
 }
 
 //end of file

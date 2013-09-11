@@ -21,13 +21,13 @@ word8_type_descriptor::word8_type_descriptor () : numeric_type_descriptor<word8>
 {}
 
 // TO/FROM STRING SERIALIZATION 
-std::string& word8_type_descriptor::toString(const any& value, std::string& destination) const
+std::string word8_type_descriptor::atos(const any& value) const
 {
     word16 t = anycast<word8>(value);
-    return destination = boost::lexical_cast<std::string,word16>(t);
+    return boost::lexical_cast<std::string,word16>(t);
 }
 
-any& word8_type_descriptor:: fromString(any& value, const std::string& string_value) const
+any& word8_type_descriptor::stoa(const std::string& string_value, any& value) const
 {
     word16 t = boost::lexical_cast<word16,std::string>(string_value);
     if (t > 255)
@@ -43,13 +43,13 @@ int8_type_descriptor::int8_type_descriptor () : numeric_type_descriptor<int8>("i
 {}
 
 // TO/FROM STRING SERIALIZATION 
-std::string& int8_type_descriptor::toString(const any& value, std::string& destination) const
+std::string int8_type_descriptor::atos(const any& value) const
 {
     int16 t = anycast<int8>(value);
-    return destination = boost::lexical_cast<std::string,int16>(t);
+    return boost::lexical_cast<std::string,int16>(t);
 }
 
-any& int8_type_descriptor:: fromString(any& value, const std::string& string_value) const
+any& int8_type_descriptor:: stoa(const std::string& string_value, any& value) const
 {
     int16 t = boost::lexical_cast<int16,std::string>(string_value);
        if ( t < SCHAR_MIN || t > SCHAR_MAX )

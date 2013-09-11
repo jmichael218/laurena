@@ -40,15 +40,16 @@ bool bitset_descriptor::has(descriptor::Flags flag) const
 }
 
 //CAST
-any& bitset_descriptor::cast (any& value) const
+any bitset_descriptor::cast (const any& value) const
 {
 	if (value.desc() != this)
 	{
+		any destination;
 		std::string svalue; 
-		this->fromString(value,value.desc()->toString(value,svalue));
+		return this->stoa(value.desc()->atos(value), destination);
 	}
 
-	return value;
+	return any(value);
 }
 
 // OPERATORS
@@ -64,11 +65,14 @@ void bitset_descriptor::set(void* ptr, const any& value)  const
 	if (value.desc() != this)	
     {
         any a = destination;
-        std::string svalue;
-        this->fromString(a,value.desc()->toString(value,svalue));
+        std::string svalue = std::move(value.desc()->atos(value));
+        this->stoa(svalue, a);
+		*destination = *anycast<boost::dynamic_bitset<>*>(a);
     }
-
-    *destination = *anycast<boost::dynamic_bitset<>*>(value);
+	else
+	{
+		*destination = *anycast<boost::dynamic_bitset<>*>(value);
+	}
 }
 
 any& bitset_descriptor::get(void* ptr, any& value)  const
@@ -78,13 +82,13 @@ any& bitset_descriptor::get(void* ptr, any& value)  const
 }
 
 // TO/FROM STRING SERIALIZATION
-std::string& bitset_descriptor::toString(const any& value, std::string& destination) const
+std::string bitset_descriptor::atos(const any& value) const
 {
     boost::dynamic_bitset<>* p = anycast<boost::dynamic_bitset<>*>(value);
-    return bitset::toString(*p,destination);
+    return bitset::tos(*p);
 }
 
-any& bitset_descriptor::fromString(any& value, const std::string& string_value) const
+any& bitset_descriptor::stoa(const std::string& string_value, any& value) const
 {
     boost::dynamic_bitset<>* p = anycast<boost::dynamic_bitset<>*>(value);
     bitset::parse(*p,string_value);
@@ -92,9 +96,9 @@ any& bitset_descriptor::fromString(any& value, const std::string& string_value) 
 }    
 
 // OBJECT CONSTRUCTOR FOR INJECTION
-any& bitset_descriptor::create(any& destination) const
+any bitset_descriptor::create() const
 {
-    return 	destination = new boost::dynamic_bitset<> ();
+    return 	any(new boost::dynamic_bitset<> ());
 }
 
 /********************************************************************************/ 

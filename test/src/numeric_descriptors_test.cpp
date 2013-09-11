@@ -31,13 +31,13 @@ word8 w ;
     testunit::function("descriptor<word8>::toString");
     testunit::startTest("casting word8(12) to std::string");
     a = (word8) 12;
-    tdword8->toString(a,s);
+    s = tdword8->atos(a);
     testunit::endTest(s == "12");           
 
     testunit::function("descriptor<word8> fromString");
     testunit::startTest("casting \"14\" to word8");
     s = "14";
-    tdword8->fromString(a,s);
+    tdword8->stoa(s, a);
     w = anycast<word8>(a);
     testunit::endTest(w == 14);
 }
@@ -66,24 +66,24 @@ int8 w ;
     testunit::function("descriptor<int8>::toString");
     testunit::startTest("casting int8(12) to std::string");
     a = (int8) 12;
-    tdint8->toString(a,s);
+    s = tdint8->atos(a);
     testunit::endTest(s == "12");          
 
     testunit::startTest("casting int8(-42) to std::string");
      a = (int8) -42;
-    tdint8->toString(a,s);
+    s = tdint8->atos(a);
     testunit::endTest(s == "-42");     
 
     testunit::function("descriptor<int8> fromString");
     testunit::startTest("casting \"14\" to int8");
     s = "14";
-    tdint8->fromString(a,s);
+    tdint8->stoa(s, a);
     w = anycast<int8>(a);
     testunit::endTest(w == 14);
 
     testunit::startTest("casting \"-34\" to int8");
     s = "-34";
-    tdint8->fromString(a,s);
+    tdint8->stoa(s, a);
     w = anycast<int8>(a);
     testunit::endTest(w == -34);
 }

@@ -78,20 +78,14 @@ any& any_descriptor::get(void* ptr, any& value)  const
 }
 
 // TO/FROM STRING SERIALIZATION 
-std::string& any_descriptor::toString(const any& value, std::string& destination) const
+std::string any_descriptor::atos(const any& value) const
 {
 	const descriptor* cd = value.desc();
 	if (!cd)
 	{
 		throw LAURENA_NULL_POINTER_EXCEPTION("Unknow class descriptor");
 	}
-	return cd->toString(value,destination);
+	return cd->atos(value);
 
-}
-
-any& any_descriptor::fromString(any& value, const std::string& string_value) const
-{
-	assert(false);
-    return value;
 }
 //End of file

@@ -40,7 +40,7 @@ bool parameter::parse(any& value, std::istream& input) const
     else
         Stream::readUntil(input,CHARSET_TABS,svalue);
     
-    this->_descriptor->fromString(value,svalue);
+    this->_descriptor->stoa(svalue, value);
     return true;
 }
 /********************************************************************************/ 

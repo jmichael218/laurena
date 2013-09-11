@@ -113,7 +113,7 @@ class bitset {
     /// \brief compute a bitset from a string made of 0 and 1
     static boost::dynamic_bitset<>& parse(boost::dynamic_bitset<>& destination, const std::string& value);
 
-    static std::string& toString(const boost::dynamic_bitset<>& bits, std::string& destination);
+    static std::string tos(const boost::dynamic_bitset<>& bits);
     static word64 toWord64 (const boost::dynamic_bitset<>& bits);
     static boost::dynamic_bitset<>& fromWord64 (word64 value, boost::dynamic_bitset<>& dest);
 

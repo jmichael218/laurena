@@ -137,7 +137,7 @@ class descriptor : public descriptable {
 	/*! Try to convert the parameter into the descriptor's type. 
 		Example std::string a = "1"; int i = td<int>::desc()->cast(a); 
 	*/
-    virtual any& cast (any& value) const;
+    virtual any cast (const any& value) const;
 
 
     /****************************************************************************/ 
@@ -227,10 +227,12 @@ class descriptor : public descriptable {
     /****************************************************************************/ 
 
     //! Serialization to a string     
-    virtual std::string& toString(const any& value, std::string& destination) const;
+	//! atos = Any TO String
+    virtual std::string atos(const any& value) const;
 
     //! Unserialization from string    
-	virtual any& fromString(any& value, const std::string& string_value) const;
+	//! stoa = String To Any
+	virtual any& stoa(const std::string& string_value, any& ) const;
 
 
     /****************************************************************************/ 
@@ -239,7 +241,7 @@ class descriptor : public descriptable {
     /*                                                                          */ 
     /****************************************************************************/ 
     //! Call default constructor of the described class
-    virtual any& create(any& destination) const;
+    virtual any create() const;
 
 	/****************************************************************************/
 	/*																			*/

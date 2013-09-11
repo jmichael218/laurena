@@ -77,11 +77,11 @@ size_t descriptor::sizeOf() const
     throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In descriptor::sizeOf(), sizeOf not implemented for this class");
 }
 
-any& descriptor::cast (any& value) const
+any descriptor::cast (const any& value) const
 {
     if (value.type() == this->type())
     {
-        return value;
+        return any(value);
     }
     throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In descriptor::recast(), recast not implemented for this class");
 }
@@ -165,12 +165,12 @@ any& descriptor::getObjectField(const any& ptr, const std::string& field_name, a
 /*              TO STRING SERIALIZATION                                         */ 
 /*                                                                              */ 
 /********************************************************************************/ 
-std::string& descriptor::toString(const any& value, std::string& destination) const
+std::string descriptor::atos(const any& value) const
 {
     throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In class_descriptor::toString(), this class is not serializable to string.");    
 }
 
-any& descriptor::fromString(any& value, const std::string& string_value) const
+any& descriptor::stoa(const std::string& string_value, any& value) const
 {
     throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In class_descriptor::fromString(), this class is not serializable from string.");    
 
@@ -182,7 +182,7 @@ any& descriptor::fromString(any& value, const std::string& string_value) const
 /*              OBJECT CREATION                                                 */ 
 /*                                                                              */ 
 /********************************************************************************/ 
-any& descriptor::create(any& destination) const
+any descriptor::create() const
 {
     throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In class_descriptor::create(), this class doesn't have a declared constructor.");
 }

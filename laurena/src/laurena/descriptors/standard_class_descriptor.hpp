@@ -163,13 +163,11 @@ public:
     
     }
 
-	virtual any& create(any& destination) const
+	virtual any create() const
 	{
 		if(_constructor)
 		{
-			T* t = (T*) _constructor();
-			destination = t;
-			return destination;
+			return any((T*) _constructor());
 		}
 		else
 		{
@@ -177,11 +175,9 @@ public:
 		}
 	}
 
-    virtual any& cast (any& value) const
-    {
-        T* t = anycast<T*>(value);
-        value = t;
-        return value;
+    virtual any cast (const any& value) const
+    {       
+        return any(anycast<T*>(value));
     }
 
     inline void constructor (std::function<T* ()> constructor) { this->_constructor = constructor ; }

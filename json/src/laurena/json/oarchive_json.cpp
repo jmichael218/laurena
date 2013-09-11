@@ -176,7 +176,7 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(cd.feature
         {
 
             key = it.key();        
-            kcd->toString(key,keystr);            
+            keystr = std::move (kcd->atos(key));            
         }
         else
         {
@@ -213,7 +213,7 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(cd.feature
 
             this->_data << this->_tab << keystr << " = " ;
                     
-            ecd->toString(element,elementstr);
+            elementstr = std::move (ecd->atos(element));
             bool isString = false;
             if (ecd->type() == typeid(std::string))
                 isString = true;

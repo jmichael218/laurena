@@ -119,107 +119,79 @@ class any
 	any();
     any(const char* str);
 	any(const any& other);
+	any(any&& other);
 
 	template<typename VALUETYPE> any (const VALUETYPE & value)  : 
-		_content(new content<VALUETYPE>(value , classes::byType(typeid(typename basetype<VALUETYPE>::type)))) {}
+		_content(new content<VALUETYPE>(value , classes::byType(typeid(typename basetype<VALUETYPE>::type)))) 
+	{ }
 
-	virtual ~any() { delete _content; }
+	virtual ~any();
+
+	/****************************************************************************/
+	/*			OPERATORS														*/ 
+	/****************************************************************************/
+
+    template<typename VALUETYPE>
+    any & operator=(const VALUETYPE & value)
+    {
+
+        const descriptor* cd = classes::byType(typeid(typename basetype<VALUETYPE>::type));
+        if (!cd)
+            cd = classes::byType(typeid(VALUETYPE));
+        if (!cd)
+            throw new LAURENA_EXCEPTION("In any::operator =, can't find a class descriptor for this type.");
+
+		if (_content)
+            delete _content;
+        _content = new content<VALUETYPE>(value,cd);
+
+        return *this;
+    }
+
+    any& operator=(const any& value);
+	any& operator=(any&& value);
+
+	bool operator==(const any& value);
+
+    inline bool operator != (const any& value)		 { return  ! this->operator== (value) ; }
 
     /****************************************************************************/ 
     /*          METHODS                                                         */ 
     /****************************************************************************/ 
     public: 
 
-        std::string& toString (std::string& s) const
-        {
-            const descriptor* d = this->desc();
-            return d ? d->toString(*this,s) : s.assign("") ;
-        }
+	std::string tos () const;			
     
-        any& clear ()
-        {
-            if (_content)
-                delete _content;            
-            return *this;
-        }   
+    inline any& clear ()
+    {
+		if (_content)
+            delete _content;            
+        return *this;
+    }   
 
 
-        bool isEmpty() const
+    inline bool isEmpty() const						{ return !_content; }
+
+    void* ptr() const
+    {
+        if (!_content)
         {
-            return !_content;
+            throw new LAURENA_EXCEPTION("In any::ptr(), empty content cannot be casted to a pointer.");
         }
+        return _content->ptr();
+    }
 
-        void* ptr() const
-        {
-            if (!_content)
-            {
-                throw new LAURENA_EXCEPTION("In any::ptr(), empty content cannot be casted to a pointer.");
-            }
-            return _content->ptr();
-            
-        }
-
-        const std::type_info & type() const
-        {
-            return _content ? _content->type() : typeid(void);
-        }
+    inline const std::type_info & type() const
+    {
+        return _content ? _content->type() : typeid(void);
+    }
 
 
-        template<typename VALUETYPE>
-        any & operator=(const VALUETYPE & value)
-        {
-            if (_content)
-                delete _content;
-
-            const descriptor* cd = classes::byType(typeid(typename basetype<VALUETYPE>::type));
-            if (!cd)
-                cd = classes::byType(typeid(VALUETYPE));
-            if (!cd)
-                throw new LAURENA_EXCEPTION("In any::operator =, can't find a class descriptor for this type.");
-
-            _content = new content<VALUETYPE>(value,cd);
-
-            return *this;
-        }
-
-        any & operator=(const any& value)
-        {
-            delete _content;
-                _content = value._content ? value._content->clone() : 0;
-            return *this;
-        }
-
-        bool operator==(const any& value)
-        {
-            const descriptor* cd   = this->desc();
-            const descriptor* cd2  = value.desc();
-
-            if (_content)
-            {
-                if (cd->has(descriptor::Flags::STRING_CAST) && cd2->has(descriptor::Flags::STRING_CAST))
-                {
-                    std::string v, v2;
-                    cd->toString(*this,v);
-                    cd2->toString(value,v2);
-                    return v == v2;
-                }
-                else
-                    return this->ptr() == value.ptr();
-            }
-            else
-                 return (value._content == nullptr); 
-                    
-        }
-
-        bool operator != (const any& value)
-        {
-            return  ! this->operator== (value) ;
-        }
-
-        inline const descriptor* desc() const
-        {
-            return _content ? _content->desc() : nullptr ;
-        }
+ 
+    inline const descriptor* desc() const
+    {
+        return _content ? _content->desc() : nullptr ;
+    }
 
     /****************************************************************************/ 
     /*                  protected datas                                         */ 
@@ -236,69 +208,69 @@ class any
         template<typename VALUETYPE> friend VALUETYPE * dynamic_anycast(any*) ;
 };
 
-    /****************************************************************************/ 
-    /*          casts                                                           */ 
-    /****************************************************************************/ 
-    template<typename VALUETYPE>
-    VALUETYPE* dynamic_anycast(any* operand)
+/****************************************************************************/ 
+/*          casts                                                           */ 
+/****************************************************************************/ 
+template<typename VALUETYPE>
+VALUETYPE* dynamic_anycast(any* operand)
+{
+    const descriptor* ocd = operand->desc();
+    if (!ocd)
+        return 0;
+
+    const descriptor* vcd = classes::byType(typeid(typename basetype<VALUETYPE>::type));
+    if (!vcd)
+        return 0;
+
+    return classes::areParents(*ocd,*vcd) ?  &static_cast<any::content<VALUETYPE> *>(operand->_content)->_value : 0;
+}
+
+template<typename VALUETYPE>
+VALUETYPE * anycast(any * operand)
+{
+    VALUETYPE* res = operand && operand->type() == typeid(VALUETYPE) ? 
+            &static_cast<any::content<VALUETYPE> *>(operand->_content)->_value
+        : dynamic_anycast<VALUETYPE>(operand) ;
+
+    if (res == 0)
     {
-        const descriptor* ocd = operand->desc();
-        if (!ocd)
-            return 0;
-
-        const descriptor* vcd = classes::byType(typeid(typename basetype<VALUETYPE>::type));
-        if (!vcd)
-            return 0;
-
-        return classes::areParents(*ocd,*vcd) ?  &static_cast<any::content<VALUETYPE> *>(operand->_content)->_value : 0;
+        const type_info& operand_info = operand->type();
+        const char* operand_name = operand_info.name();
+        const type_info& valuetype_info = typeid(VALUETYPE);
+        const char* valuetype_name = valuetype_info.name();
+        std::string message = "Failed to cast from '";
+        message.append(operand_name).append ("' to '").append(valuetype_name).append("'.");
+        //throw new LAURENA_STANDARD_EXCEPTION(message.c_str());
     }
 
-    template<typename VALUETYPE>
-    VALUETYPE * anycast(any * operand)
-    {
-        VALUETYPE* res = operand && operand->type() == typeid(VALUETYPE) ? 
-             &static_cast<any::content<VALUETYPE> *>(operand->_content)->_value
-            : dynamic_anycast<VALUETYPE>(operand) ;
+    return res;
+}  
 
-        if (res == 0)
-        {
-            const type_info& operand_info = operand->type();
-            const char* operand_name = operand_info.name();
-            const type_info& valuetype_info = typeid(VALUETYPE);
-            const char* valuetype_name = valuetype_info.name();
-            std::string message = "Failed to cast from '";
-            message.append(operand_name).append ("' to '").append(valuetype_name).append("'.");
-            //throw new LAURENA_STANDARD_EXCEPTION(message.c_str());
-        }
+template<typename VALUETYPE>
+inline const VALUETYPE * anycast(const any * operand)
+{
+    return anycast<VALUETYPE>(const_cast<any *>(operand));
+}
 
-        return res;
-    }  
+template<typename VALUETYPE>
+VALUETYPE anycast(any & operand)
+{
+    typedef typename boost::remove_reference<VALUETYPE>::type nonref;
 
-    template<typename VALUETYPE>
-    inline const VALUETYPE * anycast(const any * operand)
-    {
-        return anycast<VALUETYPE>(const_cast<any *>(operand));
-    }
+    nonref * result = anycast<nonref>(&operand);
+    if(!result)
+        throw new LAURENA_EXCEPTION("anycast failed");
 
-    template<typename VALUETYPE>
-    VALUETYPE anycast(any & operand)
-    {
-        typedef typename boost::remove_reference<VALUETYPE>::type nonref;
+    return *result;
+}
 
-        nonref * result = anycast<nonref>(&operand);
-        if(!result)
-            throw new LAURENA_EXCEPTION("anycast failed");
+template<typename VALUETYPE>
+inline VALUETYPE anycast(const any & operand)
+{
+    typedef typename boost::remove_reference<VALUETYPE>::type nonref;
 
-        return *result;
-    }
-
-    template<typename VALUETYPE>
-    inline VALUETYPE anycast(const any & operand)
-    {
-        typedef typename boost::remove_reference<VALUETYPE>::type nonref;
-
-        return anycast<const nonref &>(const_cast<any &>(operand));
-    }
+    return anycast<const nonref &>(const_cast<any &>(operand));
+}
 
 
 /********************************************************************************/ 

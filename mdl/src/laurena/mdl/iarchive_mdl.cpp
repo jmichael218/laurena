@@ -174,7 +174,7 @@ const class_feature* ft;
         else
         {
             this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_HEXADECIMAL,MDL::TOKEN_STRING);
-            anyContentDescriptor->cast(t);
+            t = std::move(anyContentDescriptor->cast(t));
         }
     }
     else
@@ -201,11 +201,8 @@ token t;
                 (this->_tokenizer.prefixErrorMessage(stream)) << " ," << keyname << " is an unknow mappable key.";
                 throw LAURENA_FAILED_PARSING_EXCEPTION(stream.str().c_str(),this->_tokenizer._ptr) ;   
             }
-            else
-		        keyDescriptor->fromString(key,keyname);
         }
-        else
-            keyDescriptor->fromString(key,keyname);
+        keyDescriptor->stoa(keyname, key);
 
 	    this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_HEXADECIMAL,MDL::TOKEN_STRING);
 
@@ -270,7 +267,7 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(d.feature(
     }
     this->readExpected(t,MDL::TOKEN_DPOINTS);
 
-    cd->create(newO) ;
+    newO = std::move(cd->create());
     std::string keyword ;
     keyword = this->_last_keyword ;
     _last_keyword = classname;
@@ -394,7 +391,7 @@ bool doListPush = false;
 
                 if ( ccf->hasKey ())
                 {
-                    ccf->keyDescriptor()->cast(key);
+                    key = std::move(ccf->keyDescriptor()->cast(key));
                     ccf->get(parent,key,obj);    
                 } 
                 else
