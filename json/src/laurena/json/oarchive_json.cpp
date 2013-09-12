@@ -53,21 +53,14 @@ const any_feature* acf = NULL;
     if (cd.has(descriptor::Flags::FIELDS) == false) 
         return;
 
-    const fields& myFields = cd.getFields();
-    word32 nbAttributes = myFields.size();
-
     void* ptrObject = value.ptr();
     any fieldValue;
 
-    for (word32 i = 0; i < nbAttributes; ++i)
+    for (const field& att : cd.getFields())
     {                
 
-        this->completeLastLine();
-
-        const field& att = myFields[i];        
+        this->completeLastLine();      
         att.get(value,fieldValue);       
-
-
 
 		const format* fieldFormat = dynamic_cast<const format*>(att.annotations().get(JSON::ANNOTATION_NAME));
         if ( fieldFormat )

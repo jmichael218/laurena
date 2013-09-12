@@ -107,7 +107,7 @@ const char* p = this->_ptr ;
     if (*p == '\n' )
     {
         p++;
-        word32 sz = memory::offset(this->_ptr,p);
+        word32 sz = std::distance(this->_ptr,p);
         this->_location.process(this->_ptr,sz);
         this->_ptr += sz;
     }
@@ -120,7 +120,7 @@ const char* p = strstr(this->_ptr,keyword);
 
     if (p)
     {       
-        word32 sz = memory::offset(this->_ptr,p);
+        word32 sz = std::distance(this->_ptr,p);
         if (skipKeyword)
             sz += strlen(keyword);
 
