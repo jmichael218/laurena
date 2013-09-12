@@ -235,7 +235,7 @@ const descriptor* cd = value.desc();
 
     if ( !cd)
     {
-        throw new LAURENA_NULL_POINTER_EXCEPTION("In oarchive::serialize, any& value do have nullptr descriptor.");
+        throw new LAURENA_NULL_POINTER_EXCEPTION("any& value do have nullptr descriptor.");
     }
 
     word32 backup = this->_nb_fields;

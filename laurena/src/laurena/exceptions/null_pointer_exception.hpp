@@ -40,8 +40,8 @@ class null_pointer_exception : public exception
     /****************************************************************************/ 
     /*          constructor, destructors                                        */ 
     /****************************************************************************/ 
-    null_pointer_exception (const char* message, const char* filename, word32 line) ;
-    null_pointer_exception (const std::string& message, const char* filename, word32 line) ;
+    null_pointer_exception (const char* message, const char* filename, const char* function, word32 line) ;
+    null_pointer_exception (const std::string& message, const char* filename, const char* function, word32 line) ;
     virtual ~null_pointer_exception () {} 
 
     /****************************************************************************/ 
@@ -51,7 +51,7 @@ class null_pointer_exception : public exception
     virtual void            report(std::ostream& destination) const ;
 
 };
-#define LAURENA_NULL_POINTER_EXCEPTION(msg) laurena::null_pointer_exception(msg,__FILE__,(word32)__LINE__)
+#define LAURENA_NULL_POINTER_EXCEPTION(msg) laurena::null_pointer_exception(msg,__FILE__,__FUNCTION__,(word32)__LINE__)
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

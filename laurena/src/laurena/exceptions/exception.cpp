@@ -23,25 +23,25 @@ using namespace laurena;
 /********************************************************************************/ 
 /*              implementation of constructors                                  */ 
 /********************************************************************************/ 
-exception::exception (const char* message, const char* filename, word32 line) 
+exception::exception (const char* message, const char* filename, const char* function, word32 line) 
                     
-    : _message (message) , _filename (filename) , _line(line)
+    : _message (message) , _filename (filename) , _function(function), _line(line)
 
 {
     this->ready();
 }
 
-exception::exception (const std::string& message, const char* filename, word32 line)
+exception::exception (const std::string& message, const char* filename, const char* function, word32 line)
 
-    : _message (message) , _filename (filename) , _line(line)
+    : _message (message) , _filename (filename) , _function(function), _line(line)
 
 {
     this->ready();
 }
 
-exception::exception (const std::ostringstream& message, const char* filename, word32 line)
+exception::exception (const std::ostringstream& message, const char* filename, const char* function, word32 line)
 
-    : _message (message.str()) , _filename (filename) , _line(line)
+    : _message (message.str()) , _filename (filename) , _function(function), _line(line)
 
 {
     this->ready();
@@ -69,7 +69,8 @@ void exception::report(std::ostream& destination) const
 {    
 
     destination << this->exceptionType() 
-        << " raised in " << this->_filename 
+        << " raised in file " << this->_filename 
+		<< ", in function " << this->_function
         << ", at line " << this->_line 
         << " : " << this->_message 
         << std::endl ;

@@ -42,10 +42,9 @@ field& field::init (const char* name, const descriptor* cd, word32 offset)
 {
     if ( cd == nullptr ) 
     {
-        std::string message;
-        message = "In field::init, you can't pass a nullptr descriptor for class " ;
+        std::string message ("you can't pass a nullptr descriptor for class ") ;
         message.append(name);
-        throw new LAURENA_NULL_POINTER_EXCEPTION (  message.c_str());
+        throw new LAURENA_NULL_POINTER_EXCEPTION (message.c_str());
     }
 
     this->_name = name ;
@@ -59,10 +58,9 @@ field& field::init (field& source)
 {
     if (source._descriptor == nullptr )
     {
-        std::string message;
-        message = "In field::init, you can't pass a nullptr descriptor for class " ;
+        std::string message ("you can't pass a nullptr descriptor for class ") ;
         message.append(source._name);
-        throw new LAURENA_NULL_POINTER_EXCEPTION (  message.c_str());
+        throw new LAURENA_NULL_POINTER_EXCEPTION (message.c_str());
     }
 
     this->_name = source._name ;
@@ -78,10 +76,9 @@ field& field::init (const char* name, const descriptor* cd, setter setfunction, 
 {
     if ( cd == nullptr ) 
     {
-        std::string message;
-        message = "In field::init, you can't pass a nullptr descriptor for class " ;
+        std::string message ("you can't pass a nullptr descriptor for class ") ;
         message.append(name);
-        throw new LAURENA_NULL_POINTER_EXCEPTION (  message.c_str());
+        throw new LAURENA_NULL_POINTER_EXCEPTION (message.c_str());
     }
 
     this->_name = name ;
@@ -191,9 +188,8 @@ void* ptrAttribute = this->ptr(ptrObject);
         int32 index = this->_values->find(svalue);
         if (index == -1)
         {
-            std::string message;
-            message.append ("In field(field=").append(this->_name)
-                   .append(",isEnum=true,value='").append(svalue).append("'), value not found in enum values.");
+            std::string message (this->_name);
+            message.append(",isEnum=true,value='").append(svalue).append("'), value not found in enum values.");
             throw LAURENA_FAILED_PARSING_EXCEPTION(message.c_str(),svalue.c_str());
         }
 
@@ -264,8 +260,8 @@ const field& fields::get(const std::string& name)
         if (f.name() == name)
             return f;
 
-    std::string message  = "In fields::get, " ;    
-    message.append(name).append (" is an unknow object field name.");
+    std::string message (name);
+	message.append (" is an unknow object field name.");
     throw new LAURENA_NULL_POINTER_EXCEPTION (message);
 }
 

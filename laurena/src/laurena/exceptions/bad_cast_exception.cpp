@@ -13,8 +13,8 @@
 using namespace laurena;
 
 
-bad_cast_exception::bad_cast_exception (const char* message, const char* castTypename, const char* valueTypename, const char* filename, word32 line)
-                    : exception(message, filename, line)
+bad_cast_exception::bad_cast_exception (const char* message, const char* castTypename, const char* valueTypename, const char* filename, const char* function, word32 line)
+                    : exception(message, filename, function, line)
 {
     this->_cast_typename = castTypename;
     this->_value_typename = valueTypename;

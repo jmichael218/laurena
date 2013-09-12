@@ -13,8 +13,8 @@
 using namespace laurena;
 
 
-file_not_found_exception::file_not_found_exception (const char* message, const std::string& fileNotFound, const char* filename, word32 line)
-                    : exception(message, filename, line)
+file_not_found_exception::file_not_found_exception (const char* message, const std::string& fileNotFound, const char* filename, const char* function, word32 line)
+                    : exception(message, filename, function, line)
 {
     this->_file_not_found = fileNotFound;
     this->ready();

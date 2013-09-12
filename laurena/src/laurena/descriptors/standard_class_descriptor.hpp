@@ -171,7 +171,7 @@ public:
 		}
 		else
 		{
-			throw LAURENA_NULL_POINTER_EXCEPTION("In PolymorphicClassDescriptor::constructor(), class constructor not set.");
+			throw LAURENA_NULL_POINTER_EXCEPTION("class constructor not set.");
 		}
 	}
 

@@ -53,7 +53,7 @@ bool descriptor::hasFeature(Feature featureId) const
 /********************************************************************************/ 
 bool descriptor::equals(const any& a0, const any& a1) const
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In descriptor::equals(), equals not implemented for this class");
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("equals not implemented for this class");
 }
 
 /********************************************************************************/ 
@@ -74,7 +74,7 @@ const descriptor& descriptor::resolve(const any& value) const
 
 size_t descriptor::sizeOf() const 
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In descriptor::sizeOf(), sizeOf not implemented for this class");
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("sizeOf not implemented for this class");
 }
 
 any descriptor::cast (const any& value) const
@@ -83,12 +83,12 @@ any descriptor::cast (const any& value) const
     {
         return any(value);
     }
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In descriptor::recast(), recast not implemented for this class");
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("recast not implemented for this class");
 }
 
 any& descriptor::clear(any& value) const
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In descriptor::init(), init not implemented for this class");
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("init not implemented for this class");
 }
 
 bool descriptor::has(descriptor::Flags flag) const
@@ -103,12 +103,12 @@ bool descriptor::has(descriptor::Flags flag) const
 
 const field& descriptor::primaryKey() const
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In class_descriptor::primaryKeyDescriptor(), this class doesn't have a primary key.");
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("this class doesn't have a primary key.");
 }
 
 const field& descriptor::serial() const
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In class_descriptor::serialDescriptor(), this class doesn't have a serial key.");
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("this class doesn't have a serial key.");
 }
 
 /********************************************************************************/ 
@@ -118,11 +118,11 @@ const field& descriptor::serial() const
 /********************************************************************************/ 
 void descriptor::set(void* ptr, const any& value) const
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In descriptor::set_value(), set operation is not implemented for this class.");
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("set operation is not implemented for this class.");
 }
 any& descriptor::get(void* ptr, any& value) const
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In descriptor::get_value(), get operation is not implemented for this class.");
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("get operation is not implemented for this class.");
 }
 
 /********************************************************************************/ 
@@ -138,13 +138,13 @@ const field* descriptor::findField(const std::string& field_name) const
 
 const field& descriptor::getField(const std::string& field_name) const
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In descriptor::field(), this class doesn't have field members.");
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("this class doesn't have field members.");
 }
 
 
 const fields& descriptor::getFields() const
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In descriptor::fields(), this class doesn't have field members.");
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("this class doesn't have field members.");
 }
 
 
@@ -167,12 +167,12 @@ any& descriptor::getObjectField(const any& ptr, const std::string& field_name, a
 /********************************************************************************/ 
 std::string descriptor::atos(const any& value) const
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In class_descriptor::toString(), this class is not serializable to string.");    
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("this class is not serializable to string.");    
 }
 
 any& descriptor::stoa(const std::string& string_value, any& value) const
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In class_descriptor::fromString(), this class is not serializable from string.");    
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("this class is not serializable from string.");    
 
 }
 
@@ -184,7 +184,7 @@ any& descriptor::stoa(const std::string& string_value, any& value) const
 /********************************************************************************/ 
 any descriptor::create() const
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("In class_descriptor::create(), this class doesn't have a declared constructor.");
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("this class doesn't have a declared constructor.");
 }
 
 /********************************************************************************/ 

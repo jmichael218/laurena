@@ -24,7 +24,7 @@ std::string& Loader::load(const std::string& filename, std::string& destination)
 FILE * F = fopen ( filename.c_str() , "rb" ) ;
 
     if (!F) 
-        throw LAURENA_FILE_NOT_FOUND_EXCEPTION("In Loader::load, file not found.",filename);
+        throw LAURENA_FILE_NOT_FOUND_EXCEPTION("file not found.",filename);
     
     /* get file size */ 
     fseek(F,0,SEEK_END);

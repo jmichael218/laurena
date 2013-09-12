@@ -40,9 +40,9 @@ class exception : public std::exception
     /*          constructor, destructors                                        */ 
     /****************************************************************************/ 
     public:
-    exception (const char* message, const char* filename , word32 line) ;
-    exception (const std::string& message, const char* filename, word32 line);
-    exception (const std::ostringstream& message, const char* filename, word32 line);
+    exception (const char* message, const char* filename , const char* function, word32 line) ;
+    exception (const std::string& message, const char* filename, const char* function, word32 line);
+    exception (const std::ostringstream& message, const char* filename, const char* function, word32 line);
 
     virtual ~exception ();
 
@@ -84,10 +84,11 @@ class exception : public std::exception
     protected:
     word32           _line ;
     std::string      _filename ;
-    std::string      _message ;
+	std::string      _function;
+    std::string      _message; 
     std::string      _what;
 };
-#define LAURENA_EXCEPTION(msg) laurena::exception(msg,__FILE__,(word32)__LINE__)
+#define LAURENA_EXCEPTION(msg) laurena::exception(msg,__FILE__,__FUNCTION__,(word32)__LINE__)
 
 
 

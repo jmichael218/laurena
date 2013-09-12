@@ -13,14 +13,14 @@
 
 using namespace laurena;
 
-null_pointer_exception::null_pointer_exception (const char* message, const char* filename, word32 line)
-                    : exception(message, filename, line)
+null_pointer_exception::null_pointer_exception (const char* message, const char* filename, const char* function, word32 line)
+                    : exception(message, filename, function, line)
 {
     this->ready();
 }
 
-null_pointer_exception::null_pointer_exception(const std::string& message, const char* filename, word32 line)
-                    : exception(message.c_str(), filename, line)
+null_pointer_exception::null_pointer_exception(const std::string& message, const char* filename, const char* function, word32 line)
+                    : exception(message.c_str(), filename, function, line)
 {
     this->ready();
 }

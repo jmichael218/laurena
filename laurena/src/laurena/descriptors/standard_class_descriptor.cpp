@@ -69,7 +69,7 @@ const field&  base_standard_class_descriptor::primaryKey() const
         if (this->hasParent())
             return this->parent().primaryKey();
 
-        throw LAURENA_NULL_POINTER_EXCEPTION("In ObjectClassDescriptor::primaryKeyDescriptor(), class doesn't have any primary key.");
+        throw LAURENA_NULL_POINTER_EXCEPTION("class doesn't have any primary key.");
     }
     else
         return this->_fields[this->_primary_key_field];
@@ -82,7 +82,7 @@ const field& base_standard_class_descriptor::serial() const
         if (this->hasParent())
             return this->parent().serial();
 
-        throw LAURENA_NULL_POINTER_EXCEPTION("In ObjectClassDescriptor::primaryKeyDescriptor(), class doesn't have any serial key.");
+        throw LAURENA_NULL_POINTER_EXCEPTION("class doesn't have any serial key.");
     }
     else
         return this->_fields[this->_serial_field];
@@ -105,11 +105,8 @@ const field& base_standard_class_descriptor::getField(const std::string& field_n
 
     if (!this->hasParent())
     {
-        std::string message;
-        message.append ("In ObjectClassDescriptor::field(), '")
-               .append(field_name)
-               .append("' is an unknow field member");
-
+        std::string message (field_name);
+        message.append("' is an unknow field member");
         throw LAURENA_NULL_POINTER_EXCEPTION(message.c_str());
     }
     else

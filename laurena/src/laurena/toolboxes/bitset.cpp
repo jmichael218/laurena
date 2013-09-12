@@ -88,7 +88,7 @@ boost::dynamic_bitset<>& bitset::binary(boost::dynamic_bitset<>& bits, const std
         else if ( c == '1' )
             bits.set(i);
         else
-            throw LAURENA_FAILED_PARSING_EXCEPTION("In BitSet::parseBinary, source is not a [0-1]* regex" , binary.c_str()) ;   
+            throw LAURENA_FAILED_PARSING_EXCEPTION("source is not a [0-1]* regex" , binary.c_str()) ;   
 
     }
     return bits;
@@ -119,7 +119,7 @@ word64 bitset::parse(const string_array& bitnames, const charset& charset, const
         int32 index = bitnames.find(key);
         if (index==-1)
         {
-            throw LAURENA_FAILED_PARSING_EXCEPTION("In bitset::string, unknow flag" , key.c_str());
+            throw LAURENA_FAILED_PARSING_EXCEPTION("unknow flag" , key.c_str());
         }
         res += ((word64)1) << index;
         p +=i;
@@ -155,7 +155,7 @@ std::string key;
         int32 index = bitnames.find(key);
         if (index==-1)
         {
-            throw LAURENA_FAILED_PARSING_EXCEPTION("In bitset::string, unknow flag" , key.c_str());
+            throw LAURENA_FAILED_PARSING_EXCEPTION("unknow flag" , key.c_str());
         }
         destination.set (index);
         p +=i;

@@ -39,7 +39,7 @@ class file_not_found_exception : public exception
     /****************************************************************************/ 
     /*          constructor, destructors                                        */ 
     /****************************************************************************/ 
-    file_not_found_exception (const char* message, const std::string& fileNotFound, const char* filename, word32 line) ;
+    file_not_found_exception (const char* message, const std::string& fileNotFound, const char* filename, const char* function, word32 line) ;
     virtual ~file_not_found_exception ();
 
     /****************************************************************************/ 
@@ -55,7 +55,7 @@ class file_not_found_exception : public exception
 
     std::string _file_not_found;
 };
-#define LAURENA_FILE_NOT_FOUND_EXCEPTION(msg,fileNotFound) laurena::file_not_found_exception(msg,fileNotFound,__FILE__,(word32)__LINE__)
+#define LAURENA_FILE_NOT_FOUND_EXCEPTION(msg,fileNotFound) laurena::file_not_found_exception(msg,fileNotFound,__FILE__,__FUNCTION__,(word32)__LINE__)
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

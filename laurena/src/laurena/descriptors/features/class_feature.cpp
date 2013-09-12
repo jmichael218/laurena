@@ -15,7 +15,7 @@ using namespace laurena;
 class_feature::class_feature(const descriptor* desc) : _descriptor(desc)
 {
     if(_descriptor == nullptr)
-        throw new LAURENA_EXCEPTION("In class_feature::class_feature(), descriptor is nullptr.");
+        throw new LAURENA_EXCEPTION("descriptor is nullptr.");
 
 }
 

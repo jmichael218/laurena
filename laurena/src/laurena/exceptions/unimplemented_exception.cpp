@@ -13,8 +13,8 @@
 
 using namespace laurena;
 
-unimplemented_exception::unimplemented_exception (const char* message, const char* filename, word32 line)
-                    : exception(message, filename, line)
+unimplemented_exception::unimplemented_exception (const char* message, const char* filename, const char* function, word32 line)
+                    : exception(message, filename, function, line)
 {
     this->ready();
 }

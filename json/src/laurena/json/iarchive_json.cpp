@@ -190,7 +190,7 @@ any a;
 
 
 		default:
-			throw LAURENA_FAILED_PARSING_EXCEPTION("Error in JSON implementation", this->_tokenizer._ptr);
+			throw LAURENA_FAILED_PARSING_EXCEPTION("error in JSON implementation", this->_tokenizer._ptr);
 			break;
 	}
 }

@@ -40,7 +40,7 @@ class unimplemented_exception : public exception
     /****************************************************************************/ 
     /*          constructor, destructors                                        */ 
     /****************************************************************************/ 
-    unimplemented_exception (const char* message, const char* filename, word32 line) ;
+    unimplemented_exception (const char* message, const char* filename, const char* function, word32 line) ;
     virtual ~unimplemented_exception () {} 
 
     /****************************************************************************/ 
@@ -50,7 +50,7 @@ class unimplemented_exception : public exception
     virtual void            report(std::ostream& destination) const ;
 
 };
-#define LAURENA_UNIMPLEMENTED_EXCEPTION(msg) laurena::unimplemented_exception(msg,__FILE__,(word32)__LINE__)
+#define LAURENA_UNIMPLEMENTED_EXCEPTION(msg) laurena::unimplemented_exception(msg,__FILE__,__FUNCTION__,(word32)__LINE__)
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

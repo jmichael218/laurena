@@ -39,9 +39,9 @@ class failed_parsing_exception : public exception
     /****************************************************************************/ 
     /*          constructor, destructors                                        */ 
     /****************************************************************************/ 
-    failed_parsing_exception (const char* message, const char* source, const char* filename, word32 line) ;
-    failed_parsing_exception (const char* message, const std::string& source, const char* filename, word32 line) ;
-    failed_parsing_exception (const char* message, std::istream& source, const char* filename, word32 line) ;
+    failed_parsing_exception (const char* message, const char* source, const char* filename, const char* function, word32 line) ;
+    failed_parsing_exception (const char* message, const std::string& source, const char* filename, const char* function, word32 line) ;
+    failed_parsing_exception (const char* message, std::istream& source, const char* filename, const char* function, word32 line) ;
     virtual ~failed_parsing_exception () {} 
 
     /****************************************************************************/ 
@@ -58,7 +58,7 @@ class failed_parsing_exception : public exception
 
     std::string         _source;
 };
-#define LAURENA_FAILED_PARSING_EXCEPTION(msg,source) laurena::failed_parsing_exception(msg,source,__FILE__,(word32)__LINE__)
+#define LAURENA_FAILED_PARSING_EXCEPTION(msg,source) laurena::failed_parsing_exception(msg,source,__FILE__,__FUNCTION__,(word32)__LINE__)
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

@@ -35,7 +35,7 @@ const descriptor& any_feature_impl::desc(void* ptrValue) const
     any* pany = (any*) ptrValue;
     const descriptor* res = pany->desc();
     if (!res)
-        throw new LAURENA_NULL_POINTER_EXCEPTION("Unkwow class descriptor");
+        throw new LAURENA_NULL_POINTER_EXCEPTION("unkwow class descriptor");
 
     return *res;
 }
@@ -83,7 +83,7 @@ std::string any_descriptor::atos(const any& value) const
 	const descriptor* cd = value.desc();
 	if (!cd)
 	{
-		throw LAURENA_NULL_POINTER_EXCEPTION("Unknow class descriptor");
+		throw LAURENA_NULL_POINTER_EXCEPTION("unknow class descriptor");
 	}
 	return cd->atos(value);
 

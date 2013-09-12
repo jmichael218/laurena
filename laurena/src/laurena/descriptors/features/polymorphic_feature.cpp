@@ -48,7 +48,7 @@ void polymorphic_feature::addChildClass (const descriptor* child_class)
 const descriptor& polymorphic_feature::parent() const
 {
     if (_parent == nullptr)
-        throw LAURENA_NULL_POINTER_EXCEPTION("In polymorphic_feature::parent(), class doesn't have any parent.");
+        throw LAURENA_NULL_POINTER_EXCEPTION("class doesn't have any parent.");
     else
         return *_parent;
 }

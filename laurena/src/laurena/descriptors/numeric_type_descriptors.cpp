@@ -31,7 +31,7 @@ any& word8_type_descriptor::stoa(const std::string& string_value, any& value) co
 {
     word16 t = boost::lexical_cast<word16,std::string>(string_value);
     if (t > 255)
-        throw new LAURENA_FAILED_PARSING_EXCEPTION("In word8_type_descriptor::fromString(), value is out of bounds",string_value);
+        throw new LAURENA_FAILED_PARSING_EXCEPTION("value is out of bounds",string_value);
     return value = (word8)t;
 }
 
@@ -53,7 +53,7 @@ any& int8_type_descriptor:: stoa(const std::string& string_value, any& value) co
 {
     int16 t = boost::lexical_cast<int16,std::string>(string_value);
        if ( t < SCHAR_MIN || t > SCHAR_MAX )
-        throw new LAURENA_FAILED_PARSING_EXCEPTION("In int8_type_descriptor::fromString(), value is out of bounds",string_value);
+        throw new LAURENA_FAILED_PARSING_EXCEPTION("value is out of bounds",string_value);
     return value = (int8)t;
 }
 //End of file

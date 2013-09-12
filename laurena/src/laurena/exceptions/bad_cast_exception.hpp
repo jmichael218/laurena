@@ -39,7 +39,7 @@ class bad_cast_exception : public exception
     /****************************************************************************/ 
     /*          constructor, destructors                                        */ 
     /****************************************************************************/ 
-    bad_cast_exception (const char* message, const char* castTypename, const char* valueTypename, const char* filename, word32 line) ;
+    bad_cast_exception (const char* message, const char* castTypename, const char* valueTypename, const char* filename, const char* function, word32 line) ;
     virtual ~bad_cast_exception () {} 
 
     /****************************************************************************/ 
@@ -57,7 +57,7 @@ class bad_cast_exception : public exception
     std::string _value_typename;
 
 };
-#define LAURENA_BAD_CAST_EXCEPTION(msg,castTypeName,valueTypeName) laurena::bad_cast_exception(msg,castTypeName,valueTypeName,__FILE__,(word32)__LINE__)
+#define LAURENA_BAD_CAST_EXCEPTION(msg,castTypeName,valueTypeName) laurena::bad_cast_exception(msg,castTypeName,valueTypeName,__FILE__,__FUNCTION__, (word32)__LINE__)
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

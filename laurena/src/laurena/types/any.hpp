@@ -139,7 +139,7 @@ class any
         if (!cd)
             cd = classes::byType(typeid(VALUETYPE));
         if (!cd)
-            throw new LAURENA_EXCEPTION("In any::operator =, can't find a class descriptor for this type.");
+            throw new LAURENA_EXCEPTION("can't find a class descriptor for this type.");
 
 		if (_content)
             delete _content;
@@ -176,7 +176,7 @@ class any
     {
         if (!_content)
         {
-            throw new LAURENA_EXCEPTION("In any::ptr(), empty content cannot be casted to a pointer.");
+            throw new LAURENA_EXCEPTION("empty content cannot be casted to a pointer.");
         }
         return _content->ptr();
     }
