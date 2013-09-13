@@ -45,7 +45,7 @@ public:
     /****************************************************************************/ 
     /*          constructors, desctructor                                       */ 
     /****************************************************************************/ 
-    base_standard_class_descriptor(const char* name, const type_info& type, size_t sizeOfObject, word8 nbAttributes =0, const descriptor* parent = nullptr);
+    base_standard_class_descriptor(const char* name, const type_info& type, size_t sizeOfObject, const descriptor* parent = nullptr);
     virtual ~base_standard_class_descriptor();
 
 
@@ -123,8 +123,8 @@ public:
     /****************************************************************************/ 
     /*          constructors, desctructor                                       */ 
     /****************************************************************************/ 
-	standard_class_descriptor(const char* name, word8 nb_attributes = 0, const descriptor* parent = nullptr)
-		: base_standard_class_descriptor(name,typeid(T),sizeof(T),nb_attributes,parent)
+	standard_class_descriptor(const char* name, const descriptor* parent = nullptr)
+		: base_standard_class_descriptor(name,typeid(T),sizeof(T),parent)
 	{
 	}
 
@@ -192,9 +192,9 @@ public:
     /*          static functions                                                */ 
     /****************************************************************************/ 
     public:
-    static standard_class_descriptor<T>* build(const char* name, const descriptor* parentClassDescriptor=nullptr, word8 nbFields =0)
+    static standard_class_descriptor<T>* build(const char* name, const descriptor* parentClassDescriptor=nullptr)
 	{
-        standard_class_descriptor<T>* cd = new standard_class_descriptor<T>(name,nbFields, parentClassDescriptor);
+        standard_class_descriptor<T>* cd = new standard_class_descriptor<T>(name, parentClassDescriptor);
         cd->constructor([](){return new T;});
         classes::add(cd);        
         return cd;

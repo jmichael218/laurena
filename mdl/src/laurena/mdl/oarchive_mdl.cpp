@@ -39,8 +39,9 @@ const any_feature* acf = NULL;
     void* ptrObject = value.ptr();
     any fieldValue;
 
-    for (const field& att : cd.getFields())
+    for (const std::unique_ptr<field>& patt : cd.getFields())
     {             
+		field& att = *patt;
         if (att.isPrimaryKey())
             continue;
 

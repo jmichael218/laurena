@@ -44,7 +44,6 @@ class descriptable
     */ 
 	descriptable (const char* name);
 
-
     //! Destructor
     /*! This is the class destructor. */
 	virtual ~descriptable ();
@@ -59,8 +58,7 @@ class descriptable
 	{ return this->_annotations; }
 
 	//! Add an annotation
-	inline descriptable& annotate(annotation* ptrvalue)
-	{ this->_annotations [ ptrvalue->name () ] = ptrvalue ; return *this ; }
+	descriptable& annotate(annotation* ptrvalue);
 
 	/****************************************************************************/ 
 	/*																			*/ 

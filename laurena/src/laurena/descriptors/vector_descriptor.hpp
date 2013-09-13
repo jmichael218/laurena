@@ -134,9 +134,9 @@ public:
     /****************************************************************************/ 
     /*          constructors, desctructor                                       */ 
     /****************************************************************************/ 
-    vector_descriptor(const char* name, word8 nbFields=0, const descriptor* parent = nullptr) 
+    vector_descriptor(const char* name, const descriptor* parent = nullptr) 
 
-    :   standard_class_descriptor<CONTAINER>(name,nbFields,parent) ,
+    :   standard_class_descriptor<CONTAINER>(name, parent) ,
         _container_class_feature (this,classes::byType(typeid(typename basetype<ELEMENT>::type)))
     { }
 
@@ -154,7 +154,7 @@ public:
 	/****************************************************************************/ 
 	static vector_descriptor<CONTAINER,ELEMENT>* build(const char* name, const descriptor* parentClassDescriptor=nullptr)
 	{
-		auto cd = new vector_descriptor<CONTAINER,ELEMENT>(name, 0, parentClassDescriptor );
+		auto cd = new vector_descriptor<CONTAINER,ELEMENT>(name, parentClassDescriptor );
         cd->constructor([](){return new CONTAINER;});
         classes::add(cd);        
         return cd;

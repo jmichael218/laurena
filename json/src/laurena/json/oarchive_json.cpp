@@ -56,9 +56,9 @@ const any_feature* acf = NULL;
     void* ptrObject = value.ptr();
     any fieldValue;
 
-    for (const field& att : cd.getFields())
+    for (const std::unique_ptr<field>& patt : cd.getFields())
     {                
-
+		const field& att = *patt;
         this->completeLastLine();      
         att.get(value,fieldValue);       
 

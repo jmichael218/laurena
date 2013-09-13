@@ -12,10 +12,10 @@
 
 using namespace laurena;
 
-base_standard_class_descriptor::base_standard_class_descriptor(const char* name, const type_info& type, size_t sizeOfObject,word8 nbAttributes, const descriptor* parent) :
+base_standard_class_descriptor::base_standard_class_descriptor(const char* name, const type_info& type, size_t sizeOfObject, const descriptor* parent) :
 
     polymorphic_class_descriptor(name, type, sizeOfObject, parent) ,
-    _fields(nbAttributes)
+    _fields()
 {
 
     this->_primary_key_field = 0xFF ;
@@ -72,7 +72,7 @@ const field&  base_standard_class_descriptor::primaryKey() const
         throw LAURENA_NULL_POINTER_EXCEPTION("class doesn't have any primary key.");
     }
     else
-        return this->_fields[this->_primary_key_field];
+        return *this->_fields[this->_primary_key_field];
 }
 
 const field& base_standard_class_descriptor::serial() const
@@ -85,7 +85,7 @@ const field& base_standard_class_descriptor::serial() const
         throw LAURENA_NULL_POINTER_EXCEPTION("class doesn't have any serial key.");
     }
     else
-        return this->_fields[this->_serial_field];
+        return *this->_fields[this->_serial_field];
 }
 
 /********************************************************************************/ 
@@ -96,11 +96,10 @@ const field& base_standard_class_descriptor::serial() const
 
 const field& base_standard_class_descriptor::getField(const std::string& field_name) const
 {
-    for (word32 i = 0 ; i < this->_fields.size(); ++i)
+    for (const std::unique_ptr<field>& f : this->_fields)
     {
-        const field& f = this->_fields[i];
-        if (f.name() == field_name)
-            return f;
+        if (f->name() == field_name)
+            return *f;
     }
 
     if (!this->hasParent())
@@ -116,11 +115,10 @@ const field& base_standard_class_descriptor::getField(const std::string& field_n
 
 const field* base_standard_class_descriptor::findField(const std::string& field_name) const
 {
-    for (word32 i = 0 ; i < this->_fields.size(); ++i)
+    for (const std::unique_ptr<field>& f : this->_fields)
     {
-        const field& f = this->_fields[i];
-        if (f.name() == field_name)
-            return &f;
+        if (f->name() == field_name)
+            return f.get();
     }
 
 	if (this->hasParent() == false)
@@ -144,7 +142,7 @@ base_standard_class_descriptor& base_standard_class_descriptor::primaryKeyField(
 {
     if(index != 0xFF)
     {
-        field& a = this->_fields[index];
+        field& a = *this->_fields[index];
         a.isPrimaryKey(true);
     }
     this->_primary_key_field = index;    
@@ -155,7 +153,7 @@ base_standard_class_descriptor& base_standard_class_descriptor::serialKeyField(w
 {
     if (index != 0xFF)
     {
-        field& a = this->_fields[index];
+        field& a = *this->_fields[index];
         a.isSerial(true);
     }
     this->_serial_field = index; 

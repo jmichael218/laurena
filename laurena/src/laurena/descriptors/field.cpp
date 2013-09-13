@@ -250,15 +250,15 @@ bool field::isBitSet() const
 /*          code for class fields                                               */ 
 /*                                                                              */ 
 /********************************************************************************/
-fields::fields(word8 size) : std::vector<field>(size) , _used(0)
+fields::fields() : std::vector<std::unique_ptr<field>>() , _used(0)
 {
 }
 
 const field& fields::get(const std::string& name)
 {
-    for(field& f : *this)
-        if (f.name() == name)
-            return f;
+    for(std::unique_ptr<field>& f : *this)
+        if (f->name() == name)
+            return *f;
 
     std::string message (name);
 	message.append (" is an unknow object field name.");
@@ -267,18 +267,18 @@ const field& fields::get(const std::string& name)
 
 const field* fields::find(const std::string& name)
 {
-    for(field& f : *this)
-        if (f.name() == name)
-            return &f;
+    for(std::unique_ptr<field>& f : *this)
+        if (f->name() == name)
+            return f.get();
 
     return nullptr;
 }
 
 field& fields::unused()
 {
-    if (_used >= this->size())     
-        this->resize(this->size() +1);
-    
-    return this->operator[] (_used++);
+	std::unique_ptr<field> p (new field());
+	this->push_back(std::move(p));
+
+	return *(this->operator[](this->size()-1));
 }
 //end of file

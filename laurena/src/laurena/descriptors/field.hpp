@@ -182,16 +182,16 @@ public:
 /*              extension of std::vector<field>                                 */ 
 /*                                                                              */ 
 /********************************************************************************/
-class fields : public std::vector<field>
+class fields : public std::vector<std::unique_ptr<field>>
 {
 public:
 
-    fields(word8 size=0);
+    fields();
 
     const field& get(const std::string& name);
     const field* find(const std::string& name);    
 
-    field& unused();
+	field&		unused();
 
     protected:
     word16      _used;

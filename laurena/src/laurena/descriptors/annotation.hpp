@@ -54,6 +54,8 @@ class annotation
 	std::string			_name;
 	descriptable*   	_descriptable;
 
+	friend descriptable;
+
 };
 
 class annotations_map : public std::unordered_map<std::string,annotation*>

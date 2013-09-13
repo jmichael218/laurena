@@ -18,7 +18,7 @@ using namespace laurena;
 /*                                                                              */ 
 /********************************************************************************/ 
 
-variable_descriptor::variable_descriptor () : standard_class_descriptor<variable>("variable",2,nullptr)
+variable_descriptor::variable_descriptor () : standard_class_descriptor<variable>("variable",nullptr)
 {
     this->init_field(variable,"name",_name);
     this->init_field(variable,"value",_value);

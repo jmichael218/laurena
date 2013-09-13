@@ -31,7 +31,14 @@ namespace sql {
 /* sql dao                                                                      */ 
 /********************************************************************************/ 
 
-class 
+class dao
+{
+public:
+
+	std::string generateInsertStatement(const descriptor& desc, const any& object);
+	std::string generateSelectByPrimaryKey(const descriptor& desc, any& primary_key);
+
+};
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

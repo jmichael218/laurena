@@ -11,10 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\laurena\sql\sql.hpp" />
     <ClInclude Include="src\laurena\sql\sql_annotations.hpp" />
     <ClInclude Include="src\laurena\sql\sql_dao.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\laurena\sql\sql_dao.cpp" />
     <ClCompile Include="src\laurena\sql\sql_annotations.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -60,6 +62,10 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy src ..\include /S /R /Y /EXCLUDE:..\xcopy_exclus.txt
+copy $(TargetPath) $(ProjectDir)..\bin\$(Configuration)\</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

@@ -78,7 +78,10 @@ public:
 	/****************************************************************************/ 
 	/*		getters																*/ 
 	/****************************************************************************/ 
-	const std::string& tablename() const { return this->_column; }
+	inline const std::string& column() const { return this->_column; }
+	inline bool  isPrimaryKey       () const { return this->_primary_key; }
+
+	
 
     /****************************************************************************/ 
     /*      protected datas                                                     */ 

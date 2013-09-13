@@ -10,6 +10,7 @@
 #include <laurena/laurena.hpp>
 #include <laurena/mdl/mdl.hpp>
 #include <laurena/json/json.hpp>
+#include <laurena/sql/sql.hpp>
 
 #include "src/character.hpp"
 
@@ -25,6 +26,7 @@ void testStringArrayDescriptor();
 void testBitsetDescriptor();
 void testMDL();
 void testJson();
+void test_sql();
 
 
 extern void cstring_test ();
@@ -38,8 +40,13 @@ void buildTestClassDescriptors ()
     /*          build class character descriptor                                */ 
     /****************************************************************************/ 
     auto d = standard_class_descriptor<character>::build("character");
-    d->init_field(character,"name",_name);
-    d->init_field(character,"age",_age);
+	d->annotate(new sql::sql_tablename("characters"));
+    d->init_field(character,"name",_name)
+		.annotate(new sql::sql_column("name", sql::sql_column::PRIMARY_KEY))		
+		;
+    d->init_field(character,"age",_age)
+		.annotate(new sql::sql_column("age"))	
+		;
 
     // testing descriptors
     const descriptor* d2 = classes::byName("character");
@@ -113,6 +120,7 @@ int main ()
     testanyDescriptor();
     testStringArrayDescriptor();
     testBitsetDescriptor();
+	test_sql();
 
     testunit::displayResults();
     return 0;

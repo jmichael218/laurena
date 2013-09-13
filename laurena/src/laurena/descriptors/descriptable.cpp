@@ -18,5 +18,12 @@ descriptable::descriptable (const char* name) : _name (name) , _annotations ()
 descriptable::~descriptable ()
 { }
 
+descriptable& descriptable::annotate(annotation* ptrvalue)
+{ 
+	this->_annotations [ ptrvalue->name () ] = ptrvalue ; 
+	ptrvalue->_descriptable = this;
+	return *this ; 
+}
+
 //End of file
 

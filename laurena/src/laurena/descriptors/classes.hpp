@@ -70,6 +70,7 @@ class classes
 	//! This static function search for a class descriptor by the type_info of the described class.	
 	//! The function return nullptr if no class found.
     static const descriptor*  byType (const type_info& type);
+	
 
     /****************************************************************************/ 
     /*          tool functions                                                  */ 
