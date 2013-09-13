@@ -26,6 +26,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "examples", "examples\exampl
 		{81D0C8C4-B6A9-4C32-A5C1-EA5F3EE587CA} = {81D0C8C4-B6A9-4C32-A5C1-EA5F3EE587CA}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sql", "sql\sql.vcxproj", "{7E0123D6-34F4-4A32-89BA-86605B62641A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E4E38395-6C22-4954-9C6C-6F772979279D} = {E4E38395-6C22-4954-9C6C-6F772979279D}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -56,6 +61,10 @@ Global
 		{256EC1ED-AFF0-49D8-9BC9-56A4072DA6B5}.Debug|Win32.Build.0 = Debug|Win32
 		{256EC1ED-AFF0-49D8-9BC9-56A4072DA6B5}.Release|Win32.ActiveCfg = Release|Win32
 		{256EC1ED-AFF0-49D8-9BC9-56A4072DA6B5}.Release|Win32.Build.0 = Release|Win32
+		{7E0123D6-34F4-4A32-89BA-86605B62641A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7E0123D6-34F4-4A32-89BA-86605B62641A}.Debug|Win32.Build.0 = Debug|Win32
+		{7E0123D6-34F4-4A32-89BA-86605B62641A}.Release|Win32.ActiveCfg = Release|Win32
+		{7E0123D6-34F4-4A32-89BA-86605B62641A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
