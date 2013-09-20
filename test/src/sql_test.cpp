@@ -36,5 +36,7 @@ void test_dao ()
 
 void test_sql()
 {
+	//sql::query q = sql::select ( field0, field1, sql::max(field3)) << sql::from ( descriptor ) << sql::where ( field (0) , sql::equals , 'XXXX');
+
 	test_dao();
 }

@@ -1,13 +1,15 @@
 ///
-/// \file     sql_dao.hpp
-/// \brief    DAO base class and templated class
+/// \file     symbols.hpp
+/// \brief    A symbol array class
 /// \author   Frederic Manisse
 /// \version  1.0
+/// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-/// Annotations for sql persistance
+///   A symbol array class
 ///
-#ifndef LAURENA_SQL_DAO_H
-#define LAURENA_SQL_DAO_H
+
+#ifndef LAURENA_SYMBOLS_H
+#define LAURENA_SYMBOLS_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -19,32 +21,50 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
-#include <laurena/laurena.hpp>
+#include <laurena/includes/includes.hpp>
+#include <laurena/includes/types.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
 namespace laurena {
-namespace sql {
 
 /********************************************************************************/ 
-/* sql dao                                                                      */ 
+/*                                                                              */ 
+/*              class symbols                                                   */ 
+/*                                                                              */ 
 /********************************************************************************/ 
-
-class dao
+template<typename KEY, typename VALUE>
+class symbols : public std::vector<std::pair<KEY, VALUE>>
 {
 public:
 
-	std::string generateInsertStatement(const descriptor& desc, const any& object);
-	std::string generateSelectByPrimaryKey(const descriptor& desc, any& primary_key);
-	std::string generateDeleteByPrimaryKey(const descriptor& desc, any& primary_key);
+	symbols () : std::vector<std::pair<KEY, VALUE>> () 
+	{ }
 
+	template<size_t N>
+	symbols (const std::pair<KEY, VALUE> (&ref_array) [N]) : std::vector<std::pair<KEY, VALUE>> (&ref_array[0], &ref_array[N])
+	{ }
+
+	typename symbols<KEY, VALUE>::const_iterator value(const VALUE& v) const
+	{
+		for (const_iterator it = this->begin(); it != this->end(); it++)
+			if (it->second == v)
+				return it;
+		return this->end();
+	}
+
+	typename symbols<KEY, VALUE>::const_iterator key(const KEY& k) const
+	{
+		for (const_iterator it = this->begin(); it != this->end(); it++)
+			if (it->first == k)
+				return it;
+		return this->end();
+	}
 };
-
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 
 
-}}
+}
 #endif
-//end of file

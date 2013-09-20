@@ -14,10 +14,15 @@
     <ClInclude Include="src\laurena\sql\sql.hpp" />
     <ClInclude Include="src\laurena\sql\sql_annotations.hpp" />
     <ClInclude Include="src\laurena\sql\sql_dao.hpp" />
+    <ClInclude Include="src\laurena\sql\sql_error.hpp" />
+    <ClInclude Include="src\laurena\sql\sql_query.hpp" />
+    <ClInclude Include="src\laurena\sql\sql_toolbox.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\sql\sql_dao.cpp" />
     <ClCompile Include="src\laurena\sql\sql_annotations.cpp" />
+    <ClCompile Include="src\laurena\sql\sql_error.cpp" />
+    <ClCompile Include="src\laurena\sql\sql_toolbox.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7E0123D6-34F4-4A32-89BA-86605B62641A}</ProjectGuid>

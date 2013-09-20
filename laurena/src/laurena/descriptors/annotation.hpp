@@ -32,6 +32,9 @@ class descriptable;
 
 class annotation
 {
+
+
+
 	/****************************************************************************/ 
 	/*		constructor, destructor												*/ 
 	/****************************************************************************/ 
@@ -43,8 +46,20 @@ class annotation
 	/****************************************************************************/ 
 	/*		getters / setters													*/ 
 	/****************************************************************************/ 
+
+	/// \brief return name of the annotation
+	/// This getter function return a const reference to the annotation name.
+	/// \return const reference to the string name
 	inline const std::string&	name ()		const		{ return this->_name ; }
 	const descriptable*			annotates() const;
+
+	/****************************************************************************/ 
+	/*		protected functions													*/ 
+	/****************************************************************************/ 
+	protected:
+
+	virtual void annotated();
+	virtual bool acceptDescriptable ();
 
 	/****************************************************************************/ 
 	/*		protected fields													*/ 

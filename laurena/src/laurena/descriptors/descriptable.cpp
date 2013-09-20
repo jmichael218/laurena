@@ -7,6 +7,7 @@
 ///  A base class for descriptable types (class, field members, functions, methods)
 ///
 #include <laurena/descriptors/descriptable.hpp>
+#include <laurena/exceptions/exception.hpp>
 
 using namespace laurena;
 
@@ -21,7 +22,14 @@ descriptable::~descriptable ()
 descriptable& descriptable::annotate(annotation* ptrvalue)
 { 
 	this->_annotations [ ptrvalue->name () ] = ptrvalue ; 
+
 	ptrvalue->_descriptable = this;
+	if (!ptrvalue->acceptDescriptable())
+	{
+		throw LAURENA_EXCEPTION ("Can't set this annotation on this class of descriptable.");
+	}
+	ptrvalue->annotated();
+
 	return *this ; 
 }
 

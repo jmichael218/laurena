@@ -1,13 +1,13 @@
 ///
-/// \file     sql_dao.hpp
-/// \brief    DAO base class and templated class
+/// \file     sql_error.hpp
+/// \brief    Toolbox of functions to generate errors
 /// \author   Frederic Manisse
 /// \version  1.0
 ///
-/// Annotations for sql persistance
+/// Toolbox of functions for sql persistance
 ///
-#ifndef LAURENA_SQL_DAO_H
-#define LAURENA_SQL_DAO_H
+#ifndef LAURENA_SQL_ERROR_H
+#define LAURENA_SQL_ERROR_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -28,19 +28,18 @@ namespace laurena {
 namespace sql {
 
 /********************************************************************************/ 
-/* sql dao                                                                      */ 
+/* sql tool box                                                                 */ 
 /********************************************************************************/ 
 
-class dao
+class sql_error
 {
 public:
 
-	std::string generateInsertStatement(const descriptor& desc, const any& object);
-	std::string generateSelectByPrimaryKey(const descriptor& desc, any& primary_key);
-	std::string generateDeleteByPrimaryKey(const descriptor& desc, any& primary_key);
-
+	static void noPrimaryKey(const descriptor& desc);
+	static void twoPrimaryKeys(const descriptor& desc);
+	static void columnButNoTablename(const field& f);
+	static void noTablename(const descriptor& desc);
 };
-
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

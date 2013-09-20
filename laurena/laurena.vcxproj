@@ -52,6 +52,8 @@
     <ClInclude Include="src\laurena\formatting\tab.hpp" />
     <ClInclude Include="src\laurena\formatting\writer.hpp" />
     <ClInclude Include="src\laurena\functions\parameter.hpp" />
+    <ClInclude Include="src\laurena\grammar\rules.hpp" />
+    <ClInclude Include="src\laurena\grammar\symbols.hpp" />
     <ClInclude Include="src\laurena\includes\includes.hpp" />
     <ClInclude Include="src\laurena\includes\types.hpp" />
     <ClInclude Include="src\laurena\laurena.hpp" />
@@ -61,6 +63,7 @@
     <ClInclude Include="src\laurena\parsing\parser.hpp" />
     <ClInclude Include="src\laurena\parsing\token.hpp" />
     <ClInclude Include="src\laurena\parsing\tokenizer.hpp" />
+    <ClInclude Include="src\laurena\source\source_location.hpp" />
     <ClInclude Include="src\laurena\toolboxes\bitset.hpp" />
     <ClInclude Include="src\laurena\toolboxes\cstring.hpp" />
     <ClInclude Include="src\laurena\toolboxes\filename.hpp" />

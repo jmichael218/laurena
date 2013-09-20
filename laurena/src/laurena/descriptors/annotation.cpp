@@ -23,6 +23,14 @@ annotation::~annotation ()
 
 const descriptable* annotation::annotates () const { return this->_descriptable; }
 
+void annotation::annotated()
+{ }
+
+bool annotation::acceptDescriptable ()
+{
+	return false;
+}
+
 annotations_map::annotations_map () : std::unordered_map<std::string,annotation*> (), _own_annotations(false)
 {}
 

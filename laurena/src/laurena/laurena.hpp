@@ -89,6 +89,12 @@
 #include <laurena/descriptors/string_array_descriptor.hpp>
 #include <laurena/descriptors/bitset_descriptor.hpp>
 
+// Source
+//#include <laurena/source/source_location.hpp>
+
+// grammar
+#include <laurena/grammar/symbols.hpp>
+
 //parsing
 #include <laurena/parsing/token.hpp>
 #include <laurena/parsing/file_location.hpp>

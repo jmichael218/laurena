@@ -1,13 +1,13 @@
 ///
-/// \file     sql_dao.hpp
-/// \brief    DAO base class and templated class
+/// \file     sql_query.hpp
+/// \brief    Class to dynamically build a sql query
 /// \author   Frederic Manisse
 /// \version  1.0
 ///
-/// Annotations for sql persistance
+/// Class to dynamically build a sql query
 ///
-#ifndef LAURENA_SQL_DAO_H
-#define LAURENA_SQL_DAO_H
+#ifndef LAURENA_SQL_QUERY_H
+#define LAURENA_SQL_QUERY_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -28,19 +28,18 @@ namespace laurena {
 namespace sql {
 
 /********************************************************************************/ 
-/* sql dao                                                                      */ 
+/*          class query                                                         */ 
 /********************************************************************************/ 
 
-class dao
-{
-public:
+class query_target 
 
-	std::string generateInsertStatement(const descriptor& desc, const any& object);
-	std::string generateSelectByPrimaryKey(const descriptor& desc, any& primary_key);
-	std::string generateDeleteByPrimaryKey(const descriptor& desc, any& primary_key);
+class query 
+{
 
 };
 
+
+class 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 
