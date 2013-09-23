@@ -33,19 +33,19 @@ namespace laurena {
 /********************************************************************************/ 
 /*              global character sets                                           */ 
 /********************************************************************************/ 
-extern charset CHARSET_RN ;     // \r\n
-extern charset CHARSET_VARNAME ;  // "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
-extern charset CHARSET_IDNAME ;    // "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_/"
-extern charset CHARSET_FULLPATH_FILENAME_SEPARATOR ; // "/\\:" ;
-extern charset CHARSET_NUMBER ; // = "0123456789" 
-extern charset CHARSET_LOWCASE ; //<! Low case letters
-extern charset CHARSET_HEXANUMBER ; // "0123456789abcdefABCDEF";
-extern charset CHARSET_TABS ; // \r\n\r and space
-extern charset CHARSET_TABS2 ; // \r\t space, no eol
-extern charset CHARSET_LETTERS;
-extern charset CHARSET_BINARY; // 0 or 1
-extern charset CHARSET_ACCENTS; // french accents
-extern charset CHARSET_URI; // http uri
+extern charset<> CHARSET_RN ;     // \r\n
+extern charset<> CHARSET_VARNAME ;  // "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
+extern charset<> CHARSET_IDNAME ;    // "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_/"
+extern charset<> CHARSET_FULLPATH_FILENAME_SEPARATOR ; // "/\\:" ;
+extern charset<> CHARSET_NUMBER ; // = "0123456789" 
+extern charset<> CHARSET_LOWCASE ; //<! Low case letters
+extern charset<> CHARSET_HEXANUMBER ; // "0123456789abcdefABCDEF";
+extern charset<> CHARSET_TABS ; // \r\n\r and space
+extern charset<> CHARSET_TABS2 ; // \r\t space, no eol
+extern charset<> CHARSET_LETTERS;
+extern charset<> CHARSET_BINARY; // 0 or 1
+extern charset<> CHARSET_ACCENTS; // french accents
+extern charset<> CHARSET_URI; // http uri
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

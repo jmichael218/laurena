@@ -24,7 +24,11 @@
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
+#include <laurena/traits/chartype.hpp>
+
 #include <laurena/source/source_location.hpp>
+#include <laurena/toolboxes/cstring.hpp>
+
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
@@ -41,21 +45,16 @@ class rule
 {
 	/****************************************************************************/ 
 	/*			typedefs														*/ 
-	/****************************************************************************/ 
+	/****************************************************************************/ 	
 	public:
-	typedef std::basic_string<CHARTYPE, std::char_traits<CHARTYPE>, std::allocator<CHARTYPE> >				mystring;
-	typedef const std::basic_string<CHARTYPE, std::char_traits<CHARTYPE>, std::allocator<CHARTYPE> >&		const_ref_mystring;
-	typedef typename mystring::iterator																		iterator;
-	typedef typename mystring::iterator&																	ref_iterator;
+	typedef chartype<CHARTYPE> c;
 
-	typedef CHARTYPE*																						ptr_chartype;
-	typedef const CHARTYPE*																					const_ptr_chartype;
-	typedef const CHARTYPE&																					const_ref_chartype;
+
 
 	/****************************************************************************/ 
 	/*			virtual functions												*/ 
 	/****************************************************************************/ 
-	virtual bool read (ref_iterator first, iterator last, source_location<CHARTYPE, EOL>& location, any& value) const =0;
+	virtual bool read (typename c::iterator& first, typename c::iterator last, source_location<CHARTYPE, EOL>& location, any& value) const =0;
 };
 
 template<typename CHARTYPE = char, CHARTYPE EOL='\n'>
@@ -72,12 +71,11 @@ public:
 	/****************************************************************************/ 
 	/*			virtual functions												*/ 
 	/****************************************************************************/ 
-	virtual bool read (ref_iterator first, iterator last, source_location<CHARTYPE, EOL>& location, any& value) const
+	virtual bool read (typename c::iterator& first, typename c::iterator last, source_location<CHARTYPE, EOL>& location, any& value) const
 	{
 		if (*first == _value)
 		{			
 			location.count(*first);
-			value = _value;
 			first++;
 			return true;
 		}
@@ -91,6 +89,45 @@ public:
 	CHARTYPE _value;
 
 };
+
+#ifdef BOBJOE
+template<typename CHARTYPE = char, CHARTYPE EOL='\n'>
+class rule_integer_field : public rule<CHARTYPE, EOL>
+{
+public:
+
+
+
+	/****************************************************************************/ 
+	/*			constructors, destructor										*/ 
+	/****************************************************************************/ 
+	rule_integer_field(const field& f) : _field(f)
+	{ }
+
+	/****************************************************************************/ 
+	/*			virtual functions												*/ 
+	/****************************************************************************/ 
+	virtual bool read (ref_iterator first, iterator last, source_location<CHARTYPE, EOL>& location, any& value) const
+	{
+		std::string v ;
+		word32 readed = cstring::readInteger(tokenizer._ptr,v);
+		if (readed)
+		{			
+			location.count(*first);
+			first++;
+			return true;
+		}
+		return false;
+	}
+
+	/****************************************************************************/ 
+	/*          protected datas                                                 */ 
+	/****************************************************************************/ 
+	protected:
+	const field&			_field;
+
+};
+#endif
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

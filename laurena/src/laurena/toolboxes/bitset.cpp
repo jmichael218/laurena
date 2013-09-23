@@ -95,7 +95,7 @@ boost::dynamic_bitset<>& bitset::binary(boost::dynamic_bitset<>& bits, const std
 }
 
 
-word64 bitset::parse(const string_array& bitnames, const charset& charset, const std::string& value )
+word64 bitset::parse(const string_array& bitnames, const charset<>& charset, const std::string& value )
 {
     const char* p = value.c_str();
     char c;
@@ -128,7 +128,7 @@ word64 bitset::parse(const string_array& bitnames, const charset& charset, const
     return res;
 }
 
-boost::dynamic_bitset<>& bitset::parse(boost::dynamic_bitset<>& destination, const string_array& bitnames, const charset& charset, const std::string& value)
+boost::dynamic_bitset<>& bitset::parse(boost::dynamic_bitset<>& destination, const string_array& bitnames, const charset<>& charset, const std::string& value)
 {
 const char* p = value.c_str();
 char c;

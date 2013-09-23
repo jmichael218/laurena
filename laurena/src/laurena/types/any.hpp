@@ -139,7 +139,7 @@ class any
         if (!cd)
             cd = classes::byType(typeid(VALUETYPE));
         if (!cd)
-            throw new LAURENA_EXCEPTION("can't find a class descriptor for this type.");
+            classes::errorTypeNotFound(typeid(typename basetype<VALUETYPE>::type));
 
 		if (_content)
             delete _content;

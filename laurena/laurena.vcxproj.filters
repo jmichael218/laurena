@@ -306,6 +306,9 @@
     <ClInclude Include="src\laurena\source\source_location.hpp">
       <Filter>Fichiers d%27en-tête\source</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\traits\chartype.hpp">
+      <Filter>Fichiers d%27en-tête\traits</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\traits">
+      <UniqueIdentifier>{785e9a29-73b1-4a6c-8adb-530b359e72cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\types">
+      <UniqueIdentifier>{32fb3555-d30c-4745-9f06-420f181557a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\algorithm">
+      <UniqueIdentifier>{5e7f362c-733a-48a5-a98d-aec285b0e407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\algorithm\strings">
+      <UniqueIdentifier>{6a917860-1725-45f4-8713-68023d9aebde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\constants">
+      <UniqueIdentifier>{ab1b8409-1ad8-4dcc-adf0-72951d16f24a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\literals">
+      <UniqueIdentifier>{1fa047f8-ab41-4dcf-8d4b-44a2b9d6ef27}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\laurena\types\charset.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\algorithm\strings\alphabet.hpp">
+      <Filter>Fichiers d%27en-tête\algorithm\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\algorithm\strings\prefix.hpp">
+      <Filter>Fichiers d%27en-tête\algorithm\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\algorithm\strings\readwhile.hpp">
+      <Filter>Fichiers d%27en-tête\algorithm\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\constants\const_charsets.hpp">
+      <Filter>Fichiers d%27en-tête\constants</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\literals\string_literal.hpp">
+      <Filter>Fichiers d%27en-tête\literals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\constants\const_strings.hpp">
+      <Filter>Fichiers d%27en-tête\constants</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\constants\const_chars.hpp">
+      <Filter>Fichiers d%27en-tête\constants</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

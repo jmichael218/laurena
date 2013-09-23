@@ -1,11 +1,15 @@
 ///
-/// \file     stdstream.hpp
-/// \brief    A toolbox of functions on std::istream and std::ostream classes
+/// \file     string_literal.hpp
+/// \brief    Generation of string literals depending of char types
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-///  A toolbox of functions on std::istream and std::ostream classes
+///  Generation of string literals depending of char types
+///
+
+#ifndef LAURENA_STRING_LITERAL_H
+#define LAURENA_STRING_LITERAL_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -14,46 +18,43 @@
 # pragma once
 #endif
 
-#ifndef LAURENA_TOOLBOX_STDSTREAM_H
-#define LAURENA_TOOLBOX_STDSTREAM_H
-
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
-#include <laurena/includes/includes.hpp>
-#include <laurena/includes/types.hpp>
 
-#include <laurena/types/charset.hpp>
+#include <string>
+
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
 namespace laurena {
 
-/********************************************************************************/ 
-/*              interface                                                       */ 
-/********************************************************************************/ 
-class Stream {
-    
-    public:
+/*********************************************************************************/
+/*          generation of string literals                                        */ 
+/*********************************************************************************/ 
 
-    static word32 skipWhile(std::istream& stream, const charset<>& characters);
-	static word32 skipUntil(std::istream& stream, const charset<>& characters);
+template<typename CHARTYPE>
+std::basic_string<CHARTYPE> sliteral(const char* value)
+{	
 
-    static word32 readWhile(std::istream& stream, const charset<>& characters, std::string& destination);
-  
-    static word32 readUntil(std::istream& stream, const charset<>& characters, std::string& destination); 
-    static word32 readUntil(std::istream& stream, const word8 symbol, std::string& destination); 
+	std::basic_string<CHARTYPE> s;
+
+	if (value)
+		s.assign(value, value+strlen(value));
+
+	return s;
+}
 
 
-
-    static bool   expect(std::istream& stream, const char* expected);
-
-};
-
+template<typename CHARTYPE>
+inline
+CHARTYPE cliteral(char value)
+{
+	return (CHARTYPE) value;
+}
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 
 
 }
 #endif
-//end of file

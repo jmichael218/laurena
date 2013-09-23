@@ -1,11 +1,15 @@
 ///
-/// \file     stdstream.hpp
-/// \brief    A toolbox of functions on std::istream and std::ostream classes
+/// \file     alphabet.hpp
+/// \brief    This algorithm computes the minimal set of characters needed to write a string parameter
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-///  A toolbox of functions on std::istream and std::ostream classes
+///  This algorithm computes the minimal set of characters needed to write a string parameter
+///
+
+#ifndef LAURENA_ALPHABET_H
+#define LAURENA_ALPHABET_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -14,41 +18,50 @@
 # pragma once
 #endif
 
-#ifndef LAURENA_TOOLBOX_STDSTREAM_H
-#define LAURENA_TOOLBOX_STDSTREAM_H
-
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
-#include <laurena/includes/includes.hpp>
-#include <laurena/includes/types.hpp>
 
-#include <laurena/types/charset.hpp>
+#include <string>
+
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
 namespace laurena {
 
-/********************************************************************************/ 
-/*              interface                                                       */ 
-/********************************************************************************/ 
-class Stream {
-    
-    public:
+/*********************************************************************************/
+/*          algorithm alphabet                                                   */ 
+/*********************************************************************************/ 
 
-    static word32 skipWhile(std::istream& stream, const charset<>& characters);
-	static word32 skipUntil(std::istream& stream, const charset<>& characters);
+template<typename CHARTYPE>
+std::basic_string<CHARTYPE>  alphabet (const CHARTYPE* first, const CHARTYPE* end)
+{
+	std::basic_string<CHARTYPE> a;
+	while (first != end)
+	{
+		if (a.find_first_of(*first) == std::basic_string<CHARTYPE>::npos)
+			a += *first;
+		++first;
+	}
 
-    static word32 readWhile(std::istream& stream, const charset<>& characters, std::string& destination);
-  
-    static word32 readUntil(std::istream& stream, const charset<>& characters, std::string& destination); 
-    static word32 readUntil(std::istream& stream, const word8 symbol, std::string& destination); 
+	return a;
+}
 
 
+template<typename CHARTYPE>
+inline 
+std::basic_string<CHARTYPE> alphabet (const CHARTYPE* first)
+{
+	return alphabet<CHARTYPE>(first, first + std::char_traits<CHARTYPE>::length(first));
+}
 
-    static bool   expect(std::istream& stream, const char* expected);
+template<typename CHARTYPE> 
+inline
+std::basic_string<CHARTYPE> alphabet(const std::basic_string<CHARTYPE>& str)
+{
+	return alphabet<CHARTYPE>(str.data(), str.data()+str.length());
+}
 
-};
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
@@ -56,4 +69,3 @@ class Stream {
 
 }
 #endif
-//end of file

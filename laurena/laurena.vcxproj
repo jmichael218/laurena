@@ -71,6 +71,7 @@
     <ClInclude Include="src\laurena\toolboxes\stdstream.hpp" />
     <ClInclude Include="src\laurena\toolboxes\stdstring.hpp" />
     <ClInclude Include="src\laurena\traits\basetype.hpp" />
+    <ClInclude Include="src\laurena\traits\chartype.hpp" />
     <ClInclude Include="src\laurena\traits\laurena_traits.hpp" />
     <ClInclude Include="src\laurena\traits\voidptr.hpp" />
     <ClInclude Include="src\laurena\types\any.hpp" />

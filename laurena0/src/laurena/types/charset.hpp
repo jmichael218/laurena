@@ -1,11 +1,11 @@
 ///
 /// \file     charset.hpp
-/// \brief    A dynamic_bitset boost set of bits enhanced to hold mask for character sets
+/// \brief    A class to wrap a given alphabet and give operations of validations / parsing
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-/// A dynamic_bitset boost set of bits enhanced to hold mask for character sets
+///  A class to wrap a given alphabet and give operations of validations / parsing
 ///
 
 #ifndef LAURENA_CHARSET_H
@@ -21,10 +21,7 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
-#include <laurena/includes/includes.hpp>
-#include <laurena/includes/types.hpp>
-
-#include <laurena/traits/chartype.hpp>
+#include <laurena/algorithm/strings/alphabet.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -43,61 +40,69 @@ public:
 	/****************************************************************************/ 
 	/*			typedefs														*/ 
 	/****************************************************************************/ 	
-	typedef chartype<CHARTYPE> c;
+	typedef std::basic_string<CHARTYPE>					string;
+	typedef typename string::iterator					iterator;
 
-	/*******************************************************************************/ 
-	/*			constructor, destructors										   */ 
-	/*******************************************************************************/ 
+	/****************************************************************************/ 
+	/*			constructor, destructors										*/ 
+	/****************************************************************************/ 
 
 	charset () : _characters () 
 	{ }
-	charset (typename const CHARTYPE* characters) : _characters (characters)
+
+	charset (typename const CHARTYPE* characters) : _characters (std::move(alphabet(characters)))
 	{ }
 
-	charset (typename const c::mystring& characters) : _characters (characters)
+	charset (typename const string& characters) : _characters (std::move(alphabet(characters)))
 	{ }
 
 	/****************************************************************************/ 
 	/*			getters															*/ 
 	/****************************************************************************/ 
 
-	inline typename const c::mystring& characters () const  
+	inline string& characters () const  
 	{ return _characters ; }
 
 
 	inline bool test(CHARTYPE c) const
-	{ return this->_characters.find(c) !=  c::mystring::npos; } 
+	{ return this->_characters.find(c) !=  string::npos; } 
 
-
-	bool validate(typename c::iterator& first, typename c::iterator last) const
+	bool validate(typename iterator& first, typename const iterator& last) const
 	{
 		while (first != last)
 		{
-			if (!this->_characters.find(*first++) == c::mystring::npos)
+			if (this->_characters.find(*first++) == string::npos)
 				return false;
 		}
 		return true;
 	}
 
-	bool validate(typename c::const_ptr_chartype first, typename c::const_ptr_chartype last) const
+	bool validate(const CHARTYPE* first, const CHARTYPE* last) const
 	{
 		while (first != last)
 		{
-			if (!this->_characters.find(*first++) == c::mystring::npos)
+			if (this->_characters.find(*first++) == string::npos)
 				return false;
 		}
 		return true;
 	}
 
-	bool validate (typename const CHARTYPE* pstr, word32 size)
+	inline
+	bool validate (const CHARTYPE* pstr, size_t size)
 	{
 		return this->validate(pstr, pstr+size);
 	}
 
-	bool validate (typename const CHARTYPE* pstr)
+	inline
+	bool validate (const CHARTYPE* pstr)
 	{
-		word32 sz =std::char_traits<CHARTYPE>::length(pstr);
-		return this->validate(pstr, pstr+sz);
+		return this->validate(pstr, pstr + std::char_traits<CHARTYPE>::length(pstr) );
+	}
+
+	inline
+	bool validate (const string& str)
+	{
+		return this->validate(str.data(), str.data() + str.length() );
 	}
 
 	/****************************************************************************/ 
@@ -105,7 +110,7 @@ public:
 	/****************************************************************************/ 
 	protected:
 
-	typename c::mystring		_characters;
+	string		_characters;
 
 };
 
