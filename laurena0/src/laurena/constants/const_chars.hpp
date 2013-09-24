@@ -33,12 +33,14 @@ namespace laurena {
 /*          generation of const chararacters                                     */ 
 /*********************************************************************************/ 
 template<typename CHARTYPE=char>
-class const_charsets
+class const_chars
 {
 public:
 	static const CHARTYPE MINUS;		// the '-' character
 };
 
+template<typename CHARTYPE>
+const CHARTYPE const_chars<CHARTYPE>::MINUS ('-');
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

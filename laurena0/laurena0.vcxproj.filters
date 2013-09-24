@@ -57,5 +57,11 @@
     <ClInclude Include="src\laurena\constants\const_chars.hpp">
       <Filter>Fichiers d%27en-tête\constants</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\algorithm\strings\readinteger.hpp">
+      <Filter>Fichiers d%27en-tête\algorithm\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\traits\in_traits.hpp">
+      <Filter>Fichiers d%27en-tête\traits</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

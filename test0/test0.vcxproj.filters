@@ -13,21 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers sources\algorithm">
+      <UniqueIdentifier>{b55478bc-a963-47d5-a513-0bc4faffe414}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\algorithm\strings">
+      <UniqueIdentifier>{77594aea-82f7-46ea-8661-4e8ce40933ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\test_alphabet.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\test_charset.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\test_prefix.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\test_readwhile.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\test_const_charset.cpp">
@@ -35,6 +32,18 @@
     </ClCompile>
     <ClCompile Include="src\test_sliteral.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\test_prefix.cpp">
+      <Filter>Fichiers sources\algorithm\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\test_readinteger.cpp">
+      <Filter>Fichiers sources\algorithm\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\test_readwhile.cpp">
+      <Filter>Fichiers sources\algorithm\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\test_alphabet.cpp">
+      <Filter>Fichiers sources\algorithm\strings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

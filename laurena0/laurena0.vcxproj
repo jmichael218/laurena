@@ -13,11 +13,13 @@
   <ItemGroup>
     <ClInclude Include="src\laurena\algorithm\strings\alphabet.hpp" />
     <ClInclude Include="src\laurena\algorithm\strings\prefix.hpp" />
+    <ClInclude Include="src\laurena\algorithm\strings\readinteger.hpp" />
     <ClInclude Include="src\laurena\algorithm\strings\readwhile.hpp" />
     <ClInclude Include="src\laurena\constants\const_chars.hpp" />
     <ClInclude Include="src\laurena\constants\const_charsets.hpp" />
     <ClInclude Include="src\laurena\constants\const_strings.hpp" />
     <ClInclude Include="src\laurena\literals\string_literal.hpp" />
+    <ClInclude Include="src\laurena\traits\in_traits.hpp" />
     <ClInclude Include="src\laurena\types\charset.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

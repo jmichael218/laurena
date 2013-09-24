@@ -30,48 +30,34 @@
 namespace laurena {
 
 /*********************************************************************************/
-/*          algorithm prefix                                                     */ 
+/*          algorithm readwhile                                                  */ 
 /*********************************************************************************/ 
 
-template<typename CHARTYPE>
-std::basic_string<CHARTYPE> readwhile(const CHARTYPE* source, const charset<CHARTYPE>& characters)
+template<typename ITERATOR, typename CHARSET, typename STRING>
+STRING readwhile(ITERATOR source, CHARSET characters)
 {
-	const CHARTYPE* p (source);
+	ITERATOR it (source);
 	while(true)
 	{
-		if (characters.test(*p) == false)
+		if (characters.test(*it) == false)
 			break; 
 
-		++p;
+		++it;
 	}
-	return std::basic_string<CHARTYPE>(source,p);
+	return STRING(source,it);
 }
 
 template<typename CHARTYPE>
 inline
 std::basic_string<CHARTYPE> readwhile(const std::basic_string<CHARTYPE>& source, const charset<CHARTYPE>& characters)
 {
-	return readwhile(source.data(),characters);
+	return readwhile<const CHARTYPE*, const charset<CHARTYPE>&, std::basic_string<CHARTYPE>>(source.data(),characters);
 }
 
-template<typename CHARTYPE>
-std::basic_string<CHARTYPE> readwhile(std::basic_istream<CHARTYPE>& source, const charset<CHARTYPE>& characters)
+template<typename ISTREAM, typename ISTREAM_ITERATOR, typename CHARSET, typename STRING>
+STRING readwhile(ISTREAM& source, CHARSET characters)
 {
-	std::basic_stringbuf<CHARTYPE> buf;
-	CHARTYPE c;
-
-	while (!source.eof())
-	{
-		c = source.peek();
-
-		if (characters.test(c) == false)
-			break;
-
-		buf.sputc(c);
-		source.ignore(1);
-	}
-
-	return buf.str();
+	return readwhile<ISTREAM_ITERATOR, CHARSET, STRING>((ISTREAM_ITERATOR(source)), characters);
 }
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

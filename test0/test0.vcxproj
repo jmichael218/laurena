@@ -82,6 +82,7 @@
     <ClCompile Include="src\test_charset.cpp" />
     <ClCompile Include="src\test_const_charset.cpp" />
     <ClCompile Include="src\test_prefix.cpp" />
+    <ClCompile Include="src\test_readinteger.cpp" />
     <ClCompile Include="src\test_readwhile.cpp" />
     <ClCompile Include="src\test_sliteral.cpp" />
   </ItemGroup>

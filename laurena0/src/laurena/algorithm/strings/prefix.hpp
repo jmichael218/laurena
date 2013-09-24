@@ -22,7 +22,7 @@
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
 
-#include <string>
+#include <laurena/traits/in_traits.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -33,14 +33,12 @@ namespace laurena {
 /*          algorithm prefix                                                     */ 
 /*********************************************************************************/ 
 
-template<typename CHARTYPE>
-bool prefix(const CHARTYPE* str, const CHARTYPE* expected_prefix, size_t size=-1)
+template<typename ITERATOR>
+bool prefix(ITERATOR source, ITERATOR prefixFirst, ITERATOR prefixLast)
 {
-	if (size == -1)
-		size = std::char_traits<CHARTYPE>::length(expected_prefix);
 
-	while (*str && size--)
-		if (*str++ != *expected_prefix++)
+	while (prefixFirst != prefixLast)
+		if (*source++ != *prefixFirst++)
 			return false;
 
 	return true;
@@ -48,9 +46,16 @@ bool prefix(const CHARTYPE* str, const CHARTYPE* expected_prefix, size_t size=-1
 
 template<typename STRING>
 inline
-bool prefix(const STRING& str, const STRING& expected_prefix, size_t size=-1)
+bool prefix(const STRING& str, const STRING& expected_prefix, size_t size_prefix=-1)
 {
-	return prefix(str.data(), expected_prefix.data(), size==-1 ? expected_prefix.length() : size);
+	return prefix(str.data(), expected_prefix.data(), expected_prefix.data() + (size_prefix==-1 ? expected_prefix.length() : size_prefix));
+}
+
+template<typename CHARTYPE>
+inline
+bool prefix(const CHARTYPE* str, const CHARTYPE* expected_prefix, size_t size_prefix=-1)
+{
+	return prefix(str, expected_prefix, expected_prefix + (size_prefix==-1 ? std::char_traits<CHARTYPE>::length(expected_prefix) : size_prefix));
 }
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

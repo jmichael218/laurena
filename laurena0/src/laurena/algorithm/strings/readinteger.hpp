@@ -1,15 +1,15 @@
 ///
-/// \file     alphabet.hpp
-/// \brief    This algorithm computes the minimal set of characters needed to write a string parameter
+/// \file     readinteger.hpp
+/// \brief    This algorithm read a string as long as it looks like an integer : -32fdsksdkf => -32
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-///  This algorithm computes the minimal set of characters needed to write a string parameter
+///  This algorithm read a string as long as it looks like an integer : -32fdsksdkf => -32
 ///
 
-#ifndef LAURENA_ALPHABET_H
-#define LAURENA_ALPHABET_H
+#ifndef LAURENA_READINTEGER_H
+#define LAURENA_READINTEGER_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -22,7 +22,9 @@
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
 
-#include <laurena/traits/in_traits.hpp>
+#include <laurena/constants/const_charsets.hpp>
+#include <laurena/constants/const_chars.hpp>
+#include <laurena/algorithm/strings/readwhile.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -30,33 +32,37 @@
 namespace laurena {
 
 /*********************************************************************************/
-/*          algorithm alphabet                                                   */ 
+/*          algorithm readinteger                                                */ 
 /*********************************************************************************/ 
 
-template<typename ITERATOR, typename STRING>
-STRING  alphabet (ITERATOR first, ITERATOR end)
+template<typename CHARTYPE, typename ITERATOR, typename STRING>
+STRING readinteger(ITERATOR source)
 {
-	STRING a;
-	while (first != end)
-	{
-		if (a.find_first_of(*first) == STRING::npos)
-			a += *first;
-		++first;
-	}
+ITERATOR it (source);
+STRING   destination;
 
-	return a;
+	if (*source == const_chars<CHARTYPE>::MINUS)	
+		destination += *source++;
+
+	return destination += readwhile<ITERATOR,const charset<CHARTYPE>&,STRING>(source,const_charsets<CHARTYPE>::NUMBERS);
 }
 
-template<typename T>
+template<typename CHARTYPE>
 inline
-typename in_traits<T>::string alphabet(T& t)
+std::basic_string<CHARTYPE> readinteger(const std::basic_string<CHARTYPE>& source)
 {
-	return alphabet<in_traits<T>::iterator, in_traits<T>::string>(in_traits<T>::first(t), in_traits<T>::last(t));
+	return readinteger<CHARTYPE, const CHARTYPE*, std::basic_string<CHARTYPE>>(source.data());
 }
 
+template<typename CHARTYPE, typename ISTREAM, typename ISTREAM_ITERATOR, typename STRING>
+STRING readinteger(ISTREAM& source)
+{
+	return readinteger<CHARTYPE, ISTREAM_ITERATOR, STRING>((ISTREAM_ITERATOR(source)));
+}
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 
 
 }
 #endif
+//End of file
