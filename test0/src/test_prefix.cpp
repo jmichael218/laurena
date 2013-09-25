@@ -4,7 +4,7 @@
 
 void testPrefix()
 {
-	/*
+	
 	const char* s0 = "hello world";
 	bool b0 = laurena::prefix(s0, "hell");
 	assert(b0);
@@ -16,5 +16,6 @@ void testPrefix()
 
 	bool b2 = laurena::prefix(s0, "Hell");
 	assert(!b2);
-	*/
+ 
+
 }

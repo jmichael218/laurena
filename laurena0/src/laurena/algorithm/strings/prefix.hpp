@@ -44,19 +44,13 @@ bool prefix(ITERATOR source, ITERATOR prefixFirst, ITERATOR prefixLast)
 	return true;
 }
 
-template<typename STRING>
+template<typename T0, typename T1>
 inline
-bool prefix(const STRING& str, const STRING& expected_prefix, size_t size_prefix=-1)
+bool prefix(T0& source, const T1& tprefix)
 {
-	return prefix(str.data(), expected_prefix.data(), expected_prefix.data() + (size_prefix==-1 ? expected_prefix.length() : size_prefix));
+	return prefix<in_traits<T0>::iterator>(in_traits<T0>::first(source), in_traits<T1>::first(tprefix), in_traits<T1>::last(tprefix));
 }
 
-template<typename CHARTYPE>
-inline
-bool prefix(const CHARTYPE* str, const CHARTYPE* expected_prefix, size_t size_prefix=-1)
-{
-	return prefix(str, expected_prefix, expected_prefix + (size_prefix==-1 ? std::char_traits<CHARTYPE>::length(expected_prefix) : size_prefix));
-}
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

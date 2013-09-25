@@ -34,31 +34,28 @@ namespace laurena {
 /*********************************************************************************/ 
 
 template<typename ITERATOR, typename CHARSET, typename STRING>
-STRING readwhile(ITERATOR source, CHARSET characters)
+STRING readwhile(ITERATOR first, ITERATOR last, const CHARSET& characters)
 {
-	ITERATOR it (source);
-	while(true)
+	ITERATOR it(first);
+	STRING   str;
+	while(it != last)
 	{
 		if (characters.test(*it) == false)
 			break; 
 
-		++it;
+		str += *it++;
 	}
-	return STRING(source,it);
+	return str;
 }
 
-template<typename CHARTYPE>
+template<typename T, typename CHARSET>
 inline
-std::basic_string<CHARTYPE> readwhile(const std::basic_string<CHARTYPE>& source, const charset<CHARTYPE>& characters)
+typename in_traits<T>::string readwhile(T& t, const CHARSET& cset)
 {
-	return readwhile<const CHARTYPE*, const charset<CHARTYPE>&, std::basic_string<CHARTYPE>>(source.data(),characters);
+	return readwhile<typename in_traits<T>::iterator, CHARSET, typename in_traits<T>::string>(in_traits<T>::first(t), in_traits<T>::last(t), cset);
 }
 
-template<typename ISTREAM, typename ISTREAM_ITERATOR, typename CHARSET, typename STRING>
-STRING readwhile(ISTREAM& source, CHARSET characters)
-{
-	return readwhile<ISTREAM_ITERATOR, CHARSET, STRING>((ISTREAM_ITERATOR(source)), characters);
-}
+
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

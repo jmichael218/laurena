@@ -4,19 +4,24 @@
 
 void testReadWhile()
 {
-	/*
+
 	const char* s0 = "hello world";
+	std::string expected = "hell";
 	laurena::charset<> cs ("hel");
 
-	std::string s = laurena::readwhile<const char*,const laurena::charset<>&,std::string>(s0,cs);
-	assert(s == "hell");
+	std::string s = laurena::readwhile(s0,cs);
+	assert(s == expected);
+
+	std::string s1 = s0;
+	s = laurena::readwhile(s1, cs);
+	assert(s == expected);
 
 	std::istringstream ss;
 	ss.str("hello world");
 	// <typename CHARTYPE, typename ISTREAM, typename ISTREAM_ITERATOR, typename STRING>
-	std::string s2 = laurena::readwhile<std::istringstream, std::istreambuf_iterator<char>, const laurena::charset<char>&, std::string>(ss,cs);
-	assert(s2 == "hell");
-	*/ 
+	std::string s2 = laurena::readwhile(ss,cs);
+	assert(s2 == expected);
+
 
 }
 //End of file
