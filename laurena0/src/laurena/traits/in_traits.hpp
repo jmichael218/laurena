@@ -36,23 +36,17 @@ namespace laurena {
 template<typename T>
 struct in_traits
 {
-
-};
-
-template<typename CHARTYPE>
-struct in_traits<std::basic_istream<CHARTYPE>>
-{
-	typedef std::basic_istream<CHARTYPE>			type;
-	typedef CHARTYPE								chartype;
-	typedef std::istreambuf_iterator<CHARTYPE>		iterator;
-	typedef std::basic_string<CHARTYPE>				string;
+	typedef T												type;
+	typedef typename T::char_type							chartype;
+	typedef std::istream_iterator<typename T::char_type>	iterator;
+	typedef std::basic_string<typename T::char_type>		string;
 
 	inline
 	static iterator first(type& stream) 
 	{ return iterator(stream); }
 
 	inline
-	static iterator last(type& stream) 
+		static iterator last(type& stream) 
 	{ return iterator(); }
 };
 

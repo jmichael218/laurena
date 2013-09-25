@@ -17,7 +17,9 @@ void testAlphabet()
 	std::string r2 = laurena::alphabet(s2);
 	assert(r2 == expected);
 
+
 	std::istringstream ss;
+	ss >> std::noskipws;
 	ss.str(s2);
 	std::string r3 = laurena::alphabet(ss);
 	assert(r3 == expected);
