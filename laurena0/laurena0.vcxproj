@@ -18,9 +18,12 @@
     <ClInclude Include="src\laurena\constants\const_chars.hpp" />
     <ClInclude Include="src\laurena\constants\const_charsets.hpp" />
     <ClInclude Include="src\laurena\constants\const_strings.hpp" />
+    <ClInclude Include="src\laurena\exceptions\exception.hpp" />
+    <ClInclude Include="src\laurena\grammar\rule.hpp" />
     <ClInclude Include="src\laurena\literals\string_literal.hpp" />
     <ClInclude Include="src\laurena\traits\in_traits.hpp" />
     <ClInclude Include="src\laurena\types\charset.hpp" />
+    <ClInclude Include="src\laurena\types\source_location.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FB1D2C3E-B598-4050-99C9-447E65E7396F}</ProjectGuid>

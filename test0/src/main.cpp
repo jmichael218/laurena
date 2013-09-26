@@ -3,6 +3,7 @@ void testAlphabet();
 void testPrefix();
 void testReadWhile();
 void testReadInteger();
+void testRules();
 
 int main ()
 {
@@ -12,5 +13,5 @@ int main ()
 	testPrefix();
 	testReadWhile();
 	testReadInteger();
-
+	testRules();
 }

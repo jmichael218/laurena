@@ -19,6 +19,9 @@
     <Filter Include="Fichiers sources\algorithm\strings">
       <UniqueIdentifier>{77594aea-82f7-46ea-8661-4e8ce40933ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\grammar">
+      <UniqueIdentifier>{d008b34e-9f6c-4141-b737-f17ac01204ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -44,6 +47,9 @@
     </ClCompile>
     <ClCompile Include="src\test_alphabet.cpp">
       <Filter>Fichiers sources\algorithm\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\test_rules.cpp">
+      <Filter>Fichiers sources\grammar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
