@@ -46,8 +46,12 @@ struct in_traits
 	{ return iterator(stream); }
 
 	inline
-		static iterator last(type& stream) 
+	static iterator last(type& stream) 
 	{ return iterator(); }
+
+	inline
+	static iterator readed(iterator it, unsigned long int length) 
+	{ return it }
 };
 
 template<typename CHARTYPE>
@@ -65,6 +69,10 @@ struct in_traits<std::basic_string<CHARTYPE>>
 	inline
 	static iterator last(const type& str)
 	{ return str.data() + str.length(); }
+
+	inline
+	static iterator readed(iterator it, unsigned long int length) 
+	{ return it + length; }
 };
 
 template<typename CHARTYPE>
@@ -82,6 +90,10 @@ struct in_traits<const CHARTYPE*>
 	inline
 	static iterator last(type str)
 	{ return str + std::char_traits<CHARTYPE>::length(str); }
+
+	inline
+	static iterator readed(iterator it, unsigned long int length) 
+	{ return it + length; }
 };
 
 template<class CHARTYPE, size_t N>
@@ -93,12 +105,16 @@ struct in_traits<CHARTYPE[N]>
 	typedef std::basic_string<CHARTYPE>				string;
 
 	inline
-		static iterator first(type str)
+	static iterator first(type str)
 	{ return str; }
 
 	inline
-		static iterator last(type str)
+	static iterator last(type str)
 	{ return str + std::char_traits<CHARTYPE>::length(str); }
+
+	inline
+	static iterator readed(iterator it, unsigned long int length) 
+	{ return it + length; }
 };
 
 template<class CHARTYPE>
@@ -110,12 +126,16 @@ struct in_traits<CHARTYPE[]>
 	typedef std::basic_string<CHARTYPE>				string;
 
 	inline
-		static iterator first(type str)
+	static iterator first(type str)
 	{ return str; }
 
 	inline
-		static iterator last(type str)
+	static iterator last(type str)
 	{ return str + std::char_traits<CHARTYPE>::length(str); }
+
+	inline
+	static iterator readed(iterator it, unsigned long int length) 
+	{ return it + length; }
 };
 
 template<typename T>
