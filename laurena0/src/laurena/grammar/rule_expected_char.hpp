@@ -1,15 +1,14 @@
 ///
-/// \file     rules.hpp
-/// \brief    grammar rules
+/// \file     rule_expected_char.hpp
+/// \brief    a rule to read a single expected character
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-///   grammar rules
-///
+///   a rule to read a single expected character
 
-#ifndef LAURENA_RULES_H
-#define LAURENA_RULES_H
+#ifndef LAURENA_RULE_EXPECTED_CHAR_H
+#define LAURENA_RULE_EXPECTED_CHAR_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -25,99 +24,71 @@
 #include <memory>
 #include <ostream>
 
-#include <laurena/grammar/rule_builder.hpp>
+#include <laurena/grammar/rule_templated.hpp>
+
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
 namespace laurena {
 
-template<
-	
-	typename CONTEXT=parsing_context<>
+/********************************************************************************/ 
+/*                                                                              */ 
+/*              class rule_expected_char                                        */ 
+/*                                                                              */ 
+/********************************************************************************/ 
+
+template 
+<
+	typename CHARTYPE =char, 
+	typename CONTEXT = parsing_context<>
 >
 
-class rule : public rule_basic<CONTEXT>
+class rule_expected_char : public rule_templated<CHARTYPE, CONTEXT>
 {
 public:
 
 	/****************************************************************************/ 
-	/*			constructors													*/ 
+	/*			constructors, destructor										*/ 
 	/****************************************************************************/ 
-	
-	rule() 
+
+	rule_expected_char(CHARTYPE charExpected) 
 		
-		: rule_basic<CONTEXT>() 
+		: rule_templated<CHARTYPE, CONTEXT>(), 
+		  _value(charExpected)
+
 		{ }
 
 	/****************************************************************************/ 
 	/*			implementation of virtual functions 							*/ 
 	/****************************************************************************/ 
-
 	virtual unsigned long int read (CONTEXT& context) const
-	{ 
-		return this->_rules.read(context); 
-	}
-
-	virtual void  regexp(std::ostream& out)    const
 	{
-		for (const rule_ptr<CONTEXT>& r : this->_rules)
-			r->regexp(out);
+		if (*context._first == this->_value)
+		{			
+			context._location.count(*context._first);
+			this->readed(this->_value,context);
+			return 1;
+		}
+		return pec::SYNTAX_ERROR;
 	}
 
+	virtual void regexp(std::ostream& out)    const
+
+		{ out << this->_value; }
 
 	/****************************************************************************/ 
-	/*			construction of the rule										*/ 
-	/****************************************************************************/ 
-
-	rule<CONTEXT>& operator<<(rule_ptr<CONTEXT>& r)
-	{
-		_rules.push_back(r);
-		return *this;
-	}
-
-	template<typename T>
-	rule<CONTEXT>& operator<<(rule_templated<T, CONTEXT>* r)
-	{
-		_rules.push_back(rule_ptr<CONTEXT>(r));
-		return *this;
-	}
-
-
-	inline
-	rule<CONTEXT>& operator << (typename CONTEXT::chartype value)
-	{
-		return *this << rule<CONTEXT>::char_(value);
-	}
-
-	inline 
-	rule<CONTEXT>& operator << (const charset<typename CONTEXT::chartype>& cset )
-	{
-		return *this << rule<CONTEXT>::set_(cset);
-	}
-
-
-	template<typename T>
-	rule<CONTEXT>& operator<< (std::function<void (const T&, typename CONTEXT::object)> cb)
-	{
-		rule_templated<T, CONTEXT>* r = dynamic_cast<rule_template<T, CONTEXT>*>(this->_rules.back().get());
-		r->operator [](cb);
-		return *this;
-	}
-
-
-	/****************************************************************************/ 
-	/*			protected datas													*/ 
+	/*          protected datas                                                 */ 
 	/****************************************************************************/ 
 	protected:
-	rule_table<CONTEXT>		_rules;
-} ;
+	
+	CHARTYPE _value;
 
-
+};
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 
-
 }
 #endif
+//End of file

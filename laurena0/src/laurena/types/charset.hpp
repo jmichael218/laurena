@@ -50,6 +50,9 @@ public:
 	charset () : _characters () 
 	{ }
 
+	charset (const charset<CHARTYPE>& cset) : _characters(cset._characters)
+	{ }
+
 	charset (typename const CHARTYPE* characters) : _characters (std::move(alphabet(characters)))
 	{ }
 
@@ -60,7 +63,7 @@ public:
 	/*			getters															*/ 
 	/****************************************************************************/ 
 
-	inline string& characters () const  
+	inline const string& characters () const  
 	{ return _characters ; }
 
 

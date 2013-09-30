@@ -14,4 +14,6 @@ int main ()
 	testReadWhile();
 	testReadInteger();
 	testRules();
+
+	return 0;
 }

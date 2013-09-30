@@ -1,15 +1,14 @@
 ///
-/// \file     rules.hpp
-/// \brief    grammar rules
+/// \file     rule_charset.hpp
+/// \brief    rules based on a charset condition (while in charset, until in charset ... )
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-///   grammar rules
-///
+///  rules based on a charset condition (while in charset, until in charset ... )
 
-#ifndef LAURENA_RULES_H
-#define LAURENA_RULES_H
+#ifndef LAURENA_RULE_CHARSET_H
+#define LAURENA_RULE_CHARSET_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -25,99 +24,77 @@
 #include <memory>
 #include <ostream>
 
-#include <laurena/grammar/rule_builder.hpp>
+#include <laurena/grammar/rule_string.hpp>
+
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
 namespace laurena {
 
-template<
-	
+/********************************************************************************/ 
+/*                                                                              */ 
+/*              class rule_charset                                              */ 
+/*                                                                              */ 
+/********************************************************************************/ 
+
+template
+<
+	typename STRING=std::basic_string<char>, 
+	typename CHARSET=charset<char>, 
 	typename CONTEXT=parsing_context<>
 >
 
-class rule : public rule_basic<CONTEXT>
+class rule_charset : public rule_string<STRING, CONTEXT>
 {
 public:
 
 	/****************************************************************************/ 
-	/*			constructors													*/ 
+	/*			constructors, destructor										*/ 
 	/****************************************************************************/ 
-	
-	rule() 
+
+	rule_charset(const CHARSET& cset) 
 		
-		: rule_basic<CONTEXT>() 
+		: rule_string<STRING, CONTEXT>(), 
+		  _charset(cset)
+
 		{ }
 
 	/****************************************************************************/ 
-	/*			implementation of virtual functions 							*/ 
+	/*			virtual functions												*/ 
 	/****************************************************************************/ 
 
 	virtual unsigned long int read (CONTEXT& context) const
-	{ 
-		return this->_rules.read(context); 
+	{
+		STRING ss = std::move(readwhile<CONTEXT::iterator, CHARSET, STRING>(context._first, context._last,this->_charset));
+		if (ss.length() == 0)
+			return pec::SYNTAX_ERROR;
+		else
+		{
+			context._location.count(ss);
+			this->readed(ss,context);
+			return ss.length();
+		}
 	}
 
 	virtual void  regexp(std::ostream& out)    const
 	{
-		for (const rule_ptr<CONTEXT>& r : this->_rules)
-			r->regexp(out);
+		out << "[" << this->_charset.characters () << "]*";
 	}
-
 
 	/****************************************************************************/ 
-	/*			construction of the rule										*/ 
-	/****************************************************************************/ 
-
-	rule<CONTEXT>& operator<<(rule_ptr<CONTEXT>& r)
-	{
-		_rules.push_back(r);
-		return *this;
-	}
-
-	template<typename T>
-	rule<CONTEXT>& operator<<(rule_templated<T, CONTEXT>* r)
-	{
-		_rules.push_back(rule_ptr<CONTEXT>(r));
-		return *this;
-	}
-
-
-	inline
-	rule<CONTEXT>& operator << (typename CONTEXT::chartype value)
-	{
-		return *this << rule<CONTEXT>::char_(value);
-	}
-
-	inline 
-	rule<CONTEXT>& operator << (const charset<typename CONTEXT::chartype>& cset )
-	{
-		return *this << rule<CONTEXT>::set_(cset);
-	}
-
-
-	template<typename T>
-	rule<CONTEXT>& operator<< (std::function<void (const T&, typename CONTEXT::object)> cb)
-	{
-		rule_templated<T, CONTEXT>* r = dynamic_cast<rule_template<T, CONTEXT>*>(this->_rules.back().get());
-		r->operator [](cb);
-		return *this;
-	}
-
-
-	/****************************************************************************/ 
-	/*			protected datas													*/ 
+	/*          protected datas                                                 */ 
 	/****************************************************************************/ 
 	protected:
-	rule_table<CONTEXT>		_rules;
-} ;
+	
+	const CHARSET _charset;
 
+};
 
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 
-
 }
 #endif
+//End of file

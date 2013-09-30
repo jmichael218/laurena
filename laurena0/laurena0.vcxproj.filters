@@ -78,5 +78,29 @@
     <ClInclude Include="src\laurena\exceptions\exception.hpp">
       <Filter>Fichiers d%27en-tête\exceptions</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\constants\const_parsing_error_codes.hpp">
+      <Filter>Fichiers d%27en-tête\constants</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\types\parsing_context.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\grammar\rule_basic.hpp">
+      <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\grammar\rule_templated.hpp">
+      <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\grammar\rule_expected_char.hpp">
+      <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\grammar\rule_charset.hpp">
+      <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\grammar\rule_string.hpp">
+      <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\grammar\rule_builder.hpp">
+      <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
