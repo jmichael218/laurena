@@ -1,14 +1,14 @@
 ///
-/// \file     rule_charset.hpp
-/// \brief    rules based on a charset condition (while in charset, until in charset ... )
+/// \file     rule_symbols.hpp
+/// \brief    rules to read a symbol and cast it into a real value
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-///  rules based on a charset condition (while in charset, until in charset ... )
+///  rules to read a symbol and cast it into a real value
 
-#ifndef LAURENA_RULE_CHARSET_H
-#define LAURENA_RULE_CHARSET_H
+#ifndef LAURENA_RULE_SYMBOLS_H
+#define LAURENA_RULE_SYMBOLS_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -24,8 +24,8 @@
 #include <memory>
 #include <ostream>
 
-#include <laurena/grammar/rule_string.hpp>
-#include <laurena/algorithm/strings/readwhile.hpp>
+#include <laurena/grammar/rule_templated.hpp>
+#include <laurena/types/symbols.hpp>
 
 
 /********************************************************************************/ 
@@ -34,73 +34,85 @@
 namespace laurena {
 
 /********************************************************************************/ 
+/*			implementation of rule_symbols::read								*/ 
+/********************************************************************************/ 
+
+// implementation for KEY = CHARTYPE
+template
+<
+	typename KEY,							// key type of the symbols
+	typename VALUE,							// value type of the symbols
+	typename CONTEXT=rule_context<>,		// context
+	typename ENABLED= typename std::enable_if<std::is_same<KEY, CONTEXT::chartype>::value>::type
+>
+struct rule_symbols_implementation
+{
+
+	static
+	unsigned long int read(const rule_templated<VALUE, CONTEXT>& therule, CONTEXT& context, const symbols<KEY, VALUE>& s)
+	{
+		auto it = s.key(*context._first);
+		if (it == s.end())
+		{ 	return pec::SYNTAX_ERROR; }
+
+		context.count(*context._first);
+		therule.readed(it->second,context);
+		return 1;
+	}
+};
+
+/********************************************************************************/ 
 /*                                                                              */ 
-/*              class rule_charset                                              */ 
+/*              class rule_symbols                                              */ 
 /*                                                                              */ 
 /********************************************************************************/ 
 
 template
 <
-	typename STRING=std::basic_string<char>, 
-	typename CHARSET=charset<char>, 
-	typename CONTEXT=parsing_context<>
+	typename KEY,							// key type of the symbols
+	typename VALUE,							// value type of the symbols
+	typename CONTEXT=parsing_context<>			// context
 >
 
-class rule_charset : public rule_string<STRING, CONTEXT>
+class rule_symbols : public rule_templated<VALUE, CONTEXT>
 {
 public:
-
-	/****************************************************************************/
-	/*			typedefs														*/ 
-	/****************************************************************************/ 
-	typedef typename CONTEXT::iterator										iterator;
-	typedef std::function<STRING (iterator, iterator, const CHARSET&)>		algorithm;
 
 	/****************************************************************************/ 
 	/*			constructors, destructor										*/ 
 	/****************************************************************************/ 
-
-	rule_charset(const CHARSET& cset,  algorithm pfun = readwhile<iterator, CHARSET, STRING>) 
+	rule_symbols(const symbols<KEY, VALUE>& ref_symbols) 
 		
-		: rule_string<STRING, CONTEXT>(), 
-		  _charset(cset),
-		  _algorithm(pfun)
+		: rule_templated<VALUE, CONTEXT>()
+		, _symbols(ref_symbols)
 
-		{ }
+	{ }
 
 	/****************************************************************************/ 
-	/*			virtual functions												*/ 
+	/*			implementation of virtual functions 							*/ 
 	/****************************************************************************/ 
 
 	virtual unsigned long int read (CONTEXT& context) const
 	{
-		STRING ss = std::move(this->_algorithm(context._first, context._last,this->_charset));
-		if (ss.length() == 0)
-			return pec::SYNTAX_ERROR;
-		else
-		{
-			context.count(ss);
-			this->readed(ss,context);
-			return ss.length();
-		}
+		return rule_symbols_implementation<KEY, VALUE, CONTEXT>::read(*this, context, this->_symbols);
 	}
 
 	virtual void  regexp(std::ostream& out)    const
-	{
-		out << "[" << this->_charset.characters () << "]*";
-	}
+	{ this->_symbols.regexp(out); }
 
 	/****************************************************************************/ 
-	/*          protected datas                                                 */ 
+	/*			protected datas													*/ 
 	/****************************************************************************/ 
 	protected:
-	
-	const CHARSET _charset;
-	algorithm	  _algorithm;
+
+	const symbols<KEY, VALUE>&		_symbols;
 
 };
 
 
+
+
+// implementation for KEY = std::basic_string<CHARTYPE>
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

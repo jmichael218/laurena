@@ -33,7 +33,8 @@ template
 <	
 	typename OBJECT=int,									//! Object to fill data
 	typename SOURCE_TRAITS = in_traits<const char*>,		//! Traits of the source (file, string, stream ... )
-	typename SOURCE_LOCATION = source_location<char, '\n'>  //! Object type that track file advancement
+	typename SOURCE_LOCATION = source_location<char, '\n'>, //! Object type that track file advancement
+	typename OUTPUT = std::ostream							//! output 
 >
 
 class parsing_context
@@ -49,13 +50,28 @@ public:
 	typedef typename SOURCE_TRAITS::iterator		iterator;		// iterator type (const char* for memory string, stream_iterator otherwhile
 	typedef typename SOURCE_LOCATION				location;		// object type that track file advancement
 	typedef typename OBJECT							object;			// object target
+	typedef typename OUTPUT							output;			// output
 
 	/************************************************************************/ 
 	/*		constructor														*/ 
 	/************************************************************************/ 
 
 	// construction is initialisation
-	parsing_context(iterator first, iterator last) : _first(first), _last(last) { };
+	parsing_context(iterator first, iterator last) : _first(first), _last(last), _output(nullptr) { };
+
+	/************************************************************************/ 
+	/*		functions														*/ 
+	/************************************************************************/ 
+
+	template <typename T>
+	inline void count(T value)
+	{
+		if (this->_output)
+			*this->_output << value;
+
+		this->_location.count(value);
+	}
+
 
 	/************************************************************************/ 
 	/*		parsing context													*/ 
@@ -64,6 +80,7 @@ public:
 	iterator			_last;										//! End of the source text
 	location			_location;									//! Location of the current pointer (filename, function, line, column)
 	object				_object;									//! target
+	output*				_output;									//! output
 
 };
 

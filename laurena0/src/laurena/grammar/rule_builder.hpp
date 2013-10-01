@@ -24,7 +24,9 @@
 #include <laurena/grammar/rule.hpp>
 #include <laurena/grammar/rule_expected_char.hpp>
 #include <laurena/grammar/rule_charset.hpp>
+#include <laurena/grammar/rule_symbols.hpp>
 #include <laurena/algorithm/strings/readwhile.hpp>
+#include <laurena/algorithm/strings/readuntil.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -52,6 +54,7 @@ public:
 	typedef std::basic_string<typename CONTEXT::chartype>					string;
 	typedef typename typename CONTEXT::chartype								chartype;   // chartype
 	typedef charset<typename CONTEXT::chartype>								characters;
+	typedef typename CONTEXT::iterator										iterator;
 
 	/*******************************************************************************/ 
 	/*					rules builders											   */ 
@@ -63,8 +66,21 @@ public:
 
 	static rule_ptr_templated<string, CONTEXT> while_ (const characters& cset)
 	{
-		auto p = new rule_charset<string, characters>(cset);
+		auto p = new rule_charset<string, characters>(cset, readwhile<iterator, characters, string>);
 		return rule_ptr_templated<string, CONTEXT> (p);
+	}
+
+	static rule_ptr_templated<string, CONTEXT> until_ (const characters& cset)
+	{
+		auto p = new rule_charset<string, characters>(cset, readuntil<iterator, characters, string>);
+		return rule_ptr_templated<string, CONTEXT> (p);
+	}
+
+	template<typename KEY, typename VALUE>
+	static rule_ptr_templated<VALUE, CONTEXT> symbols_ (const symbols<KEY, VALUE>& s)
+	{
+		auto p = new rule_symbols<KEY, VALUE, CONTEXT>(s);
+		return rule_ptr_templated<VALUE, CONTEXT>(p);
 	}
 };
 

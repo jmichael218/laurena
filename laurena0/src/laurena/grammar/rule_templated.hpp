@@ -94,9 +94,8 @@ public:
 	{ return pec::SYNTAX_ERROR; }
 
 	/*******************************************************************************/ 
-	/*		protected functions													   */ 
+	/*		new functions													   */ 
 	/*******************************************************************************/ 
-	protected:
 
 	// to be called before returning an OK resultat in read functions
 	inline void readed(const T& t, CONTEXT& context) const

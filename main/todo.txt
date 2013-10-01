@@ -1,0 +1,35 @@
+0: X rule charset templaté avec algo (readwhile, readuntil, skipwhile, skipuntil)
+
+1:
+   X stream out dans le context pour l'affichage de la sortie
+   X context->count(s) => source location + stream out.
+
+2:
+   * rules symbols
+
+4:
+    * rules integer<int>
+
+5:
+
+	* dégager grammaire de L
+
+6: 
+	* loader<chartype> dans L0
+
+7: 
+	* tabs<chartype> dans LO
+	* utiliser std::fill ou std::space pour insérer les espaces
+
+8:
+	* reduction des toolsets
+
+9:
+	* refonte de annotation format 
+
+10:
+	* reduction des constants dans L
+
+20:
+	* string array en symbols <int,string> ou <string,string>.
+	* enrichir symbols avec les fonctions de string array

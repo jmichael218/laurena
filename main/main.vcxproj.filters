@@ -18,5 +18,8 @@
     <Text Include="..\Makefile">
       <Filter>Fichiers de ressources</Filter>
     </Text>
+    <Text Include="todo.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </Text>
   </ItemGroup>
 </Project>

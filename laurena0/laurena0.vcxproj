@@ -14,6 +14,7 @@
     <ClInclude Include="src\laurena\algorithm\strings\alphabet.hpp" />
     <ClInclude Include="src\laurena\algorithm\strings\prefix.hpp" />
     <ClInclude Include="src\laurena\algorithm\strings\readinteger.hpp" />
+    <ClInclude Include="src\laurena\algorithm\strings\readuntil.hpp" />
     <ClInclude Include="src\laurena\algorithm\strings\readwhile.hpp" />
     <ClInclude Include="src\laurena\constants\const_chars.hpp" />
     <ClInclude Include="src\laurena\constants\const_charsets.hpp" />
@@ -26,12 +27,14 @@
     <ClInclude Include="src\laurena\grammar\rule_charset.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_expected_char.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_string.hpp" />
+    <ClInclude Include="src\laurena\grammar\rule_symbols.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_templated.hpp" />
     <ClInclude Include="src\laurena\literals\string_literal.hpp" />
     <ClInclude Include="src\laurena\traits\in_traits.hpp" />
     <ClInclude Include="src\laurena\types\charset.hpp" />
     <ClInclude Include="src\laurena\types\parsing_context.hpp" />
     <ClInclude Include="src\laurena\types\source_location.hpp" />
+    <ClInclude Include="src\laurena\types\symbols.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FB1D2C3E-B598-4050-99C9-447E65E7396F}</ProjectGuid>

@@ -102,5 +102,14 @@
     <ClInclude Include="src\laurena\grammar\rule_builder.hpp">
       <Filter>Fichiers d%27en-tête\grammar</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\algorithm\strings\readuntil.hpp">
+      <Filter>Fichiers d%27en-tête\algorithm\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\types\symbols.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\grammar\rule_symbols.hpp">
+      <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
