@@ -111,5 +111,8 @@
     <ClInclude Include="src\laurena\grammar\rule_symbols.hpp">
       <Filter>Fichiers d%27en-tête\grammar</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\traits\string_traits.hpp">
+      <Filter>Fichiers d%27en-tête\traits</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

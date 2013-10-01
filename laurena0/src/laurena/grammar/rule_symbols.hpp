@@ -27,7 +27,6 @@
 #include <laurena/grammar/rule_templated.hpp>
 #include <laurena/types/symbols.hpp>
 
-
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
@@ -36,20 +35,38 @@ namespace laurena {
 /********************************************************************************/ 
 /*			implementation of rule_symbols::read								*/ 
 /********************************************************************************/ 
-
-// implementation for KEY = CHARTYPE
 template
 <
-	typename KEY,							// key type of the symbols
-	typename VALUE,							// value type of the symbols
-	typename CONTEXT=rule_context<>,		// context
-	typename ENABLED= typename std::enable_if<std::is_same<KEY, CONTEXT::chartype>::value>::type
+	bool ENABLED_CHARTYPE,bool ENABLED_STRINGTYPE
+
+	,typename KEY							// key type of the symbols
+	,typename VALUE							// value type of the symbols
+	,typename CONTEXT		// context
+
+	
+	
 >
 struct rule_symbols_implementation
 {
+};
 
-	static
-	unsigned long int read(const rule_templated<VALUE, CONTEXT>& therule, CONTEXT& context, const symbols<KEY, VALUE>& s)
+template
+<
+	typename KEY							// key type of the symbols
+	,typename VALUE							// value type of the symbols
+	,typename CONTEXT		// context
+		
+>
+struct rule_symbols_implementation<true, false, KEY, VALUE, CONTEXT>
+{
+
+	typedef typename CONTEXT::chartype			chartype;
+	typedef rule_templated<VALUE, CONTEXT>		ruletype;
+	typedef symbols<KEY, VALUE>					symbolstype;
+
+	// implementation for KEY = CHARTYPE
+	static inline
+	unsigned long int read(const ruletype& therule, CONTEXT& context, const symbolstype& s )
 	{
 		auto it = s.key(*context._first);
 		if (it == s.end())
@@ -61,6 +78,45 @@ struct rule_symbols_implementation
 	}
 };
 
+
+template
+	<
+	typename KEY							// key type of the symbols
+	,typename VALUE							// value type of the symbols
+	,typename CONTEXT		// context
+
+>
+struct rule_symbols_implementation<false, true, KEY, VALUE, CONTEXT>
+{
+
+
+	typedef typename CONTEXT::chartype			chartype;
+	typedef rule_templated<VALUE, CONTEXT>		ruletype;
+	typedef symbols<KEY, VALUE>					symbolstype;
+
+	static inline
+	unsigned long int read(const ruletype& therule, CONTEXT& context, const symbolstype& s)
+	{
+		return 1;
+	}
+	
+};
+
+template
+	<
+	typename KEY							// key type of the symbols
+	,typename VALUE							// value type of the symbols
+	,typename CONTEXT		// context
+	>
+struct rule_symbols_implementation_dispatch : public rule_symbols_implementation<
+
+
+	std::is_same<KEY, typename CONTEXT::chartype>::value
+	,std::is_same<KEY, std::basic_string<typename CONTEXT::chartype>>::value
+
+	,KEY, VALUE, CONTEXT
+	>
+{ };
 /********************************************************************************/ 
 /*                                                                              */ 
 /*              class rule_symbols                                              */ 
@@ -94,7 +150,7 @@ public:
 
 	virtual unsigned long int read (CONTEXT& context) const
 	{
-		return rule_symbols_implementation<KEY, VALUE, CONTEXT>::read(*this, context, this->_symbols);
+		return rule_symbols_implementation_dispatch<KEY, VALUE, CONTEXT>::read(*this, context, this->_symbols);
 	}
 
 	virtual void  regexp(std::ostream& out)    const

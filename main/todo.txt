@@ -6,6 +6,8 @@
 
 2:
    * rules symbols
+		X implemented for KEY = chartype
+		implemented for KEY = basic_string<chartype>
 
 4:
     * rules integer<int>
