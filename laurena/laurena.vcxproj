@@ -52,8 +52,6 @@
     <ClInclude Include="src\laurena\formatting\tab.hpp" />
     <ClInclude Include="src\laurena\formatting\writer.hpp" />
     <ClInclude Include="src\laurena\functions\parameter.hpp" />
-    <ClInclude Include="src\laurena\grammar\rules.hpp" />
-    <ClInclude Include="src\laurena\grammar\symbols.hpp" />
     <ClInclude Include="src\laurena\includes\includes.hpp" />
     <ClInclude Include="src\laurena\includes\types.hpp" />
     <ClInclude Include="src\laurena\laurena.hpp" />

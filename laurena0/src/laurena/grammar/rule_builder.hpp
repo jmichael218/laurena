@@ -25,8 +25,10 @@
 #include <laurena/grammar/rule_expected_char.hpp>
 #include <laurena/grammar/rule_charset.hpp>
 #include <laurena/grammar/rule_symbols.hpp>
+#include <laurena/grammar/rule_integer.hpp>
 #include <laurena/algorithm/strings/readwhile.hpp>
 #include <laurena/algorithm/strings/readuntil.hpp>
+
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -81,6 +83,13 @@ public:
 	{
 		auto p = new rule_symbols<KEY, VALUE, CONTEXT>(s);
 		return rule_ptr_templated<VALUE, CONTEXT>(p);
+	}
+
+	template<typename NUMTYPE>
+	static rule_ptr_templated<NUMTYPE, CONTEXT> num_ ()
+	{
+		auto p = new rule_integer<NUMTYPE>();
+		return rule_ptr_templated<NUMTYPE, CONTEXT>(p);
 	}
 };
 

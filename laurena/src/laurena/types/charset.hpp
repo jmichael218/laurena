@@ -24,8 +24,6 @@
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
-#include <laurena/traits/chartype.hpp>
-
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
@@ -35,81 +33,33 @@ namespace laurena {
 /*          CharSet                                                              */ 
 /*********************************************************************************/ 
 
-template<typename CHARTYPE=char>
-class charset
+class charset : public boost::dynamic_bitset<>
 {
 public:
 
-	/****************************************************************************/ 
-	/*			typedefs														*/ 
-	/****************************************************************************/ 	
-	typedef chartype<CHARTYPE> c;
+    charset ();
+    charset (const char* characters);
+    charset (const std::string& characters);
+    virtual ~charset() {}
+    
 
-	/*******************************************************************************/ 
-	/*			constructor, destructors										   */ 
-	/*******************************************************************************/ 
+    inline const std::string& characters () { return _characters ; }
 
-	charset () : _characters () 
-	{ }
-	charset (typename const CHARTYPE* characters) : _characters (characters)
-	{ }
+    /****************************************************************************/
+    /*          functions                                                       */ 
+    /****************************************************************************/ 
+    bool validate(const char* source, word32 size = ULONG_MAX) const;
+    bool validate(const word8* source, word32 size = ULONG_MAX) const;
+    bool validate(const std::string& source) const;
 
-	charset (typename const c::mystring& characters) : _characters (characters)
-	{ }
-
-	/****************************************************************************/ 
-	/*			getters															*/ 
-	/****************************************************************************/ 
-
-	inline typename const c::mystring& characters () const  
-	{ return _characters ; }
-
-
-	inline bool test(CHARTYPE c) const
-	{ return this->_characters.find(c) !=  c::mystring::npos; } 
-
-
-	bool validate(typename c::iterator& first, typename c::iterator last) const
-	{
-		while (first != last)
-		{
-			if (!this->_characters.find(*first++) == c::mystring::npos)
-				return false;
-		}
-		return true;
-	}
-
-	bool validate(typename c::const_ptr_chartype first, typename c::const_ptr_chartype last) const
-	{
-		while (first != last)
-		{
-			if (!this->_characters.find(*first++) == c::mystring::npos)
-				return false;
-		}
-		return true;
-	}
-
-	bool validate (typename const CHARTYPE* pstr, word32 size)
-	{
-		return this->validate(pstr, pstr+size);
-	}
-
-	bool validate (typename const CHARTYPE* pstr)
-	{
-		word32 sz =std::char_traits<CHARTYPE>::length(pstr);
-		return this->validate(pstr, pstr+sz);
-	}
-
-	/****************************************************************************/ 
-	/*          protected datas                                                 */ 
-	/****************************************************************************/ 
-	protected:
-
-	typename c::mystring		_characters;
+    /****************************************************************************/ 
+    /*          protected datas                                                 */ 
+    /****************************************************************************/ 
+    protected:
+        
+    std::string _characters;
 
 };
-
-
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

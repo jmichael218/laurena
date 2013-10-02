@@ -114,5 +114,8 @@
     <ClInclude Include="src\laurena\traits\string_traits.hpp">
       <Filter>Fichiers d%27en-tête\traits</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\grammar\rule_integer.hpp">
+      <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
