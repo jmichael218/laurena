@@ -25,6 +25,7 @@
 #include <laurena/traits/string_traits.hpp>
 #include <laurena/algorithm/strings/prefix.hpp>
 #include <laurena/traits/in_traits.hpp>
+#include <laurena/traits/string_traits.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -37,41 +38,70 @@ namespace laurena {
 /*                                                                              */ 
 /********************************************************************************/ 
 
-class symbols_implementation
+// empty implementation for failed substitution
+template
+<
+	  bool ENABLED_CHARTYPE
+	, bool ENABLED_STRINGTYPE
+
+	, typename KEY							// key type of the symbols
+	, typename VALUE							// value type of the symbols
+>
+struct symbols_implementation
 {
+};
 
-	template <typename KEY>	
-	inline
-	static bool is_prefix
-	(
+// implementation when KEY is a chartype
+template
+<
+	typename KEY							// key type of the symbols
+	,typename VALUE							// value type of the symbols
+>
+struct symbols_implementation<true, false, KEY, VALUE>
+{
+	static inline
+	bool is_prefix (const KEY& sprefix, const KEY& key)
+	{ return sprefix == key; }		 	
+};
+
+// implementation when KEY is a std::basic_string<chartype> class
+template
+<
+	typename KEY							// key type of the symbols
+	,typename VALUE							// value type of the symbols
+>
+struct symbols_implementation<false, true, KEY, VALUE>
+{
+	typedef typename in_traits<KEY>::iterator		iterator;
+	typedef in_traits<KEY>							traits;
 	
-		const KEY& sprefix, 
-		const KEY& key,
-
-		typename std::enable_if<std::is_integral<KEY>::value>::type = true
-	
-	)
+	static inline
+	bool is_prefix (const KEY& sprefix,  const KEY& key )
 	{
-		return sprefix == key;
-	}
 
-	template <typename KEY>
-	inline
-	static bool is_prefix
-	(
-
-		const KEY& sprefix, 
-		const KEY& key,
-
-		typename std::enable_if<string_traits<KEY>::is_string>::type = true
-	)
-	{
-		typedef typename in_traits<KEY>::iterator		iterator;
-		typedef in_traits<KEY>							traits;
 
 		return prefix<iterator>(traits::first(key), traits::first(sprefix), traits::last(sprefix));
 	}
 };
+
+// tag dispatcher for the implementation
+template
+<
+	typename KEY							// key type of the symbols
+	,typename VALUE							// value type of the symbols
+>
+struct symbols_implementation_displatch 
+
+	: public symbols_implementation
+	<
+		std::is_integral<KEY>::value
+		,string_traits<KEY>::is_string::value
+		,KEY
+		,VALUE
+	>
+
+	{ }
+;
 
 /********************************************************************************/ 
 /*                                                                              */ 
@@ -122,7 +152,7 @@ public:
 	{
 		unsigned long int res = 0;
 		for (const std::pair<KEY, VALUE>& p : *this)
-			res  += symbols_implementation<KEY>::is_prefix(prefix, p.first) ? 1 : 0 ;
+			res  += symbols_implementation_displatch<KEY, VALUE>::is_prefix(prefix, p.first) ? 1 : 0 ;
 
 		return res;
 	}

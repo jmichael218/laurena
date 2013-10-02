@@ -95,6 +95,30 @@ void testRuleSymbols()
 	unsigned long int res = rs.read(context);
 	assert(res==4);
 
+
+	typedef std::pair<std::string, int> day;
+	day DAYS [7] = { day("lundi",0), day("mardi",1), day("mercredi",2), day("jeudi",3), day("vendredi",4), day("samedi",5), day("dimanche",6)};
+	laurena::symbols<std::string, int> sdays (DAYS);
+	laurena::rule_symbols<std::string, int> rdays (sdays);
+
+	laurena::rule <> rs2;
+
+	std::function<void (const int& b, laurena::parsing_context<>::object i )> sib
+
+		= [] (const int& b, laurena::parsing_context<>::object) { std::cout << "J" << b; };
+
+	rs2 << G::symbols_(sdays) [sib]
+		<< G::symbols_(sdays) [sib]
+		<< G::symbols_(sdays) [sib]
+		<< G::symbols_(sdays) [sib]
+		;
+
+	const char* cc2="lundimardimercredidimanche";
+	laurena::parsing_context<> context2 (cc2, cc+strlen(cc2));
+	res = rs2.read(context2);
+	assert(res == strlen(cc2));
+
+
 }
 
 void testRules()

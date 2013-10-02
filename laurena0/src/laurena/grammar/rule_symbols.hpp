@@ -111,26 +111,30 @@ struct rule_symbols_implementation<false, true, KEY, VALUE, CONTEXT>
 	static inline
 	unsigned long int read(const ruletype& therule, CONTEXT& context, const symbolstype& s)
 	{
-		/*
 		KEY sresult;
-		chartype c;
 		unsigned long int nb_candidates;
-		while (true)
+		auto it = context._first;
+
+		while (it != context._last)
 		{
-			sresult += *context._first;
+			sresult += *it++;
 			nb_candidates = s.candidates(sresult);
+
 			if (nb_candidates == 0)
 				return pec::SYNTAX_ERROR;
 
 			if (nb_candidates == 1)
 			{
-				context.count(sresult);
-				therule.readed(sresult,context);
-				return sresult.length();
+				auto itres = s.key(sresult);	
+				if (itres != s.end())
+				{				
+					context.count(sresult);
+					therule.readed(itres->second,context);
+					return sresult.length();
+				}
 			}
 		}
-		*/
-		return 1;
+		return pec::SYNTAX_ERROR;
 	}
 	
 };
