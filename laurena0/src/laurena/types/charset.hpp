@@ -42,22 +42,40 @@ public:
 	/****************************************************************************/ 	
 	typedef std::basic_string<CHARTYPE>					string;
 	typedef typename string::iterator					iterator;
+	typedef std::function<bool (const CHARTYPE&)>		test_function;
+	typedef typename CHARTYPE							chartype;
 
 	/****************************************************************************/ 
 	/*			constructor, destructors										*/ 
 	/****************************************************************************/ 
 
-	charset () : _characters () 
-	{ }
+	charset () 
+		
+		: _characters (), 
+		, _condition_function([&] (const CHARTYPE& c) {return this->test(c);})
 
-	charset (const charset<CHARTYPE>& cset) : _characters(cset._characters)
-	{ }
+		{ }
 
-	charset (typename const CHARTYPE* characters) : _characters (std::move(alphabet(characters)))
-	{ }
+	charset (const charset<CHARTYPE>& cset) 
+		
+		: _characters(cset._characters)
+		, _condition_function([&] (const CHARTYPE& c) {return this->test(c);})
 
-	charset (typename const string& characters) : _characters (std::move(alphabet(characters)))
-	{ }
+		{ }
+
+	charset (typename const CHARTYPE* characters) 
+		
+		: _characters (std::move(alphabet(characters)))
+		, _condition_function([&] (const CHARTYPE& c) {return this->test(c);})
+
+		{ }
+
+	charset (typename const string& characters) 
+		
+		: _characters (std::move(alphabet(characters)))
+		, _condition_function([&] (const CHARTYPE& c) {return this->test(c);})
+
+		{ }
 
 	/****************************************************************************/ 
 	/*			getters															*/ 
@@ -69,6 +87,13 @@ public:
 
 	inline bool test(CHARTYPE c) const
 	{ return this->_characters.find(c) !=  string::npos; } 
+
+	inline const test_function& condition() const
+	{ return this->_condition_function; }
+		 		
+	/****************************************************************************/ 
+	/*			string validation functions										*/ 
+	/****************************************************************************/ 
 
 	bool validate(typename iterator& first, typename const iterator& last) const
 	{
@@ -113,8 +138,8 @@ public:
 	/****************************************************************************/ 
 	protected:
 
-	string		_characters;
-
+	string			_characters;
+	test_function	_condition_function;
 };
 
 

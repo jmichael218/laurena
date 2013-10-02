@@ -33,14 +33,14 @@ namespace laurena {
 /*          algorithm readuntil                                                  */ 
 /*********************************************************************************/ 
 
-template<typename ITERATOR, typename CHARSET, typename STRING>
-STRING readuntil(ITERATOR first, ITERATOR last, const CHARSET& characters)
+template<typename ITERATOR, typename CHARTYPE, typename STRING>
+STRING readuntil(ITERATOR first, ITERATOR last, const std::function<bool (const CHARTYPE& )>& condition)
 {
 	ITERATOR it(first);
 	STRING   str;
 	while(it != last)
 	{
-		if (characters.test(*it) == true)
+		if (condition(*it) == true)
 			break; 
 
 		str += *it++;
@@ -48,11 +48,11 @@ STRING readuntil(ITERATOR first, ITERATOR last, const CHARSET& characters)
 	return str;
 }
 
-template<typename T, typename CHARSET>
+template<typename T, typename CHARTYPE>
 inline
-typename in_traits<T>::string readuntil(T& t, const CHARSET& cset)
+typename in_traits<T>::string readuntil(T& t, const std::function<bool (const CHARTYPE& )>& condition)
 {
-	return readuntil<typename in_traits<T>::iterator, CHARSET, typename in_traits<T>::string>(in_traits<T>::first(t), in_traits<T>::last(t), cset);
+	return readuntil<typename in_traits<T>::iterator, CHARTYPE, typename in_traits<T>::string>(in_traits<T>::first(t), in_traits<T>::last(t), condition);
 }
 
 

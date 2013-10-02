@@ -66,13 +66,13 @@ public:
 
 	static rule_ptr_templated<string, CONTEXT> while_ (const characters& cset)
 	{
-		auto p = new rule_charset<string, characters>(cset, readwhile<iterator, characters, string>);
+		auto p = new rule_charset<string, characters>(cset, readwhile<iterator, chartype, string>);
 		return rule_ptr_templated<string, CONTEXT> (p);
 	}
 
 	static rule_ptr_templated<string, CONTEXT> until_ (const characters& cset)
 	{
-		auto p = new rule_charset<string, characters>(cset, readuntil<iterator, characters, string>);
+		auto p = new rule_charset<string, characters>(cset, readuntil<iterator, chartype, string>);
 		return rule_ptr_templated<string, CONTEXT> (p);
 	}
 

@@ -43,7 +43,7 @@ STRING   destination;
 	if (*source == const_chars<CHARTYPE>::MINUS)	
 		destination += *source++;
 
-	return destination += readwhile<ITERATOR,charset<CHARTYPE>,STRING>(source, last, const_charsets<CHARTYPE>::NUMBERS);
+	return destination += readwhile<ITERATOR,CHARTYPE,STRING>(source, last, const_charsets<CHARTYPE>::NUMBERS.condition());
 }
 
 template<typename T>
@@ -52,21 +52,7 @@ typename in_traits<T>::string readinteger(T& t)
 {
 	return readinteger<typename in_traits<T>::chartype, typename in_traits<T>::iterator, typename in_traits<T>::string>(in_traits<T>::first(t), in_traits<T>::last(t));
 }
-
-/*
-template<typename CHARTYPE>
-inline
-std::basic_string<CHARTYPE> readinteger(const std::basic_string<CHARTYPE>& source)
-{
-	return readinteger<CHARTYPE, const CHARTYPE*, std::basic_string<CHARTYPE>>(source.data());
-}
-
-template<typename CHARTYPE, typename ISTREAM, typename ISTREAM_ITERATOR, typename STRING>
-STRING readinteger(ISTREAM& source)
-{
-	return readinteger<CHARTYPE, ISTREAM_ITERATOR, STRING>((ISTREAM_ITERATOR(source)));
-}
-*/ 
+ 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

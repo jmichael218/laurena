@@ -35,21 +35,21 @@ namespace laurena {
 /********************************************************************************/ 
 /*			implementation of rule_symbols::read								*/ 
 /********************************************************************************/ 
+
+// empty implementation for failed substitution
 template
 <
-	bool ENABLED_CHARTYPE,bool ENABLED_STRINGTYPE
+	bool ENABLED_CHARTYPE, bool ENABLED_STRINGTYPE
 
 	,typename KEY							// key type of the symbols
 	,typename VALUE							// value type of the symbols
-	,typename CONTEXT		// context
-
-	
-	
+	,typename CONTEXT		// context	
 >
 struct rule_symbols_implementation
 {
 };
 
+// implementation when KEY is a chartype
 template
 <
 	typename KEY							// key type of the symbols
@@ -60,9 +60,16 @@ template
 struct rule_symbols_implementation<true, false, KEY, VALUE, CONTEXT>
 {
 
+	/*******************************************************************************/ 
+	/*			typedefs for readability										   */ 
+	/*******************************************************************************/ 
 	typedef typename CONTEXT::chartype			chartype;
 	typedef rule_templated<VALUE, CONTEXT>		ruletype;
 	typedef symbols<KEY, VALUE>					symbolstype;
+
+	/****************************************************************************/ 
+	/*		implementation of the read function									*/ 
+	/****************************************************************************/ 
 
 	// implementation for KEY = CHARTYPE
 	static inline
@@ -70,7 +77,7 @@ struct rule_symbols_implementation<true, false, KEY, VALUE, CONTEXT>
 	{
 		auto it = s.key(*context._first);
 		if (it == s.end())
-		{ 	return pec::SYNTAX_ERROR; }
+		{ return pec::SYNTAX_ERROR; }
 
 		context.count(*context._first);
 		therule.readed(it->second,context);
@@ -78,9 +85,9 @@ struct rule_symbols_implementation<true, false, KEY, VALUE, CONTEXT>
 	}
 };
 
-
+// implementation when KEY is a std::basic_string<chartype> class
 template
-	<
+<
 	typename KEY							// key type of the symbols
 	,typename VALUE							// value type of the symbols
 	,typename CONTEXT		// context
@@ -89,34 +96,65 @@ template
 struct rule_symbols_implementation<false, true, KEY, VALUE, CONTEXT>
 {
 
+	/*******************************************************************************/ 
+	/*			typedefs for readability										   */ 
+	/*******************************************************************************/ 
+	typedef typename CONTEXT::chartype						chartype;
+	typedef rule_templated<VALUE, CONTEXT>					ruletype;
+	typedef symbols<KEY, VALUE>								symbolstype;
+	typedef typename symbols<KEY, VALUE>::const_iterator	iterator;
 
-	typedef typename CONTEXT::chartype			chartype;
-	typedef rule_templated<VALUE, CONTEXT>		ruletype;
-	typedef symbols<KEY, VALUE>					symbolstype;
+	/****************************************************************************/ 
+	/*		implementation of the read function									*/ 
+	/****************************************************************************/ 
 
 	static inline
 	unsigned long int read(const ruletype& therule, CONTEXT& context, const symbolstype& s)
 	{
+		/*
+		KEY sresult;
+		chartype c;
+		unsigned long int nb_candidates;
+		while (true)
+		{
+			sresult += *context._first;
+			nb_candidates = s.candidates(sresult);
+			if (nb_candidates == 0)
+				return pec::SYNTAX_ERROR;
+
+			if (nb_candidates == 1)
+			{
+				context.count(sresult);
+				therule.readed(sresult,context);
+				return sresult.length();
+			}
+		}
+		*/
 		return 1;
 	}
 	
 };
 
+// tag dispatcher for the implementation
 template
-	<
+<
 	typename KEY							// key type of the symbols
 	,typename VALUE							// value type of the symbols
 	,typename CONTEXT		// context
+>
+struct rule_symbols_implementation_dispatch 
+	
+	: public rule_symbols_implementation
+	<
+		std::is_same<KEY, typename CONTEXT::chartype>::value
+		,std::is_same<KEY, std::basic_string<typename CONTEXT::chartype>>::value
+		,KEY
+		,VALUE
+		,CONTEXT
 	>
-struct rule_symbols_implementation_dispatch : public rule_symbols_implementation<
 
-
-	std::is_same<KEY, typename CONTEXT::chartype>::value
-	,std::is_same<KEY, std::basic_string<typename CONTEXT::chartype>>::value
-
-	,KEY, VALUE, CONTEXT
-	>
-{ };
+	{ }
+;
 /********************************************************************************/ 
 /*                                                                              */ 
 /*              class rule_symbols                                              */ 

@@ -22,7 +22,9 @@
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
 
-#include <laurena/types/charset.hpp>
+#include <functional>
+
+#include <laurena/traits/in_traits.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -33,14 +35,14 @@ namespace laurena {
 /*          algorithm readwhile                                                  */ 
 /*********************************************************************************/ 
 
-template<typename ITERATOR, typename CHARSET, typename STRING>
-STRING readwhile(ITERATOR first, ITERATOR last, const CHARSET& characters)
+template<typename ITERATOR, typename CHARTYPE, typename STRING>
+STRING readwhile(ITERATOR first, ITERATOR last, const std::function<bool (const CHARTYPE& )>& condition)
 {
 	ITERATOR it(first);
 	STRING   str;
 	while(it != last)
 	{
-		if (characters.test(*it) == false)
+		if (!condition(*it))
 			break; 
 
 		str += *it++;
@@ -48,11 +50,11 @@ STRING readwhile(ITERATOR first, ITERATOR last, const CHARSET& characters)
 	return str;
 }
 
-template<typename T, typename CHARSET>
+template<typename T, typename CHARTYPE>
 inline
-typename in_traits<T>::string readwhile(T& t, const CHARSET& cset)
+typename in_traits<T>::string readwhile(T& t, const std::function<bool (const CHARTYPE& )>& condition)
 {
-	return readwhile<typename in_traits<T>::iterator, CHARSET, typename in_traits<T>::string>(in_traits<T>::first(t), in_traits<T>::last(t), cset);
+	return readwhile<typename in_traits<T>::iterator, CHARTYPE, typename in_traits<T>::string>(in_traits<T>::first(t), in_traits<T>::last(t), condition);
 }
 
 

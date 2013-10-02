@@ -54,13 +54,13 @@ public:
 	/*			typedefs														*/ 
 	/****************************************************************************/ 
 	typedef typename CONTEXT::iterator										iterator;
-	typedef std::function<STRING (iterator, iterator, const CHARSET&)>		algorithm;
+	typedef std::function<STRING (iterator, iterator, const typename CHARSET::test_function &)>		algorithm;
 
 	/****************************************************************************/ 
 	/*			constructors, destructor										*/ 
 	/****************************************************************************/ 
 
-	rule_charset(const CHARSET& cset,  algorithm pfun = readwhile<iterator, CHARSET, STRING>) 
+	rule_charset(const CHARSET& cset,  algorithm pfun = readwhile<iterator, typename CHARSET::chartype, STRING>) 
 		
 		: rule_string<STRING, CONTEXT>(), 
 		  _charset(cset),
@@ -74,7 +74,7 @@ public:
 
 	virtual unsigned long int read (CONTEXT& context) const
 	{
-		STRING ss = std::move(this->_algorithm(context._first, context._last,this->_charset));
+		STRING ss = std::move(this->_algorithm(context._first, context._last,this->_charset.condition()));
 		if (ss.length() == 0)
 			return pec::SYNTAX_ERROR;
 		else

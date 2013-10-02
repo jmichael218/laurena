@@ -31,7 +31,7 @@ void testRuleCharset()
 	assert(res==6);
 
 	laurena::charset<> csetB ("b");
-	laurena::rule_charset<>pwaitb (csetB, laurena::readuntil<const char*, laurena::charset<>, std::string>);
+	laurena::rule_charset<>pwaitb (csetB, laurena::readuntil<const char*, char, std::string>);
 	laurena::parsing_context<> context2 (cc, cc+strlen(cc));
 	context2._output = &std::cout;
 
