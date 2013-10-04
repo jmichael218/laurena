@@ -67,9 +67,6 @@
     <Filter Include="Fichiers sources\descriptors\features">
       <UniqueIdentifier>{7a966ffb-c5ab-4395-82a2-008813b0282b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\templates">
-      <UniqueIdentifier>{9ec72eb6-0a81-4d86-a5cc-438da7ead08e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\archives">
       <UniqueIdentifier>{d9e001a5-7244-4866-8917-fdc2ca14cf6f}</UniqueIdentifier>
     </Filter>
@@ -93,9 +90,6 @@
     </Filter>
     <Filter Include="Fichiers sources\functions">
       <UniqueIdentifier>{1b7cec9f-b381-409b-8edf-e3b27e967e83}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\grammar">
-      <UniqueIdentifier>{c47749e9-0282-46e9-80bf-1c9e97a77740}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers d%27en-tête\source">
       <UniqueIdentifier>{b65cefcb-3c33-4c16-b53a-42c54dedeb49}</UniqueIdentifier>
@@ -296,12 +290,6 @@
     </ClInclude>
     <ClInclude Include="src\laurena\descriptors\descriptable.hpp">
       <Filter>Fichiers d%27en-tête\descriptors</Filter>
-    </ClInclude>
-    <ClInclude Include="src\laurena\grammar\symbols.hpp">
-      <Filter>Fichiers d%27en-tête\grammar</Filter>
-    </ClInclude>
-    <ClInclude Include="src\laurena\grammar\rules.hpp">
-      <Filter>Fichiers d%27en-tête\grammar</Filter>
     </ClInclude>
     <ClInclude Include="src\laurena\source\source_location.hpp">
       <Filter>Fichiers d%27en-tête\source</Filter>

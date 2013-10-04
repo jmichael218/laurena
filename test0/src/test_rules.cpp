@@ -121,12 +121,28 @@ void testRuleSymbols()
 
 }
 
+
+void testRuleInteger ()
+{
+	laurena::rule_integer<int, laurena::parsing_context<>> ri ;
+
+	laurena::rule<> rs;
+
+	rs << G::expected_('(')			[[] (const char& c, laurena::parsing_context<>::object o) { std::cout << c; }]
+		<< G::num_<int>()			[[] (const int& s, laurena::parsing_context<>::object i ) { std::cout << s; }]
+		<< G::expected_(',')		[[] (const char& c, laurena::parsing_context<>::object o) { std::cout << c; }]
+		 << G::num_<int>()			[[] (const int& s, laurena::parsing_context<>::object i ) { std::cout << s; }]
+		 << G::expected_(')')       [[] (const char& c, laurena::parsing_context<>::object o) { std::cout << c; }]
+		 ;
+}
+
 void testRules()
 {
 	testRuleStaticChar();
 	testRuleCharset();
 	testRuleAddition();
 	testRuleSymbols();
+	testRuleInteger();
 
 }
 

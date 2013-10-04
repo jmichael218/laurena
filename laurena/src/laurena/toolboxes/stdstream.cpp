@@ -13,7 +13,7 @@
 
 using namespace laurena;
 
-word32 Stream::skipWhile(std::istream& stream, const charset<>& characters)
+word32 Stream::skipWhile(std::istream& stream, const charset& characters)
 {
     word32 res = 0;
     if (stream.eof())
@@ -30,7 +30,7 @@ word32 Stream::skipWhile(std::istream& stream, const charset<>& characters)
 }
 
 
-word32 Stream::skipUntil(std::istream& stream, const charset<>& characters)
+word32 Stream::skipUntil(std::istream& stream, const charset& characters)
 {
     word32 res = 0;
     if (stream.eof())
@@ -47,7 +47,7 @@ word32 Stream::skipUntil(std::istream& stream, const charset<>& characters)
     return res;
 }
 
-word32 Stream::readWhile(std::istream& stream, const charset<>& characters, std::string& destination)
+word32 Stream::readWhile(std::istream& stream, const charset& characters, std::string& destination)
 {
     
     word32 res = 0;
@@ -105,7 +105,7 @@ word32 Stream::readUntil(std::istream& stream, const word8 symbol, std::string& 
         
 }
 
-word32 Stream::readUntil(std::istream& stream, const charset<>& characters, std::string& destination)
+word32 Stream::readUntil(std::istream& stream, const charset& characters, std::string& destination)
 {
 word32 res = 0;
 std::stringbuf buf;

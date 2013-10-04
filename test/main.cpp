@@ -27,7 +27,7 @@ void testBitsetDescriptor();
 void testMDL();
 void testJson();
 void test_sql();
-void testGrammar();
+
 
 
 extern void cstring_test ();
@@ -121,7 +121,6 @@ int main ()
     testanyDescriptor();
     testStringArrayDescriptor();
     testBitsetDescriptor();
-	testGrammar();
 	//test_sql();
 
     testunit::displayResults();

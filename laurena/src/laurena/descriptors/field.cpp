@@ -161,7 +161,7 @@ std::string& field::toString(const any& object, std::string& destination) const
             bitset::serialize(wbits,*this->_values,destination,CONST_SPACE);            
         } 
         else
-        if (CHARSET_BINARY.validate(destination))            
+        if (CHARSET_BINARY.validate(destination.data()))            
         {
             std::string bits = destination;
             bitset::serialize(bits,*this->_values,destination,CONST_SPACE);
