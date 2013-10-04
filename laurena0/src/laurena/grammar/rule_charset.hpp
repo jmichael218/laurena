@@ -90,6 +90,11 @@ public:
 		out << "[" << this->_charset.characters () << "]*";
 	}
 
+	virtual bool  is_candidate(chartype c) const
+	{ 
+		return this->_algorithm(&c, (&c)+1, this->_charset.condition()).length() == 1;
+	}
+
 	/****************************************************************************/ 
 	/*          protected datas                                                 */ 
 	/****************************************************************************/ 

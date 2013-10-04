@@ -39,6 +39,8 @@ namespace laurena {
 /*                                                                              */ 
 /********************************************************************************/ 
 
+template <typename CONTEXT = parsing_context<>>	class rule_ptr;
+
 // This is the interface for all rules
 template 
 <	
@@ -49,11 +51,28 @@ class rule_basic
 {
 public:
 
+
+	/****************************************************************************/ 
+	/*			typedef         												*/ 
+	/****************************************************************************/ 
+	typedef typename CONTEXT::chartype			chartype;
+
+	/****************************************************************************/ 
+	/*			constructor     												*/ 
+	/****************************************************************************/ 
+	rule_basic() { }
+
+
 	/****************************************************************************/ 
 	/*			virtual functions												*/ 
 	/****************************************************************************/ 
 	virtual unsigned long int	read (CONTEXT& context)		 const =0;
 	virtual void                regexp(std::ostream& out)    const =0;
+
+	virtual bool  is_candidate(chartype c) const
+	
+		{ return false; }
+
 };
 
 /********************************************************************************/ 
@@ -65,17 +84,21 @@ public:
 // This is the class wrapping a smart rule_basic  pointer
 template 
 <
-	typename CONTEXT = parsing_context<>
+	typename CONTEXT
 >
 
 class rule_ptr : public std::shared_ptr<rule_basic<CONTEXT>> 
 {
 public:
 
+	/************************************************************************/ 
+	/*		constructor														*/ 
+	/************************************************************************/ 
 	rule_ptr(rule_basic<CONTEXT>* ptr) 
 		
 		: std::shared_ptr<rule_basic<CONTEXT>>(ptr) 
 		{ }
+
 
 };
 

@@ -5,9 +5,9 @@
    X context->count(s) => source location + stream out.
 
 2:
-   * rules symbols
+   X rules symbols
 		X implemented for KEY = chartype
-		implemented for KEY = basic_string<chartype>
+		X implemented for KEY = basic_string<chartype>
 
 4:
     * rules integer<int>

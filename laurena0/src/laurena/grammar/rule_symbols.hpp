@@ -33,6 +33,18 @@
 namespace laurena {
 
 /********************************************************************************/ 
+/*			forward definition													*/ 
+/********************************************************************************/ 
+template
+<
+	typename KEY,							// key type of the symbols
+	typename VALUE,							// value type of the symbols
+	typename CONTEXT=parsing_context<>			// context
+>
+
+class rule_symbols;
+
+/********************************************************************************/ 
 /*			implementation of rule_symbols::read								*/ 
 /********************************************************************************/ 
 
@@ -64,7 +76,7 @@ struct rule_symbols_implementation<true, false, KEY, VALUE, CONTEXT>
 	/*			typedefs for readability										   */ 
 	/*******************************************************************************/ 
 	typedef typename CONTEXT::chartype			chartype;
-	typedef rule_templated<VALUE, CONTEXT>		ruletype;
+	typedef rule_symbols<KEY, VALUE>			ruletype;
 	typedef symbols<KEY, VALUE>					symbolstype;
 
 	/****************************************************************************/ 
@@ -73,8 +85,9 @@ struct rule_symbols_implementation<true, false, KEY, VALUE, CONTEXT>
 
 	// implementation for KEY = CHARTYPE
 	static inline
-	unsigned long int read(const ruletype& therule, CONTEXT& context, const symbolstype& s )
+	unsigned long int read(const ruletype& therule, CONTEXT& context)
 	{
+		const symbolstype& s = therule.values();
 		auto it = s.key(*context._first);
 		if (it == s.end())
 		{ return pec::SYNTAX_ERROR; }
@@ -82,6 +95,12 @@ struct rule_symbols_implementation<true, false, KEY, VALUE, CONTEXT>
 		context.count(*context._first);
 		therule.readed(it->second,context);
 		return 1;
+	}
+
+	static inline 
+	bool is_candidate (const ruletype& therule, chartype c )
+	{
+		return therule.values().key(c) != therule.values().end();
 	}
 };
 
@@ -100,7 +119,7 @@ struct rule_symbols_implementation<false, true, KEY, VALUE, CONTEXT>
 	/*			typedefs for readability										   */ 
 	/*******************************************************************************/ 
 	typedef typename CONTEXT::chartype						chartype;
-	typedef rule_templated<VALUE, CONTEXT>					ruletype;
+	typedef rule_symbols<KEY, VALUE>						ruletype;
 	typedef symbols<KEY, VALUE>								symbolstype;
 	typedef typename symbols<KEY, VALUE>::const_iterator	iterator;
 
@@ -109,11 +128,12 @@ struct rule_symbols_implementation<false, true, KEY, VALUE, CONTEXT>
 	/****************************************************************************/ 
 
 	static inline
-	unsigned long int read(const ruletype& therule, CONTEXT& context, const symbolstype& s)
+	unsigned long int read(const ruletype& therule, CONTEXT& context)
 	{
 		KEY sresult;
 		unsigned long int nb_candidates;
 		auto it = context._first;
+		const symbolstype& s = therule.values();
 
 		while (it != context._last)
 		{
@@ -135,6 +155,15 @@ struct rule_symbols_implementation<false, true, KEY, VALUE, CONTEXT>
 			}
 		}
 		return pec::SYNTAX_ERROR;
+	}
+
+
+	static inline 
+	bool is_candidate (const ruletype& therule, chartype c )
+	{
+		KEY sresult;
+		sresult += c;
+		return therule.values().candidates(sresult) > 0;
 	}
 	
 };
@@ -169,7 +198,7 @@ template
 <
 	typename KEY,							// key type of the symbols
 	typename VALUE,							// value type of the symbols
-	typename CONTEXT=parsing_context<>			// context
+	typename CONTEXT						// context
 >
 
 class rule_symbols : public rule_templated<VALUE, CONTEXT>
@@ -192,12 +221,26 @@ public:
 
 	virtual unsigned long int read (CONTEXT& context) const
 	{
-		return rule_symbols_implementation_dispatch<KEY, VALUE, CONTEXT>::read(*this, context, this->_symbols);
+		return rule_symbols_implementation_dispatch<KEY, VALUE, CONTEXT>::read(*this, context);
 	}
 
 	virtual void  regexp(std::ostream& out)    const
 	{ this->_symbols.regexp(out); }
 
+	virtual bool is_candidate(chartype c) const
+	{
+		return false;
+	}
+
+	/****************************************************************************/ 
+	/*			getters / setters												*/ 
+	/****************************************************************************/ 
+	inline 
+	const symbols<KEY, VALUE>& values () const 
+
+	{
+		 return this->_symbols;
+	}
 	/****************************************************************************/ 
 	/*			protected datas													*/ 
 	/****************************************************************************/ 
