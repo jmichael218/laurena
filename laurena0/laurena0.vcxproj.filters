@@ -37,6 +37,9 @@
     <Filter Include="Fichiers d%27en-tête\exceptions">
       <UniqueIdentifier>{7c7830b5-5160-4388-9fc5-03794e022fec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\toolboxes">
+      <UniqueIdentifier>{e940cee3-a891-41b2-abd9-176e2d8e4ecd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\laurena\types\charset.hpp">
@@ -74,9 +77,6 @@
     </ClInclude>
     <ClInclude Include="src\laurena\types\source_location.hpp">
       <Filter>Fichiers d%27en-tête\types</Filter>
-    </ClInclude>
-    <ClInclude Include="src\laurena\exceptions\exception.hpp">
-      <Filter>Fichiers d%27en-tête\exceptions</Filter>
     </ClInclude>
     <ClInclude Include="src\laurena\constants\const_parsing_error_codes.hpp">
       <Filter>Fichiers d%27en-tête\constants</Filter>
@@ -116,6 +116,12 @@
     </ClInclude>
     <ClInclude Include="src\laurena\grammar\rule_integer.hpp">
       <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\toolboxes\loader.hpp">
+      <Filter>Fichiers d%27en-tête\toolboxes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\types\tabs.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

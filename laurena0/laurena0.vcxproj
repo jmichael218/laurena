@@ -20,7 +20,6 @@
     <ClInclude Include="src\laurena\constants\const_charsets.hpp" />
     <ClInclude Include="src\laurena\constants\const_parsing_error_codes.hpp" />
     <ClInclude Include="src\laurena\constants\const_strings.hpp" />
-    <ClInclude Include="src\laurena\exceptions\exception.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_builder.hpp" />
     <ClInclude Include="src\laurena\grammar\rule.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_basic.hpp" />
@@ -31,12 +30,14 @@
     <ClInclude Include="src\laurena\grammar\rule_symbols.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_templated.hpp" />
     <ClInclude Include="src\laurena\literals\string_literal.hpp" />
+    <ClInclude Include="src\laurena\toolboxes\loader.hpp" />
     <ClInclude Include="src\laurena\traits\in_traits.hpp" />
     <ClInclude Include="src\laurena\traits\string_traits.hpp" />
     <ClInclude Include="src\laurena\types\charset.hpp" />
     <ClInclude Include="src\laurena\types\parsing_context.hpp" />
     <ClInclude Include="src\laurena\types\source_location.hpp" />
     <ClInclude Include="src\laurena\types\symbols.hpp" />
+    <ClInclude Include="src\laurena\types\tabs.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FB1D2C3E-B598-4050-99C9-447E65E7396F}</ProjectGuid>

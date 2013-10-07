@@ -7,10 +7,12 @@
 ///
 ///  A tokenizer class
 ///
+
+#include <laurena/toolboxes/loader.hpp>
+
 #include <laurena/parsing/tokenizer.hpp>
 #include <laurena/exceptions/failed_parsing_exception.hpp>
 #include <laurena/memory/memory_functions.hpp>
-#include <laurena/toolboxes/loader.hpp>
 #include <laurena/toolboxes/cstring.hpp>
 
 using namespace laurena;
@@ -26,7 +28,7 @@ tokenizer::~tokenizer()
 
 void tokenizer::load(const std::string& filename)
 {
-    _source = Loader::load(filename);
+    _source = loader<>::load(filename);
     this->_location.reset ();
     this->_location.filename (filename);
     this->_ptr = this->_source.c_str();

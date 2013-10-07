@@ -92,9 +92,6 @@
 // Source
 //#include <laurena/source/source_location.hpp>
 
-// grammar
-#include <laurena/grammar/symbols.hpp>
-
 //parsing
 #include <laurena/parsing/token.hpp>
 #include <laurena/parsing/file_location.hpp>

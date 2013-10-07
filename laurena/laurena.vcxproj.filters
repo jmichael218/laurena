@@ -255,9 +255,6 @@
     <ClInclude Include="src\laurena\toolboxes\cstring.hpp">
       <Filter>Fichiers d%27en-tête\toolboxes</Filter>
     </ClInclude>
-    <ClInclude Include="src\laurena\toolboxes\loader.hpp">
-      <Filter>Fichiers d%27en-tête\toolboxes</Filter>
-    </ClInclude>
     <ClInclude Include="src\laurena\exceptions\file_not_found_exception.hpp">
       <Filter>Fichiers d%27en-tête\exceptions</Filter>
     </ClInclude>
@@ -268,9 +265,6 @@
       <Filter>Fichiers d%27en-tête\formatting</Filter>
     </ClInclude>
     <ClInclude Include="src\laurena\formatting\format.hpp">
-      <Filter>Fichiers d%27en-tête\formatting</Filter>
-    </ClInclude>
-    <ClInclude Include="src\laurena\formatting\tab.hpp">
       <Filter>Fichiers d%27en-tête\formatting</Filter>
     </ClInclude>
     <ClInclude Include="src\laurena\functions\parameter.hpp">
@@ -416,9 +410,6 @@
     <ClCompile Include="src\laurena\parsing\tokenizer.cpp">
       <Filter>Fichiers sources\parsing</Filter>
     </ClCompile>
-    <ClCompile Include="src\laurena\toolboxes\loader.cpp">
-      <Filter>Fichiers sources\toolboxes</Filter>
-    </ClCompile>
     <ClCompile Include="src\laurena\exceptions\file_not_found_exception.cpp">
       <Filter>Fichiers sources\exceptions</Filter>
     </ClCompile>
@@ -426,9 +417,6 @@
       <Filter>Fichiers sources\toolboxes</Filter>
     </ClCompile>
     <ClCompile Include="src\laurena\formatting\format.cpp">
-      <Filter>Fichiers sources\formatting</Filter>
-    </ClCompile>
-    <ClCompile Include="src\laurena\formatting\tab.cpp">
       <Filter>Fichiers sources\formatting</Filter>
     </ClCompile>
     <ClCompile Include="src\laurena\functions\parameter.cpp">

@@ -22,6 +22,9 @@
     <Filter Include="Fichiers sources\grammar">
       <UniqueIdentifier>{d008b34e-9f6c-4141-b737-f17ac01204ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\types">
+      <UniqueIdentifier>{2a7254f6-cb63-4a2b-852c-f5e04ce4a5f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -50,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="src\test_rules.cpp">
       <Filter>Fichiers sources\grammar</Filter>
+    </ClCompile>
+    <ClCompile Include="src\test_tabs.cpp">
+      <Filter>Fichiers sources\types</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

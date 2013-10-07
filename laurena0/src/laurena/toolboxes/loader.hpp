@@ -21,10 +21,9 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
-#include <laurena/includes/includes.hpp>
-#include <laurena/includes/types.hpp>
 
-
+#include <string>
+#include <fstream>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -32,15 +31,31 @@
 namespace laurena {
 
 /********************************************************************************/ 
-/*              interface                                                       */ 
+/*              chartype dependant loader                                       */ 
 /********************************************************************************/ 
-class Loader {
-    
-    public:
+template<typename CHARTYPE=char, typename DESTINATION=std::string, typename FILENAME=std::string>
+class loader {
+public:
 
+	static DESTINATION  load(const FILENAME& filename)
+	{
+		DESTINATION s;
+		return loader<CHARTYPE, DESTINATION, FILENAME>::load(filename, s);
+	}
 
-    static std::string  load(const std::string& filename);
-    static std::string& load(const std::string& filename, std::string& destination); 
+	static DESTINATION& load(const FILENAME& filename, DESTINATION& destination)
+	{
+		std::basic_ifstream<CHARTYPE> t(filename);
+
+		t.seekg(0, std::ios::end);   
+		destination.reserve((unsigned long int)t.tellg());
+		t.seekg(0, std::ios::beg);
+
+		destination.assign((std::istreambuf_iterator<CHARTYPE>(t)),
+			std::istreambuf_iterator<CHARTYPE>());
+
+		return destination;
+	}
 
 };
 
@@ -50,4 +65,3 @@ class Loader {
 
 }
 #endif
-//end of file

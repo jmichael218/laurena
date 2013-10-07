@@ -10,14 +10,14 @@
 		X implemented for KEY = basic_string<chartype>
 
 4:
-    * rules integer<int>
+    X rules integer<int>
 
 5:
 
-	* dégager grammaire de L
+	X dégager grammaire de L
 
 6: 
-	* loader<chartype> dans L0
+	X loader<chartype> dans L0
 
 7: 
 	* tabs<chartype> dans LO
