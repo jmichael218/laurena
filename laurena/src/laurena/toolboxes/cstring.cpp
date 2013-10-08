@@ -12,6 +12,7 @@
 
 using namespace laurena;
 
+/*
 bool cstring::startWith(const char* str, const char* expected_prefix, bool caseSensitive, word32 size)
 {
     if (size == -1)
@@ -35,7 +36,9 @@ bool cstring::startWith(const char* str, const char* expected_prefix, bool caseS
         return true;
     }
 }
+*/
 
+/*
 std::string cstring::readWhile(const char* source, const charset<>& characters)
 {
     word32 res = 0;
@@ -49,6 +52,7 @@ std::string cstring::readWhile(const char* source, const charset<>& characters)
     }
     return std::string(source,res);
 }
+*/
 
 word32 cstring::readWhile(const char* source, std::string& destination, const charset<>& characters)
 {

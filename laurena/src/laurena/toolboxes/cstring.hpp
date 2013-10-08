@@ -41,10 +41,10 @@ class cstring {
 public:
     
     //! return true if str starts with 'expected_prefix' value like Hello starts with 'Hel'  or even 'H'
-    static bool startWith(const char* str, const char* expected_prefix, bool caseSensitive=true, word32 size=-1);
+    //static bool startWith(const char* str, const char* expected_prefix, bool caseSensitive=true, word32 size=-1);
 
     //! read start of a c string as long as characters are elements of a charset
-    static std::string  readWhile(const char* source, const charset<>& characters);
+    //static std::string  readWhile(const char* source, const charset<>& characters);
     static word32       readWhile(const char* source, std::string& destination, const charset<>& characters);
 
     //! read start of a c string until a character element of a charset is found

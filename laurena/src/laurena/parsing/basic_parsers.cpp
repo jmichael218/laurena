@@ -8,6 +8,8 @@
 /// parser classes are parsing units to parse a given format like integer, string, hexadecimal number , etc ...
 ///
 #include <laurena/algorithm/strings/prefix.hpp>
+#include <laurena/algorithm/strings/readwhile.hpp>
+#include <laurena/algorithm/strings/readuntil.hpp>
 
 #include <laurena/parsing/basic_parsers.hpp>
 #include <laurena/parsing/tokenizer.hpp>
@@ -133,7 +135,7 @@ const char* p = tokenizer._ptr;
         return false;
 
     p ++;
-    std::string v = cstring::readWhile(p,const_charsets<>::HEXADECIMAL);
+    std::string v = readwhile(p,const_charsets<>::HEXADECIMAL.condition());
 
     v.insert(0,tokenizer._ptr,2);
     value = v;
@@ -284,7 +286,7 @@ tabs_parser::~tabs_parser ()
 bool tabs_parser::read (tokenizer& tokenizer, any& value, bool consume) const
 {
 
-    std::string keyword = cstring::readWhile(tokenizer._ptr,const_charsets<>::TABS_NO_EOL);
+    std::string keyword = readwhile(tokenizer._ptr,const_charsets<>::TABS_NO_EOL.condition());
     if (!keyword.length())
         return false;
 
@@ -312,7 +314,7 @@ charset_parser::~charset_parser()
 bool charset_parser::read (tokenizer& tokenizer, any& value, bool consume) const
 {
     
-    std::string keyword = this->_until ? cstring::readUntil(tokenizer._ptr,this->_charset) : cstring::readWhile(tokenizer._ptr,this->_charset);
+    std::string keyword = this->_until ? readuntil(tokenizer._ptr,this->_charset.condition()) : readwhile(tokenizer._ptr,this->_charset.condition());
     if (!keyword.length())
         return false;
 
