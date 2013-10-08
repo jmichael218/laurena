@@ -9,6 +9,7 @@
 ///
 
 #include <laurena/formatting/format.hpp>
+#include <laurena/descriptors/field.hpp>
 
 using namespace laurena;
 
@@ -24,4 +25,8 @@ bool format::read (tokenizer& tokenizer, any& value, bool consume) const
     return this->_parser->read (tokenizer,value,consume);
 }
 
+bool format::acceptDescriptable ()
+{
+	return nullptr != dynamic_cast<descriptor*>(this->_descriptable) || nullptr != dynamic_cast<field*>(this->_descriptable);
+}
 //End of file

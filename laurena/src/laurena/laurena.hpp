@@ -74,9 +74,7 @@
 
 // toolboxes
 #include <laurena/toolboxes/bitset.hpp>
-#include <laurena/toolboxes/stdstring.hpp>
 #include <laurena/toolboxes/cstring.hpp>
-#include <laurena/toolboxes/loader.hpp>
 #include <laurena/toolboxes/filename.hpp>
 #include <laurena/toolboxes/stdstream.hpp>
 
@@ -113,7 +111,6 @@
 //formatters
 #include <laurena/formatting/writer.hpp>
 #include <laurena/formatting/format.hpp>
-#include <laurena/formatting/tab.hpp>
 
 
 #endif

@@ -36,7 +36,7 @@ bool cstring::startWith(const char* str, const char* expected_prefix, bool caseS
     }
 }
 
-std::string cstring::readWhile(const char* source, const charset& characters)
+std::string cstring::readWhile(const char* source, const charset<>& characters)
 {
     word32 res = 0;
     const char* p = source;
@@ -50,7 +50,7 @@ std::string cstring::readWhile(const char* source, const charset& characters)
     return std::string(source,res);
 }
 
-word32 cstring::readWhile(const char* source, std::string& destination, const charset& characters)
+word32 cstring::readWhile(const char* source, std::string& destination, const charset<>& characters)
 {
     word32 res = 0;
     const char* p = source;
@@ -65,7 +65,7 @@ word32 cstring::readWhile(const char* source, std::string& destination, const ch
     return res;
 }
 
-std::string cstring::readUntil(const char* source, const charset& characters)
+std::string cstring::readUntil(const char* source, const charset<>& characters)
 {
     word32 res = 0;
     while(true)
@@ -78,7 +78,7 @@ std::string cstring::readUntil(const char* source, const charset& characters)
     return std::string(source,res);
 }
 
-word32 cstring::readUntil(const char* source, std::string& destination, const charset& characters)
+word32 cstring::readUntil(const char* source, std::string& destination, const charset<>& characters)
 {
     word32 res = 0;
     while(true)
@@ -128,7 +128,7 @@ word32 cstring::readUntil(const char* source, std::string& destination, const ch
     return res;
 }
 
-const char* cstring::skipWhile(const char* source, const charset& characters)
+const char* cstring::skipWhile(const char* source, const charset<>& characters)
 {
     while (characters.test(*source)) 
         source++;        
@@ -142,7 +142,7 @@ word32 cstring::readInteger(const char* source, std::string& destination)
     if (isSigned)
         source ++;    
 
-    word32 readed = cstring::readWhile(source,destination,CHARSET_NUMBER);
+    word32 readed = cstring::readWhile(source,destination,const_charsets<>::NUMBERS);
 
     if (isSigned && readed) 
     {

@@ -217,13 +217,13 @@ class charset_parser : public parser
 {
 public:
 
-    charset_parser(const charset& characters, bool until=false);
+    charset_parser(const charset<>& characters, bool until=false);
     virtual ~charset_parser();
 
     virtual bool read (tokenizer& tokenizer, any& value, bool consume) const;
 
     protected:
-    const charset&            _charset;    
+    const charset<>&            _charset;    
     bool                      _until ;
 
 

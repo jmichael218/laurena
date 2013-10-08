@@ -21,6 +21,8 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
+#include <laurena/types/charset.hpp>
+
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 #include <laurena/types/string_array.hpp>
@@ -98,7 +100,7 @@ class bitset {
     /// \param separator : a separator character
     ///
     /// \return A computed word64 value
-    static word64 parse(const string_array& bitnames, const charset& charset, const std::string& value );
+    static word64 parse(const string_array& bitnames, const charset<>& charset, const std::string& value );
 
     /// \brief compute a bitset as a stringified list of flags
     ///
@@ -108,7 +110,7 @@ class bitset {
     /// \param separator : a separator character
     ///
     /// \return A computed bitset value
-    static boost::dynamic_bitset<>& parse(boost::dynamic_bitset<>& destination, const string_array& bitnames, const charset& charset, const std::string& names);
+    static boost::dynamic_bitset<>& parse(boost::dynamic_bitset<>& destination, const string_array& bitnames, const charset<>& charset, const std::string& names);
 
     /// \brief compute a bitset from a string made of 0 and 1
     static boost::dynamic_bitset<>& parse(boost::dynamic_bitset<>& destination, const std::string& value);

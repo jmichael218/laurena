@@ -126,12 +126,6 @@
     <ClInclude Include="src\laurena\exceptions\null_pointer_exception.hpp">
       <Filter>Fichiers d%27en-tête\exceptions</Filter>
     </ClInclude>
-    <ClInclude Include="src\laurena\types\charset.hpp">
-      <Filter>Fichiers d%27en-tête\types</Filter>
-    </ClInclude>
-    <ClInclude Include="src\laurena\constants\const_charsets.hpp">
-      <Filter>Fichiers d%27en-tête\constants</Filter>
-    </ClInclude>
     <ClInclude Include="src\laurena\toolboxes\bitset.hpp">
       <Filter>Fichiers d%27en-tête\toolboxes</Filter>
     </ClInclude>
@@ -197,9 +191,6 @@
     </ClInclude>
     <ClInclude Include="src\laurena\archives\oarchive.hpp">
       <Filter>Fichiers d%27en-tête\archives</Filter>
-    </ClInclude>
-    <ClInclude Include="src\laurena\toolboxes\stdstring.hpp">
-      <Filter>Fichiers d%27en-tête\toolboxes</Filter>
     </ClInclude>
     <ClInclude Include="src\laurena\descriptors\features\any_feature.hpp">
       <Filter>Fichiers d%27en-tête\descriptors\features</Filter>
@@ -311,12 +302,6 @@
     <ClCompile Include="src\laurena\exceptions\null_pointer_exception.cpp">
       <Filter>Fichiers sources\exceptions</Filter>
     </ClCompile>
-    <ClCompile Include="src\laurena\types\charset.cpp">
-      <Filter>Fichiers sources\types</Filter>
-    </ClCompile>
-    <ClCompile Include="src\laurena\constants\const_charsets.cpp">
-      <Filter>Fichiers sources\constants</Filter>
-    </ClCompile>
     <ClCompile Include="src\laurena\toolboxes\bitset.cpp">
       <Filter>Fichiers sources\toolboxes</Filter>
     </ClCompile>
@@ -364,9 +349,6 @@
     </ClCompile>
     <ClCompile Include="src\laurena\archives\oarchive.cpp">
       <Filter>Fichiers sources\archives</Filter>
-    </ClCompile>
-    <ClCompile Include="src\laurena\toolboxes\stdstring.cpp">
-      <Filter>Fichiers sources\toolboxes</Filter>
     </ClCompile>
     <ClCompile Include="src\laurena\types\variable.cpp">
       <Filter>Fichiers sources\types</Filter>

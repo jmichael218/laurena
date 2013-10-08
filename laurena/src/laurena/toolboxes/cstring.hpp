@@ -21,6 +21,9 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
+// includes from laurena0
+#include <laurena/types/charset.hpp>
+
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 #include <laurena/types/string_array.hpp>
@@ -41,19 +44,19 @@ public:
     static bool startWith(const char* str, const char* expected_prefix, bool caseSensitive=true, word32 size=-1);
 
     //! read start of a c string as long as characters are elements of a charset
-    static std::string  readWhile(const char* source, const charset& characters);
-    static word32       readWhile(const char* source, std::string& destination, const charset& characters);
+    static std::string  readWhile(const char* source, const charset<>& characters);
+    static word32       readWhile(const char* source, std::string& destination, const charset<>& characters);
 
     //! read start of a c string until a character element of a charset is found
-    static std::string readUntil(const char* source, const charset& characters);
-    static word32      readUntil(const char* source, std::string& destination, const charset& characters);
+    static std::string readUntil(const char* source, const charset<>& characters);
+    static word32      readUntil(const char* source, std::string& destination, const charset<>& characters);
 
     //! read start of a c string until a special characters is found
     static std::string readUntil(const char* source, const char character);
     static word32      readUntil(const char* source, std::string& destination, const char character);
 
     //! advance in source as long as characters are elements of a charset    
-    static const char* skipWhile(const char* source, const charset& characters);
+    static const char* skipWhile(const char* source, const charset<>& characters);
 
     //! read a possibly signed integer of anysize. Return amount of readed characters. Return 0 for a failed parsing
     static word32 readInteger(const char* source, std::string& destination);

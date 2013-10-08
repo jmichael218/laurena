@@ -7,6 +7,8 @@
 ///
 /// parsers and tokens for the mdl language
 ///
+#include <laurena/constants/const_charsets.hpp>
+
 #include <laurena/mdl/language_mdl.hpp>
 
 using namespace laurena;
@@ -17,7 +19,7 @@ using namespace mdl;
 parsers                 MDL::_parsers;
 bool                    MDL::_init               = false;
 boost::dynamic_bitset<> MDL::_mask_tab_tokens;
-charset                 MDL::_charset_keywordList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\r\n\t " ;
+charset<>               MDL::_charset_keywordList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\r\n\t " ;
 
 void MDL::init () 
 {
@@ -47,8 +49,8 @@ void MDL::init ()
     r [ MDL::TOKEN_PARENTHESIS_OPEN ]    = new single_character_parser('(');
     r [ MDL::TOKEN_PARENTHESIS_CLOSE ]   = new single_character_parser(')');
     r [ MDL::TOKEN_INJECTION ]           = new keyword_parser("<-");
-    r [ MDL::TOKEN_PRIMARY_KEY ]         = new charset_parser(CHARSET_IDNAME);
-    r [ MDL::TOKEN_KEYWORD  ]            = new charset_parser(CHARSET_VARNAME);
+    r [ MDL::TOKEN_PRIMARY_KEY ]         = new charset_parser(const_charsets<>::IDNAME);
+    r [ MDL::TOKEN_KEYWORD  ]            = new charset_parser(const_charsets<>::VARNAME);
     r [ MDL::TOKEN_KEYWORD_LIST ]        = new charset_parser(MDL::_charset_keywordList);
     r [ MDL::TOKEN_INTEGER ]             = new signed_integer_parser();
     r [ MDL::TOKEN_HEXADECIMAL ]         = new hexadecimal_parser();

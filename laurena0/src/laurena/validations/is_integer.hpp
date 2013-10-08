@@ -1,15 +1,15 @@
 ///
-/// \file     stdstring.hpp
-/// \brief    A toolbox of functions for std::string, mainly parsing functions
+/// \file     is_integer.hpp
+/// \brief    This algorithm return true if a string is built as an integer (no size limit)
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-/// A toolbox of functions for std::string, mainly parsing functions
+///  This algorithm return true if a string is built as an integer (no size limit)
 ///
 
-#ifndef LAURENA_TOOLBOX_STDSTRING_H
-#define LAURENA_TOOLBOX_STDSTRING_H
+#ifndef LAURENA_IS_INTEGER_H
+#define LAURENA_IS_INTEGER_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -21,33 +21,41 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
-#include <laurena/includes/includes.hpp>
-#include <laurena/includes/types.hpp>
-#include <laurena/types/string_array.hpp>
-#include <laurena/types/charset.hpp>
+
+#include <laurena/constants/const_charsets.hpp>
+#include <laurena/constants/const_chars.hpp>
+#include <laurena/algorithm/strings/readwhile.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
 namespace laurena {
 
-/********************************************************************************/ 
-/*              interface                                                       */ 
-/********************************************************************************/ 
-class stdstring {
-public:
+/*********************************************************************************/
+/*          algorithm readinteger                                                */ 
+/*********************************************************************************/ 
 
-    //! Return true if parameter matche the integer regex, without size limitation
-    static bool isInteger(const std::string& value);
+template<typename CHARTYPE, typename ITERATOR>
+bool is_integer(ITERATOR source, ITERATOR last)
+{
 
-    static bool startWith(const std::string& str, const std::string& expected_prefix, bool caseSensitive=false);
+	if (*source == const_chars<CHARTYPE>::MINUS)	
+		source++;
 
+	return const_charsets<CHARTYPE>::NUMBERS.validate(source, last);
+}
 
-};
+template<typename T>
+inline
+bool is_integer(T& t)
+{
+	return is_integer<typename in_traits<T>::chartype, typename in_traits<T>::iterator>(in_traits<T>::first(t), in_traits<T>::last(t));
+}
+
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 
 
 }
 #endif
-//end of file    
+//End of file

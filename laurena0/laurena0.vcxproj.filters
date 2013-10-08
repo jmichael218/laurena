@@ -40,6 +40,9 @@
     <Filter Include="Fichiers d%27en-tête\toolboxes">
       <UniqueIdentifier>{e940cee3-a891-41b2-abd9-176e2d8e4ecd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\validations">
+      <UniqueIdentifier>{b4c702ec-5e29-494d-9fbb-32b9d1242a88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\laurena\types\charset.hpp">
@@ -122,6 +125,9 @@
     </ClInclude>
     <ClInclude Include="src\laurena\types\tabs.hpp">
       <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\validations\is_integer.hpp">
+      <Filter>Fichiers d%27en-tête\validations</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

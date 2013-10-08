@@ -51,7 +51,12 @@ public:
     /*          getters                                                         */ 
     /****************************************************************************/ 
     bool write (std::ostream& output, any& value) const;
-    bool read (tokenizer& tokenizer, any& value, bool consume) const  ;       
+    bool read (tokenizer& tokenizer, any& value, bool consume) const  ;     
+
+	/****************************************************************************/ 
+	/*			virtual functions from annotation								*/ 
+	/****************************************************************************/ 
+	virtual bool acceptDescriptable ();
 
     /****************************************************************************/ 
     /*      protected datas                                                     */ 

@@ -20,10 +20,11 @@
 	X loader<chartype> dans L0
 
 7: 
-	* tabs<chartype> dans LO
-	* utiliser std::fill ou std::space pour insérer les espaces
+	X tabs<chartype> dans LO
+	NO utiliser std::fill ou std::space pour insérer les espaces
 
 8:
+    * deplacement des const charset en l0
 	* reduction des toolsets
 
 9:

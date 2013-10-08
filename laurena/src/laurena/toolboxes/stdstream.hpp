@@ -36,12 +36,12 @@ class Stream {
     
     public:
 
-    static word32 skipWhile(std::istream& stream, const charset& characters);
-	static word32 skipUntil(std::istream& stream, const charset& characters);
+    static word32 skipWhile(std::istream& stream, const charset<>& characters);
+	static word32 skipUntil(std::istream& stream, const charset<>& characters);
 
-    static word32 readWhile(std::istream& stream, const charset& characters, std::string& destination);
+    static word32 readWhile(std::istream& stream, const charset<>& characters, std::string& destination);
   
-    static word32 readUntil(std::istream& stream, const charset& characters, std::string& destination); 
+    static word32 readUntil(std::istream& stream, const charset<>& characters, std::string& destination); 
     static word32 readUntil(std::istream& stream, const word8 symbol, std::string& destination); 
 
 

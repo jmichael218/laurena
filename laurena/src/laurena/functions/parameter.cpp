@@ -27,8 +27,8 @@ parameter::parameter ()
 
 bool parameter::parse(any& value, std::istream& input) const
 {
-    Stream::skipWhile(input,CHARSET_TABS2);
-    if ( input.eof() || CHARSET_RN.test(input.peek()))
+    Stream::skipWhile(input,const_charsets<>::TABS_NO_EOL);
+    if ( input.eof() || const_charsets<>::RN.test(input.peek()))
     {
         if ( this->_flags.test(parameter::FLAG_MANDATORY))                
             return false;
@@ -36,9 +36,9 @@ bool parameter::parse(any& value, std::istream& input) const
 
     std::string svalue;
     if (this->_flags.test(parameter::FLAG_LINE))
-        Stream::readUntil(input,CHARSET_RN,svalue);
+        Stream::readUntil(input,const_charsets<>::RN,svalue);
     else
-        Stream::readUntil(input,CHARSET_TABS,svalue);
+        Stream::readUntil(input,const_charsets<>::TABS,svalue);
     
     this->_descriptor->stoa(svalue, value);
     return true;

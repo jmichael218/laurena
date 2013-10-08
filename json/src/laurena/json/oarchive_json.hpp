@@ -19,6 +19,8 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
+#include <laurena/types/tabs.hpp>
+
 #include <laurena/laurena.hpp>
 
 /********************************************************************************/ 
@@ -64,7 +66,7 @@ class oarchive_json : public oarchive{
     /*      protected function                                                  */ 
     /****************************************************************************/ 
     protected:
-    tab						_tab;
+    tabs<>					_tab;
     bool					_compact ;
     word16					_nb_fields;         // nb of serialized fields in a level
 	word32					_depth;

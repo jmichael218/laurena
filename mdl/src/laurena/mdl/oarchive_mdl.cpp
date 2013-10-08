@@ -7,6 +7,8 @@
 ///
 /// Base class for an output archive i.e a class to serialize a class into a file format.
 ///
+#include <laurena/validations/is_integer.hpp>
+
 #include <laurena/mdl/oarchive_mdl.hpp>
 #include <laurena/mdl/language_mdl.hpp>
 
@@ -106,7 +108,7 @@ const any_feature* acf = NULL;
             {
                 if ( !att.isEnum() && !att.isBitSet())
                    if (acd.has(descriptor::Flags::NUMERIC_VALUE) == false)
-                        isString |= !stdstring::isInteger(s);
+                        isString |= !is_integer(s);
             }
 
             this->_data << this->_tab << att.name() << " = " ;
@@ -197,7 +199,7 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(cd.feature
             if (ecd->type() == typeid(std::string))
                 isString = true;
             else
-                isString |= !stdstring::isInteger(elementstr);
+                isString |= !is_integer(elementstr);
             
 
             if (isString)

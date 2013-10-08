@@ -7,9 +7,10 @@
 ///
 /// parser classes are parsing units to parse a given format like integer, string, hexadecimal number , etc ...
 ///
+#include <laurena/algorithm/strings/prefix.hpp>
+
 #include <laurena/parsing/basic_parsers.hpp>
 #include <laurena/parsing/tokenizer.hpp>
-#include <laurena/toolboxes/stdstring.hpp>
 #include <laurena/toolboxes/cstring.hpp>
 #include <laurena/constants/const_charsets.hpp>
 #include <laurena/memory/memory_functions.hpp>
@@ -62,8 +63,7 @@ keyword_parser::~keyword_parser()
 
 bool keyword_parser::read (tokenizer& tokenizer, any& value, bool consume) const
 {
-
-    bool res = cstring::startWith(tokenizer._ptr,this->_keyword.c_str(),false,this->_keyword.length());
+	bool res = prefix(tokenizer._ptr,this->_keyword.c_str());
 
     if(res)
     {
@@ -133,7 +133,7 @@ const char* p = tokenizer._ptr;
         return false;
 
     p ++;
-    std::string v = cstring::readWhile(p,CHARSET_HEXANUMBER);
+    std::string v = cstring::readWhile(p,const_charsets<>::HEXADECIMAL);
 
     v.insert(0,tokenizer._ptr,2);
     value = v;
@@ -208,7 +208,7 @@ std::string b ;
 
     while (true)
     {
-        p = cstring::skipWhile(p,CHARSET_TABS);
+        p = cstring::skipWhile(p,const_charsets<>::TABS);
         if ( *p != '"' )
             break;
 
@@ -284,7 +284,7 @@ tabs_parser::~tabs_parser ()
 bool tabs_parser::read (tokenizer& tokenizer, any& value, bool consume) const
 {
 
-    std::string keyword = cstring::readWhile(tokenizer._ptr,CHARSET_TABS2);
+    std::string keyword = cstring::readWhile(tokenizer._ptr,const_charsets<>::TABS_NO_EOL);
     if (!keyword.length())
         return false;
 
@@ -303,7 +303,7 @@ bool tabs_parser::read (tokenizer& tokenizer, any& value, bool consume) const
 /*          accept any length belonging to a charset                            */ 
 /*                                                                              */ 
 /********************************************************************************/
-charset_parser::charset_parser(const charset& cset, bool until) : parser (), _charset(cset), _until(until)
+charset_parser::charset_parser(const charset<>& cset, bool until) : parser (), _charset(cset), _until(until)
 { }
 
 charset_parser::~charset_parser()

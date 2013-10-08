@@ -17,7 +17,7 @@ const std::string&  JSON::ANNOTATION_NAME = "json" ;
 parsers                 JSON::_parsers;
 bool                    JSON::_init               = false;
 boost::dynamic_bitset<> JSON::_mask_tab_tokens;
-charset                 JSON::_charset_keywordList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\r\n\t " ;
+charset<>                 JSON::_charset_keywordList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\r\n\t " ;
 
 void JSON::init () 
 {

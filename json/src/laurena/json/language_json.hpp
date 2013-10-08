@@ -61,14 +61,14 @@ public:
     static void init ();
 
     static inline const parsers&                            units ()                    { return JSON::_parsers ; }
-    static inline const charset&                            charset_keywordlist ()      { return JSON::_charset_keywordList ; }
+    static inline const charset<>&                            charset_keywordlist ()      { return JSON::_charset_keywordList ; }
     static inline const boost::dynamic_bitset<>             mask_tab_tokens ()          { return JSON::_mask_tab_tokens; }
 
     
 
     protected:
     static bool                     _init;
-    static charset                  _charset_keywordList;
+    static charset<>                  _charset_keywordList;
     static boost::dynamic_bitset<>  _mask_tab_tokens;
     static parsers                  _parsers;
 

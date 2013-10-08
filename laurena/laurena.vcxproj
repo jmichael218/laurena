@@ -13,7 +13,6 @@
   <ItemGroup>
     <ClInclude Include="src\laurena\archives\iarchive.hpp" />
     <ClInclude Include="src\laurena\archives\oarchive.hpp" />
-    <ClInclude Include="src\laurena\constants\const_charsets.hpp" />
     <ClInclude Include="src\laurena\constants\const_strings.hpp" />
     <ClInclude Include="src\laurena\debug\debug.hpp" />
     <ClInclude Include="src\laurena\debug\debug_stream.hpp" />
@@ -65,13 +64,11 @@
     <ClInclude Include="src\laurena\toolboxes\cstring.hpp" />
     <ClInclude Include="src\laurena\toolboxes\filename.hpp" />
     <ClInclude Include="src\laurena\toolboxes\stdstream.hpp" />
-    <ClInclude Include="src\laurena\toolboxes\stdstring.hpp" />
     <ClInclude Include="src\laurena\traits\basetype.hpp" />
     <ClInclude Include="src\laurena\traits\chartype.hpp" />
     <ClInclude Include="src\laurena\traits\laurena_traits.hpp" />
     <ClInclude Include="src\laurena\traits\voidptr.hpp" />
     <ClInclude Include="src\laurena\types\any.hpp" />
-    <ClInclude Include="src\laurena\types\charset.hpp" />
     <ClInclude Include="src\laurena\types\context.hpp" />
     <ClInclude Include="src\laurena\types\literator.hpp" />
     <ClInclude Include="src\laurena\types\string_array.hpp" />
@@ -80,7 +77,6 @@
   <ItemGroup>
     <ClCompile Include="src\laurena\archives\iarchive.cpp" />
     <ClCompile Include="src\laurena\archives\oarchive.cpp" />
-    <ClCompile Include="src\laurena\constants\const_charsets.cpp" />
     <ClCompile Include="src\laurena\constants\const_strings.cpp" />
     <ClCompile Include="src\laurena\debug\debug.cpp" />
     <ClCompile Include="src\laurena\debug\debug_stream.cpp" />
@@ -119,9 +115,7 @@
     <ClCompile Include="src\laurena\toolboxes\cstring.cpp" />
     <ClCompile Include="src\laurena\toolboxes\filename.cpp" />
     <ClCompile Include="src\laurena\toolboxes\stdstream.cpp" />
-    <ClCompile Include="src\laurena\toolboxes\stdstring.cpp" />
     <ClCompile Include="src\laurena\types\any.cpp" />
-    <ClCompile Include="src\laurena\types\charset.cpp" />
     <ClCompile Include="src\laurena\types\literator.cpp" />
     <ClCompile Include="src\laurena\types\string_array.cpp" />
     <ClCompile Include="src\laurena\types\variable.cpp" />

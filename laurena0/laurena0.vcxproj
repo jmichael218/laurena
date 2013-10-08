@@ -38,6 +38,7 @@
     <ClInclude Include="src\laurena\types\source_location.hpp" />
     <ClInclude Include="src\laurena\types\symbols.hpp" />
     <ClInclude Include="src\laurena\types\tabs.hpp" />
+    <ClInclude Include="src\laurena\validations\is_integer.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FB1D2C3E-B598-4050-99C9-447E65E7396F}</ProjectGuid>

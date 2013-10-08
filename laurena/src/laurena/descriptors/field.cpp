@@ -161,7 +161,7 @@ std::string& field::toString(const any& object, std::string& destination) const
             bitset::serialize(wbits,*this->_values,destination,CONST_SPACE);            
         } 
         else
-        if (CHARSET_BINARY.validate(destination.data()))            
+        if (const_charsets<>::BINARY.validate(destination))            
         {
             std::string bits = destination;
             bitset::serialize(bits,*this->_values,destination,CONST_SPACE);
@@ -195,7 +195,7 @@ void* ptrAttribute = this->ptr(ptrObject);
     {
         if (this->_descriptor->has(descriptor::Flags::NUMERIC_VALUE))
         {
-            word64 b = bitset::parse(*this->_values,CHARSET_VARNAME,svalue);
+            word64 b = bitset::parse(*this->_values,const_charsets<>::VARNAME,svalue);
             value = b;
             this->_descriptor->set(ptrAttribute,value);
         } 
@@ -204,7 +204,7 @@ void* ptrAttribute = this->ptr(ptrObject);
             boost::dynamic_bitset<>* p = (boost::dynamic_bitset<>*) ptrAttribute;
 			if (p->size() != this->_values->size())
 				p->resize(this->_values->size());
-            bitset::parse(*p,*this->_values,CHARSET_VARNAME,svalue);
+            bitset::parse(*p,*this->_values,const_charsets<>::VARNAME,svalue);
         }
         else
             assert(false);

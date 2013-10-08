@@ -26,7 +26,9 @@ descriptable& descriptable::annotate(annotation* ptrvalue)
 	ptrvalue->_descriptable = this;
 	if (!ptrvalue->acceptDescriptable())
 	{
+		ptrvalue->acceptDescriptable();
 		throw LAURENA_EXCEPTION ("Can't set this annotation on this class of descriptable.");
+
 	}
 	ptrvalue->annotated();
 

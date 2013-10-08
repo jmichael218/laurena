@@ -21,6 +21,12 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
+
+/************************** std lib includes ************************************/
+// for std::function
+#include <functional>		
+
+/************************** laurena0 lib includes *******************************/
 #include <laurena/algorithm/strings/alphabet.hpp>
 
 /********************************************************************************/ 
@@ -116,19 +122,19 @@ public:
 	}
 
 	inline
-	bool validate (const CHARTYPE* pstr, size_t size)
+	bool validate (const CHARTYPE* pstr, size_t size) const
 	{
 		return this->validate(pstr, pstr+size);
 	}
 
 	inline
-	bool validate (const CHARTYPE* pstr)
+	bool validate (const CHARTYPE* pstr) const
 	{
 		return this->validate(pstr, pstr + std::char_traits<CHARTYPE>::length(pstr) );
 	}
 
 	inline
-	bool validate (const string& str)
+	bool validate (const string& str) const
 	{
 		return this->validate(str.data(), str.data() + str.length() );
 	}

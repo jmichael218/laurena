@@ -22,7 +22,7 @@ using namespace laurena;
 //<! Extract a filename from a full path filename
 void Filename::extractFilename(const std::string& fullpath_filename, std::string& filename)
 {
-    int32 pos = fullpath_filename.find_last_of(CHARSET_FULLPATH_FILENAME_SEPARATOR.characters());
+    int32 pos = fullpath_filename.find_last_of(const_charsets<>::FULLPATH_FILENAME_SEPARATOR.characters());
 
     if ( pos == -1 ) 
         filename = fullpath_filename ;    
@@ -38,7 +38,7 @@ void Filename::extractFilename(const std::string& fullpath_filename, std::string
 //<! The directory doesn't have a final "/"
 void Filename::extractDirectory(const std::string& fullpath_filename, std::string& directory)
 {
-    int32 pos = fullpath_filename.find_last_of(CHARSET_FULLPATH_FILENAME_SEPARATOR.characters()) ;
+    int32 pos = fullpath_filename.find_last_of(const_charsets<>::FULLPATH_FILENAME_SEPARATOR.characters()) ;
     if ( pos == -1 ) 
         directory = "" ;
     else 
