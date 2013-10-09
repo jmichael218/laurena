@@ -168,6 +168,7 @@ public:
     virtual bool read (tokenizer& tokenizer, any& value, bool consume) const;
 
     protected:
+	std::function<bool (const char& )>		_quote_condition;
 
 };
 

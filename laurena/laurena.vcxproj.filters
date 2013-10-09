@@ -243,9 +243,6 @@
     <ClInclude Include="src\laurena\parsing\file_location.hpp">
       <Filter>Fichiers d%27en-tête\parsing</Filter>
     </ClInclude>
-    <ClInclude Include="src\laurena\toolboxes\cstring.hpp">
-      <Filter>Fichiers d%27en-tête\toolboxes</Filter>
-    </ClInclude>
     <ClInclude Include="src\laurena\exceptions\file_not_found_exception.hpp">
       <Filter>Fichiers d%27en-tête\exceptions</Filter>
     </ClInclude>
@@ -385,9 +382,6 @@
     </ClCompile>
     <ClCompile Include="src\laurena\parsing\file_location.cpp">
       <Filter>Fichiers sources\parsing</Filter>
-    </ClCompile>
-    <ClCompile Include="src\laurena\toolboxes\cstring.cpp">
-      <Filter>Fichiers sources\toolboxes</Filter>
     </ClCompile>
     <ClCompile Include="src\laurena\parsing\tokenizer.cpp">
       <Filter>Fichiers sources\parsing</Filter>

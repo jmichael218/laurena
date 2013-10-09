@@ -10,10 +10,11 @@
 #include <laurena/algorithm/strings/prefix.hpp>
 #include <laurena/algorithm/strings/readwhile.hpp>
 #include <laurena/algorithm/strings/readuntil.hpp>
+#include <laurena/algorithm/strings/readinteger.hpp>
+#include <laurena/algorithm/strings/skipwhile.hpp>
 
 #include <laurena/parsing/basic_parsers.hpp>
 #include <laurena/parsing/tokenizer.hpp>
-#include <laurena/toolboxes/cstring.hpp>
 #include <laurena/constants/const_charsets.hpp>
 #include <laurena/memory/memory_functions.hpp>
 
@@ -94,18 +95,18 @@ signed_integer_parser::~signed_integer_parser()
 
 bool signed_integer_parser::read (tokenizer& tokenizer, any& value, bool consume) const
 { 
-    std::string v ;
-    word32 readed = cstring::readInteger(tokenizer._ptr,v);
+	std::string svalue = std::move(readinteger(tokenizer._ptr));
+	word32 v = svalue.length();
 
-    if (!readed)
+    if (!v)
         return false;
 
-    value = v;
+    value = svalue;
 
     if (consume)
     {
-        tokenizer._location.process (v);
-        tokenizer._ptr += readed;
+        tokenizer._location.process (svalue);
+        tokenizer._ptr += v;
     }
 
     return true;       
@@ -195,7 +196,11 @@ bool string_parser::read (tokenizer& tokenizer, any& value, bool consume) const
 /********************************************************************************/ 
 
 multi_string_parser::multi_string_parser () : parser ()
-{ }
+{
+	_quote_condition = [] (const char& c) {return c == '"';};
+
+
+}
 
 multi_string_parser::~multi_string_parser()
 {}
@@ -210,13 +215,13 @@ std::string b ;
 
     while (true)
     {
-        p = cstring::skipWhile(p,const_charsets<>::TABS);
+        p = skipwhile(p,const_charsets<>::TABS.condition());
         if ( *p != '"' )
             break;
 
         p++;
 
-        b = cstring::readUntil(p,'"');
+        b = std::move(readuntil(p,_quote_condition));
         p += b.length ();
 
         if ( *p != '"' )

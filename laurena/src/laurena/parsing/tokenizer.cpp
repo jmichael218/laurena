@@ -9,11 +9,11 @@
 ///
 
 #include <laurena/toolboxes/loader.hpp>
+#include <laurena/algorithm/strings/readinteger.hpp>
 
 #include <laurena/parsing/tokenizer.hpp>
 #include <laurena/exceptions/failed_parsing_exception.hpp>
 #include <laurena/memory/memory_functions.hpp>
-#include <laurena/toolboxes/cstring.hpp>
 
 using namespace laurena;
 
@@ -166,8 +166,8 @@ tokenizer& tokenizer::operator >> (const char c)
 
 tokenizer& tokenizer::operator >> (int32& i)
 {
-    std::string svalue;
-    word32 v = cstring::readInteger(this->_ptr,svalue);
+    std::string svalue = std::move(readinteger(this->_ptr));
+    word32 v = svalue.length();
     if (v)
 	{
         i = boost::lexical_cast<int32,std::string>(svalue);
@@ -181,8 +181,8 @@ tokenizer& tokenizer::operator >> (int32& i)
 
 tokenizer& tokenizer::operator >> (word32& w)
 {
-    std::string svalue;
-    word32 v = cstring::readInteger(this->_ptr,svalue);
+	std::string svalue = std::move(readinteger(this->_ptr));
+	word32 v = svalue.length();
     if (v)
 	{
         w = boost::lexical_cast<word32,std::string>(svalue);     
@@ -196,8 +196,8 @@ tokenizer& tokenizer::operator >> (word32& w)
 
 tokenizer& tokenizer::operator>>  (int16& i)
 {
-    std::string svalue;
-    word32 v = cstring::readInteger(this->_ptr,svalue);
+	std::string svalue = std::move(readinteger(this->_ptr));
+	word32 v = svalue.length();
     if (v)
 	{
         i = boost::lexical_cast<int16,std::string>(svalue);       
@@ -211,8 +211,8 @@ tokenizer& tokenizer::operator>>  (int16& i)
 
 tokenizer& tokenizer::operator>>  (word16& w)
 {
-    std::string svalue;
-    word32 v = cstring::readInteger(this->_ptr,svalue);
+	std::string svalue = std::move(readinteger(this->_ptr));
+	word32 v = svalue.length();
     if (v)
 	{
         w = boost::lexical_cast<word16,std::string>(svalue);       

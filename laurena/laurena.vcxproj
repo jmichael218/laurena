@@ -61,7 +61,6 @@
     <ClInclude Include="src\laurena\parsing\tokenizer.hpp" />
     <ClInclude Include="src\laurena\source\source_location.hpp" />
     <ClInclude Include="src\laurena\toolboxes\bitset.hpp" />
-    <ClInclude Include="src\laurena\toolboxes\cstring.hpp" />
     <ClInclude Include="src\laurena\toolboxes\filename.hpp" />
     <ClInclude Include="src\laurena\toolboxes\stdstream.hpp" />
     <ClInclude Include="src\laurena\traits\basetype.hpp" />
@@ -112,7 +111,6 @@
     <ClCompile Include="src\laurena\parsing\token.cpp" />
     <ClCompile Include="src\laurena\parsing\tokenizer.cpp" />
     <ClCompile Include="src\laurena\toolboxes\bitset.cpp" />
-    <ClCompile Include="src\laurena\toolboxes\cstring.cpp" />
     <ClCompile Include="src\laurena\toolboxes\filename.cpp" />
     <ClCompile Include="src\laurena\toolboxes\stdstream.cpp" />
     <ClCompile Include="src\laurena\types\any.cpp" />

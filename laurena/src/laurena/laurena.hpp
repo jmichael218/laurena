@@ -74,7 +74,6 @@
 
 // toolboxes
 #include <laurena/toolboxes/bitset.hpp>
-#include <laurena/toolboxes/cstring.hpp>
 #include <laurena/toolboxes/filename.hpp>
 #include <laurena/toolboxes/stdstream.hpp>
 

@@ -129,5 +129,8 @@
     <ClInclude Include="src\laurena\validations\is_integer.hpp">
       <Filter>Fichiers d%27en-tête\validations</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\algorithm\strings\skipwhile.hpp">
+      <Filter>Fichiers d%27en-tête\algorithm\strings</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
