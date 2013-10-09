@@ -57,7 +57,6 @@ typename in_traits<T>::string readwhile(T& t, const std::function<bool (const CH
 	return readwhile<typename in_traits<T>::iterator, CHARTYPE, typename in_traits<T>::string>(in_traits<T>::first(t), in_traits<T>::last(t), condition);
 }
 
-
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

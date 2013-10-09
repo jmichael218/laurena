@@ -24,15 +24,23 @@ void cstring_test ()
     std::string s4;
     testunit::startTest("basic test : cstring::readWhile ('0123EREZC' , 'CHARSET_NUMBER')");
     word32 w4 = cstring::readWhile("0123EREZC",s4,const_charsets<>::NUMBERS);
-    std::string rs4 = readwhile("0123EREZC",const_charsets<>::NUMBERS.condition());
+	const char* cc4 = "0123EREZC";
+    std::string rs4 = readwhile(cc4,const_charsets<>::NUMBERS.condition());
     testunit::endTest(w4 == 4 && s4 == "0123" && rs4 == "0123" );
     
     // failed test
     std::string s5;
     testunit::startTest("basic failed test : cstring::readWhile ('Z0123EREZC' , 'CHARSET_NUMBER')");
     word32 w5 = cstring::readWhile("Z0123EREZC",s5,const_charsets<>::NUMBERS);
+	const char* cc5 = "Z0123EREZC";
     std::string rs5 = readwhile("Z0123EREZC",const_charsets<>::NUMBERS.condition());
-    testunit::endTest(w5 == 0 && s5 == "" && rs5 == "" );    
+    testunit::endTest(w5 == 0 && s5 == "" && rs5 == "" );  
+
+	typedef in_traits<const char [5]> ii;
+
+	ii::chartype c = 'r' ;
+
+	return;
     
 }
 

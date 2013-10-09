@@ -54,6 +54,33 @@ struct in_traits
 	{ return it }
 };
 
+template<typename T>
+struct in_traits<const T> : in_traits<T> {};
+
+template<typename T>
+struct in_traits<const T&> : in_traits<T> {};
+
+template<class CHARTYPE, size_t N>
+struct in_traits<const CHARTYPE[N]>
+{
+	typedef const CHARTYPE*							type;
+	typedef CHARTYPE								chartype;
+	typedef const CHARTYPE*							iterator;
+	typedef std::basic_string<CHARTYPE>				string;
+
+	inline
+	static iterator first(type str)
+	{ return str; }
+
+	inline
+	static iterator last(type str)
+	{ return str + N; }
+
+	inline
+	static iterator readed(iterator it, unsigned long int length) 
+	{ return it + length; }
+};
+
 template<typename CHARTYPE>
 struct in_traits<std::basic_string<CHARTYPE>>
 {
@@ -138,11 +165,7 @@ struct in_traits<CHARTYPE[]>
 	{ return it + length; }
 };
 
-template<typename T>
-struct in_traits<const T> : in_traits<T> {};
 
-template<typename T>
-struct in_traits<const T&> : in_traits<T> {};
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
