@@ -39,9 +39,6 @@
 
 // traits
 #include <laurena/traits/basetype.hpp>
-#include <laurena/traits/voidptr.hpp>
-
-// templates
 
 // generic descriptors
 #include <laurena/descriptors/descriptor.hpp>
@@ -75,7 +72,6 @@
 // toolboxes
 #include <laurena/toolboxes/bitset.hpp>
 #include <laurena/toolboxes/filename.hpp>
-#include <laurena/toolboxes/stdstream.hpp>
 
 // laurena traits
 #include <laurena/traits/laurena_traits.hpp>
@@ -85,9 +81,6 @@
 #include <laurena/descriptors/variable_descriptor.hpp>
 #include <laurena/descriptors/string_array_descriptor.hpp>
 #include <laurena/descriptors/bitset_descriptor.hpp>
-
-// Source
-//#include <laurena/source/source_location.hpp>
 
 //parsing
 #include <laurena/parsing/token.hpp>

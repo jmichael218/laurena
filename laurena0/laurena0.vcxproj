@@ -17,6 +17,7 @@
     <ClInclude Include="src\laurena\algorithm\strings\readuntil.hpp" />
     <ClInclude Include="src\laurena\algorithm\strings\readwhile.hpp" />
     <ClInclude Include="src\laurena\algorithm\strings\skipwhile.hpp" />
+    <ClInclude Include="src\laurena\casting\void_cast.hpp" />
     <ClInclude Include="src\laurena\constants\const_chars.hpp" />
     <ClInclude Include="src\laurena\constants\const_charsets.hpp" />
     <ClInclude Include="src\laurena\constants\const_parsing_error_codes.hpp" />

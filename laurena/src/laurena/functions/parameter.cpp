@@ -7,8 +7,11 @@
 ///
 /// A type to store a named variable of Any type
 ///
+#include <laurena/algorithm/strings/readuntil.hpp>
+#include <laurena/algorithm/strings/skipwhile.hpp>
+
+
 #include <laurena/functions/parameter.hpp>
-#include <laurena/toolboxes/stdstream.hpp>
 #include <laurena/constants/const_charsets.hpp>
 #include <laurena/exceptions/failed_parsing_exception.hpp>
 
@@ -27,7 +30,7 @@ parameter::parameter ()
 
 bool parameter::parse(any& value, std::istream& input) const
 {
-    Stream::skipWhile(input,const_charsets<>::TABS_NO_EOL);
+    skipwhile(input,const_charsets<>::TABS_NO_EOL.condition());
     if ( input.eof() || const_charsets<>::RN.test(input.peek()))
     {
         if ( this->_flags.test(parameter::FLAG_MANDATORY))                
@@ -36,9 +39,9 @@ bool parameter::parse(any& value, std::istream& input) const
 
     std::string svalue;
     if (this->_flags.test(parameter::FLAG_LINE))
-        Stream::readUntil(input,const_charsets<>::RN,svalue);
+        svalue = std::move(readuntil(input,const_charsets<>::RN.condition()));
     else
-        Stream::readUntil(input,const_charsets<>::TABS,svalue);
+        svalue = std::move(readuntil(input,const_charsets<>::TABS.condition()));
     
     this->_descriptor->stoa(svalue, value);
     return true;

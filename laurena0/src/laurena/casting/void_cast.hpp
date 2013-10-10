@@ -1,15 +1,15 @@
 ///
-/// \file     voidptr.h
-/// \brief    cast a pointer to (void*) 
+/// \file     voi_cast.h
+/// \brief    cast a pointer or a reference to a (void*) ptr
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-///  Cast a pointer to (void*) or throw an exception
+///  cast a pointer or a reference to a (void*) ptr
 ///
 
-#ifndef LAURENA_VOID_PTR_H
-#define LAURENA_VOID_PTR_H
+#ifndef LAURENA_VOID_CAST_H
+#define LAURENA_VOID_CAST_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -19,42 +19,34 @@
 #endif
 
 /********************************************************************************/ 
-/*              dependencies                                                    */ 
-/********************************************************************************/ 
-#include <laurena/includes/includes.hpp>
-#include <laurena/includes/types.hpp>
-
-/********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
 namespace laurena {
 
-/********************************************************************************/ 
-/*              forward declaration                                             */ 
-/********************************************************************************/ 
 
 /*********************************************************************************/
 /*         voidptr caster                                                        */ 
 /*********************************************************************************/ 
 
 template<typename VALUETYPE>
-struct voidptr
+struct void_cast
 {
-	static void* cast(const VALUETYPE& value) 
-    {
-        return (void*) &value;
-    }
+	inline
+	static void* cast (const VALUETYPE& value) 
+	{
+		return (void*) &value;
+	}
 };
 
 template<typename VALUETYPE>
-struct voidptr<VALUETYPE*>
+struct void_cast<VALUETYPE*>
 {
-	static void* cast(const VALUETYPE* value)
-    {
-        return (void*) value;
-    }
+	inline
+	static void* cast (const VALUETYPE* value)
+	{
+		return (void*) value;
+	}
 };
-
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

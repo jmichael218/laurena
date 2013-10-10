@@ -29,7 +29,7 @@
 		X cstring, 
 		X stdstring, 
 		filename, 
-		stdstream
+		X stdstream
 	* virer source_location
 	* faire tests dans test0 pour algos avec const char* const char[] std::string std::istream std::wstring
 

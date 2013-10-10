@@ -91,9 +91,6 @@
     <Filter Include="Fichiers sources\functions">
       <UniqueIdentifier>{1b7cec9f-b381-409b-8edf-e3b27e967e83}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\source">
-      <UniqueIdentifier>{b65cefcb-3c33-4c16-b53a-42c54dedeb49}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\laurena\includes\includes.hpp">
@@ -136,9 +133,6 @@
       <Filter>Fichiers d%27en-tête\exceptions</Filter>
     </ClInclude>
     <ClInclude Include="src\laurena\traits\basetype.hpp">
-      <Filter>Fichiers d%27en-tête\traits</Filter>
-    </ClInclude>
-    <ClInclude Include="src\laurena\traits\voidptr.hpp">
       <Filter>Fichiers d%27en-tête\traits</Filter>
     </ClInclude>
     <ClInclude Include="src\laurena\descriptors\classes.hpp">
@@ -261,9 +255,6 @@
     <ClInclude Include="src\laurena\types\context.hpp">
       <Filter>Fichiers d%27en-tête\types</Filter>
     </ClInclude>
-    <ClInclude Include="src\laurena\toolboxes\stdstream.hpp">
-      <Filter>Fichiers d%27en-tête\toolboxes</Filter>
-    </ClInclude>
     <ClInclude Include="src\laurena\parsing\basic_parsers.hpp">
       <Filter>Fichiers d%27en-tête\parsing</Filter>
     </ClInclude>
@@ -272,9 +263,6 @@
     </ClInclude>
     <ClInclude Include="src\laurena\descriptors\descriptable.hpp">
       <Filter>Fichiers d%27en-tête\descriptors</Filter>
-    </ClInclude>
-    <ClInclude Include="src\laurena\source\source_location.hpp">
-      <Filter>Fichiers d%27en-tête\source</Filter>
     </ClInclude>
     <ClInclude Include="src\laurena\traits\chartype.hpp">
       <Filter>Fichiers d%27en-tête\traits</Filter>
@@ -397,9 +385,6 @@
     </ClCompile>
     <ClCompile Include="src\laurena\functions\parameter.cpp">
       <Filter>Fichiers sources\functions</Filter>
-    </ClCompile>
-    <ClCompile Include="src\laurena\toolboxes\stdstream.cpp">
-      <Filter>Fichiers sources\toolboxes</Filter>
     </ClCompile>
     <ClCompile Include="src\laurena\parsing\basic_parsers.cpp">
       <Filter>Fichiers sources\parsing</Filter>

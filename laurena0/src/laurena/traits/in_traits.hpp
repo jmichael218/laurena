@@ -74,7 +74,7 @@ struct in_traits<const CHARTYPE[N]>
 
 	inline
 	static iterator last(type str)
-	{ return str + N; }
+	{ return str + N-1; } // -1 because last is a zero 
 
 	inline
 	static iterator readed(iterator it, unsigned long int length) 

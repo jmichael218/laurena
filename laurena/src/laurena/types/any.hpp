@@ -22,12 +22,13 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
+#include <laurena/casting/void_cast.hpp>
+
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
 #include <laurena/descriptors/classes.hpp>
 #include <laurena/traits/basetype.hpp>
-#include <laurena/traits/voidptr.hpp>
 
 #include <laurena/exceptions/exception.hpp>
 
@@ -90,7 +91,7 @@ class any
 
 		virtual const std::type_info &      type()      const		 { return typeid(VALUETYPE); }
 		virtual base_content *              clone()     const		 { return new content<VALUETYPE>( this->_value, this->_descriptor); }
-		virtual void*                       ptr()       const        { return voidptr<VALUETYPE>::cast(this->_value); }
+		virtual void*                       ptr()       const        { return void_cast<VALUETYPE>::cast(this->_value); }
 
         /************************************************************************/ 
         /*              datas                                                   */ 
