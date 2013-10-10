@@ -138,5 +138,8 @@
     <ClInclude Include="src\laurena\casting\void_cast.hpp">
       <Filter>Fichiers d%27en-tête\casting</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\traits\type_traits.hpp">
+      <Filter>Fichiers d%27en-tête\traits</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

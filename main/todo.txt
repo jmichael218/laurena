@@ -36,11 +36,16 @@
 9:
    * deplacer basetype
    * virer / deplacer chartype
-   * deplacer voidptr
-	* refonte de annotation format 
+   X deplacer voidptr
+   * rule keyword
+   * parsing avec des rules de tabulations
+   * rule OR (multi choix)
+
+
 
 10:
 	* reduction des constants dans L
+	* refonte de annotation format 
 
 20:
 	* string array en symbols <int,string> ou <string,string>.
