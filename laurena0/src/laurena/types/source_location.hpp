@@ -108,14 +108,30 @@ public:
 	}
 
 	/****************************************************************************/
+	/*			setters															*/ 
+	/****************************************************************************/ 
+
+	inline void filename(const std::string& path) { this->_filename = path; }
+	inline void function(const std::string& name) {this->_function = name;  }
+
+	/****************************************************************************/
 	/*			getters															*/ 
 	/****************************************************************************/ 
 
-	inline std::string&				filename() const					   { return this->_filename; }
-	inline std::string&				function() const					   { return this->_function; }
+	inline const std::string&				filename() const					   { return this->_filename; }
+	inline const std::string&				function() const					   { return this->_function; }
 	inline unsigned long int		column  () const                       { return _column ; }
 	inline unsigned long int		line    () const                       { return _line ; }
 
+	/****************************************************************************/ 
+	/*          other functions                                                 */ 
+	/****************************************************************************/ 
+
+	void reset()
+	{
+		this-> _filename = this->_function = "" ;
+		this->_column = _line = 0;
+	}
 	/****************************************************************************/ 
 	/*          protected datas                                                 */ 
 	/****************************************************************************/ 

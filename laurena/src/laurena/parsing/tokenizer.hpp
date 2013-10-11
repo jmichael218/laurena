@@ -21,6 +21,8 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
+#include <laurena/types/source_location.hpp>
+
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
@@ -105,7 +107,7 @@ public:
 
     std::string             _source;
     const char*             _ptr;
-    file_location           _location;
+    source_location<>       _location;
 };
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

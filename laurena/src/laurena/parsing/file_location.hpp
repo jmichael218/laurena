@@ -8,7 +8,7 @@
 /// A location in a file ( filename, column, line )
 ///
 
-#ifndef LAURENA_FILE_LOCATION_H
+#ifdef LAURENA_FILE_LOCATION_H
 #define LAURENA_FILE_LOCATION_H
 
 /********************************************************************************/

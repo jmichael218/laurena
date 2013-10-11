@@ -12,7 +12,7 @@
 #include <laurena/debug/debug.hpp>
 
 //#define DEBUG_FILE_PROCESS
-
+/*
 using namespace laurena;
 
 file_location::file_location () : _filename (), _column(0), _line(0)
@@ -115,5 +115,5 @@ void file_location::process(const std::string& content)
     #endif
 }
 
-
+*/
 

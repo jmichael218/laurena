@@ -34,8 +34,8 @@
 	* faire tests dans test0 pour algos avec const char* const char[] std::string std::istream std::wstring
 
 9:
-   * deplacer basetype
-   * virer / deplacer chartype
+   X deplacer basetype
+   X virer / deplacer chartype
    X deplacer voidptr
    * rule keyword
    * parsing avec des rules de tabulations

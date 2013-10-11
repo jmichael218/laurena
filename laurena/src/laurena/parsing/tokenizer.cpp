@@ -37,7 +37,7 @@ void tokenizer::str(const char* source)
 {
     this->_source = source;
     this->_location.reset ();
-    this->_location.filename ("<null>") ;
+    this->_location.filename (std::string("<null>")) ;
     this->_ptr = this->_source.c_str();
 }
 
@@ -110,7 +110,7 @@ const char* p = this->_ptr ;
     {
         p++;
         word32 sz = std::distance(this->_ptr,p);
-        this->_location.process(this->_ptr,sz);
+        this->_location.count(this->_ptr,this->_ptr + sz);
         this->_ptr += sz;
     }
 
@@ -126,7 +126,7 @@ const char* p = strstr(this->_ptr,keyword);
         if (skipKeyword)
             sz += strlen(keyword);
 
-        this->_location.process(this->_ptr,sz);
+        this->_location.count(this->_ptr,this->_ptr + sz);
         this->_ptr += sz;
     }
 }
@@ -150,7 +150,7 @@ tokenizer& tokenizer::operator >> (const char c)
     if ( *this->_ptr == c)
     {
         ++this->_ptr ;
-        this->_location.process(c);
+        this->_location.count(c);
 
     } 
     else 
@@ -172,7 +172,7 @@ tokenizer& tokenizer::operator >> (int32& i)
 	{
         i = boost::lexical_cast<int32,std::string>(svalue);
 		this->_ptr += svalue.length();
-		this->_location.process(svalue);
+		this->_location.count(svalue);
 	}
     else
         this->syntaxError("Was expecting a signed integer");
@@ -187,7 +187,7 @@ tokenizer& tokenizer::operator >> (word32& w)
 	{
         w = boost::lexical_cast<word32,std::string>(svalue);     
 		this->_ptr += svalue.length();
-		this->_location.process(svalue);
+		this->_location.count(svalue);
 	}
     else
         this->syntaxError("Was expecting a signed integer");
@@ -202,7 +202,7 @@ tokenizer& tokenizer::operator>>  (int16& i)
 	{
         i = boost::lexical_cast<int16,std::string>(svalue);       
 		this->_ptr += svalue.length();
-		this->_location.process(svalue);
+		this->_location.count(svalue);
 	}
     else
         this->syntaxError("Was expecting a signed integer");
@@ -217,7 +217,7 @@ tokenizer& tokenizer::operator>>  (word16& w)
 	{
         w = boost::lexical_cast<word16,std::string>(svalue);       
 		this->_ptr += svalue.length();
-		this->_location.process(svalue);
+		this->_location.count(svalue);
 	}
     else
         this->syntaxError("Was expecting a signed integer");

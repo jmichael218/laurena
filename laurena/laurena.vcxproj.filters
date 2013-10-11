@@ -261,9 +261,6 @@
     <ClInclude Include="src\laurena\descriptors\descriptable.hpp">
       <Filter>Fichiers d%27en-tête\descriptors</Filter>
     </ClInclude>
-    <ClInclude Include="src\laurena\traits\chartype.hpp">
-      <Filter>Fichiers d%27en-tête\traits</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">

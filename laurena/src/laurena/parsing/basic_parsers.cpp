@@ -44,7 +44,7 @@ bool single_character_parser::read (tokenizer& tokenizer, any& value, bool consu
         value = std::string((const char*)&this->_character,1);
         if (consume)
         {
-            tokenizer._location.process (*tokenizer._ptr);
+            tokenizer._location.count (*tokenizer._ptr);
             tokenizer._ptr ++;
         }
     }
@@ -73,7 +73,7 @@ bool keyword_parser::read (tokenizer& tokenizer, any& value, bool consume) const
         value = this->_keyword;
         if (consume)
         {
-            tokenizer._location.process (this->_keyword);
+            tokenizer._location.count (this->_keyword);
             tokenizer._ptr += this->_keyword.length();
         }        
     }
@@ -105,7 +105,7 @@ bool signed_integer_parser::read (tokenizer& tokenizer, any& value, bool consume
 
     if (consume)
     {
-        tokenizer._location.process (svalue);
+        tokenizer._location.count (svalue);
         tokenizer._ptr += v;
     }
 
@@ -142,7 +142,7 @@ const char* p = tokenizer._ptr;
     value = v;
     if (consume)
     {
-        tokenizer._location.process(v);
+        tokenizer._location.count(v);
         tokenizer._ptr += v.length();
     }
     return true;  
@@ -181,7 +181,7 @@ bool string_parser::read (tokenizer& tokenizer, any& value, bool consume) const
 
     if (consume)
     {
-        tokenizer._location.process(tokenizer._ptr,idx+2);
+        tokenizer._location.count(tokenizer._ptr,tokenizer._ptr+idx+2);
         tokenizer._ptr += idx +2;
         
     }
@@ -241,9 +241,8 @@ std::string b ;
     
     if (consume)
     {
-        word32 sz = memory::offset(tokenizer._ptr,p);
-        tokenizer._location.process (tokenizer._ptr,sz);
-        tokenizer._ptr += sz;
+        tokenizer._location.count (tokenizer._ptr,p);
+        tokenizer._ptr = p;
     }
 
    value = b ;
@@ -270,7 +269,7 @@ bool eol_parser::read (tokenizer& tokenizer, any& value, bool consume) const
 
     if (consume)
     {
-        tokenizer._location.process('\n');
+        tokenizer._location.count('\n');
         tokenizer._ptr ++;
     }
     return true;
@@ -298,7 +297,7 @@ bool tabs_parser::read (tokenizer& tokenizer, any& value, bool consume) const
     value = keyword;
     if (consume)
     {
-        tokenizer._location.process (keyword);
+        tokenizer._location.count (keyword);
         tokenizer._ptr += keyword.length();
     }
     return true;  
@@ -326,7 +325,7 @@ bool charset_parser::read (tokenizer& tokenizer, any& value, bool consume) const
     value = keyword;
     if (consume)
     {
-        tokenizer._location.process ( keyword);
+        tokenizer._location.count (keyword);
         tokenizer._ptr += keyword.length();
     }
     return true;   
@@ -354,7 +353,7 @@ bool length_parser::read (tokenizer& tokenizer, any& value, bool consume) const
     value = std::string(tokenizer._ptr,this->_length);
     if (consume)
     {
-        tokenizer._location.process (*tokenizer._ptr);
+        tokenizer._location.count (*tokenizer._ptr);
         tokenizer._ptr ++;
     }    
     return true;
