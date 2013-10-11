@@ -132,9 +132,6 @@
     <ClInclude Include="src\laurena\exceptions\failed_parsing_exception.hpp">
       <Filter>Fichiers d%27en-tête\exceptions</Filter>
     </ClInclude>
-    <ClInclude Include="src\laurena\traits\basetype.hpp">
-      <Filter>Fichiers d%27en-tête\traits</Filter>
-    </ClInclude>
     <ClInclude Include="src\laurena\descriptors\classes.hpp">
       <Filter>Fichiers d%27en-tête\descriptors</Filter>
     </ClInclude>

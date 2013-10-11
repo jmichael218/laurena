@@ -38,7 +38,6 @@
 #include <laurena/exceptions/unimplemented_exception.hpp>
 
 // traits
-#include <laurena/traits/basetype.hpp>
 
 // generic descriptors
 #include <laurena/descriptors/descriptor.hpp>

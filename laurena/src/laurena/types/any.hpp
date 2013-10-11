@@ -22,13 +22,15 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
+#include <laurena/traits/type_traits.hpp>
 #include <laurena/casting/void_cast.hpp>
+
 
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
 #include <laurena/descriptors/classes.hpp>
-#include <laurena/traits/basetype.hpp>
+
 
 #include <laurena/exceptions/exception.hpp>
 
@@ -123,7 +125,7 @@ class any
 	any(any&& other);
 
 	template<typename VALUETYPE> any (const VALUETYPE & value)  : 
-		_content(new content<VALUETYPE>(value , classes::byType(typeid(typename basetype<VALUETYPE>::type)))) 
+		_content(new content<VALUETYPE>(value , classes::byType(typeid(typename traits<VALUETYPE>::basetype)))) 
 	{ }
 
 	virtual ~any();
@@ -136,11 +138,11 @@ class any
     any & operator=(const VALUETYPE & value)
     {
 
-        const descriptor* cd = classes::byType(typeid(typename basetype<VALUETYPE>::type));
+        const descriptor* cd = classes::byType(typeid(typename traits<VALUETYPE>::basetype));
         if (!cd)
             cd = classes::byType(typeid(VALUETYPE));
         if (!cd)
-            classes::errorTypeNotFound(typeid(typename basetype<VALUETYPE>::type));
+            classes::errorTypeNotFound(typeid(typename traits<VALUETYPE>::basetype));
 
 		if (_content)
             delete _content;
@@ -219,7 +221,7 @@ VALUETYPE* dynamic_anycast(any* operand)
     if (!ocd)
         return 0;
 
-    const descriptor* vcd = classes::byType(typeid(typename basetype<VALUETYPE>::type));
+    const descriptor* vcd = classes::byType(typeid(typename traits<VALUETYPE>::basetype));
     if (!vcd)
         return 0;
 
@@ -256,7 +258,7 @@ inline const VALUETYPE * anycast(const any * operand)
 template<typename VALUETYPE>
 VALUETYPE anycast(any & operand)
 {
-    typedef typename boost::remove_reference<VALUETYPE>::type nonref;
+    typedef typename std::remove_reference<VALUETYPE>::type nonref;
 
     nonref * result = anycast<nonref>(&operand);
     if(!result)
@@ -268,7 +270,7 @@ VALUETYPE anycast(any & operand)
 template<typename VALUETYPE>
 inline VALUETYPE anycast(const any & operand)
 {
-    typedef typename boost::remove_reference<VALUETYPE>::type nonref;
+    typedef typename std::remove_reference<VALUETYPE>::type nonref;
 
     return anycast<const nonref &>(const_cast<any &>(operand));
 }

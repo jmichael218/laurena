@@ -21,6 +21,8 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
+#include <laurena/traits/type_traits.hpp>
+
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
@@ -28,7 +30,6 @@
 #include <laurena/descriptors/standard_class_descriptor.hpp>
 #include <laurena/descriptors/features/container_feature.hpp>
 #include <laurena/types/literator.hpp>
-#include <laurena/traits/basetype.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -137,7 +138,7 @@ public:
     vector_descriptor(const char* name, const descriptor* parent = nullptr) 
 
     :   standard_class_descriptor<CONTAINER>(name, parent) ,
-        _container_class_feature (this,classes::byType(typeid(typename basetype<ELEMENT>::type)))
+        _container_class_feature (this,classes::byType(typeid(typename traits<ELEMENT>::basetype)))
     { }
 
 

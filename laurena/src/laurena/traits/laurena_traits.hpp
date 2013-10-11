@@ -21,11 +21,13 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
+#include <laurena/traits/type_traits.hpp>
+
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
 #include <laurena/descriptors/descriptor.hpp>
-#include <laurena/traits/basetype.hpp>
+
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
@@ -45,8 +47,8 @@ struct td
 
     static const descriptor* desc(T& t)
     {
-        typedef basetype<T> bt;
-        return td<typename bt::type>::desc ();
+		typedef traits<TYPENAME>::basetype basetype;
+        return td<basetype>::desc ();
     }
 };
 
@@ -54,9 +56,9 @@ struct td
 template<typename TYPENAME>
 const descriptor* desc_of(TYPENAME& t)
 {
-  typedef basetype<TYPENAME> bt;
-  const descriptor* d = classes::byType(typeid(typename bt::type));
-  return d ? d : td<typename bt::type>::desc();
+  typedef traits<TYPENAME>::basetype basetype;
+  const descriptor* d = classes::byType(typeid(basetype));
+  return d ? d : td<basetype>::desc();
 }
 
 template<typename TYPENAME>
