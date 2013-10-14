@@ -21,16 +21,14 @@
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
 
-#include <laurena/grammar/rule.hpp>
 #include <laurena/grammar/rule_expected_char.hpp>
 #include <laurena/grammar/rule_charset.hpp>
 #include <laurena/grammar/rule_symbols.hpp>
 #include <laurena/grammar/rule_integer.hpp>
 #include <laurena/grammar/rule_keyword.hpp>
+#include <laurena/grammar/rule_or.hpp>
 #include <laurena/algorithm/strings/readwhile.hpp>
 #include <laurena/algorithm/strings/readuntil.hpp>
-
-
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -99,6 +97,13 @@ public:
 		auto p = new rule_keyword<CONTEXT>(keyword);
 		return rule_ptr_templated<string, CONTEXT>(p);
 	}
+
+	static rule_ptr<CONTEXT> or_ ()
+	{
+		rule_or<CONTEXT>* p = new rule_or<CONTEXT>();
+		return rule_ptr<CONTEXT>(p);
+	}
+
 };
 
 /********************************************************************************/ 

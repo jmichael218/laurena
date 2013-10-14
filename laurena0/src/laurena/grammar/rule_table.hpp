@@ -1,15 +1,15 @@
 ///
-/// \file     rule_basic.hpp
-/// \brief    basic interface to implement for all rules
+/// \file     rule_table.hpp
+/// \brief    a vector of rule_ptr
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-///   grammar rulesbasic interface to implement for all rules
+///   a vector of rule_ptr
 ///
 
-#ifndef LAURENA_RULE_BASIC_H
-#define LAURENA_RULE_BASIC_H
+#ifndef LAURENA_RULE_TABLE_H
+#define LAURENA_RULE_TABLE_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -25,7 +25,7 @@
 #include <memory>
 #include <ostream>
 
-#include <laurena/types/parsing_context.hpp>
+#include <laurena/grammar/rule_ptr.hpp>
 
 
 /********************************************************************************/ 
@@ -35,44 +35,49 @@ namespace laurena {
 
 /********************************************************************************/ 
 /*                                                                              */ 
-/*              class rule_basic                                                */ 
+/*              class rule_table                                                */ 
 /*                                                                              */ 
 /********************************************************************************/ 
 
-template <typename CONTEXT = parsing_context<>>	class rule_ptr;
-
-// This is the interface for all rules
+// This is a vector of rule_ptr
 template 
-<	
+<
 	typename CONTEXT = parsing_context<>
 >
 
-class rule_basic
+class rule_table : public std::vector<rule_ptr<CONTEXT>>
 {
 public:
 
+	/************************************************************************/ 
+	/*		constructor														*/ 
+	/************************************************************************/ 
 
-	/****************************************************************************/ 
-	/*			typedef         												*/ 
-	/****************************************************************************/ 
-	typedef typename CONTEXT::chartype			chartype;
+	rule_table () { };
+	rule_table (rule_table&& r) 
+		
+		: std::vector<std::unique_ptr<rule_basic<CONTEXT>>> (r)
+		{ }
 
-	/****************************************************************************/ 
-	/*			constructor     												*/ 
-	/****************************************************************************/ 
-	rule_basic() { }
+	/************************************************************************/ 
+	/*		rule execution													*/ 
+	/************************************************************************/ 
 
+	unsigned long int read(CONTEXT& context) const
+	{
+		unsigned long int res = 0, r2;
+		for (const rule_ptr<CONTEXT>& r : *this)
+		{
+			r2 = r->read(context);
 
-	/****************************************************************************/ 
-	/*			virtual functions												*/ 
-	/****************************************************************************/ 
-	virtual unsigned long int	read (CONTEXT& context)		 const =0;
-	virtual void                regexp(std::ostream& out)    const =0;
+			if (r2 == 0 || r2 == pec::SYNTAX_ERROR)
+				return pec::SYNTAX_ERROR;
 
-	virtual bool  is_candidate(chartype c) const
-	
-		{ return false; }
-
+			context._first = CONTEXT::traits::readed(context._first, r2);
+			res += r2;
+		}
+		return res;
+	}
 };
 
 /********************************************************************************/ 

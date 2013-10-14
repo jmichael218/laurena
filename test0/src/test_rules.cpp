@@ -159,6 +159,29 @@ void testRuleKeyword ()
 
 }
 
+void testRuleOr ()
+{
+	laurena::rule_or<>* rk = new laurena::rule_or<>();
+
+	laurena::rule<> rs;
+
+	(*rk) | G::kword_("hello") [[] (const std::string& c, laurena::parsing_context<>::object o) { std::cout << c; }] 
+	   | G::kword_("bonjour") [[] (const std::string& c, laurena::parsing_context<>::object o) { std::cout << c; }]
+	   | G::kword_("priviet") [[] (const std::string& c, laurena::parsing_context<>::object o) { std::cout << c; }]
+	   ;
+	   
+
+	rs << laurena::rule_ptr<>(rk) 
+	   << G::expected_(' ') [[] (const char& c, laurena::parsing_context<>::object o) { std::cout << c; }] 
+	   << G::kword_("world") [[] (const std::string& c, laurena::parsing_context<>::object o) { std::cout << c; }];
+
+	const char* cc = "bonjour world";
+	laurena::parsing_context<> context (cc, cc+strlen(cc));
+	unsigned long int res = rs.read(context);
+	assert(res == strlen(cc));
+
+}
+
 void testRules()
 {
 	testRuleStaticChar();
@@ -167,6 +190,7 @@ void testRules()
 	testRuleSymbols();
 	testRuleInteger();
 	testRuleKeyword();
+	testRuleOr();
 
 }
 

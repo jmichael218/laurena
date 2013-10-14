@@ -29,8 +29,11 @@
     <ClInclude Include="src\laurena\grammar\rule_expected_char.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_integer.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_keyword.hpp" />
+    <ClInclude Include="src\laurena\grammar\rule_or.hpp" />
+    <ClInclude Include="src\laurena\grammar\rule_ptr.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_string.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_symbols.hpp" />
+    <ClInclude Include="src\laurena\grammar\rule_table.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_templated.hpp" />
     <ClInclude Include="src\laurena\literals\string_literal.hpp" />
     <ClInclude Include="src\laurena\toolboxes\loader.hpp" />

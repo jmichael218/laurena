@@ -144,5 +144,14 @@
     <ClInclude Include="src\laurena\grammar\rule_keyword.hpp">
       <Filter>Fichiers d%27en-tête\grammar</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\grammar\rule_or.hpp">
+      <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\grammar\rule_ptr.hpp">
+      <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\grammar\rule_table.hpp">
+      <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

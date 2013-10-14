@@ -26,6 +26,7 @@
 #include <ostream>
 
 #include <laurena/grammar/rule_builder.hpp>
+#include <laurena/grammar/rule_table.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -63,6 +64,11 @@ public:
 	{
 		for (const rule_ptr<CONTEXT>& r : this->_rules)
 			r->regexp(out);
+	}
+
+	virtual bool  is_candidate(chartype c) const
+	{ 
+		return this->_rules.size() ? this->_rules.front()->is_candidate(c) : false;
 	}
 
 

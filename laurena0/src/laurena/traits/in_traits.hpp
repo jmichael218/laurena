@@ -52,6 +52,21 @@ struct in_traits
 	inline
 	static iterator readed(iterator it, unsigned long int length) 
 	{ return it }
+
+	inline
+	static iterator back(type& stream, iterator current, chartype c)
+	{ 
+		stream.putback(c);
+		return current;
+	}
+
+	inline
+	static iterator back(type& stream, iterator current, const string& s)
+	{
+		for (chartype c : s)
+			stream.putback(c);
+		return current;		
+	}
 };
 
 template<typename T>
@@ -79,6 +94,20 @@ struct in_traits<const CHARTYPE[N]>
 	inline
 	static iterator readed(iterator it, unsigned long int length) 
 	{ return it + length; }
+
+	inline
+	static iterator back(type& carray, iterator current, chartype c)
+	{ 
+		--current;
+		return current;
+	}
+
+	inline
+	static iterator back(type& stream, iterator current, const string& s)
+	{
+		current -= s.size();
+		return current;		
+	}
 };
 
 template<typename CHARTYPE>
@@ -100,6 +129,13 @@ struct in_traits<std::basic_string<CHARTYPE>>
 	inline
 	static iterator readed(iterator it, unsigned long int length) 
 	{ return it + length; }
+
+	inline
+	static iterator back(type& str, iterator current, chartype c)
+	{ 
+		--current;
+		return current;
+	}
 };
 
 template<typename CHARTYPE>
@@ -121,6 +157,13 @@ struct in_traits<const CHARTYPE*>
 	inline
 	static iterator readed(iterator it, unsigned long int length) 
 	{ return it + length; }
+
+	inline
+	static iterator back(type& carray, iterator current, chartype c)
+	{ 
+		--current;
+		return current;
+	}
 };
 
 template<class CHARTYPE, size_t N>
@@ -142,6 +185,13 @@ struct in_traits<CHARTYPE[N]>
 	inline
 	static iterator readed(iterator it, unsigned long int length) 
 	{ return it + length; }
+
+	inline
+	static iterator back(type& carray, iterator current, chartype c)
+	{ 
+		--current;
+		return current;
+	}
 };
 
 template<class CHARTYPE>
@@ -163,6 +213,13 @@ struct in_traits<CHARTYPE[]>
 	inline
 	static iterator readed(iterator it, unsigned long int length) 
 	{ return it + length; }
+
+	inline
+	static iterator back(type& carray, iterator current, chartype c)
+	{ 
+		--current;
+		return current;
+	}
 };
 
 

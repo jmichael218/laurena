@@ -1,15 +1,15 @@
 ///
-/// \file     rule_basic.hpp
-/// \brief    basic interface to implement for all rules
+/// \file     rule_ptr.hpp
+/// \brief    shared ptr rule wrapper
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-///   grammar rulesbasic interface to implement for all rules
+///   shared ptr rule wrapper
 ///
 
-#ifndef LAURENA_RULE_BASIC_H
-#define LAURENA_RULE_BASIC_H
+#ifndef LAURENA_RULE_PTR_H
+#define LAURENA_RULE_PTR_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -26,6 +26,8 @@
 #include <ostream>
 
 #include <laurena/types/parsing_context.hpp>
+#include <laurena/grammar/rule_basic.hpp>
+#include <laurena/grammar/rule_or.hpp>
 
 
 /********************************************************************************/ 
@@ -35,43 +37,27 @@ namespace laurena {
 
 /********************************************************************************/ 
 /*                                                                              */ 
-/*              class rule_basic                                                */ 
+/*              class rule_ptr                                                  */ 
 /*                                                                              */ 
 /********************************************************************************/ 
 
-template <typename CONTEXT = parsing_context<>>	class rule_ptr;
-
-// This is the interface for all rules
+// This is the class wrapping a smart rule_basic  pointer
 template 
-<	
-	typename CONTEXT = parsing_context<>
+<
+	typename CONTEXT
 >
 
-class rule_basic
+class rule_ptr : public std::shared_ptr<rule_basic<CONTEXT>> 
 {
 public:
 
-
-	/****************************************************************************/ 
-	/*			typedef         												*/ 
-	/****************************************************************************/ 
-	typedef typename CONTEXT::chartype			chartype;
-
-	/****************************************************************************/ 
-	/*			constructor     												*/ 
-	/****************************************************************************/ 
-	rule_basic() { }
-
-
-	/****************************************************************************/ 
-	/*			virtual functions												*/ 
-	/****************************************************************************/ 
-	virtual unsigned long int	read (CONTEXT& context)		 const =0;
-	virtual void                regexp(std::ostream& out)    const =0;
-
-	virtual bool  is_candidate(chartype c) const
-	
-		{ return false; }
+	/************************************************************************/ 
+	/*		constructor														*/ 
+	/************************************************************************/ 
+	rule_ptr(rule_basic<CONTEXT>* ptr) 
+		
+		: std::shared_ptr<rule_basic<CONTEXT>>(ptr) 
+		{ }
 
 };
 

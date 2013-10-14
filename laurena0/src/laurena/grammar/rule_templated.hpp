@@ -25,7 +25,7 @@
 #include <memory>
 #include <ostream>
 
-#include <laurena/grammar/rule_basic.hpp>
+#include <laurena/grammar/rule_ptr.hpp>
 #include <laurena/constants/const_parsing_error_codes.hpp>
 
 

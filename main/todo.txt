@@ -40,6 +40,9 @@
    X rule keyword
    * parsing avec des rules de tabulations
    * rule OR (multi choix)
+      X avec unicité du is_candidate
+	  * possible avec multiplicité du is_candidate ?
+
 
 
 

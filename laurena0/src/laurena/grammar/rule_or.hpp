@@ -1,14 +1,14 @@
 ///
-/// \file     rule_integer.hpp
-/// \brief    rules to read an integer
+/// \file     rule_or.hpp
+/// \brief    rules implemeting a selection between several other rules
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-///  rules to read an integer
+///  rules implemeting a selection between several other rules
 
-#ifndef LAURENA_RULE_INTEGER_H
-#define LAURENA_RULE_INTEGER_H
+#ifndef LAURENA_RULE_OR_H
+#define LAURENA_RULE_OR_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -21,13 +21,14 @@
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
 
+/********************************************************************************/ 
+/*              dependencies                                                    */ 
+/********************************************************************************/ 
+
 #include <memory>
 #include <ostream>
 
-#include <boost/lexical_cast.hpp>
-
-#include <laurena/grammar/rule_templated.hpp>
-#include <laurena/algorithm/strings/readinteger.hpp>
+#include <laurena/grammar/rule_table.hpp>
 
 
 /********************************************************************************/ 
@@ -43,51 +44,99 @@ namespace laurena {
 
 template
 <
-	typename NUMTYPE=int, // returned string type
 	typename CONTEXT=parsing_context<>			 // context
 >
 
-class rule_integer : public rule_templated<NUMTYPE, CONTEXT>
+class rule_or : public rule_basic<CONTEXT>
 {
 public:
 
-	/****************************************************************************/
-	/*			typedefs														*/ 
 	/****************************************************************************/ 
-	typedef typename CONTEXT::chartype							chartype;
-	typedef typename CONTEXT::iterator							iterator;
-	typedef std::basic_string<typename CONTEXT::chartype>		string;
+	/*			constructors													*/ 
+	/****************************************************************************/ 
+	
+	rule_or() 
+		
+		: rule_basic<CONTEXT>() 
+		{ }
 
-	/****************************************************************************/ 
-	/*			constructors, destructor										*/ 
-	/****************************************************************************/ 
-	rule_integer() : rule_templated<NUMTYPE, CONTEXT>() 
-	{ }
 
 	/****************************************************************************/ 
 	/*			implementation of virtual functions 							*/ 
 	/****************************************************************************/ 
+
 	virtual unsigned long int read (CONTEXT& context) const
-	{
-		string ss = std::move(readinteger<chartype, iterator, string>(context._first, context._last));
-		if (ss.length() == 0)
+	{ 
+		if (this->_rules.size() == 0)
 			return pec::SYNTAX_ERROR;
-		else
+
+		unsigned int candidates = 0;
+		rule_table<CONTEXT>::const_iterator it_candidate;
+		chartype c = *context._first;
+		for (auto it = this->_rules.begin(); it != this->_rules.end(); it ++)
 		{
-			context.count(ss);
-			this->readed(boost::lexical_cast<NUMTYPE, string>(ss),context);
-			return ss.length();
+			if (it->get()->is_candidate(c))
+			{
+				candidates ++;
+				it_candidate = it;
+			}
+		}
+		if (candidates == 1)
+			return it_candidate->get()->read(context);
+		else
+			return pec::SYNTAX_ERROR;
+	}
+
+	virtual void  regexp(std::ostream& out)    const
+	{
+		if (this->_rules.size())
+		{
+			out << "(";
+			bool first = true;
+			for (const rule_ptr<CONTEXT>& r : this->_rules)
+			{
+				if (first)
+					first = false;
+				else
+					out << "|";
+				r->regexp(out);
+			}
+			out << ")";
 		}
 	}
 
-	virtual void regexp(std::ostream& out)    const
-
-		{ out << "[-]?[0123456789]*"; }
-
 	virtual bool  is_candidate(chartype c) const
 	{ 
-		return c == ((chartype)'-') || const_charsets<chartype>::NUMBERS.test(c);
+		for (const rule_ptr<CONTEXT>& r : this->_rules)
+			if (r->is_candidate(c))
+				return true;
+
+		return false;
 	}
+
+
+	/****************************************************************************/ 
+	/*			construction of the rule										*/ 
+	/****************************************************************************/ 
+
+	rule_or<CONTEXT>& operator | (rule_ptr<CONTEXT>& r)
+	{
+		_rules.push_back(r);
+		return *this;
+	}
+
+	rule_or<CONTEXT>& operator |= (rule_ptr<CONTEXT>& r)
+	{
+		_rules.push_back(r);
+		return *this;
+	}
+
+
+	/****************************************************************************/ 
+	/*			protected datas													*/ 
+	/****************************************************************************/ 
+	protected:
+	rule_table<CONTEXT>		_rules;
 };
 
 /********************************************************************************/ 
