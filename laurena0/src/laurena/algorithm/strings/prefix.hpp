@@ -33,8 +33,8 @@ namespace laurena {
 /*          algorithm prefix                                                     */ 
 /*********************************************************************************/ 
 
-template<typename ITERATOR>
-bool prefix(ITERATOR source, ITERATOR prefixFirst, ITERATOR prefixLast)
+template<typename ITERATOR_SOURCE, typename ITERATOR_PREFIX>
+bool prefix(ITERATOR_SOURCE source, ITERATOR_PREFIX prefixFirst, ITERATOR_PREFIX prefixLast)
 {
 
 	while (prefixFirst != prefixLast)
@@ -48,7 +48,7 @@ template<typename T0, typename T1>
 inline
 bool prefix(T0& source, const T1& tprefix)
 {
-	return prefix<in_traits<T0>::iterator>(in_traits<T0>::first(source), in_traits<T1>::first(tprefix), in_traits<T1>::last(tprefix));
+	return prefix<in_traits<T0>::iterator, in_traits<T1>::iterator>(in_traits<T0>::first(source), in_traits<T1>::first(tprefix), in_traits<T1>::last(tprefix));
 }
 
 /********************************************************************************/ 

@@ -26,8 +26,10 @@
 #include <laurena/grammar/rule_charset.hpp>
 #include <laurena/grammar/rule_symbols.hpp>
 #include <laurena/grammar/rule_integer.hpp>
+#include <laurena/grammar/rule_keyword.hpp>
 #include <laurena/algorithm/strings/readwhile.hpp>
 #include <laurena/algorithm/strings/readuntil.hpp>
+
 
 
 /********************************************************************************/ 
@@ -90,6 +92,12 @@ public:
 	{
 		auto p = new rule_integer<NUMTYPE>();
 		return rule_ptr_templated<NUMTYPE, CONTEXT>(p);
+	}
+
+	static rule_ptr_templated<string, CONTEXT> kword_ (const string& keyword)
+	{
+		auto p = new rule_keyword<CONTEXT>(keyword);
+		return rule_ptr_templated<string, CONTEXT>(p);
 	}
 };
 

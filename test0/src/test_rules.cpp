@@ -134,6 +134,29 @@ void testRuleInteger ()
 		 << G::num_<int>()			[[] (const int& s, laurena::parsing_context<>::object i ) { std::cout << s; }]
 		 << G::expected_(')')       [[] (const char& c, laurena::parsing_context<>::object o) { std::cout << c; }]
 		 ;
+
+	const char* cc = "(12,15)";
+	laurena::parsing_context<> context (cc, cc+strlen(cc));
+	unsigned long int res = rs.read(context);
+	assert(res == strlen(cc));
+}
+
+
+void testRuleKeyword ()
+{
+	laurena::rule_keyword<> rk ("hello");
+	
+	laurena::rule<> rs;
+
+	rs << G::kword_("hello")		[[] (const std::string& c, laurena::parsing_context<>::object o) { std::cout << c; }]
+	   << G::kword_("world")		[[] (const std::string& c, laurena::parsing_context<>::object o) { std::cout << c; }]
+	   ;
+
+	const char* cc = "helloworld";
+	laurena::parsing_context<> context (cc, cc+strlen(cc));
+	unsigned long int res = rs.read(context);
+	assert(res == strlen(cc));
+
 }
 
 void testRules()
@@ -143,6 +166,7 @@ void testRules()
 	testRuleAddition();
 	testRuleSymbols();
 	testRuleInteger();
+	testRuleKeyword();
 
 }
 
