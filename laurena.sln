@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "laurena", "laurena\laurena.vcxproj", "{E4E38395-6C22-4954-9C6C-6F772979279D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FB1D2C3E-B598-4050-99C9-447E65E7396F} = {FB1D2C3E-B598-4050-99C9-447E65E7396F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{7C49FEA0-44C8-4AE8-82EF-BC014DC36066}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -35,6 +38,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "laurena0", "laurena0\laurena0.vcxproj", "{FB1D2C3E-B598-4050-99C9-447E65E7396F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test0", "test0\test0.vcxproj", "{38C0613E-BD76-4709-A164-D4923E320FD8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FB1D2C3E-B598-4050-99C9-447E65E7396F} = {FB1D2C3E-B598-4050-99C9-447E65E7396F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
