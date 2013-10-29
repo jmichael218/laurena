@@ -25,6 +25,7 @@
 #include <laurena/grammar/rule_charset.hpp>
 #include <laurena/grammar/rule_symbols.hpp>
 #include <laurena/grammar/rule_integer.hpp>
+#include <laurena/grammar/rule_hexadecimal.hpp>
 #include <laurena/grammar/rule_keyword.hpp>
 #include <laurena/grammar/rule_or.hpp>
 #include <laurena/algorithm/strings/readwhile.hpp>
@@ -89,6 +90,13 @@ public:
 	static rule_ptr_templated<NUMTYPE, CONTEXT> num_ ()
 	{
 		auto p = new rule_integer<NUMTYPE>();
+		return rule_ptr_templated<NUMTYPE, CONTEXT>(p);
+	}
+
+	template<typename NUMTYPE>
+	static rule_ptr_templated<NUMTYPE, CONTEXT> hex_()
+	{
+		auto p = new rule_hexadecimal<NUMTYPE>();
 		return rule_ptr_templated<NUMTYPE, CONTEXT>(p);
 	}
 

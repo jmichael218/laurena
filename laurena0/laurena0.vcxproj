@@ -28,6 +28,7 @@
     <ClInclude Include="src\laurena\grammar\rule_basic.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_charset.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_expected_char.hpp" />
+    <ClInclude Include="src\laurena\grammar\rule_hexadecimal.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_integer.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_keyword.hpp" />
     <ClInclude Include="src\laurena\grammar\rule_or.hpp" />

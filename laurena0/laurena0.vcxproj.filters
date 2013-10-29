@@ -159,5 +159,8 @@
     <ClInclude Include="src\laurena\algorithm\strings\readhexadecimal.hpp">
       <Filter>Fichiers d%27en-tête\algorithm\strings</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\grammar\rule_hexadecimal.hpp">
+      <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

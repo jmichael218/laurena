@@ -182,6 +182,26 @@ void testRuleOr ()
 
 }
 
+
+void testRuleHexadecimal()
+{
+	laurena::rule_integer<int, laurena::parsing_context<>> ri ;
+
+	laurena::rule<> rs;
+
+	rs << G::expected_('(')			[[] (const char& c, laurena::parsing_context<>::object o) { std::cout << c; }]
+		<< G::hex_<int>()			[[] (const int& s, laurena::parsing_context<>::object i ) { std::cout << s; }]
+		<< G::expected_(',')		[[] (const char& c, laurena::parsing_context<>::object o) { std::cout << c; }]
+		 << G::hex_<int>()			[[] (const int& s, laurena::parsing_context<>::object i ) { std::cout << s; }]
+		 << G::expected_(')')       [[] (const char& c, laurena::parsing_context<>::object o) { std::cout << c; }]
+		 ;
+
+	const char* cc = "(0A,FF)";
+	laurena::parsing_context<> context (cc, cc+strlen(cc));
+	unsigned long int res = rs.read(context);
+	assert(res == strlen(cc));
+}
+
 void testRules()
 {
 	testRuleStaticChar();
@@ -191,6 +211,7 @@ void testRules()
 	testRuleInteger();
 	testRuleKeyword();
 	testRuleOr();
+	testRuleHexadecimal();
 
 }
 
