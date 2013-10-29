@@ -49,7 +49,7 @@ template<typename T>
 inline
 bool is_integer(T& t)
 {
-	return is_integer<typename in_traits<T>::chartype, typename in_traits<T>::iterator>(in_traits<T>::first(t), in_traits<T>::last(t));
+	return is_integer<typename in_traits<T>::chartype, typename in_traits<T>::iterator>(in_traits<T>::begin(t), in_traits<T>::end(t));
 }
 
 /********************************************************************************/ 

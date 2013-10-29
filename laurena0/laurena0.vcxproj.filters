@@ -46,6 +46,9 @@
     <Filter Include="Fichiers d%27en-tête\casting">
       <UniqueIdentifier>{f50549c8-dbdd-446b-a2ee-eb1c24e0b296}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\algorithm\conversions">
+      <UniqueIdentifier>{43c29c3e-be8f-4dfc-a6ed-58150af19aa7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\laurena\types\charset.hpp">
@@ -152,6 +155,9 @@
     </ClInclude>
     <ClInclude Include="src\laurena\grammar\rule_table.hpp">
       <Filter>Fichiers d%27en-tête\grammar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\algorithm\strings\readhexadecimal.hpp">
+      <Filter>Fichiers d%27en-tête\algorithm\strings</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

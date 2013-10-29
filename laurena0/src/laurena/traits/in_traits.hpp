@@ -42,11 +42,11 @@ struct in_traits
 	typedef std::basic_string<typename T::char_type>		string;
 
 	inline
-	static iterator first(type& stream) 
+	static iterator begin(type& stream) 
 	{ return iterator(stream); }
 
 	inline
-	static iterator last(type& stream) 
+	static iterator end(type& stream) 
 	{ return iterator(); }
 
 	inline
@@ -84,11 +84,11 @@ struct in_traits<const CHARTYPE[N]>
 	typedef std::basic_string<CHARTYPE>				string;
 
 	inline
-	static iterator first(type str)
+	static iterator begin(type str)
 	{ return str; }
 
 	inline
-	static iterator last(type str)
+	static iterator end(type str)
 	{ return str + N-1; } // -1 because last is a zero 
 
 	inline
@@ -119,11 +119,11 @@ struct in_traits<std::basic_string<CHARTYPE>>
 	typedef std::basic_string<CHARTYPE, std::char_traits<CHARTYPE>, std::allocator<char>>	string;
 
 	inline
-	static iterator first(const type& str)
+	static iterator begin(const type& str)
 	{ return str.data(); }
 
 	inline
-	static iterator last(const type& str)
+	static iterator end(const type& str)
 	{ return str.data() + str.length(); }
 
 	inline
@@ -147,11 +147,11 @@ struct in_traits<const CHARTYPE*>
 	typedef std::basic_string<CHARTYPE>				string;
 
 	inline
-	static iterator first(type str)
+	static iterator begin(type str)
 	{ return str; }
 
 	inline
-	static iterator last(type str)
+	static iterator end(type str)
 	{ return str + std::char_traits<CHARTYPE>::length(str); }
 
 	inline
@@ -175,11 +175,11 @@ struct in_traits<CHARTYPE[N]>
 	typedef std::basic_string<CHARTYPE>				string;
 
 	inline
-	static iterator first(type str)
+	static iterator begin(type str)
 	{ return str; }
 
 	inline
-	static iterator last(type str)
+	static iterator end(type str)
 	{ return str + std::char_traits<CHARTYPE>::length(str); }
 
 	inline
@@ -203,11 +203,11 @@ struct in_traits<CHARTYPE[]>
 	typedef std::basic_string<CHARTYPE>				string;
 
 	inline
-	static iterator first(type str)
+	static iterator begin(type str)
 	{ return str; }
 
 	inline
-	static iterator last(type str)
+	static iterator end(type str)
 	{ return str + std::char_traits<CHARTYPE>::length(str); }
 
 	inline

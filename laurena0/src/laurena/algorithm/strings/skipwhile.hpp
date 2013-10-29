@@ -53,7 +53,7 @@ template<typename T, typename CHARTYPE>
 inline
 typename in_traits<T>::iterator skipwhile(T& t, const std::function<bool (const CHARTYPE& )>& condition)
 {
-	return skipwhile<typename in_traits<T>::iterator, CHARTYPE>(in_traits<T>::first(t), in_traits<T>::last(t), condition);
+	return skipwhile<typename in_traits<T>::iterator, CHARTYPE>(in_traits<T>::begin(t), in_traits<T>::end(t), condition);
 }
 
 /********************************************************************************/ 

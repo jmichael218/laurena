@@ -108,6 +108,35 @@ public:
     const char*             _ptr;
     source_location<>       _location;
 };
+
+template<>
+struct in_traits<tokenizer>
+{
+	typedef tokenizer								type;
+	typedef char									chartype;
+	typedef const char*								iterator;
+	typedef std::string								string;
+
+	inline
+	static iterator first(const type& str)
+	{ return str._ptr; }
+
+	inline
+	static iterator last(const type& str)
+	{ return str._source.c_str() + str._source.length(); }
+
+	inline
+	static iterator readed(iterator it, unsigned long int length) 
+	{ return it + length; }
+
+	inline
+	static iterator back(type& str, iterator current, chartype c)
+	{ 
+		--current;
+		return current;
+	}
+};
+
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

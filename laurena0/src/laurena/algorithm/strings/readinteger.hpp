@@ -50,7 +50,7 @@ template<typename T>
 inline
 typename in_traits<T>::string readinteger(T& t)
 {
-	return readinteger<typename in_traits<T>::chartype, typename in_traits<T>::iterator, typename in_traits<T>::string>(in_traits<T>::first(t), in_traits<T>::last(t));
+	return readinteger<typename in_traits<T>::chartype, typename in_traits<T>::iterator, typename in_traits<T>::string>(in_traits<T>::begin(t), in_traits<T>::end(t));
 }
  
 /********************************************************************************/ 

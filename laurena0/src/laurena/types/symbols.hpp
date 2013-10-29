@@ -80,7 +80,7 @@ struct symbols_implementation<false, true, KEY, VALUE>
 	{
 
 
-		return prefix<iterator>(traits::first(key), traits::first(sprefix), traits::last(sprefix));
+		return prefix<iterator>(traits::begin(key), traits::begin(sprefix), traits::end(sprefix));
 	}
 };
 

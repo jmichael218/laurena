@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="src\laurena\algorithm\strings\alphabet.hpp" />
     <ClInclude Include="src\laurena\algorithm\strings\prefix.hpp" />
+    <ClInclude Include="src\laurena\algorithm\strings\readhexadecimal.hpp" />
     <ClInclude Include="src\laurena\algorithm\strings\readinteger.hpp" />
     <ClInclude Include="src\laurena\algorithm\strings\readuntil.hpp" />
     <ClInclude Include="src\laurena\algorithm\strings\readwhile.hpp" />

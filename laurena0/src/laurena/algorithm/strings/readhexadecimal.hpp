@@ -1,15 +1,15 @@
 ///
-/// \file     readuntil.hpp
-/// \brief    This algorithm read a string until a condition is filled
+/// \file     readhexadecimal.hpp
+/// \brief    This algorithm read a string as long as it looks like an hexadecimal integer 
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-///  This algorithm read a string until a condition is filled
+///  This algorithm read a string as long as it looks like an hexadecimal integer 
 ///
 
-#ifndef LAURENA_READUNTIL_H
-#define LAURENA_READUNTIL_H
+#ifndef LAURENA_READ_HEXADECIMAL_H
+#define LAURENA_READ_HEXADECIMAL_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -22,7 +22,9 @@
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
 
-#include <laurena/types/charset.hpp>
+#include <laurena/constants/const_charsets.hpp>
+#include <laurena/constants/const_chars.hpp>
+#include <laurena/algorithm/strings/readwhile.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -30,32 +32,22 @@
 namespace laurena {
 
 /*********************************************************************************/
-/*          algorithm readuntil                                                  */ 
+/*          algorithm readinteger                                                */ 
 /*********************************************************************************/ 
 
-template<typename ITERATOR, typename CHARTYPE, typename STRING>
-STRING readuntil(ITERATOR first, ITERATOR last, const std::function<bool (const CHARTYPE& )>& condition)
+template<typename CHARTYPE, typename ITERATOR, typename STRING>
+STRING readhexadecimal(ITERATOR source, ITERATOR last)
 {
-	ITERATOR it(first);
-	STRING   str;
-	while(it != last)
-	{
-		if (condition(*it) == true)
-			break; 
-
-		str += *it++;
-	}
-	return str;
+	return readwhile<ITERATOR,CHARTYPE,STRING>(source, last, const_charsets<CHARTYPE>::HEXADECIMAL.condition());
 }
 
-template<typename T, typename CHARTYPE>
+template<typename T>
 inline
-typename in_traits<T>::string readuntil(T& t, const std::function<bool (const CHARTYPE& )>& condition)
+typename in_traits<T>::string readhexadecimal(T& t)
 {
-	return readuntil<typename in_traits<T>::iterator, CHARTYPE, typename in_traits<T>::string>(in_traits<T>::begin(t), in_traits<T>::end(t), condition);
+	return readhexadecimal<typename in_traits<T>::chartype, typename in_traits<T>::iterator, typename in_traits<T>::string>(in_traits<T>::begin(t), in_traits<T>::end(t));
 }
-
-
+ 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

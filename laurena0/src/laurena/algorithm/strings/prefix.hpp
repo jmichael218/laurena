@@ -48,7 +48,7 @@ template<typename T0, typename T1>
 inline
 bool prefix(T0& source, const T1& tprefix)
 {
-	return prefix<in_traits<T0>::iterator, in_traits<T1>::iterator>(in_traits<T0>::first(source), in_traits<T1>::first(tprefix), in_traits<T1>::last(tprefix));
+	return prefix<in_traits<T0>::iterator, in_traits<T1>::iterator>(in_traits<T0>::begin(source), in_traits<T1>::begin(tprefix), in_traits<T1>::end(tprefix));
 }
 
 /********************************************************************************/ 
