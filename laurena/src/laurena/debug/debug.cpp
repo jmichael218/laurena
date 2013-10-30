@@ -68,24 +68,26 @@ void debug::printStackTrace ()
 /// implementation of debug::printCrtDbgReport
 void debug::printCrtDbgReport(const char* message)
 {
-    word32 s = strlen(message);
-    if (s < 10000)
-        _CrtDbgReport(_CRT_WARN, nullptr , 0 , nullptr , message ) ;
-    else
-    {
-        char buf[1001] ;
-        buf[1000]=0;
-        word32 len = 0, clen ;
-        const char*p = message;
+	#ifdef _DEBUG
+		word32 s = strlen(message);
+		if (s < 10000)
+			_CrtDbgReport(_CRT_WARN, nullptr , 0 , nullptr , message ) ;
+		else
+		{
+			char buf[1001] ;
+			buf[1000]=0;
+			word32 len = 0, clen ;
+			const char*p = message;
             
-        while ( len <= s)
-        {
-            clen = len + 1000 > s ? s - len : 1000;
-            memcpy(buf,p,clen);
-            p += clen;
-            _CrtDbgReport(_CRT_WARN, nullptr , 0 , nullptr , buf ) ;
-        }
-    }
+			while ( len <= s)
+			{
+				clen = len + 1000 > s ? s - len : 1000;
+				memcpy(buf,p,clen);
+				p += clen;
+				_CrtDbgReport(_CRT_WARN, nullptr , 0 , nullptr , buf ) ;
+			}
+		}
+	#endif
 }
 #endif
 
@@ -98,8 +100,10 @@ void debug::println(const char* message)
     #if defined(_MSC_VER)        
         debug::printCrtDbgReport(message);
 
-        if (!is_last_endl)
-            _CrtDbgReport(_CRT_WARN, nullptr , 0 , nullptr , "\r\n" ) ;
+		#ifdef _DEBUG
+			if (!is_last_endl)
+				_CrtDbgReport(_CRT_WARN, nullptr , 0 , nullptr , "\r\n" ) ;
+		#endif
     #endif
 
     for (std::ostream* i : debug::_outputs)
@@ -116,6 +120,7 @@ void debug::println(const std::string& message)
 
     // display debug message in the visual studio console
     #if defined(_MSC_VER)
+	#ifdef _DEBUG
         if ( message.length () <= 10000 )  
             _CrtDbgReport(_CRT_WARN, nullptr , 0 , nullptr , message.data()) ;
         else
@@ -123,6 +128,7 @@ void debug::println(const std::string& message)
        
          if (!is_last_endl)
             _CrtDbgReport(_CRT_WARN, nullptr , 0 , nullptr , "\r\n" ) ;
+	#endif
     #endif
 
     for (std::ostream* i : debug::_outputs)
