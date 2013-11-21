@@ -27,6 +27,7 @@ void testBitsetDescriptor();
 void testMDL();
 void testJson();
 void test_sql();
+void testMdlArray();
 
 
 
@@ -111,8 +112,11 @@ int main ()
     // build descriptors for test classes
     buildTestClassDescriptors();
 
+
     // toolboxes tests
     cstring_test ();
+
+	testMdlArray();
 
     // running tests
     testNumericDescriptors ();

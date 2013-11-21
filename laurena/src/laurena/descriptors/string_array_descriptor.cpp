@@ -30,11 +30,19 @@ string_array_descriptor::string_array_descriptor() : vector_descriptor<string_ar
 
 const descriptor* td<string_array>::desc()
 {
-    static const string_array_descriptor* res = NULL;
+    static string_array_descriptor* res = NULL;
     if (res == NULL)
     {
         res = new string_array_descriptor();
         classes::add(res);
+
+		// getter for the vector size
+		field::getter getsize = [] (const any& object, any& value) { string_array* c = anycast<string_array*>(object); value = c->size(); };
+
+		// setter for the vector size
+		field::setter setsize = [] (any& object, const any& value) { string_array* b = anycast<string_array*>(object); b->resize(anycast<word32>(value));};
+
+		res->init_virtual_field("size", word32, setsize, getsize).supportTag("vector.size");
     }
 
     return res;

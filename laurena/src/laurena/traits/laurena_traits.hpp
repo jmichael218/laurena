@@ -21,8 +21,6 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
-#include <laurena/traits/type_traits.hpp>
-
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 

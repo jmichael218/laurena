@@ -38,7 +38,20 @@ void testBasicMdlSerialization ()
     return;
 }
 
+void testMdlArray()
+{
+	string_array sa = "one two three";
+	std::string serialized_array = laurena::mdl::mdl::serialize(sa);
+	testunit::log() << "serialized array = " << serialized_array << std::endl;
+
+	string_array sa2;
+	laurena::mdl::mdl::parse(serialized_array, sa2);
+	assert(sa2.size() == 3);
+	return ;
+}
+
 void testMdl()
 {
     testBasicMdlSerialization();
+	testMdlArray();
 }

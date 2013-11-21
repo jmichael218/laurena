@@ -158,6 +158,14 @@ public:
 		auto cd = new vector_descriptor<CONTAINER,ELEMENT>(name, parentClassDescriptor );
         cd->constructor([](){return new CONTAINER;});
         classes::add(cd);        
+
+		// getter for the vector size
+		field::getter getsize = [] (const any& object, any& value) { CONTAINER* c = anycast<CONTAINER*>(object); value = c->size(); };
+
+		// setter for the vector size
+		field::setter setsize = [] (any& object, const any& value) { CONTAINER* b = anycast<CONTAINER*>(object); b->resize(anycast<word32>(value));};
+
+		cd->init_virtual_field("size", word32, setsize, getsize).supportTag("vector.size");
         return cd;
 	}
 

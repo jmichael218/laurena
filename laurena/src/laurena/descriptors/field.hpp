@@ -158,7 +158,9 @@ public:
     const any&              defaultValue () const;
     field&        defaultValue(const any&);
 
-    
+    const std::string&		supportTag() const;
+	field&					supportTag(const std::string& tag);
+	bool					needSupport() const;
     
 
     /****************************************************************************/ 
@@ -170,6 +172,8 @@ public:
     const descriptor*           _descriptor;
     boost::dynamic_bitset<>     _flags;
     const string_array*         _values;
+
+	std::string					_support_tag;
 
 	setter						_setter;
 	getter						_getter;
@@ -215,6 +219,25 @@ inline
 word32 field::offset() const 
 { 
     return this->_offset ; 
+}
+
+inline
+const std::string&	field::supportTag() const
+{ 
+	return this->_support_tag;
+}
+
+inline
+field&	field::supportTag(const std::string& tag)
+{
+	this->_support_tag = tag;
+	return *this;
+}
+
+inline
+bool field::needSupport() const
+{
+	return this->_support_tag.length() > 0;
 }
 
 inline 
