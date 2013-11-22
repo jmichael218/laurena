@@ -60,7 +60,7 @@ bool ret = true;
     for (word32 i = 0 ; i < this->size(); i ++)
     {
         const parameter& p = this->operator[](i);       
-        ret &= p.parse(c[p.name()]._value,input);
+        ret &= p.parse(c[p._name]._value,input);
     }
     return ret;
 }

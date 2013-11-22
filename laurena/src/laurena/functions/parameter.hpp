@@ -68,13 +68,6 @@ public:
     /****************************************************************************/ 
     /*          accessors                                                       */ 
     /****************************************************************************/
-    
-    inline const std::string& name () const                         { return this->_name ; }
-    inline parameter&         name (const std::string& name)        { this->_name = name ; return *this ; }
-    
-    inline const descriptor*  desc() const                          { return this->_descriptor ; }
-    inline parameter&         desc (const descriptor* d)			{ this->_descriptor = d ; return *this; }
-
 
     inline bool                     isMandatory() const             { return this->_flags.test(FLAG_MANDATORY); }
     inline parameter&               isMandatory(bool mode)          { this->_flags.set(FLAG_MANDATORY,mode); return *this; }
@@ -82,13 +75,12 @@ public:
     inline bool                     isLine() const					{ return this->_flags.test(FLAG_LINE); }
     inline parameter&               isLine(bool mode)				{ this->_flags.set(FLAG_LINE,mode); return *this; }
 
-    inline boost::dynamic_bitset<>& flags()                         { return _flags ; }
 
 
     /****************************************************************************/ 
     /*          protected data                                                  */ 
     /****************************************************************************/ 
-    protected:
+    public:
     std::string                   _name;
     const descriptor*			  _descriptor;
     boost::dynamic_bitset<>       _flags;   

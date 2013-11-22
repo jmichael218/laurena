@@ -50,8 +50,43 @@ void testMdlArray()
 	return ;
 }
 
+void testMdlParameterArray()
+{
+std::string s;
+
+
+	parameter pa;
+	pa._name = "name";
+	pa._descriptor = td<std::string>::desc();
+
+	s = laurena::mdl::mdl::serialize(pa);
+	testunit::log() << "serialized parameter = " << s << std::endl;
+
+	parameter pa2;
+	laurena::mdl::mdl::parse(s, pa2);
+	assert(pa2._descriptor == td<std::string>::desc());
+
+	parameters pas;
+	pas.resize(2);
+	pas[0]._name = "name";
+	pas[0]._descriptor = td<std::string>::desc();
+
+	pas[1]._name = "age";
+	pas[1]._descriptor = td<word16>::desc();
+
+	s = laurena::mdl::mdl::serialize(pas);
+	testunit::log() << "serialized parameters = " << s << std::endl;
+
+	parameters pas2;
+	laurena::mdl::mdl::parse(s, pas2);
+	assert(pas2.size() == 2);
+
+	return;
+}
+
 void testMdl()
 {
     testBasicMdlSerialization();
 	testMdlArray();
+	testMdlParameterArray();
 }

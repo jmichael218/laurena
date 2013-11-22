@@ -30,7 +30,7 @@ string_array_descriptor::string_array_descriptor() : vector_descriptor<string_ar
 
 const descriptor* td<string_array>::desc()
 {
-    static string_array_descriptor* res = NULL;
+    static string_array_descriptor* res = nullptr;
     if (res == NULL)
     {
         res = new string_array_descriptor();

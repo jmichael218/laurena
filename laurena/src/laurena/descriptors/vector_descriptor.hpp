@@ -117,7 +117,13 @@ public:
 
     virtual void get(any& container, const any& key, any& element) const
     {
-        assert(false);
+		CONTAINER* c = anycast<CONTAINER*>(container);
+		word32 index = anycast<word32>(key);
+
+		if (boost::is_pointer<ELEMENT>::value)
+			element = (*c) [index];
+		else
+			element = & (*c) [index];
     }
 
 };

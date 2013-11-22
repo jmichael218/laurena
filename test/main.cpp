@@ -27,7 +27,7 @@ void testBitsetDescriptor();
 void testMDL();
 void testJson();
 void test_sql();
-void testMdlArray();
+void testMdlParameterArray();
 
 
 
@@ -116,7 +116,7 @@ int main ()
     // toolboxes tests
     cstring_test ();
 
-	testMdlArray();
+	testMdlParameterArray();
 
     // running tests
     testNumericDescriptors ();

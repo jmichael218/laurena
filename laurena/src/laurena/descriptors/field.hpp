@@ -56,7 +56,8 @@ public:
         FLAGS_IS_ENUM                 = 6,  // Is an enum integer type
         FLAGS_IS_BITSET               = 8,  // Is a bitset (integer or boost::dynamic_biset) type
         FLAGS_IS_OWNER_SERIAL         = 9,
-        FLAGS_MAX                     = 9,
+		FLAGS_NO_QUOTE				  = 10, // No quote on string value. Print as it is
+        FLAGS_MAX                     = 11,
     };
 
 
@@ -147,7 +148,10 @@ public:
     bool                    dontArchive() const;
 
     field&        ignoreIfDefaultValue(bool mode);
-    bool                    ignoreIfDefaultValue() const;
+    bool          ignoreIfDefaultValue() const;
+
+	field&		  noQuote(bool mode);
+	bool		  noQuote() const;
 
     std::string&            toString(const any& object, std::string& destination) const;
     void                    fromString(any& object, const std::string& svalue) const;
@@ -246,7 +250,18 @@ void* field::ptr(void* object) const
     return memory::ptr(object,this->_offset);
 }
 
+inline
+field&	field::noQuote(bool mode)
+{
+    _flags.set(FLAGS_NO_QUOTE,mode);
+    return *this;
+}
 
+inline
+bool	field::noQuote() const
+{
+    return _flags.test(FLAGS_NO_QUOTE);
+}
 
 inline 
 bool field::isPrimaryKey () const  
@@ -353,6 +368,7 @@ field& field::hasGetter(getter callback)
 	this->_getter = callback;
 	return *this;
 }
+
 
 #define init_field(CLASSNAME,NAME,FIELD)	editFields().unused().init(NAME, field_descriptor(CLASSNAME,FIELD), offsetof(CLASSNAME,FIELD)).isPointer(field_is_pointer(CLASSNAME,FIELD))
 #define init_virtual_field(NAME,FIELDCLASS,SETTER,GETTER)    editFields().unused().init(NAME,classes::byType(typeid(FIELDCLASS)),SETTER,GETTER)

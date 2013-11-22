@@ -150,6 +150,8 @@ const class_feature* ft;
 	    this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD);
     else if (f.isBitSet())
 		this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD_LIST);
+	else if (f.noQuote())
+		this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD);
     else if ((ft = fd.feature(Feature::ANY)))
     {
         const any_feature* acf = dynamic_cast<const any_feature*>(ft);

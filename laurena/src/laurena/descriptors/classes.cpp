@@ -18,6 +18,8 @@
 #include <laurena/descriptors/any_descriptor.hpp>
 #include <laurena/descriptors/string_array_descriptor.hpp>
 #include <laurena/descriptors/bitset_descriptor.hpp>
+#include <laurena/descriptors/const_ptr_descriptor_descriptor.hpp>
+#include <laurena/descriptors/parameter_descriptor.hpp>
 
 #include <laurena/exceptions/exception.hpp>
 
@@ -87,11 +89,14 @@ void classes::init ()
     td<int64>::desc();
 
     // types descriptors
+	td<const descriptor *>::desc();
     td<any>::desc();
     td<variable>::desc();
     td<variable_list>::desc();
     td<string_array>::desc();
     td<boost::dynamic_bitset<>>::desc();
+	td<parameter>::desc();
+	td<parameters>::desc();
 
 }
 

@@ -21,6 +21,7 @@
     <ClInclude Include="src\laurena\descriptors\any_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\bitset_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\classes.hpp" />
+    <ClInclude Include="src\laurena\descriptors\const_ptr_descriptor_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\descriptable.hpp" />
     <ClInclude Include="src\laurena\descriptors\descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\features\any_feature.hpp" />
@@ -34,6 +35,7 @@
     <ClInclude Include="src\laurena\descriptors\map_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\method_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\numeric_type_descriptors.hpp" />
+    <ClInclude Include="src\laurena\descriptors\parameter_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\polymorphic_class_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\simple_type_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\standard_class_descriptor.hpp" />
@@ -78,6 +80,7 @@
     <ClCompile Include="src\laurena\descriptors\any_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\bitset_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\classes.cpp" />
+    <ClCompile Include="src\laurena\descriptors\const_ptr_descriptor_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\descriptable.cpp" />
     <ClCompile Include="src\laurena\descriptors\descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\features\class_feature.cpp" />
@@ -85,6 +88,7 @@
     <ClCompile Include="src\laurena\descriptors\field.cpp" />
     <ClCompile Include="src\laurena\descriptors\list_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\numeric_type_descriptors.cpp" />
+    <ClCompile Include="src\laurena\descriptors\parameter_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\polymorphic_class_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\standard_class_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\string_array_descriptor.cpp" />

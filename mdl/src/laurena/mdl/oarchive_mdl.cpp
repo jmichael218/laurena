@@ -119,12 +119,12 @@ const any_feature* acf = NULL;
                 this->_data << "(" << acf->desc(vptr).name() << ") ";  
             }
 
-            if (isString)
+            if (isString && !att.noQuote())
                 this->_data << "\"";
 
             this->_data << s;
 
-            if (isString)
+            if (isString && !att.noQuote())
                 this->_data << "\"";
 
             this->_data << ";" << std::endl;           

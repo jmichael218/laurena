@@ -258,6 +258,12 @@
     <ClInclude Include="src\laurena\descriptors\descriptable.hpp">
       <Filter>Fichiers d%27en-tête\descriptors</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\parameter_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\const_ptr_descriptor_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">
@@ -381,6 +387,12 @@
       <Filter>Fichiers sources\descriptors</Filter>
     </ClCompile>
     <ClCompile Include="src\laurena\descriptors\descriptable.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\parameter_descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\const_ptr_descriptor_descriptor.cpp">
       <Filter>Fichiers sources\descriptors</Filter>
     </ClCompile>
   </ItemGroup>
