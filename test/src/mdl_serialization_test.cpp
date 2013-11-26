@@ -84,9 +84,35 @@ std::string s;
 	return;
 }
 
+class TParameters : public std::vector<parameter*>
+{};
+
+
+void testMdlPArray()
+{
+	const descriptor* tpdesc = vector_descriptor<TParameters, parameter*>::build("tparameters");
+
+	TParameters tp;
+	tp.resize(1);
+	tp[0] = new parameter ();
+	tp[0]->_name = "name";
+	tp[0]->_descriptor = td<std::string>::desc();
+
+	std::string s = laurena::mdl::mdl::serialize(tp);
+	std::cout << s << std::endl;
+
+	TParameters tp2;
+	laurena::mdl::mdl::parse(s, tp2);
+
+	assert(tp2.size() == 1);
+
+	return;
+}
+
 void testMdl()
 {
     testBasicMdlSerialization();
 	testMdlArray();
 	testMdlParameterArray();
+	testMdlPArray();
 }

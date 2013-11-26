@@ -171,7 +171,10 @@ public:
 		}
 		else
 		{
-			throw LAURENA_NULL_POINTER_EXCEPTION("class constructor not set.");
+			std::string message = "class constructor not set for descriptor ";
+			message.append (this->name());
+			
+			throw LAURENA_NULL_POINTER_EXCEPTION(message);
 		}
 	}
 

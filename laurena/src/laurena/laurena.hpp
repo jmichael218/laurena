@@ -68,6 +68,9 @@
 #include <laurena/types/literator.hpp>
 #include <laurena/types/context.hpp>
 
+// functions
+#include <laurena/functions/parameter.hpp>
+
 // toolboxes
 #include <laurena/toolboxes/bitset.hpp>
 #include <laurena/toolboxes/filename.hpp>
@@ -80,6 +83,7 @@
 #include <laurena/descriptors/variable_descriptor.hpp>
 #include <laurena/descriptors/string_array_descriptor.hpp>
 #include <laurena/descriptors/bitset_descriptor.hpp>
+#include <laurena/descriptors/parameter_descriptor.hpp>
 
 //parsing
 #include <laurena/parsing/token.hpp>

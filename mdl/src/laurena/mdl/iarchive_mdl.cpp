@@ -284,8 +284,8 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(d.feature(
         if ( ccf->hasKey())
         {
 		    any key;
-		    key = attribute;
-            ccf->set(object,key,newO);
+		    key = ccf->keyDescriptor()->cast(attribute);
+            ccf->set(object, key, newO);
         }
         else
         {
