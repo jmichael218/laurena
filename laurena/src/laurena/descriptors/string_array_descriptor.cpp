@@ -12,14 +12,65 @@
 
 using namespace laurena;
 
+/********************************************************************************/ 
+/*                                                                              */ 
+/*         code for string_array_keymapper_feature                              */ 
+/*                                                                              */ 
+/********************************************************************************/ 
+string_array_keymapper_feature::string_array_keymapper_feature(const descriptor* d) : keymapper_feature(d)
+{ }
+
+string_array_keymapper_feature::~string_array_keymapper_feature()
+{ }
+
+bool string_array_keymapper_feature::map (const any& object, const any& key, any& value) const 
+{
+	string_array* sa = anycast<string_array*>(object);
+	if (sa->attributes() == nullptr)
+		value = key;
+	else
+	{
+		word32 index = anycast<word32>(key);
+		value = sa->attributes()->operator[](index);
+	}
+	return true;
+}
+    
+bool string_array_keymapper_feature::find (const any& object, any& key, const any& value) const
+{
+	string_array* sa = anycast<string_array*>(object);
+	if (sa->attributes() == nullptr)
+		key = value;
+	else
+	{
+		std::string s = anycast<std::string>(value);
+		auto i = sa->attributes()->findExact(s);
+		if (i == -1)
+			key = value;
+		else
+			key = (word32) i;
+	}     
+	return true;
+}
+
 
 /********************************************************************************/ 
 /*                                                                              */ 
-/*         code for string_array_descriptor                                    */ 
+/*         code for string_array_descriptor                                     */ 
 /*                                                                              */ 
 /********************************************************************************/ 
 string_array_descriptor::string_array_descriptor() : vector_descriptor<string_array,std::string>("stringArray")
 { }
+
+const class_feature*   string_array_descriptor::feature(Feature featureId) const
+{
+static string_array_keymapper_feature f(this);
+
+	if (featureId == Feature::KEY_MAPPER)
+		return &f;
+
+	return this->vector_descriptor<string_array, std::string>::feature(featureId);
+}
 
 /********************************************************************************/ 
 /*                                                                              */ 

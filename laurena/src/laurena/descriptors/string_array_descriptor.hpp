@@ -30,6 +30,7 @@
 #include <laurena/descriptors/vector_descriptor.hpp>
 #include <laurena/descriptors/string_descriptor.hpp>
 #include <laurena/traits/laurena_traits.hpp>
+#include <laurena/descriptors/features/keymapper_feature.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -40,6 +41,22 @@ namespace laurena {
 /*          string_array_descriptor                                              */ 
 /*********************************************************************************/ 
 
+class string_array_keymapper_feature : public keymapper_feature
+{
+public:
+
+
+    string_array_keymapper_feature(const descriptor* d);
+    virtual ~string_array_keymapper_feature ();
+
+    /****************************************************************************/ 
+    /*          any-typed   class functions                                     */ 
+    /****************************************************************************/ 
+    virtual bool map (const any& object, const any& key, any& value) const ;
+    virtual bool find (const any& object, any& key, const any& value) const ;
+     
+};
+
 class string_array_descriptor : public vector_descriptor<string_array,std::string> 
 {
 public:
@@ -48,6 +65,8 @@ public:
     /*          constructors, desctructor                                       */ 
     /****************************************************************************/ 
     string_array_descriptor();
+
+	virtual const class_feature*   feature(Feature featureId) const;
 
 };
 

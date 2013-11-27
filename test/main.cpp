@@ -117,7 +117,7 @@ int main ()
     // toolboxes tests
     cstring_test ();
 
-	testMdlPArray();
+	testStringArrayDescriptor();
 
     // running tests
     testNumericDescriptors ();

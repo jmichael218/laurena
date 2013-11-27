@@ -190,21 +190,22 @@ const class_feature* ft;
 void iarchive_mdl::readElement (const container_feature* cf, const std::string& keyname, any& object)
 {
 const descriptor* keyDescriptor = cf->keyDescriptor();
-any key, akeyname = keyname;
+any key;
 token t;
 
         const keymapper_feature* mapper = dynamic_cast<const keymapper_feature*>(cf->desc().feature(Feature::KEY_MAPPER));
         if (mapper) 
         {
-                   
+            any akeyname = keyname;       
             if ( !mapper->find(object,key,akeyname))
             {
 	            std::ostringstream stream;
                 (this->_tokenizer.prefixErrorMessage(stream)) << " ," << keyname << " is an unknow mappable key.";
                 throw LAURENA_FAILED_PARSING_EXCEPTION(stream.str().c_str(),this->_tokenizer._ptr) ;   
-            }
+            }		
         }
-        keyDescriptor->stoa(keyname, key);
+		else
+			keyDescriptor->stoa(keyname, key);
 
 	    this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_HEXADECIMAL,MDL::TOKEN_STRING);
 

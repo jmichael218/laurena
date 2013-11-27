@@ -31,7 +31,24 @@ void testStringArrayDescriptor()
 
     std::string serialized;
     oarchive_mdl::tostring(serialized, "stringArray", &sa);
-    testunit::log() << serialized << std::endl;        
+    testunit::log() << serialized << std::endl;  
+	testunit::endTest(true);
+
+    testunit::startTest("test string array's key mapper");
+	string_array sa3;
+	sa3.attributes(&sa);
+	sa3 [0] = "un";
+	sa3 [1] = "deux";
+	sa3 [2] = "trois";
+
+	serialized = laurena::mdl::mdl::serialize(sa3);
+    testunit::log() << serialized << std::endl;    
+
+	string_array sa4;
+	sa4.attributes(&sa);
+	laurena::mdl::mdl::parse(serialized, sa4);
+
+	testunit::endTest(sa4[0] == "un");
 
 }
 

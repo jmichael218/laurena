@@ -136,6 +136,7 @@ void oarchive_mdl::serializeElements(const descriptor& cd, const any& value)
 {
 
 const container_feature* ccf = dynamic_cast<const container_feature*>(cd.feature(Feature::CONTAINER));
+const keymapper_feature* mapper = dynamic_cast<const keymapper_feature*>(cd.feature(Feature::KEY_MAPPER));
 
     if (!ccf)
         return;
@@ -156,8 +157,14 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(cd.feature
         // get key 
         if ( hasKey )
         {
-            key = it.key();        
-            keystr = std::move( kcd->atos(key));            
+            key = it.key();      
+			if (mapper)
+			{
+				mapper->map(value, key, mapped);
+				keystr = std::move(mapped.tos());
+			}
+			else
+				keystr = std::move( kcd->atos(key));            
         }
         else
         {
