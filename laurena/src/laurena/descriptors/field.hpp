@@ -196,8 +196,11 @@ public:
 
     fields();
 
-    const field& get(const std::string& name);
-    const field* find(const std::string& name);    
+    const field& get(const std::string& name)   const;
+    const field* find(const std::string& name)  const;    
+
+    field& get(const std::string& name);
+    field* find(const std::string& name);    
 
 	field&		unused();
 
@@ -209,7 +212,7 @@ public:
 
 /********************************************************************************/ 
 /*                                                                              */ 
-/*              inline function                                                 */ 
+/*              inline function for class field                                 */ 
 /*                                                                              */ 
 /********************************************************************************/ 
 
@@ -368,7 +371,7 @@ field& field::hasGetter(getter callback)
 	this->_getter = callback;
 	return *this;
 }
-
+ 
 
 #define init_field(CLASSNAME,NAME,FIELD)	editFields().unused().init(NAME, field_descriptor(CLASSNAME,FIELD), offsetof(CLASSNAME,FIELD)).isPointer(field_is_pointer(CLASSNAME,FIELD))
 #define init_virtual_field(NAME,FIELDCLASS,SETTER,GETTER)    editFields().unused().init(NAME,classes::byType(typeid(FIELDCLASS)),SETTER,GETTER)

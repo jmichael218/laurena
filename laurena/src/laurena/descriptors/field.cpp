@@ -249,7 +249,7 @@ fields::fields() : std::vector<std::unique_ptr<field>>() , _used(0)
 {
 }
 
-const field& fields::get(const std::string& name)
+field& fields::get(const std::string& name)
 {
     for(std::unique_ptr<field>& f : *this)
         if (f->name() == name)
@@ -260,9 +260,29 @@ const field& fields::get(const std::string& name)
     throw new LAURENA_NULL_POINTER_EXCEPTION (message);
 }
 
-const field* fields::find(const std::string& name)
+field* fields::find(const std::string& name)
 {
     for(std::unique_ptr<field>& f : *this)
+        if (f->name() == name)
+            return f.get();
+
+    return nullptr;
+}
+
+const field& fields::get(const std::string& name) const
+{
+    for(const std::unique_ptr<field>& f : *this)
+        if (f->name() == name)
+            return *f;
+
+    std::string message (name);
+	message.append (" is an unknow object field name.");
+    throw new LAURENA_NULL_POINTER_EXCEPTION (message);
+}
+
+const field* fields::find(const std::string& name) const
+{
+    for(const std::unique_ptr<field>& f : *this)
         if (f->name() == name)
             return f.get();
 
