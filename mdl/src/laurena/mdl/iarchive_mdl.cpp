@@ -205,11 +205,17 @@ token t;
             }		
         }
 		else
-			keyDescriptor->stoa(keyname, key);
+			if (cf->hasKey())
+				keyDescriptor->stoa(keyname, key);
 
 	    this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_HEXADECIMAL,MDL::TOKEN_STRING);
 
-		cf->set(object,key,t);
+		if (cf->hasKey())
+			cf->set(object,key,t);
+		else
+		{
+			cf->push(object, t);
+		}
 		return ;
 }
 

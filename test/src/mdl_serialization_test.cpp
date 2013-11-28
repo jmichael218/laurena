@@ -109,10 +109,41 @@ void testMdlPArray()
 	return;
 }
 
+
+
+void testMdlList ()
+{
+	const descriptor* lwdesc = list_descriptor<LWord32, word32>::build("lword32");
+	LWord32 lw;
+	lw.push_back(65);
+	lw.push_back(486);
+	lw.push_back(-4);
+
+	std::string s = laurena::mdl::mdl::serialize(lw);
+	std::cout << s << std::endl;
+
+	LWord32 lw2;
+	laurena::mdl::mdl::parse(s, lw2);
+
+	const descriptor* lsdesc  = list_descriptor<LString, std::string>::build("lstring");
+	LString ls;
+	ls.push_back("hello");
+	ls.push_back("world");
+
+	s = laurena::mdl::mdl::serialize(ls);
+	std::cout << s << std::endl;
+
+	LString ls2;
+	laurena::mdl::mdl::parse(s, ls2);
+
+	return;
+}
+
 void testMdl()
 {
     testBasicMdlSerialization();
 	testMdlArray();
 	testMdlParameterArray();
 	testMdlPArray();
+	testMdlList();
 }

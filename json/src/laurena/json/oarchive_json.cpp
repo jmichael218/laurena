@@ -163,7 +163,6 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(cd.feature
 
     ccf->begin(value);
     
-
     for (literator it = ccf->begin(value); it != ccf->end(value); ++it)
     {
 
@@ -186,7 +185,9 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(cd.feature
         const format* typeFormat = dynamic_cast<const format*>(ecd->annotations().get(JSON::ANNOTATION_NAME));
         if (typeFormat)
         {
-            this->_data << this->_tab << keystr << " = " ;
+			if ( hasKey )
+				this->_data << this->_tab << keystr << " = " ;
+
             typeFormat->write(this->_data,element);
             continue;
         }
@@ -209,7 +210,8 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(cd.feature
         else
         {            
 
-            this->_data << this->_tab << keystr << " = " ;
+			if ( hasKey )
+				this->_data << this->_tab << keystr << " = " ;
                     
             elementstr = std::move (ecd->atos(element));
             bool isString = false;
@@ -227,7 +229,7 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(cd.feature
             if (isString)
                 this->_data << "\"";
 
-            this->_data << ";" << std::endl;  
+            this->_data << std::endl;  
         }   
          
     }

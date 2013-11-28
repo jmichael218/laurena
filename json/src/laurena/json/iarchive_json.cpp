@@ -44,6 +44,22 @@ void iarchive_json::readToken(token& tk, boost::dynamic_bitset<>& allowed_tokens
     }
 }
 
+bool iarchive_json::readMaybeToken (token& tk, boost::dynamic_bitset<>& allowed_tokens)
+{
+    while (true)
+    {
+        int32 res = this->_tokenizer.readExpected(tk,JSON::units(),allowed_tokens);
+
+        if (res == -1)        
+            return false;        
+
+        tk._token_id = res;
+
+        if ( !JSON::mask_tab_tokens().test (res))
+            return true;
+    }
+}
+
 void iarchive_json::readExpected(token& token, word8 tokenId)
 {
 boost::dynamic_bitset<> allowed;
@@ -78,6 +94,19 @@ boost::dynamic_bitset<> allowed;
 	allowed.set(tokenId3);
 
     this->readToken(token,allowed);
+}
+
+bool iarchive_json::readMaybe(token& token, word8 tokenId1, word8 tokenId2, word8 tokenId3)
+{
+boost::dynamic_bitset<> allowed;
+
+    allowed.resize(JSON::TOKEN_MAX);
+    allowed |= JSON::mask_tab_tokens();
+    allowed.set(tokenId1);
+	allowed.set(tokenId2);
+	allowed.set(tokenId3);
+
+    return this->readMaybeToken(token,allowed);
 }
 
 void iarchive_json::readExpected(token& token, word8 tokenId1, word8 tokenId2, word8 tokenId3, word8 tokenId4)
@@ -209,18 +238,30 @@ literator it = ccf->begin(object);
 word32 index = 0;
 any key;
 
+	bool tinyElement = ecd->has(descriptor::Flags::TINY);
 	while (true)
 	{
-		this->readExpected(t,JSON::TOKEN_ARRAY_BRACKET_CLOSE, JSON::TOKEN_BRACKET_OPEN, JSON::TOKEN_COLON);
-		if ( t._token_id == JSON::TOKEN_ARRAY_BRACKET_CLOSE)
-			return ;
+		bool ok = this->readMaybe(t,JSON::TOKEN_ARRAY_BRACKET_CLOSE, JSON::TOKEN_BRACKET_OPEN, JSON::TOKEN_COLON);
 
-		if (t._token_id == JSON::TOKEN_COLON)
-			this->readExpected(t,JSON::TOKEN_BRACKET_OPEN);
+		if (ok)
+		{
+			if ( t._token_id == JSON::TOKEN_ARRAY_BRACKET_CLOSE)
+				return ;
 
-		element = std::move(ecd->create());
-		
-		this->parseObject(element);
+			if (t._token_id == JSON::TOKEN_COLON && !tinyElement)
+				this->readExpected(t,JSON::TOKEN_BRACKET_OPEN);
+		}
+
+		if (tinyElement)
+		{
+			this->readExpected(t,JSON::TOKEN_SINGLE_STRING, JSON::TOKEN_INTEGER);
+			element = ecd->cast(t);
+		}
+		else
+		{
+			element = std::move(ecd->create());
+			this->parseObject(element);
+		}
 
 		if (hasKey)
 		{

@@ -29,7 +29,8 @@ void testJson();
 void test_sql();
 void testMdlParameterArray();
 void testMdlPArray();
-
+void testMdlList ();
+void testJsonlList();
 
 
 extern void cstring_test ();
@@ -117,7 +118,7 @@ int main ()
     // toolboxes tests
     cstring_test ();
 
-	testStringArrayDescriptor();
+	testJsonlList();
 
     // running tests
     testNumericDescriptors ();

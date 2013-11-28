@@ -96,8 +96,15 @@ public:
     virtual void push(any& container, any& element) const
     {
         CONTAINER* c = anycast<CONTAINER*>(container);
-		if (boost::is_pointer<ELEMENT>::value || element.desc()->has(descriptor::Flags::TINY))
+		if ( element.desc()->has(descriptor::Flags::TINY))
+		{
+			element = _elements_descriptor->cast(element);
 			c->push_back(anycast<ELEMENT>(element));
+		}
+		else if (boost::is_pointer<ELEMENT>::value)
+		{
+			c->push_back(anycast<ELEMENT>(element));
+		}
 		else
 		{
 			ELEMENT* e = anycast<ELEMENT*>(element);

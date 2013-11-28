@@ -73,7 +73,36 @@ void testBasicJsonSerialization ()
     return;
 }
 
+void testJsonlList ()
+{
+	const descriptor* lwdesc = list_descriptor<LWord32, word32>::build("lword32");
+	LWord32 lw;
+	lw.push_back(65);
+	lw.push_back(486);
+	lw.push_back(-4);
+
+	std::string s = laurena::json::json::serialize(lw);
+	std::cout << s << std::endl;
+
+	LWord32 lw2;
+	laurena::json::json::parse(s, lw2);
+
+	const descriptor* lsdesc  = list_descriptor<LString, std::string>::build("lstring");
+	LString ls;
+	ls.push_back("hello");
+	ls.push_back("world");
+
+	s = laurena::json::json::serialize(ls);
+	std::cout << s << std::endl;
+
+	LString ls2;
+	laurena::json::json::parse(s, ls2);
+
+	return;
+}
+
 void testJson()
 {
     testBasicJsonSerialization();
+	testJsonlList();
 }

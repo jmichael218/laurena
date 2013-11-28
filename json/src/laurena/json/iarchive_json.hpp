@@ -57,11 +57,14 @@ public:
 	/****************************************************************************/ 
 	protected:
 	void readToken(token& tk, boost::dynamic_bitset<>& allowed_tokens);
+	bool readMaybeToken (token& tk, boost::dynamic_bitset<>& allowed_tokens);
 
     void readExpected(token& tk, word8 tokenId);
     void readExpected(token& tk, word8 tokenId1, word8 tokenId2);
     void readExpected(token& tk, word8 tokenId1, word8 tokenId2, word8 tokenId3);
 	void readExpected(token& tk, word8 tokenId1, word8 tokenId2, word8 tokenId3, word8 tokenId4);
+
+	bool readMaybe(token& token, word8 tokenId1, word8 tokenId2, word8 tokenId3);
 
 	void parseObject(any& destination);
 	void parseElements(any& object);
