@@ -81,7 +81,7 @@ void testJsonlList ()
 	lw.push_back(486);
 	lw.push_back(-4);
 
-	std::string s = laurena::json::json::serialize(lw);
+	std::string s = laurena::json::json::serialize(lw, laurena::json::json::COMPACT);
 	std::cout << s << std::endl;
 
 	LWord32 lw2;
@@ -92,7 +92,7 @@ void testJsonlList ()
 	ls.push_back("hello");
 	ls.push_back("world");
 
-	s = laurena::json::json::serialize(ls);
+	s = laurena::json::json::serialize(ls, laurena::json::json::COMPACT);
 	std::cout << s << std::endl;
 
 	LString ls2;
@@ -101,8 +101,23 @@ void testJsonlList ()
 	return;
 }
 
+void testJSonNoWrapper()
+{
+	character bob;
+    bob._name = "Bob" ;
+    bob._age = 28;
+
+    testunit::type("JSON - simple object no wrapper");
+    testunit::function("oarchive_json::toString + iarchive_json::fromString - simple object");
+
+    std::string serialized_bob  = laurena::json::json::serialize(bob, laurena::json::json::NO_WRAPPER);
+
+    testunit::log() << serialized_bob << std::endl;
+}
+
 void testJson()
 {
     testBasicJsonSerialization();
 	testJsonlList();
+	testJSonNoWrapper();
 }

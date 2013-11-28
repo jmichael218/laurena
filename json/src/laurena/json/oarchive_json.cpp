@@ -14,7 +14,7 @@
 using namespace laurena;
 using namespace json;
 
-oarchive_json::oarchive_json() : oarchive () , _compact (false) , _tab ("\t"), _nb_fields(0), _depth(0)
+oarchive_json::oarchive_json() : oarchive () , _compact (false), _no_wrapper(false), _tab ("\t"), _nb_fields(0), _depth(0)
 {
 }
 
@@ -229,6 +229,7 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(cd.feature
             if (isString)
                 this->_data << "\"";
 
+			if (!this->_compact)
             this->_data << std::endl;  
         }   
          
@@ -286,26 +287,28 @@ const descriptor* cd = value.desc();
 oarchive& oarchive_json::serialize(const std::string& name, const any& value,bool injection)
 {
 
-   if (this->_compact) 
-		this->_data << "{" << "\"" << name << "\":";
-	else
+	if (!this->_no_wrapper)
 	{
-			this->_data << this->_tab << "{" << std::endl;
-			this->_data << this->_tab.increase() <<  "\"" << name << "\":" << std::endl;
+	   if (this->_compact) 
+			this->_data << "{" << "\"" << name << "\":";
+		else
+		{
+				this->_data << this->_tab << "{" << std::endl;
+				this->_data << this->_tab.increase() <<  "\"" << name << "\":" << std::endl;
 
+		}
 	}
 	
-   this->serializeObject(value);
+	this->serializeObject(value);
 
-
-	if (this->_compact)
-		this->_data << "}" ;
-	else 
+	if (!this->_no_wrapper)
 	{
-
-		this->_data << std::endl << this->_tab.decrease() << "}" ;
+		if (this->_compact)
+			this->_data << "}" ;
+		else 
+			this->_data << std::endl << this->_tab.decrease() << "}" ;	
 	}
-    return *this;
+	return *this;
 }
 
 

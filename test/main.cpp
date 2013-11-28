@@ -31,6 +31,7 @@ void testMdlParameterArray();
 void testMdlPArray();
 void testMdlList ();
 void testJsonlList();
+void testJSonNoWrapper();
 
 
 extern void cstring_test ();
@@ -118,7 +119,7 @@ int main ()
     // toolboxes tests
     cstring_test ();
 
-	testJsonlList();
+	testJSonNoWrapper();
 
     // running tests
     testNumericDescriptors ();

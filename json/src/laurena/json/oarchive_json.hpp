@@ -54,7 +54,8 @@ class oarchive_json : public oarchive{
 
     void serializeElements(const descriptor& cd, const any& value);
 
-	inline oarchive_json& compact (bool mode) { this->_compact = mode; return *this; }
+	inline oarchive_json& compact   (bool mode)		{ this->_compact = mode; return *this; }
+	inline oarchive_json& nowrapper (bool mode)		{ this->_no_wrapper = mode; return *this; }
 
     protected:
     void completeLastLine();
@@ -68,6 +69,7 @@ class oarchive_json : public oarchive{
     protected:
     tabs<>					_tab;
     bool					_compact ;
+	bool					_no_wrapper;
     word16					_nb_fields;         // nb of serialized fields in a level
 	word32					_depth;
     

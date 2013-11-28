@@ -38,6 +38,7 @@ public:
     enum FLAGS {
 
         COMPACT = (1<<0),
+		NO_WRAPPER = (1<<1),
 
     };
 

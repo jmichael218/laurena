@@ -17,6 +17,7 @@ std::string& laurena::json::json::serialize(std::string& destination, const std:
 {
     oarchive_json ajson;
     ajson.compact( flags & json::COMPACT );
+	ajson.nowrapper(flags & json::NO_WRAPPER);
 
     ajson.serialize(name,value,false);
 
