@@ -115,9 +115,52 @@ void testJSonNoWrapper()
     testunit::log() << serialized_bob << std::endl;
 }
 
+void testJsonAny()
+{
+
+	// test int
+	variable a;
+	a._value = (word32) 5;
+	a._name = "age";
+    std::string s  = laurena::json::json::serialize(a);
+    testunit::log() << s << std::endl;
+
+	variable b;
+	laurena::json::json::parse(s, b);
+
+	assert(anycast<int64>(b._value) == 5);
+
+	// test string
+	a._value = "Red John";
+	a._name = "name";
+
+    s  = laurena::json::json::serialize(a);
+    testunit::log() << s << std::endl;
+
+	laurena::json::json::parse(s, b);
+
+	assert(anycast<std::string>(b._value) == "Red John");
+
+
+	// test boolean
+	a._name = "alive";
+	a._value = true;
+
+    s  = laurena::json::json::serialize(a);
+    testunit::log() << s << std::endl;
+
+	laurena::json::json::parse(s, b);
+
+	assert(anycast<bool>(b._value) == true);
+
+	return;
+
+}
+
 void testJson()
 {
     testBasicJsonSerialization();
 	testJsonlList();
 	testJSonNoWrapper();
+	testJsonAny();
 }

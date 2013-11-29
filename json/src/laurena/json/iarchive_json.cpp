@@ -145,6 +145,8 @@ void iarchive_json::parseValue(any& object,const field* fdesc)
 {
 token t;
 any a;
+static const descriptor* desc_int64 = classes::byType(typeid(int64));
+
 
 	if (fdesc)
 	{
@@ -179,7 +181,10 @@ any a;
 			break;
 
 		case JSON::TOKEN_INTEGER :
-			fdesc->set(object,t);
+			if (fdesc->desc().feature(Feature::ANY))
+				fdesc->set(object,desc_int64->cast(t));
+			else
+				fdesc->set(object,t);
 			break;
 
 		case JSON::TOKEN_BRACKET_OPEN:

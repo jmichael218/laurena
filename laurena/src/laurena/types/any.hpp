@@ -151,6 +151,11 @@ class any
         return *this;
     }
 
+	any& operator=(const char* str)
+	{
+		return this->operator=(std::string(str));
+	}
+
     any& operator=(const any& value);
 	any& operator=(any&& value);
 
