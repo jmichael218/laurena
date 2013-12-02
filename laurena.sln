@@ -42,6 +42,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test0", "test0\test0.vcxpro
 		{FB1D2C3E-B598-4050-99C9-447E65E7396F} = {FB1D2C3E-B598-4050-99C9-447E65E7396F}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "velocity", "velocity\velocity.vcxproj", "{BE77DA79-0882-4BEC-BEAC-7299F05A3874}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -84,6 +86,10 @@ Global
 		{38C0613E-BD76-4709-A164-D4923E320FD8}.Debug|Win32.Build.0 = Debug|Win32
 		{38C0613E-BD76-4709-A164-D4923E320FD8}.Release|Win32.ActiveCfg = Release|Win32
 		{38C0613E-BD76-4709-A164-D4923E320FD8}.Release|Win32.Build.0 = Release|Win32
+		{BE77DA79-0882-4BEC-BEAC-7299F05A3874}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BE77DA79-0882-4BEC-BEAC-7299F05A3874}.Debug|Win32.Build.0 = Debug|Win32
+		{BE77DA79-0882-4BEC-BEAC-7299F05A3874}.Release|Win32.ActiveCfg = Release|Win32
+		{BE77DA79-0882-4BEC-BEAC-7299F05A3874}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
