@@ -264,6 +264,9 @@
     <ClInclude Include="src\laurena\descriptors\const_ptr_descriptor_descriptor.hpp">
       <Filter>Fichiers d%27en-tête\descriptors</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\bool_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">
@@ -393,6 +396,9 @@
       <Filter>Fichiers sources\descriptors</Filter>
     </ClCompile>
     <ClCompile Include="src\laurena\descriptors\const_ptr_descriptor_descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\bool_descriptor.cpp">
       <Filter>Fichiers sources\descriptors</Filter>
     </ClCompile>
   </ItemGroup>

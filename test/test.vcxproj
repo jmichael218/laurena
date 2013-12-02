@@ -86,6 +86,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\any_descriptor_test.cpp" />
     <ClCompile Include="src\bitset_descriptor_test.cpp" />
+    <ClCompile Include="src\bool_descriptor.cpp" />
     <ClCompile Include="src\cstring_test.cpp" />
     <ClCompile Include="src\json_serialization_test.cpp" />
     <ClCompile Include="src\mdl_serialization_test.cpp" />

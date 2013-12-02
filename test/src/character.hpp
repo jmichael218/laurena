@@ -82,6 +82,15 @@ class LWord32 : public std::list<word32>
 
 class LString : public std::list<std::string>
 { };
+
+class test_bool
+{
+public:
+
+	bool		_a;
+	bool		_b;
+
+};
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

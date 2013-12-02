@@ -33,6 +33,7 @@ void testMdlList ();
 void testJsonlList();
 void testJSonNoWrapper();
 void testJsonAny();
+void testBoolDescriptor ();
 
 
 extern void cstring_test ();
@@ -94,6 +95,14 @@ void buildTestClassDescriptors ()
     d4->init_field(test_bitset_bitfield,"bitset",_bitset).isBitSet(the_tens);
     d4->init_field(test_bitset_bitfield,"i64",_i64);
 
+
+    /****************************************************************************/ 
+    /*          build class test_bool descriptor								*/ 
+    /****************************************************************************/
+    auto d5 = standard_class_descriptor<test_bool>::build("test_bool");
+    d5->init_field(test_bool,"a",_a);
+    d5->init_field(test_bool,"b",_b);
+
 }
 
 
@@ -120,7 +129,7 @@ int main ()
     // toolboxes tests
     cstring_test ();
 
-	testJsonAny();
+	testBoolDescriptor();
 
     // running tests
     testNumericDescriptors ();

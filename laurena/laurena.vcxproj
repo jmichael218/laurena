@@ -20,6 +20,7 @@
     <ClInclude Include="src\laurena\descriptors\annotation.hpp" />
     <ClInclude Include="src\laurena\descriptors\any_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\bitset_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\bool_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\classes.hpp" />
     <ClInclude Include="src\laurena\descriptors\const_ptr_descriptor_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\descriptable.hpp" />
@@ -79,6 +80,7 @@
     <ClCompile Include="src\laurena\descriptors\annotation.cpp" />
     <ClCompile Include="src\laurena\descriptors\any_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\bitset_descriptor.cpp" />
+    <ClCompile Include="src\laurena\descriptors\bool_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\classes.cpp" />
     <ClCompile Include="src\laurena\descriptors\const_ptr_descriptor_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\descriptable.cpp" />

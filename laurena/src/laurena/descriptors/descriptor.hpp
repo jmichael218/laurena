@@ -61,6 +61,7 @@ class descriptor : public descriptable {
 		,METHODS		//<! The descriptor does have description of methods and can execute them by name finding i.e the class can be used in an interpreted language
 		,STRING_CAST    //<! The type can be printed as a string, like int i = 1 => has a string casted value of "1" ;
 		,TINY			//<! tiny type are numeric value or std::string 
+		,NO_QUOTE		//<! A string value but don't display quote (like boolean as true or false instead of "true" or "false"
 
 
 	};

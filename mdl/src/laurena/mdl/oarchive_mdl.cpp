@@ -103,7 +103,7 @@ const any_feature* acf = NULL;
 
             att.toString(value,s);
             if (acd.type() == typeid(std::string))
-                isString = true;
+                isString = !acd.has(descriptor::Flags::NO_QUOTE);
             else
             {
                 if ( !att.isEnum() && !att.isBitSet())

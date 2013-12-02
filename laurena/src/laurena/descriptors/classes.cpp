@@ -20,6 +20,7 @@
 #include <laurena/descriptors/bitset_descriptor.hpp>
 #include <laurena/descriptors/const_ptr_descriptor_descriptor.hpp>
 #include <laurena/descriptors/parameter_descriptor.hpp>
+#include <laurena/descriptors/bool_descriptor.hpp>
 
 #include <laurena/exceptions/exception.hpp>
 
@@ -87,6 +88,8 @@ void classes::init ()
     td<int32>::desc();
     td<word64>::desc();
     td<int64>::desc();
+
+	td<bool>::desc();
 
     // types descriptors
 	td<const descriptor *>::desc();

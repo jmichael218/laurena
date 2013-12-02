@@ -150,7 +150,7 @@ const class_feature* ft;
 	    this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD);
     else if (f.isBitSet())
 		this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD_LIST);
-	else if (f.noQuote())
+	else if (f.noQuote() || fd.has(descriptor::Flags::NUMERIC_VALUE))
 		this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD);
     else if ((ft = fd.feature(Feature::ANY)))
     {

@@ -51,6 +51,7 @@
 #include <laurena/descriptors/numeric_type_descriptors.hpp>
 #include <laurena/descriptors/list_descriptor.hpp>
 #include <laurena/descriptors/vector_descriptor.hpp>
+#include <laurena/descriptors/bool_descriptor.hpp>
 
 // class features
 #include <laurena/descriptors/features/class_feature.hpp>
