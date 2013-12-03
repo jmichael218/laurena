@@ -93,7 +93,7 @@ any value, value2;
 				return s-1;
 
 			s += varname.length();
-			value.desc()->getField(varname).get(value, value2);
+			value.desc()->getFieldValue(value, varname, value2);
 			value = value2;
 		}
 		else

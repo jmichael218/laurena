@@ -14,6 +14,28 @@ using namespace laurena;
 using namespace test;
 using namespace mdl;
 
+void testStringArrayGetFieldValue()
+{
+    string_array sa ;
+    sa.push_back("one");
+    sa.push_back("two");
+    sa.push_back("three");
+
+	string_array sa3;
+	sa3.attributes(&sa);
+	sa3 [0] = "un";
+	sa3 [1] = "deux";
+	sa3 [2] = "trois";
+
+    const descriptor* cd = td<string_array>::desc();
+
+	any a;
+	cd->getFieldValue(&sa3, "one", a);
+	assert(anycast<std::string>(a) == "un");
+
+
+}
+
 void testStringArrayDescriptor()
 {
     testunit::type("descriptor<string_array>");
@@ -49,6 +71,8 @@ void testStringArrayDescriptor()
 	laurena::mdl::mdl::parse(serialized, sa4);
 
 	testunit::endTest(sa4[0] == "un");
+
+	testStringArrayGetFieldValue();
 
 }
 

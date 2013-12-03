@@ -72,6 +72,15 @@ static string_array_keymapper_feature f(this);
 	return this->vector_descriptor<string_array, std::string>::feature(featureId);
 }
 
+any& string_array_descriptor::getFieldValue(const any& ptr, const std::string& attribute_name,any& value) const
+{
+	const string_array* psa = anycast<const string_array*>(ptr);
+	int index = (psa->attributes() == nullptr) ?  -1 : psa->attributes()->find(attribute_name);
+	if (index == -1)
+		return this->vector_descriptor<string_array,std::string>::getFieldValue(ptr, attribute_name, value);
+	return value = psa->operator[](index);
+}
+
 /********************************************************************************/ 
 /*                                                                              */ 
 /*         code for td<string_array>                                            */ 

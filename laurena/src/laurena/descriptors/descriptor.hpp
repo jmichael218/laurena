@@ -202,13 +202,13 @@ class descriptor : public descriptable {
 	}
 
     //! Read a field member value   
-    any& getObjectField(const any& ptr, const std::string& attribute_name,any& value) const;
+    virtual any& getFieldValue(const any& ptr, const std::string& attribute_name,any& value) const;
 
     template<class T>
-    inline any& getObjectField(const T* object, const std::string& field, any& value) const
+    inline any& getFieldValue(const T* object, const std::string& field, any& value) const
     { 
 		any a = object;
-		return this->getObjectField (a,field,value) ; 
+		return this->getFieldValue (a,field,value) ; 
 	}
 
     /****************************************************************************/ 

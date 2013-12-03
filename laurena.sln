@@ -44,6 +44,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test0", "test0\test0.vcxpro
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "velocity", "velocity\velocity.vcxproj", "{BE77DA79-0882-4BEC-BEAC-7299F05A3874}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E4E38395-6C22-4954-9C6C-6F772979279D} = {E4E38395-6C22-4954-9C6C-6F772979279D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

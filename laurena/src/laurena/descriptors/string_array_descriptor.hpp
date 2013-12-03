@@ -67,6 +67,7 @@ public:
     string_array_descriptor();
 
 	virtual const class_feature*   feature(Feature featureId) const;
+	virtual any& getFieldValue(const any& ptr, const std::string& attribute_name,any& value) const;
 
 };
 

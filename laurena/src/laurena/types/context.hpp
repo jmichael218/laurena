@@ -40,6 +40,8 @@ class context : public std::unordered_map<std::string, variable>
 public:
 
 	variable* get(const std::string& name);
+
+	context&  push(const std::string& name, any value);
 };
 
 /********************************************************************************/ 

@@ -16,4 +16,12 @@ variable* context::get(const std::string& name)
 	auto it = this->find(name);
 	return (it == this->end()) ? nullptr : &it->second;
 }
+
+context&  context::push(const std::string& name, any value)
+{
+	variable& v = this->operator[](name);
+	v._name = name;
+	v._value = value;
+	return *this;
+}
 //End of files

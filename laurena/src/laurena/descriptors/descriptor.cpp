@@ -154,7 +154,7 @@ void descriptor::setObjectField(any& object,const std::string& field_name, const
     f.set(object,value);
 }
 
-any& descriptor::getObjectField(const any& ptr, const std::string& field_name, any& value) const
+any& descriptor::getFieldValue(const any& ptr, const std::string& field_name, any& value) const
 {
     const field& f = this->getField(field_name);
     return f.get(ptr,value);    
