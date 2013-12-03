@@ -34,6 +34,7 @@ void testJsonlList();
 void testJSonNoWrapper();
 void testJsonAny();
 void testBoolDescriptor ();
+void testVelocity();
 
 
 extern void cstring_test ();
@@ -129,7 +130,7 @@ int main ()
     // toolboxes tests
     cstring_test ();
 
-	testBoolDescriptor();
+	testVelocity();
 
     // running tests
     testNumericDescriptors ();

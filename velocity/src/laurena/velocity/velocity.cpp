@@ -8,6 +8,7 @@
 ///
 #include <laurena/velocity/velocity.hpp>
 #include <laurena/algorithm/strings/readuntil.hpp>
+#include <laurena/algorithm/strings/readwhile.hpp>
 #include <laurena/constants/const_charsets.hpp>
 
 using namespace laurena;
@@ -52,11 +53,10 @@ const char* velocity::handleSharpCharacter(const char* src, std::ostream& output
 	switch (*src)
 	{
 		case '*' : // comment
-			src = this->skipComment(src);
-			break;
+			return this->skipComment(++src);
+
 		case '#' : // single line comment
-			src = this->skipSingleLineComment(src);
-			break;
+			return this->skipSingleLineComment(++src);
 
 	}
 	output << "#" ;
@@ -65,12 +65,43 @@ const char* velocity::handleSharpCharacter(const char* src, std::ostream& output
 
 const char* velocity::handleDollarCharacter(const char* src, std::ostream& output)
 {
-	std::string varname = laurena::readwhile(src,const_charsets<>::VARNAME.condition());
-	if (varname.length() == 0)
-		return src;
+const char* s = src;
+std::string varname = laurena::readwhile(s,const_charsets<>::VARNAME.condition());
+variable* v;
+any value, value2;
 
-	src += varname.length();
+	if (varname.length() == 0)
+		return s;
+
+	s += varname.length();
+	v = this->_context.get(varname);
+	if (!v)
+	{
+		std::string msg = varname;
+		msg.append(" is an unknow variable name.");
+		throw LAURENA_FAILED_PARSING_EXCEPTION(msg.c_str(), src);
+	}
 	
+	value = v->_value;
+	while(true)
+	{
+		if (*s == '.')
+		{
+			++s;
+			varname = laurena::readwhile(s,const_charsets<>::VARNAME.condition());
+			if (varname.length() == 0)
+				return s-1;
+
+			s += varname.length();
+			value.desc()->getField(varname).get(value, value2);
+			value = value2;
+		}
+		else
+		{
+			output << value.tos();
+			return s;
+		}
+	}
 }
 
 std::string velocity::render(const std::string& source)
@@ -88,10 +119,9 @@ std::string readed;
 		if (velo_alphabet.test(*src))
 		{
 			if (*src == '#')
-				src = this->handleSharpCharacter(src, ss);
+				src = this->handleSharpCharacter(++src, ss);
 			else if (*src == '$')
-				src = this->handleDollarCharacter(src, ss);
-			}
+				src = this->handleDollarCharacter(++src, ss);
 		}
 	}
 

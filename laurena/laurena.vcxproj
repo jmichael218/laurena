@@ -112,6 +112,7 @@
     <ClCompile Include="src\laurena\toolboxes\bitset.cpp" />
     <ClCompile Include="src\laurena\toolboxes\filename.cpp" />
     <ClCompile Include="src\laurena\types\any.cpp" />
+    <ClCompile Include="src\laurena\types\context.cpp" />
     <ClCompile Include="src\laurena\types\literator.cpp" />
     <ClCompile Include="src\laurena\types\string_array.cpp" />
     <ClCompile Include="src\laurena\types\variable.cpp" />

@@ -401,6 +401,9 @@
     <ClCompile Include="src\laurena\descriptors\bool_descriptor.cpp">
       <Filter>Fichiers sources\descriptors</Filter>
     </ClCompile>
+    <ClCompile Include="src\laurena\types\context.cpp">
+      <Filter>Fichiers sources\types</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="todo.txt">

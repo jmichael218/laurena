@@ -37,7 +37,9 @@ namespace laurena {
 
 class context : public std::unordered_map<std::string, variable>
 {
+public:
 
+	variable* get(const std::string& name);
 };
 
 /********************************************************************************/ 
