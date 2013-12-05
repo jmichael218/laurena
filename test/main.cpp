@@ -36,6 +36,7 @@ void testJsonAny();
 void testBoolDescriptor ();
 void testVelocity();
 void testStringArrayGetFieldValue();
+void testNewFieldInit();
 
 
 extern void cstring_test ();
@@ -131,7 +132,7 @@ int main ()
     // toolboxes tests
     cstring_test ();
 
-	testStringArrayGetFieldValue();
+	testNewFieldInit();
 
     // running tests
     testNumericDescriptors ();

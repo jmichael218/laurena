@@ -90,6 +90,7 @@
     <ClCompile Include="src\cstring_test.cpp" />
     <ClCompile Include="src\json_serialization_test.cpp" />
     <ClCompile Include="src\mdl_serialization_test.cpp" />
+    <ClCompile Include="src\new_field_init.cpp" />
     <ClCompile Include="src\numeric_descriptors_test.cpp" />
     <ClCompile Include="src\sql_test.cpp" />
     <ClCompile Include="src\string_array_descriptor_test.cpp" />

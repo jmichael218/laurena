@@ -228,7 +228,7 @@ std::string b ;
             return false ;
 
         if ( b.length() == 0)
-            buf << std::endl;
+            buf << "\r\n";
         else
             buf << b;
                 
