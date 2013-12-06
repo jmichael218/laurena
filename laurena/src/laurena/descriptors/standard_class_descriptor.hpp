@@ -137,7 +137,8 @@ public:
 		typedef traits<FIELDTYPE>::basetype basetype;
 		const descriptor* fdesc = classes::byType(typeid(basetype));
 		word32 offset = (word32) &(((T*)(0))->*f);
-		return this->editFields().unused().init(name, fdesc, offset);
+		bool bIsPointer = std::is_pointer<FIELDTYPE>::value;
+		return this->editFields().unused().init(name, fdesc, offset).isPointer(bIsPointer);
 	}
 
     /****************************************************************************/ 
