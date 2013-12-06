@@ -115,6 +115,15 @@ public:
     field& init (field& source);
 	field& init (const char* name, const descriptor* cd, setter setfunction, getter getfunction);
 
+	template<typename CLASS, typename FIELDTYPE>
+	field& init(FIELDTYPE CLASS::*f, const char* name)
+	{
+		typedef traits<FIELDTYPE>::basetype basetype;
+		const descriptor* fdesc = classes::byType(typeid(basetype));
+		word32 offset = (word32) &(((CLASS*)(0))->*f);
+		return this->init(name, fdesc, offset);
+	}
+
     void        set(any& object, const any& value)  const;
     any&        get(const any& object, any& value)        const;
 
@@ -372,8 +381,7 @@ field& field::hasGetter(getter callback)
 	return *this;
 }
  
-
-#define init_field(CLASSNAME,NAME,FIELD)	editFields().unused().init(NAME, field_descriptor(CLASSNAME,FIELD), offsetof(CLASSNAME,FIELD)).isPointer(field_is_pointer(CLASSNAME,FIELD))
+//#define init_field(CLASSNAME,NAME,FIELD)	editFields().unused().init(NAME, field_descriptor(CLASSNAME,FIELD), offsetof(CLASSNAME,FIELD)).isPointer(field_is_pointer(CLASSNAME,FIELD))
 #define init_virtual_field(NAME,FIELDCLASS,SETTER,GETTER)    editFields().unused().init(NAME,classes::byType(typeid(FIELDCLASS)),SETTER,GETTER)
 
 /********************************************************************************/ 

@@ -51,10 +51,10 @@ void buildTestClassDescriptors ()
     /****************************************************************************/ 
     auto d = standard_class_descriptor<character>::build("character");
 	d->annotate(new sql::sql_tablename("characters"));
-    d->init_field(character,"name",_name)
+    d->addField(&character::_name, "name")
 		.annotate(new sql::sql_column("name", sql::sql_column::PRIMARY_KEY))		
 		;
-    d->init_field(character,"age",_age)
+    d->addField(&character::_age, "age")
 		.annotate(new sql::sql_column("age"))	
 		;
 
@@ -76,9 +76,9 @@ void buildTestClassDescriptors ()
 	/*			build class mariage descriptor									*/ 
 	/****************************************************************************/ 
 	auto dm = standard_class_descriptor<mariage>::build("mariage");
-	dm->init_field(mariage,"husband",_husband);
-	dm->init_field(mariage,"wife",_wife);
-	dm->init_field(mariage,"children",_children);
+	dm->addField(&mariage::_husband,"husband");
+	dm->addField(&mariage::_wife,"wife");
+	dm->addField(&mariage::_children,"children");
 
 
 
@@ -86,25 +86,25 @@ void buildTestClassDescriptors ()
     /*          build class test_bitset_binary descriptor                       */ 
     /****************************************************************************/ 
     auto d3 = standard_class_descriptor<test_bitset_binary>::build("test_bitset_binary");
-    d3->init_field(test_bitset_binary,"w8",_w8);
-    d3->init_field(test_bitset_binary,"bitset",_bitset);
-    d3->init_field(test_bitset_binary,"i32",_i32);
+    d3->addField(&test_bitset_binary::_w8,"w8");
+    d3->addField(&test_bitset_binary::_bitset,"bitset");
+    d3->addField(&test_bitset_binary::_i32,"i32");
 
     /****************************************************************************/ 
     /*          build class test_bitset_bitfield descriptor                     */ 
     /****************************************************************************/
     auto d4 = standard_class_descriptor<test_bitset_bitfield>::build("test_bitset_bitfield");
-    d4->init_field(test_bitset_bitfield,"w16",_w16);
-    d4->init_field(test_bitset_bitfield,"bitset",_bitset).isBitSet(the_tens);
-    d4->init_field(test_bitset_bitfield,"i64",_i64);
+    d4->addField(&test_bitset_bitfield::_w16,"w16");
+    d4->addField(&test_bitset_bitfield::_bitset,"bitset").isBitSet(the_tens);
+    d4->addField(&test_bitset_bitfield::_i64,"i64");
 
 
     /****************************************************************************/ 
     /*          build class test_bool descriptor								*/ 
     /****************************************************************************/
     auto d5 = standard_class_descriptor<test_bool>::build("test_bool");
-    d5->init_field(test_bool,"a",_a);
-    d5->init_field(test_bool,"b",_b);
+    d5->addField(&test_bool::_a,"a");
+    d5->addField(&test_bool::_b,"b");
 
 }
 

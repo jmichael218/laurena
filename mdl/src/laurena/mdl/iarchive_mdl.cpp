@@ -211,7 +211,10 @@ token t;
 	    this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_HEXADECIMAL,MDL::TOKEN_STRING);
 
 		if (cf->hasKey())
-			cf->set(object,key,t);
+		{
+			
+			cf->set(object,keyDescriptor->cast(key),t);
+		}
 		else
 		{
 			cf->push(object, t);

@@ -128,6 +128,17 @@ public:
 	{
 	}
 
+    /****************************************************************************/ 
+    /*          field edition							                        */ 
+    /****************************************************************************/ 
+	template<typename FIELDTYPE>
+	inline field& addField(FIELDTYPE T::*f, const char* name)
+	{
+		typedef traits<FIELDTYPE>::basetype basetype;
+		const descriptor* fdesc = classes::byType(typeid(basetype));
+		word32 offset = (word32) &(((T*)(0))->*f);
+		return this->editFields().unused().init(name, fdesc, offset);
+	}
 
     /****************************************************************************/ 
     /*          virtual functions from class_descriptor                         */ 

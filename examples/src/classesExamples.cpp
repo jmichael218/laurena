@@ -22,19 +22,19 @@ void buildClassDescriptor_SimpleCat ()
     auto d = standard_class_descriptor<simple_cat>::build("simple_cat");
 
 	// to be able to serialize fields, call descriptor->init_field(CLASS,"fieldname",field)
-    d->init_field(simple_cat,"name",_name);
-    d->init_field(simple_cat,"age",_age);
-	d->init_field(simple_cat,"birds",_birds);
-	d->init_field(simple_cat,"mouses",_mouses);
+    d->addField(&simple_cat::_name,"name");
+    d->addField(&simple_cat::_age,"age");
+	d->addField(&simple_cat::_birds,"birds");
+	d->addField(&simple_cat::_mouses,"mouses");
 }
 
 void buildClassDescriptor_Animal()
 {
     // create class descriptor for the class 'animal'
 	auto d_animal = standard_class_descriptor<animal>::build("animal");
-	d_animal->init_field(animal,"specie",_specie);
-    d_animal->init_field(animal,"name",_name);
-    d_animal->init_field(animal,"age",_age);
+	d_animal->addField(&animal::_specie,"specie");
+    d_animal->addField(&animal::_name,"name");
+    d_animal->addField(&animal::_age,"age");
 }
 
 void buildClassDescriptor_Cat()
@@ -44,9 +44,9 @@ void buildClassDescriptor_Cat()
     auto d = standard_class_descriptor<cat>::build("cat", classes::byName("animal"));
 
 	// to be able to serialize fields, call descriptor->init_field(CLASS,"fieldname",field)
-    d->init_field(cat,"age",_age);
-	d->init_field(cat,"birds",_birds);
-	d->init_field(cat,"mouses",_mouses);
+    d->addField(&cat::_age,"age");
+	d->addField(&cat::_birds,"birds");
+	d->addField(&cat::_mouses,"mouses");
 }
 
 void buildClassDescriptor_Zoo()
@@ -66,10 +66,10 @@ void buildClassDescriptor_User()
 {
     // create class descriptor for the class 'user'
 	auto d = standard_class_descriptor<user>::build("user");
-	d->init_field(user,"gender",_gender).isEnum(genders);
-    d->init_field(user,"type",_type).isEnum(user_types);
-	d->init_field(user,"age",_age);
-	d->init_field(user,"name",_name);
+	d->addField(&user::_gender,"gender").isEnum(genders);
+    d->addField(&user::_type,"type").isEnum(user_types);
+	d->addField(&user::_age,"age");
+	d->addField(&user::_name,"name");
 }
 
 string_array dragon_states = "happy hungry sleepy";
@@ -78,9 +78,9 @@ void buildClassDescriptor_Dragon()
 {
     // create class descriptor for the class 'dragon'
 	auto d = standard_class_descriptor<dragon>::build("dragon");
-	d->init_field(dragon,"name",_name);
-	d->init_field(dragon,"state",_state).isBitSet(dragon_states);
-	d->init_field(dragon,"food",_foods).isBitSet(dragon_foods);
+	d->addField(&dragon::_name,"name");
+	d->addField(&dragon::_state,"state").isBitSet(dragon_states);
+	d->addField(&dragon::_foods,"food").isBitSet(dragon_foods);
 }
 
 void buildClassDescriptor_Building()
@@ -109,8 +109,8 @@ tokenizer& operator >> (tokenizer& source, ivertex& v)
 void buildClassDescriptor_IVertex()
 {
 	auto d = standard_class_descriptor<ivertex>::build("ivertex");
-    d->init_field(ivertex,"x",_x);
-    d->init_field(ivertex,"y",_y);
+    d->addField(&ivertex::_x,"x");
+    d->addField(&ivertex::_y,"y");
 	d->annotate(new format("json",new generic_writer<ivertex> () , new generic_parser<ivertex> () ));
 }
 
@@ -118,9 +118,9 @@ void buildClassDescriptor_IVertex()
 void buildClassDescriptor_ITriangle()
 {
 	auto d = standard_class_descriptor<itriangle>::build("itriangle");
-	d->init_field(itriangle,"v0",_v0);
-	d->init_field(itriangle,"v1",_v1);
-	d->init_field(itriangle,"v2",_v2);
+	d->addField(&itriangle::_v0,"v0");
+	d->addField(&itriangle::_v1,"v1");
+	d->addField(&itriangle::_v2,"v2");
 };
 
 //End of file

@@ -211,6 +211,13 @@ class descriptor : public descriptable {
 		return this->getFieldValue (a,field,value) ; 
 	}
 
+
+	template<typename CLASS, typename FIELDTYPE>
+	inline field& addField(FIELDTYPE CLASS::*f, const char* name)
+	{
+		return this->editFields().unused().init(f, name);
+	}
+
     /****************************************************************************/ 
     /*                                                                          */ 
     /*                  METHODS                                                 */ 

@@ -21,12 +21,12 @@ const descriptor* td<parameter>::desc()
     {
         res = standard_class_descriptor<parameter>::build("parameter");       
 
-		res->init_field(parameter, "name", _name);
+		res->addField(&parameter::_name, "name");
 
 		const descriptor * cdesc = td<const descriptor *>::desc();
 		res->editFields().unused().init("type", cdesc, offsetof(parameter, _descriptor)).isPointer(true).noQuote(true);
 	
-		res->init_field(parameter, "flags", _flags).isEnum(parameter::FlagsKeywords);
+		res->addField(&parameter::_flags, "flags").isEnum(parameter::FlagsKeywords);
     }
 
     return res;
