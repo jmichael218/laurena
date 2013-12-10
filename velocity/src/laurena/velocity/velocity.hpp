@@ -32,7 +32,8 @@ public:
 
 	std::string render(const std::string& source);
 
-	inline class context& context() { return this->_context; }
+	inline class context&					context()			{ return this->_context; }
+	inline std::list<class context*>&		heap()				{ return this->_heap; }
 
 	/****************************************************************************/ 
 	/*				protected functions											*/ 
@@ -50,7 +51,10 @@ public:
 	/****************************************************************************/ 
 	protected:
 
-	class context					_context;
+	class context					_context;		// base context
+
+	std::list<class context*>		_heap;			// extra context
+
 
 };
 

@@ -132,6 +132,7 @@ int main ()
     // toolboxes tests
     cstring_test ();
 
+	testVelocity();
 	testNewFieldInit();
 
     // running tests

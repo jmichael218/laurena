@@ -66,15 +66,34 @@ const char* velocity::handleSharpCharacter(const char* src, std::ostream& output
 const char* velocity::handleDollarCharacter(const char* src, std::ostream& output)
 {
 const char* s = src;
-std::string varname = laurena::readwhile(s,const_charsets<>::VARNAME.condition());
+
+std::string varname;
 variable* v;
 any value, value2;
+bool useBracket = *src == '{';
 
+	if (useBracket)
+		++s;
+
+	varname = laurena::readwhile(s,const_charsets<>::VARNAME.condition());
 	if (varname.length() == 0)
-		return s;
+		return src;
 
 	s += varname.length();
-	v = this->_context.get(varname);
+
+
+	if (!this->_heap.empty())
+	{
+		for (class context* cnt : this->_heap)
+		{
+			v = cnt->get(varname);
+			if (v)
+				break;
+		}
+	}
+	else
+		v = this->_context.get(varname);
+
 	if (!v)
 	{
 		std::string msg = varname;
@@ -85,6 +104,11 @@ any value, value2;
 	value = v->_value;
 	while(true)
 	{
+		if (*s == '}' && useBracket)
+		{
+			output << value.tos();
+			return s+1;
+		}
 		if (*s == '.')
 		{
 			++s;

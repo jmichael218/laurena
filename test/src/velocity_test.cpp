@@ -20,7 +20,9 @@ void testVelocity()
 	joe._name = "John Doe";
 	joe._age = 32;
 	engine.context() ["actor"] = variable("actor", &joe);
-	std::string s = engine.render ("Hello $actor.name#* it should not be displayed*#, how do you do ? You are $actor.age old ?");
+	engine.context().push("day", std::string("Monday"));
+
+	std::string s = engine.render ("Hello $actor.name#* it should not be displayed*#, how do you do ? You are $actor.age old on this ${day}.");
 	std::cout << s << std::endl;
 	return;
 }
