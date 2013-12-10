@@ -89,11 +89,11 @@ void buildClassDescriptor_Building()
 
 	field::getter sgname = [] (const any& object, any& value) { building* b = anycast<building*>(object); value = b->name(); };
 	field::setter ssname = [] (any& object, const any& value) { building* b = anycast<building*>(object); b->name(anycast<const std::string&>(value));};
-	d->init_virtual_field("name",std::string,ssname,sgname);
+	d->addField<std::string>("name", ssname,sgname);
 
 	field::getter sgfloors = [] (const any& object, any& value) { building* b = anycast<building*>(object); value = b->floors(); };
 	field::setter ssfloors = [] (any& object, const any& value) { building* b = anycast<building*>(object); b->floors(anycast<unsigned char>(value));};
-	d->init_virtual_field("floors",unsigned char,ssfloors, sgfloors);
+	d->addField<unsigned char>("floors", ssfloors, sgfloors);
 }
 
 std::ostream& operator << (std::ostream& dest, const ivertex& v)

@@ -37,6 +37,7 @@ void testBoolDescriptor ();
 void testVelocity();
 void testStringArrayGetFieldValue();
 void testNewFieldInit();
+void testParameters();
 
 
 extern void cstring_test ();
@@ -132,7 +133,7 @@ int main ()
     // toolboxes tests
     cstring_test ();
 
-	testVelocity();
+	testParameters();
 	testNewFieldInit();
 
     // running tests

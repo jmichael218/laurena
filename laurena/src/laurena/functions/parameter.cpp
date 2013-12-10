@@ -14,6 +14,8 @@
 #include <laurena/functions/parameter.hpp>
 #include <laurena/constants/const_charsets.hpp>
 #include <laurena/exceptions/failed_parsing_exception.hpp>
+#include <laurena/descriptors/classes.hpp>
+#include <laurena/descriptors/string_descriptor.hpp>
 
 using namespace laurena;
 
@@ -28,13 +30,15 @@ parameter::parameter ()
     this->_flags.resize(parameter::MAX_FLAGS);
 }
 
-bool parameter::parse(any& value, std::istream& input) const
+const char* parameter::parse(any& value, const char* input) const
 {
-    skipwhile(input,const_charsets<>::TABS_NO_EOL.condition());
-    if ( input.eof() || const_charsets<>::RN.test(input.peek()))
+	// skip spaces
+    input = skipwhile(input,const_charsets<>::TABS_NO_EOL.condition());
+
+	if (!*input || const_charsets<>::RN.test(*input))
     {
         if ( this->_flags.test(parameter::FLAG_MANDATORY))                
-            return false;
+            return nullptr;
     }
 
     std::string svalue;
@@ -44,7 +48,7 @@ bool parameter::parse(any& value, std::istream& input) const
         svalue = std::move(readuntil(input,const_charsets<>::TABS.condition()));
     
     this->_descriptor->stoa(svalue, value);
-    return true;
+    return input + svalue.length();
 }
 /********************************************************************************/ 
 /*          code for class ParameterArray                                       */ 
@@ -53,18 +57,70 @@ parameters::parameters () : std::vector<parameter>()
 {
 }
 
-bool parameters::parse (context& c, std::istream& input) const
+bool parameters::parse (context& c, const std::string& input) const
 {
 bool ret = true;
+const char* s = input.c_str();
 
-    for (word32 i = 0 ; i < this->size(); i ++)
-    {
-        const parameter& p = this->operator[](i);       
-        ret &= p.parse(c[p._name]._value,input);
+    for (const parameter& p : *this)
+    {  
+        s = p.parse(c[p._name]._value,s);
+		if (!s)
+			return false;
     }
     return ret;
 }
+
+// syntax is [flags]<type> <name>. '*' is for non mandatory. keyword is string without flag LINE
+bool parameters::syntax (const std::string& src)
+{
+
+	const char* s = src.c_str();
+	std::list<parameter> tmplist;
+
+	std::string classtype;
+
+	while (*s)
+	{
+		parameter p;
+
+		// read classtype and flags
+		if (*s == '*')
+			++s;
+		else
+			p._flags.set(parameter::FLAG_MANDATORY);		
+
+		classtype = readuntil(s, const_charsets<>::TABS.condition());
+
+		// set type
+		if (classtype == "keyword")
+			p._descriptor = td<std::string>::desc();
+		else if (classtype == "string")
+		{
+			p._descriptor = td<std::string>::desc();
+			p._flags.set(parameter::FLAG_LINE);
+		}
+		else
+			p._descriptor = classes::byName(classtype);
+
+		if (!p._descriptor)
+			return false;
+
+		// skip classtype
+		s += classtype.length();
+		s = skipwhile(s, const_charsets<>::TABS.condition());
+
+		// read parameter name
+		p._name = readuntil(s, const_charsets<>::TABS.condition());
+		s += p._name.length();
+		s = skipwhile(s, const_charsets<>::TABS.condition());
+
+		tmplist.push_back(p);
+	}
+
+	this->assign(tmplist.begin(), tmplist.end());
+	return true;
+}
 /********************************************************************************/ 
 //End of file
-
 

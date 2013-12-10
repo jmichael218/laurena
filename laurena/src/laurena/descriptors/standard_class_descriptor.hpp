@@ -141,6 +141,15 @@ public:
 		return this->editFields().unused().init(name, fdesc, offset).isPointer(bIsPointer);
 	}
 
+	template<typename FIELDTYPE>
+	inline field& addField(const char* name, field::setter setter, field::getter getter)
+	{
+		typedef traits<FIELDTYPE>::basetype basetype;
+		const descriptor* fdesc = classes::byType(typeid(basetype));
+		bool bIsPointer = std::is_pointer<FIELDTYPE>::value;
+		return this->editFields().unused().init(name, fdesc, setter, getter);
+	}
+
     /****************************************************************************/ 
     /*          virtual functions from class_descriptor                         */ 
     /****************************************************************************/ 

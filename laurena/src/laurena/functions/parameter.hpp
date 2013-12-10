@@ -63,7 +63,7 @@ public:
     /****************************************************************************/ 
     /*          parsing                                                         */ 
     /****************************************************************************/ 
-    bool parse(any& value, std::istream& input) const;
+    const char* parse(any& value, const char* input) const;
 
     /****************************************************************************/ 
     /*          accessors                                                       */ 
@@ -103,7 +103,9 @@ public:
     /*      parsing                                                             */ 
     /****************************************************************************/ 
 
-    bool parse (context& cnt, std::istream& input) const;
+	// syntax is [flags]<type> <name>. '*' is for non mandatory. keyword is string without flag LINE
+	bool syntax (const std::string& s);
+    bool parse (context& cnt, const std::string& input) const;
 };
 
 
