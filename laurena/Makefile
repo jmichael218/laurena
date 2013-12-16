@@ -6,20 +6,22 @@ CC=c++
 
 OBJECTS= $(CORE)/archives/iarchive.o \
 	$(CORE)/archives/oarchive.o \
-	$(CORE)/constants/const_charsets.o \
 	$(CORE)/constants/const_strings.o \
 	$(CORE)/debug/debug.o \
 	$(CORE)/debug/debug_stream.o \
 	$(CORE)/debug/testunit.o \
 	$(CORE)/descriptors/features/class_feature.o \
     $(CORE)/descriptors/features/polymorphic_feature.o \
+	$(CORE)/descriptors/annotation.o \
     $(CORE)/descriptors/any_descriptor.o \
     $(CORE)/descriptors/bitset_descriptor.o \
+	$(CORE)/descriptors/bool_descriptor.o \
 	$(CORE)/descriptors/classes.o \
     $(CORE)/descriptors/descriptor.o \
     $(CORE)/descriptors/field.o \
 	$(CORE)/descriptors/list_descriptor.o \
 	$(CORE)/descriptors/numeric_type_descriptors.o \
+	$(CORE)/descriptors/parameter_descriptor.o \
     $(CORE)/descriptors/polymorphic_class_descriptor.o \
 	$(CORE)/descriptors/standard_class_descriptor.o \
     $(CORE)/descriptors/string_array_descriptor.o \
@@ -33,22 +35,15 @@ OBJECTS= $(CORE)/archives/iarchive.o \
     $(CORE)/exceptions/null_pointer_exception.o \
     $(CORE)/exceptions/unimplemented_exception.o \
     $(CORE)/formatting/format.o \
-    $(CORE)/formatting/formats.o \
-    $(CORE)/formatting/tab.o \
 	$(CORE)/functions/parameter.o \
     $(CORE)/memory/memory_functions.o \
-    $(CORE)/parsing/file_location.o \
 	$(CORE)/parsing/basic_parsers.o \
     $(CORE)/parsing/token.o \
     $(CORE)/parsing/tokenizer.o \
 	$(CORE)/toolboxes/bitset.o \
-	$(CORE)/toolboxes/cstring.o \
 	$(CORE)/toolboxes/filename.o \
-	$(CORE)/toolboxes/loader.o \
-	$(CORE)/toolboxes/stdstream.o \
-	$(CORE)/toolboxes/stdstring.o \
 	$(CORE)/types/any.o \
-	$(CORE)/types/charset.o \
+	$(CORE)/types/context.o \	
 	$(CORE)/types/literator.o \
 	$(CORE)/types/string_array.o \
 	$(CORE)/types/variable.o

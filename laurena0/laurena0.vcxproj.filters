@@ -162,5 +162,13 @@
     <ClInclude Include="src\laurena\grammar\rule_hexadecimal.hpp">
       <Filter>Fichiers d%27en-tête\grammar</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\types\filler.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -43,11 +43,15 @@
     <ClInclude Include="src\laurena\traits\string_traits.hpp" />
     <ClInclude Include="src\laurena\traits\type_traits.hpp" />
     <ClInclude Include="src\laurena\types\charset.hpp" />
+    <ClInclude Include="src\laurena\types\filler.hpp" />
     <ClInclude Include="src\laurena\types\parsing_context.hpp" />
     <ClInclude Include="src\laurena\types\source_location.hpp" />
     <ClInclude Include="src\laurena\types\symbols.hpp" />
     <ClInclude Include="src\laurena\types\tabs.hpp" />
     <ClInclude Include="src\laurena\validations\is_integer.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FB1D2C3E-B598-4050-99C9-447E65E7396F}</ProjectGuid>
