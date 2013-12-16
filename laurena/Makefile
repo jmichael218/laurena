@@ -43,7 +43,7 @@ OBJECTS= $(CORE)/archives/iarchive.o \
 	$(CORE)/toolboxes/bitset.o \
 	$(CORE)/toolboxes/filename.o \
 	$(CORE)/types/any.o \
-	$(CORE)/types/context.o \	
+	$(CORE)/types/context.o \
 	$(CORE)/types/literator.o \
 	$(CORE)/types/string_array.o \
 	$(CORE)/types/variable.o
