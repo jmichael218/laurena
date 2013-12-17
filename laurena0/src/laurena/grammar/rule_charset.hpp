@@ -26,6 +26,7 @@
 
 #include <laurena/grammar/rule_string.hpp>
 #include <laurena/algorithm/strings/readwhile.hpp>
+#include <laurena/types/charset.hpp>
 
 
 /********************************************************************************/ 

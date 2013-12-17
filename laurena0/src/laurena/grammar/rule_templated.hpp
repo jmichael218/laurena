@@ -134,7 +134,7 @@ public:
 	/*			constructors													*/ 
 	/****************************************************************************/ 
 
-	rule_ptr_templated(rule_templated<T,CONTEXT>* ptr) : rule_ptr(ptr)
+	rule_ptr_templated(rule_templated<T,CONTEXT>* ptr) : rule_ptr<CONTEXT>(ptr)
 	{ }
 
 	/****************************************************************************/ 
