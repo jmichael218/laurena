@@ -57,7 +57,7 @@ public:
 
 	charset () 
 		
-		: _characters (), 
+		: _characters ()
 		, _condition_function([&] (const CHARTYPE& c) {return this->test(c);})
 
 		{ }
