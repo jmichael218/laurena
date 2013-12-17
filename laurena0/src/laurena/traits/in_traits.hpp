@@ -51,7 +51,7 @@ struct in_traits
 
 	inline
 	static iterator readed(iterator it, unsigned long int length) 
-	{ return it }
+	{ return it; }
 
 	inline
 	static iterator back(type& stream, iterator current, chartype c)
