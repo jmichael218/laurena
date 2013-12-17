@@ -4,12 +4,9 @@ CFLAGS= -std=c++11 -Wno-write-strings -I /boost -I src -I ../include
 
 CC=c++
 
-OBJECTS= $(CORE)/mdl/iarchive_mdl.o \
-	$(CORE)/mdl/language_mdl.o \
-	$(CORE)/mdl/mdl_interface.o \
-	$(CORE)/mdl/oarchive_mdl.o
+OBJECTS= $(CORE)/velocity/velocity.o
 
-TARGET=mdl
+TARGET=velocity
 
 all: $(TARGET)
 
@@ -29,5 +26,3 @@ $(TARGET): $(OBJECTS)
 
 clear:
 	find . -type f -name "*.o" -exec rm -f {} \;
-	
-

@@ -97,6 +97,9 @@
   <ItemGroup>
     <ClInclude Include="src\classesExamples.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Makefile" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

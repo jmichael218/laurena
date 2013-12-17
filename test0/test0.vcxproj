@@ -78,6 +78,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="Makefile">
+      <FileType>CppCode</FileType>
+    </Text>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\test_alphabet.cpp" />
     <ClCompile Include="src\test_charset.cpp" />

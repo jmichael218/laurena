@@ -4,12 +4,12 @@ CFLAGS= -std=c++11 -Wno-write-strings -I /boost -I src -I ../include
 
 CC=c++
 
-OBJECTS= $(CORE)/mdl/iarchive_mdl.o \
-	$(CORE)/mdl/language_mdl.o \
-	$(CORE)/mdl/mdl_interface.o \
-	$(CORE)/mdl/oarchive_mdl.o
+OBJECTS= $(CORE)/sql/sql_annotations.o \
+	$(CORE)/sql/sql_dao.o \
+	$(CORE)/sql/sql_error.o \
+	$(CORE)/sql/sql_toolbox.o
 
-TARGET=mdl
+TARGET=sql
 
 all: $(TARGET)
 
@@ -29,5 +29,3 @@ $(TARGET): $(OBJECTS)
 
 clear:
 	find . -type f -name "*.o" -exec rm -f {} \;
-	
-

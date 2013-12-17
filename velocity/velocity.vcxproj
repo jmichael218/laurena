@@ -14,6 +14,9 @@
     <ClInclude Include="src\laurena\velocity\velocity.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Makefile">
+      <FileType>CppCode</FileType>
+    </Text>
     <ClCompile Include="src\laurena\velocity\velocity.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

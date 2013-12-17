@@ -24,6 +24,9 @@
     <ClCompile Include="src\laurena\sql\sql_error.cpp" />
     <ClCompile Include="src\laurena\sql\sql_toolbox.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Makefile" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7E0123D6-34F4-4A32-89BA-86605B62641A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
