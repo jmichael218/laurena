@@ -46,11 +46,11 @@ public:
 	/************************************************************************/ 
 
 	typedef typename SOURCE_TRAITS::chartype		chartype;		// the source character ( char for a string, wchar_t for a 16bits file, etc ... )
-	typedef typename SOURCE_TRAITS					traits;			// source traits
+	typedef			 SOURCE_TRAITS					traits;			// source traits
 	typedef typename SOURCE_TRAITS::iterator		iterator;		// iterator type (const char* for memory string, stream_iterator otherwhile
-	typedef typename SOURCE_LOCATION				location;		// object type that track file advancement
-	typedef typename OBJECT							object;			// object target
-	typedef typename OUTPUT							output;			// output
+	typedef			 SOURCE_LOCATION				location;		// object type that track file advancement
+	typedef			 OBJECT							object;			// object target
+	typedef			 OUTPUT							output;			// output
 
 	/************************************************************************/ 
 	/*		constructor														*/ 
