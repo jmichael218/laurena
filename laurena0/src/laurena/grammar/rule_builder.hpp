@@ -55,7 +55,7 @@ public:
 	/*******************************************************************************/ 
 	typedef rule_ptr_templated<typename CONTEXT::chartype, CONTEXT>			type;		// return type
 	typedef std::basic_string<typename CONTEXT::chartype>					string;
-	typedef typename typename CONTEXT::chartype								chartype;   // chartype
+	typedef typename CONTEXT::chartype										chartype;   // chartype
 	typedef charset<typename CONTEXT::chartype>								characters;
 	typedef typename CONTEXT::iterator										iterator;
 
