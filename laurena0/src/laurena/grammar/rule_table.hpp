@@ -24,6 +24,7 @@
 
 #include <memory>
 #include <ostream>
+#include <vector>
 
 #include <laurena/grammar/rule_ptr.hpp>
 
