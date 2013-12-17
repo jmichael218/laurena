@@ -88,6 +88,13 @@ public:
 	}
 
 	template<typename T>
+	rule<CONTEXT>& operator<<(rule_ptr_templated<T, CONTEXT>& r)
+	{
+		_rules.push_back(r);
+		return *this;
+	}
+
+	template<typename T>
 	rule<CONTEXT>& operator<<(rule_templated<T, CONTEXT>* r)
 	{
 		_rules.push_back(rule_ptr<CONTEXT>(r));
