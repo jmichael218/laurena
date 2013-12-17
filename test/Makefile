@@ -8,17 +8,19 @@ LIBRARIES=
 
 CC=c++
 
-OBJECTS= $(CORE)/test_alphabet.o \
-	$(CORE)/test_prefix.o \
-	$(CORE)/test_readinteger.o \
-	$(CORE)/test_readwhile.o \
-	$(CORE)/test_rules.o \
-	$(CORE)/test_tabs.o \
+OBJECTS= $(CORE)/any_descriptor_test.o \
+	$(CORE)/bitset_descriptor_test.o \
+	$(CORE)/bool_descriptor.o \
+	$(CORE)/cstring_test.o \
+	$(CORE)/json_serialization_test.o \
 	main.o \
-	$(CORE)/test_charset.o \
-	$(CORE)/test_const_charset.o \
-	$(CORE)/test_sliteral.o
-
+	$(CORE)/mdl_serialization_test.o \
+	$(CORE)/new_field_init.o \
+	$(CORE)/numeric_descriptors_test.o \
+	$(CORE)/parameters_test.o \
+	$(CORE)/sql_test.o \
+	$(CORE)/string_array_descriptor_test.o \
+	$(CORE)/velocity_test.o
 
 TARGET=test
 
