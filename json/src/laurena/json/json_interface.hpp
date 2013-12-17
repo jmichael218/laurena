@@ -31,6 +31,36 @@ namespace json {
 /* json interface                                                                  */ 
 /***********************************************************************************/ 
 
+namespace json_impl
+{
+	template <class T>
+	inline T& parse(const std::string& json, const std::string& expected_name, T& destination)
+	{
+		any a = &destination;
+		laurena::json::json::parse<any>(json,expected_name,a);
+		return destination;
+	}
+
+	template <>
+	inline any& parse<any>(const std::string& json, const std::string& expected_name, any& value)
+	{
+		iarchive_json amdl ;
+		amdl.reader().str(json.c_str());
+
+		try 
+		{
+			return amdl.parse(expected_name,value) ;
+		}
+		catch (const exception& e)
+		{        
+			std::ostringstream message ;
+			(amdl.reader().prefixErrorMessage(message)) << e.message ();
+			throw LAURENA_FAILED_PARSING_EXCEPTION( message.str().c_str(),amdl.reader()._ptr) ;      
+		}   
+	}
+
+}
+
 class json
 {
 public:
@@ -77,9 +107,11 @@ public:
 	template <class T>
 	static T& parse(const std::string& json, const std::string& expected_name, T& destination)
 	{
-		any a = &destination;
-		laurena::json::json::parse<any>(json,expected_name,a);
-		return destination;
+		return json_impl::parse(json, expected_name, destination);
+
+		//any a = &destination;
+		//laurena::json::json::parse<any>(json,expected_name,a);
+		//return destination;
 	}
 
 	template <class T>
@@ -90,6 +122,7 @@ public:
 		return destination;
 	}
 
+	/*
 	template <>
 	static any& parse<any>(const std::string& json, const std::string& expected_name, any& value)
 	{
@@ -107,6 +140,7 @@ public:
 			throw LAURENA_FAILED_PARSING_EXCEPTION( message.str().c_str(),amdl.reader()._ptr) ;      
 		}   
 	}
+	*/
 };
 
 /********************************************************************************/ 
