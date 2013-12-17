@@ -51,7 +51,7 @@ template<typename T>
 inline
 typename in_traits<T>::string alphabet(T& t)
 {
-	return alphabet<typename in_traits<T>::iterator, in_traits<T>::string>(in_traits<T>::begin(t), in_traits<T>::end(t));
+	return alphabet<typename in_traits<T>::iterator, typename in_traits<T>::string>(in_traits<T>::begin(t), in_traits<T>::end(t));
 }
 
 /********************************************************************************/ 
