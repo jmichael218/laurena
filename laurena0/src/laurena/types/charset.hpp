@@ -101,7 +101,7 @@ public:
 	/*			string validation functions										*/ 
 	/****************************************************************************/ 
 
-	bool validate(typename iterator& first, typename const iterator& last) const
+	bool validate(iterator& first, const iterator& last) const
 	{
 		while (first != last)
 		{
