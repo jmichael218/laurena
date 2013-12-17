@@ -111,7 +111,7 @@ public:
 	template<typename T>
 	rule<CONTEXT>& operator<< (std::function<void (const T&, typename CONTEXT::object)> cb)
 	{
-		rule_templated<T, CONTEXT>* r = dynamic_cast<rule_template<T, CONTEXT>*>(this->_rules.back().get());
+		rule_templated<T, CONTEXT>* r = dynamic_cast<rule_templated<T, CONTEXT>*>(this->_rules.back().get());
 		r->operator [](cb);
 		return *this;
 	}
