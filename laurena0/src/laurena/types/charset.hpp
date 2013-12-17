@@ -69,14 +69,14 @@ public:
 
 		{ }
 
-	charset (typename const CHARTYPE* characters) 
+	charset (const CHARTYPE* characters) 
 		
 		: _characters (std::move(alphabet(characters)))
 		, _condition_function([&] (const CHARTYPE& c) {return this->test(c);})
 
 		{ }
 
-	charset (typename const string& characters) 
+	charset (const string& characters) 
 		
 		: _characters (std::move(alphabet(characters)))
 		, _condition_function([&] (const CHARTYPE& c) {return this->test(c);})
