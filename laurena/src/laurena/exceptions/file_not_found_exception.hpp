@@ -40,7 +40,7 @@ class file_not_found_exception : public exception
     /*          constructor, destructors                                        */ 
     /****************************************************************************/ 
     file_not_found_exception (const char* message, const std::string& fileNotFound, const char* filename, const char* function, word32 line) ;
-    virtual ~file_not_found_exception () throw () ;
+	virtual ~file_not_found_exception () throw () {}
 
     /****************************************************************************/ 
     /*          virtual functions                                               */ 

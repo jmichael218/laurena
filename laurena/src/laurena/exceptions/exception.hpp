@@ -44,7 +44,7 @@ class exception : public std::exception
     exception (const std::string& message, const char* filename, const char* function, word32 line);
     exception (const std::ostringstream& message, const char* filename, const char* function, word32 line);
 
-	virtual ~exception () throw ();
+	virtual ~exception () throw () {}
 
     /****************************************************************************/
     /*          virtual functions from std::exception                           */ 

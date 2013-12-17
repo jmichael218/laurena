@@ -20,10 +20,6 @@ file_not_found_exception::file_not_found_exception (const char* message, const s
     this->ready();
 }
 
-file_not_found_exception::~file_not_found_exception()
-{
-    this->ready();
-}
 
 const char* file_not_found_exception::exceptionType () const
 {
