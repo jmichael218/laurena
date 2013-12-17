@@ -76,7 +76,7 @@ public:
 			return pec::SYNTAX_ERROR;
 
 		unsigned int candidates = 0;
-		rule_table<CONTEXT>::const_iterator it_candidate;
+		typename rule_table<CONTEXT>::const_iterator it_candidate;
 		chartype c = *context._first;
 		for (auto it = this->_rules.begin(); it != this->_rules.end(); it ++)
 		{
