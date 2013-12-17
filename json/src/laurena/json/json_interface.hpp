@@ -37,7 +37,7 @@ namespace json_impl
 	inline T& parse(const std::string& json, const std::string& expected_name, T& destination)
 	{
 		any a = &destination;
-		laurena::json::json::parse<any>(json,expected_name,a);
+		laurena::json::json::json_impl::parse<any>(json,expected_name,a);
 		return destination;
 	}
 
