@@ -48,6 +48,12 @@ class rule_expected_char : public rule_templated<CHARTYPE, CONTEXT>
 {
 public:
 
+	/************************************************************************/ 
+	/*		typedefs														*/ 
+	/************************************************************************/ 
+	typedef typename CONTEXT::chartype		chartype;		// the source character ( char for a string, wchar_t for a 16bits file, etc ... )
+
+
 	/****************************************************************************/ 
 	/*			constructors, destructor										*/ 
 	/****************************************************************************/ 

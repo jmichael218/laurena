@@ -55,6 +55,8 @@ public:
 	/****************************************************************************/ 
 	typedef typename CONTEXT::iterator										iterator;
 	typedef std::function<STRING (iterator, iterator, const typename CHARSET::test_function &)>		algorithm;
+	typedef typename CONTEXT::chartype		chartype;		// the source character ( char for a string, wchar_t for a 16bits file, etc ... )
+
 
 	/****************************************************************************/ 
 	/*			constructors, destructor										*/ 

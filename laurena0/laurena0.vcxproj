@@ -43,7 +43,6 @@
     <ClInclude Include="src\laurena\traits\string_traits.hpp" />
     <ClInclude Include="src\laurena\traits\type_traits.hpp" />
     <ClInclude Include="src\laurena\types\charset.hpp" />
-    <ClInclude Include="src\laurena\types\filler.hpp" />
     <ClInclude Include="src\laurena\types\parsing_context.hpp" />
     <ClInclude Include="src\laurena\types\source_location.hpp" />
     <ClInclude Include="src\laurena\types\symbols.hpp" />

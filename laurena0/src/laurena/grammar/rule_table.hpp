@@ -27,6 +27,7 @@
 #include <vector>
 
 #include <laurena/grammar/rule_ptr.hpp>
+#include <laurena/constants/const_parsing_error_codes.hpp>
 
 
 /********************************************************************************/ 
