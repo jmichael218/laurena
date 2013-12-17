@@ -47,7 +47,7 @@ struct td
 
     static const descriptor* desc(T& t)
     {
-		typedef traits<TYPENAME>::basetype basetype;
+		typedef traits<T>::basetype basetype;
         return td<basetype>::desc ();
     }
 };
