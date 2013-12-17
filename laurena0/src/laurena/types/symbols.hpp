@@ -114,6 +114,11 @@ class symbols : public std::vector<std::pair<KEY, VALUE>>
 public:
 
 	/****************************************************************************/ 
+	/*			typedefs														*/ 
+	/****************************************************************************/ 
+	typedef typename symbols<KEY, VALUE>::const_iterator tconst_iterator;
+
+	/****************************************************************************/ 
 	/*			constructors, destructor										*/ 
 	/****************************************************************************/ 
 
@@ -131,18 +136,18 @@ public:
 	/*			search functions												*/ 
 	/****************************************************************************/ 
 	// search value by key
-	typename symbols<KEY, VALUE>::const_iterator value(const VALUE& v) const
+	tconst_iterator value(const VALUE& v) const
 	{
-		for (const_iterator it = this->begin(); it != this->end(); it++)
+		for (tconst_iterator it = this->cbegin(); it != this->cend(); it++)
 			if (it->second == v)
 				return it;
 		return this->end();
 	}
 
 	// search key by value
-	typename symbols<KEY, VALUE>::const_iterator key(const KEY& k) const
+	tconst_iterator key(const KEY& k) const
 	{
-		for (const_iterator it = this->begin(); it != this->end(); it++)
+		for (tconst_iterator it = this->cbegin(); it != this->cend(); it++)
 			if (it->first == k)
 				return it;
 		return this->end();
