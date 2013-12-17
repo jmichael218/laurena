@@ -171,7 +171,10 @@ public:
 		// setter for the vector size
 		field::setter setsize = [] (any& object, const any& value) { CONTAINER* b = anycast<CONTAINER*>(object); b->resize(anycast<word32>(value));};
 
-		cd->addField<word32>("size", setsize, getsize).supportTag("vector.size");
+		field& f = cd->addField<word32>("size", setsize, getsize);
+		
+		f.supportTag("vector.size");
+
         return cd;
 	}
 
