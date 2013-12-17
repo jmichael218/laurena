@@ -49,7 +49,7 @@ public:
 	typedef std::basic_string<CHARTYPE>					string;
 	typedef typename string::iterator					iterator;
 	typedef std::function<bool (const CHARTYPE&)>		test_function;
-	typedef typename CHARTYPE							chartype;
+	typedef CHARTYPE									chartype;
 
 	/****************************************************************************/ 
 	/*			constructor, destructors										*/ 
