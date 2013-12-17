@@ -47,28 +47,28 @@ struct td
 
     static const descriptor* desc(T& t)
     {
-		typedef traits<T>::basetype basetype;
+		typedef typename traits<T>::basetype basetype;
         return td<basetype>::desc ();
     }
 };
 
 
-template<typename TYPENAME>
-const descriptor* desc_of(TYPENAME& t)
+template<typename T>
+const descriptor* desc_of(T& t)
 {
-  typedef traits<TYPENAME>::basetype basetype;
+  typedef typename traits<T>::basetype basetype;
   const descriptor* d = classes::byType(typeid(basetype));
   return d ? d : td<basetype>::desc();
 }
 
-template<typename TYPENAME>
-bool is_pointer(TYPENAME& t)
+template<typename T>
+bool is_pointer(T& t)
 {
 	return false;
 }
 
-template<typename TYPENAME>
-bool is_pointer(TYPENAME* t)
+template<typename T>
+bool is_pointer(T* t)
 {
 	return true;
 }
