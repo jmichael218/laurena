@@ -44,7 +44,7 @@ namespace laurena {
 
 template
 <
-	typename CONTEXT= rule_context<>
+	typename CONTEXT= parsing_context<>
 >
 class rule_builder
 {
