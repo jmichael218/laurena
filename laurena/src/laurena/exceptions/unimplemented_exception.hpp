@@ -41,7 +41,7 @@ class unimplemented_exception : public exception
     /*          constructor, destructors                                        */ 
     /****************************************************************************/ 
     unimplemented_exception (const char* message, const char* filename, const char* function, word32 line) ;
-    virtual ~unimplemented_exception () {} 
+    virtual ~unimplemented_exception () throw () {} 
 
     /****************************************************************************/ 
     /*          virtual functions                                               */ 

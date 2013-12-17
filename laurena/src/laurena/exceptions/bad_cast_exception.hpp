@@ -40,7 +40,7 @@ class bad_cast_exception : public exception
     /*          constructor, destructors                                        */ 
     /****************************************************************************/ 
     bad_cast_exception (const char* message, const char* castTypename, const char* valueTypename, const char* filename, const char* function, word32 line) ;
-    virtual ~bad_cast_exception () {} 
+    virtual ~bad_cast_exception () throw () {} 
 
     /****************************************************************************/ 
     /*          virtual functions                                               */ 

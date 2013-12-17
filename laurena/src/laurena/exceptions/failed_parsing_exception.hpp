@@ -42,7 +42,7 @@ class failed_parsing_exception : public exception
     failed_parsing_exception (const char* message, const char* source, const char* filename, const char* function, word32 line) ;
     failed_parsing_exception (const char* message, const std::string& source, const char* filename, const char* function, word32 line) ;
     failed_parsing_exception (const char* message, std::istream& source, const char* filename, const char* function, word32 line) ;
-    virtual ~failed_parsing_exception () {} 
+    virtual ~failed_parsing_exception () throw () {} 
 
     /****************************************************************************/ 
     /*          virtual functions                                               */ 

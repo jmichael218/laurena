@@ -42,7 +42,7 @@ class null_pointer_exception : public exception
     /****************************************************************************/ 
     null_pointer_exception (const char* message, const char* filename, const char* function, word32 line) ;
     null_pointer_exception (const std::string& message, const char* filename, const char* function, word32 line) ;
-    virtual ~null_pointer_exception () {} 
+    virtual ~null_pointer_exception () throw () {} 
 
     /****************************************************************************/ 
     /*          virtual functions                                               */ 
