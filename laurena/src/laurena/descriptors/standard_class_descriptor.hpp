@@ -134,7 +134,7 @@ public:
 	template<typename FIELDTYPE>
 	inline field& addField(FIELDTYPE T::*f, const char* name)
 	{
-		typedef traits<FIELDTYPE>::basetype basetype;
+		typedef typename traits<FIELDTYPE>::basetype basetype;
 		const descriptor* fdesc = classes::byType(typeid(basetype));
 		word32 offset = (word32) &(((T*)(0))->*f);
 		bool bIsPointer = std::is_pointer<FIELDTYPE>::value;
@@ -144,7 +144,7 @@ public:
 	template<typename FIELDTYPE>
 	inline field& addField(const char* name, field::setter setter, field::getter getter)
 	{
-		typedef traits<FIELDTYPE>::basetype basetype;
+		typedef typename traits<FIELDTYPE>::basetype basetype;
 		const descriptor* fdesc = classes::byType(typeid(basetype));
 		bool bIsPointer = std::is_pointer<FIELDTYPE>::value;
 		return this->editFields().unused().init(name, fdesc, setter, getter);
