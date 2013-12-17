@@ -42,6 +42,11 @@ class rule : public rule_basic<CONTEXT>
 {
 public:
 
+	/****************************************************************************/
+	/*			typedefs														*/ 
+	/****************************************************************************/ 
+	typedef typename CONTEXT::chartype										chartype;
+
 	/****************************************************************************/ 
 	/*			constructors													*/ 
 	/****************************************************************************/ 
@@ -91,13 +96,13 @@ public:
 
 
 	inline
-	rule<CONTEXT>& operator << (typename CONTEXT::chartype value)
+	rule<CONTEXT>& operator << (chartype value)
 	{
 		return *this << rule<CONTEXT>::char_(value);
 	}
 
 	inline 
-	rule<CONTEXT>& operator << (const charset<typename CONTEXT::chartype>& cset )
+	rule<CONTEXT>& operator << (const charset<chartype>& cset )
 	{
 		return *this << rule<CONTEXT>::set_(cset);
 	}
