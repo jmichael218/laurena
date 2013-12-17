@@ -123,7 +123,7 @@ public:
 template
 <
 	typename T, 
-	typename CONTEXT=rule_context<>
+	typename CONTEXT=parsing_context<>
 >
 
 class rule_ptr_templated : public rule_ptr<CONTEXT>
