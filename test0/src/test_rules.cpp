@@ -45,6 +45,9 @@ void testRuleCharset()
 void testRuleAddition()
 {
 	laurena::rule<> rs ;
+	laurena::rule_ptr<> rptr = G::expected_('H');
+
+	rs << rptr ;
 	rs << G::expected_('H') << G::expected_('e');
 
 	const char* cc = "Hello World";
