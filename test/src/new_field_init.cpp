@@ -22,7 +22,8 @@ void set_field(FIELDTYPE CLASS::*f, CLASS& object, FIELDTYPE& v)
 void testNewFieldInit()
 {
 	character bob;
-	set_field<character, std::string>(&character::_name, bob, std::string("Bob"));
+	std::string fieldname= "Bob";
+	set_field<character, std::string>(&character::_name, bob, fieldname);
 	assert(bob._name == "Bob" );
     return;
 
