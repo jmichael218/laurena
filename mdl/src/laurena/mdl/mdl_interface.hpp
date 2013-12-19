@@ -20,7 +20,7 @@
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
 #include <laurena/laurena.hpp>
-
+#include <laurena/mdl/iarchive_mdl.hpp>
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
@@ -30,6 +30,35 @@ namespace mdl {
 /***********************************************************************************/ 
 /* json interface                                                                  */ 
 /***********************************************************************************/ 
+namespace mdl_impl
+{
+	template <typename T>
+	inline T& parse(const std::string& source, const std::string& expected_name, T& destination)
+	{
+		any a = &destination;
+		laurena::mdl::mdl_impl::parse(source,expected_name,a);
+		return destination;
+	}
+
+	template <>
+	inline any& parse<any>(const std::string& source, const std::string& expected_name, any& value)
+	{
+		iarchive_mdl amdl ;
+		amdl.reader().str(source.c_str());
+
+		try 
+		{
+			return amdl.parse(expected_name,value) ;
+		}
+		catch (const exception& e)
+		{        
+			std::ostringstream message ;
+			(amdl.reader().prefixErrorMessage(message)) << e.message ();
+			throw LAURENA_FAILED_PARSING_EXCEPTION( message.str().c_str(),amdl.reader()._ptr) ;      
+		}   
+	}
+
+}
 
 class mdl
 {
@@ -69,21 +98,19 @@ public:
 	
 
 	template <class T>
-	static T& parse(const std::string& mdl, const std::string& expected_name, T& destination)
+	static T& parse(const std::string& src, const std::string& expected_name, T& destination)
 	{
-		any a = &destination;
-		laurena::mdl::mdl::parse<any>(mdl,expected_name,a);
-		return destination;
+		return mdl_impl::parse(src, expected_name, destination);
 	}
 
 	template <class T>
-	static T& parse(const std::string& mdl, T& destination)
+	static T& parse(const std::string& src, T& destination)
 	{
 		any a = &destination;
-		laurena::mdl::mdl::parse<any>(mdl,a.desc()->name(),a);
-		return destination;
+		return mdl_impl::parse(src, expected_name, destination);
 	}
 
+	/*
 	template <>
 	static any& parse<any>(const std::string& mdl, const std::string& expected_name, any& value)
 	{
@@ -101,6 +128,8 @@ public:
 			throw LAURENA_FAILED_PARSING_EXCEPTION( message.str().c_str(),amdl.reader()._ptr) ;      
 		}   
 	}
+
+	*/
 };
 
 /********************************************************************************/ 
