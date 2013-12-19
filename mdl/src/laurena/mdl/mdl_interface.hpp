@@ -107,7 +107,7 @@ public:
 	static T& parse(const std::string& src, T& destination)
 	{
 		any a = &destination;
-		return mdl_impl::parse(src, expected_name, destination);
+		return mdl_impl::parse(src, a.desc()->name(), destination);
 	}
 
 	/*
