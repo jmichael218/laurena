@@ -21,6 +21,7 @@
 /********************************************************************************/ 
 #include <laurena/laurena.hpp>
 
+#include <laurena/json/iarchive_json.hpp>
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
@@ -33,19 +34,19 @@ namespace json {
 
 namespace json_impl
 {
-	template <class T>
-	inline T& parse(const std::string& json, const std::string& expected_name, T& destination)
+	template <typename T>
+	inline T& parse(const std::string& source, const std::string& expected_name, T& destination)
 	{
 		any a = &destination;
-		laurena::json::json::json_impl::parse<any>(json,expected_name,a);
+		laurena::json::json_impl::parse(source,expected_name,a);
 		return destination;
 	}
 
 	template <>
-	inline any& parse<any>(const std::string& json, const std::string& expected_name, any& value)
+	inline any& parse<any>(const std::string& source, const std::string& expected_name, any& value)
 	{
 		iarchive_json amdl ;
-		amdl.reader().str(json.c_str());
+		amdl.reader().str(source.c_str());
 
 		try 
 		{
