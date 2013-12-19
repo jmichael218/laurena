@@ -2,9 +2,9 @@ CORE=src
 
 CFLAGS= -std=c++11 -Wno-write-strings -I /boost -I src -I ../include
 
-ARCHIVES=
+ARCHIVES=mdl.a json.a sql.a velocity.a laurena.a
 
-LIBRARIES=mdl.a json.a sql.a velocity.a laurena.a
+LIBRARIES=
 
 CC=c++
 
