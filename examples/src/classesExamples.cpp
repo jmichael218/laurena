@@ -44,7 +44,6 @@ void buildClassDescriptor_Cat()
     auto d = standard_class_descriptor<cat>::build("cat", classes::byName("animal"));
 
 	// to be able to serialize fields, call descriptor->init_field(CLASS,"fieldname",field)
-    d->addField(&cat::_age,"age");
 	d->addField(&cat::_birds,"birds");
 	d->addField(&cat::_mouses,"mouses");
 }
