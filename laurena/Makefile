@@ -17,6 +17,8 @@ OBJECTS= $(CORE)/archives/iarchive.o \
     $(CORE)/descriptors/bitset_descriptor.o \
 	$(CORE)/descriptors/bool_descriptor.o \
 	$(CORE)/descriptors/classes.o \
+	$(CORE)/descriptors/const_ptr_descriptor_descriptor.o \
+	$(CORE)/descriptors/descriptable.o \
     $(CORE)/descriptors/descriptor.o \
     $(CORE)/descriptors/field.o \
 	$(CORE)/descriptors/list_descriptor.o \
