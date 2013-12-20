@@ -49,6 +49,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "velocity", "velocity\veloci
 		{E4E38395-6C22-4954-9C6C-6F772979279D} = {E4E38395-6C22-4954-9C6C-6F772979279D}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tutorials", "Tutorials", "{96549F7B-C766-4DD5-A200-2E4A0FC4C4DA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t01_simple_example", "tutorials\t01_simple_example\t01_simple_example.vcxproj", "{2D095192-AAA5-4F78-A820-56EDF749F84B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -95,8 +99,15 @@ Global
 		{BE77DA79-0882-4BEC-BEAC-7299F05A3874}.Debug|Win32.Build.0 = Debug|Win32
 		{BE77DA79-0882-4BEC-BEAC-7299F05A3874}.Release|Win32.ActiveCfg = Release|Win32
 		{BE77DA79-0882-4BEC-BEAC-7299F05A3874}.Release|Win32.Build.0 = Release|Win32
+		{2D095192-AAA5-4F78-A820-56EDF749F84B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2D095192-AAA5-4F78-A820-56EDF749F84B}.Debug|Win32.Build.0 = Debug|Win32
+		{2D095192-AAA5-4F78-A820-56EDF749F84B}.Release|Win32.ActiveCfg = Release|Win32
+		{2D095192-AAA5-4F78-A820-56EDF749F84B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2D095192-AAA5-4F78-A820-56EDF749F84B} = {96549F7B-C766-4DD5-A200-2E4A0FC4C4DA}
 	EndGlobalSection
 EndGlobal
