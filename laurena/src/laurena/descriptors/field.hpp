@@ -57,6 +57,7 @@ public:
         FLAGS_IS_BITSET               = 8,  // Is a bitset (integer or boost::dynamic_biset) type
         FLAGS_IS_OWNER_SERIAL         = 9,
 		FLAGS_NO_QUOTE				  = 10, // No quote on string value. Print as it is
+		FLAGS_IS_EPOCH				  = 12, // This int is an epoch (a time value in second since 1970) - or a value in seconds.
         FLAGS_MAX                     = 11,
     };
 

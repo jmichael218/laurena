@@ -267,6 +267,9 @@
     <ClInclude Include="src\laurena\descriptors\bool_descriptor.hpp">
       <Filter>Fichiers d%27en-tête\descriptors</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\toolboxes\time.hpp">
+      <Filter>Fichiers d%27en-tête\toolboxes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">
