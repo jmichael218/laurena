@@ -53,7 +53,7 @@ public:
         FLAGS_IS_PRIMARY_KEY          = 3,  // Is a primary key (uint or string)
         FLAGS_IS_UNIQUE               = 4,  // Is unique
         FLAGS_IS_SERIAL               = 5,  // Is serial ( primary key for all serializables objects )
-        FLAGS_IS_ENUM                 = 6,  // Is an enum integer type
+        //FLAGS_IS_ENUM                 = 6,  // Is an enum integer type
         FLAGS_IS_BITSET               = 8,  // Is a bitset (integer or boost::dynamic_biset) type
         FLAGS_IS_OWNER_SERIAL         = 9,
 		FLAGS_NO_QUOTE				  = 10, // No quote on string value. Print as it is
@@ -68,39 +68,7 @@ public:
 	typedef std::function<void(const any& obj, any& value)> getter;
 	typedef std::function<void(any& obj, const any& value)> setter;
 
-	/*
-    class get_accessor 
-    {
-       public:
-
-      // two possible functions to call member function. virtual cause derived
-      // classes will use a pointer to an object and a pointer to a member function
-      // to make the function call
-      virtual void call(const any& obj, any& value) const =0 ;        // call using function
-
-      protected:
-      const field*        _field;
-
-      friend class field;
-    };
-
-    class set_accessor 
-    {
-       public:
-
-      // two possible functions to call member function. virtual cause derived
-      // classes will use a pointer to an object and a pointer to a member function
-      // to make the function call
-      virtual void call(any& obj, const any& value) const =0 ;        // call using function
-
-      protected:
-      const field*        _field;
-
-      friend class field;
-    };
-       */
         
-
     /****************************************************************************/ 
     /*          constructors, desctructor                                       */ 
     /****************************************************************************/ 
@@ -139,8 +107,8 @@ public:
     bool                    isPointer()         const;
     field&        isPointer(bool mode);
 
-    field&        isEnum(const string_array& values);
-    bool                    isEnum() const;
+    //field&        isEnum(const string_array& values);
+    //bool                    isEnum() const;
 
     field&        isBitSet(const string_array& values);
     bool                    isBitSet() const;

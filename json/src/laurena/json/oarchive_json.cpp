@@ -122,7 +122,7 @@ const any_feature* acf = NULL;
                 isString = true;
             else
             {
-                if ( !att.isEnum() && !att.isBitSet())
+                if ( /*!att.isEnum() &&*/ !att.isBitSet())
 				{
                    if (acd.has(descriptor::Flags::NUMERIC_VALUE) == false)
                         isString |= !is_integer(s);

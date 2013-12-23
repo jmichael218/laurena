@@ -148,12 +148,13 @@ std::string& field::toString(const any& object, std::string& destination) const
 
 
     destination = std::move(this->_descriptor->atos(value));
+	/*
     if (this->_flags.test(field::FLAGS_IS_ENUM))
     {
         word32 index = boost::lexical_cast<word32,std::string>(destination);
         destination = this->_values->operator[](index);
     }
-    else if (this->_flags.test(field::FLAGS_IS_BITSET))
+    else*/ if (this->_flags.test(field::FLAGS_IS_BITSET))
     {
         if (this->_descriptor->has(descriptor::Flags::NUMERIC_VALUE))
         {
@@ -178,6 +179,7 @@ any value;
 void* ptrObject = object.ptr();
 void* ptrAttribute = this->ptr(ptrObject);
 
+	/*
     if (this->_flags.test(field::FLAGS_IS_ENUM))
     {
         int32 index = this->_values->find(svalue);
@@ -191,7 +193,7 @@ void* ptrAttribute = this->ptr(ptrObject);
         value = index;
         this->_descriptor->set(ptrAttribute,value);
     }
-    else if (this->_flags.test(field::FLAGS_IS_BITSET))
+    else*/  if (this->_flags.test(field::FLAGS_IS_BITSET))
     {
         if (this->_descriptor->has(descriptor::Flags::NUMERIC_VALUE))
         {
@@ -215,7 +217,7 @@ void* ptrAttribute = this->ptr(ptrObject);
         this->_descriptor->set(ptrAttribute,value);
     }
 }
-
+/*
 field& field::isEnum(const string_array& values)
 {
     this->_flags.set(field::FLAGS_IS_ENUM);
@@ -227,6 +229,7 @@ bool field::isEnum() const
 {
     return this->_flags.test(field::FLAGS_IS_ENUM);
 }    
+*/
 
 field& field::isBitSet(const string_array& values)
 {

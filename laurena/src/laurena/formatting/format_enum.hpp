@@ -40,28 +40,28 @@ class writer_enum : public writer
 {
 public:    
 
-	writer_enum			 (string_array& values);
+	writer_enum			 (const string_array& values);
 
     //! a tokenizer is providing a list of tokens from a source code.
     virtual bool write (std::ostream& output, any& value) const;
 
 protected:
 
-	string_array&		_values;
+	const string_array&		_values;
 };
 
 class parser_enum : public charset_parser
 {
 public:    
 
-	parser_enum (string_array& values);
+	parser_enum (const string_array& values);
 
     //! a tokenizer is providing a list of tokens from a source code.
     virtual bool read (tokenizer& tokenizer, any& value, bool consume) const;
 
 protected:
 
-	string_array&		_values;
+	const string_array&		_values;
 
 };
 
@@ -69,7 +69,7 @@ class format_enum : public format
 {
 public:
 
-    format_enum (const char* language, string_array& values);
+    format_enum (const char* language, const string_array& values);
 
 };
 

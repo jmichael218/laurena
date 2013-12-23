@@ -11,6 +11,7 @@
 #include <laurena/descriptors/const_ptr_descriptor_descriptor.hpp>
 #include <laurena/descriptors/bitset_descriptor.hpp>
 #include <laurena/descriptors/vector_descriptor.hpp>
+#include <laurena/formatting/format_enum.hpp>
 
 using namespace laurena;
 
@@ -26,7 +27,7 @@ const descriptor* td<parameter>::desc()
 		const descriptor * cdesc = td<const descriptor *>::desc();
 		res->editFields().unused().init("type", cdesc, offsetof(parameter, _descriptor)).isPointer(true).noQuote(true);
 	
-		res->addField(&parameter::_flags, "flags").isEnum(parameter::FlagsKeywords);
+		res->addField(&parameter::_flags, "flags").annotate(new format_enum("default", parameter::FlagsKeywords));
     }
 
     return res;

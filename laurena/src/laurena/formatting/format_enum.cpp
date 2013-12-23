@@ -13,7 +13,7 @@
 
 using namespace laurena;
 
-writer_enum::writer_enum(string_array& values) : writer (), _values(values)
+writer_enum::writer_enum(const string_array& values) : writer (), _values(values)
 { }
 
 bool writer_enum::write (std::ostream& output, any& value) const
@@ -22,7 +22,7 @@ bool writer_enum::write (std::ostream& output, any& value) const
 	return true;
 }
 
-parser_enum::parser_enum (string_array& values) : charset_parser(const_charsets<>::VARNAME), _values(values)
+parser_enum::parser_enum (const string_array& values) : charset_parser(const_charsets<>::VARNAME), _values(values)
 { }
 
 //! a tokenizer is providing a list of tokens from a source code.
@@ -41,7 +41,7 @@ bool parser_enum::read (tokenizer& tokenizer, any& value, bool consume) const
 	return true;
 }
 
-format_enum::format_enum (const char* language, string_array& values) : format(language)
+format_enum::format_enum (const char* language, const string_array& values) : format(language)
 { 
 	this->_writer = std::make_shared<writer_enum>(values);
 	this->_parser =  std::make_shared<parser_enum>(values);
