@@ -1,15 +1,15 @@
 ///
-/// \file     writer.hpp
-/// \brief    writer classes are optional output writer for a type, like hexadecimal output for an integer ...
+/// \file     format_enum.hpp
+/// \brief    format_enum is a keyword enum format
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-/// formatter classes are optional output writer for a type, like hexadecimal output for an integer ...
+/// format_enum is a keyword enum format
 ///
 
-#ifndef LAURENA_WRITER_H
-#define LAURENA_WRITER_H
+#ifndef LAURENA_FORMAT_ENUM_H
+#define LAURENA_FORMAT_ENUM_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -24,9 +24,9 @@
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
-#include <laurena/parsing/token.hpp>
-#include <laurena/types/charset.hpp>
-#include <laurena/descriptors/classes.hpp>
+#include <laurena/formatting/format.hpp>
+#include <laurena/types/string_array.hpp>
+#include <laurena/parsing/basic_parsers.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -36,28 +36,43 @@ namespace laurena {
 /*********************************************************************************/
 /*          base class for all parser classes                                    */ 
 /*********************************************************************************/ 
-class writer
+class writer_enum : public writer
 {
 public:    
 
+	writer_enum			 (string_array& values);
+
     //! a tokenizer is providing a list of tokens from a source code.
-    virtual bool write (std::ostream& output, any& value) const =0;
+    virtual bool write (std::ostream& output, any& value) const;
+
+protected:
+
+	string_array&		_values;
 };
 
-//! A generic writer assuming ostream << T is defined.
-template<typename T>
-class generic_writer : public writer
+class parser_enum : public charset_parser
+{
+public:    
+
+	parser_enum (string_array& values);
+
+    //! a tokenizer is providing a list of tokens from a source code.
+    virtual bool read (tokenizer& tokenizer, any& value, bool consume) const;
+
+protected:
+
+	string_array&		_values;
+
+};
+
+class format_enum : public format
 {
 public:
-	
 
-    virtual bool write (std::ostream& output, any& value) const
-    {
-        output <<  *(anycast<T*>(value));
-        return true;
-         
-    }
+    format_enum (const char* language, string_array& values);
+
 };
+
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

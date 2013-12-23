@@ -65,8 +65,8 @@ void buildClassDescriptor_User()
 {
     // create class descriptor for the class 'user'
 	auto d = standard_class_descriptor<user>::build("user");
-	d->addField(&user::_gender,"gender").isEnum(genders);
-    d->addField(&user::_type,"type").isEnum(user_types);
+	d->addField(&user::_gender,"gender").annotate(new format_enum("json",genders));
+    d->addField(&user::_type,"type").annotate(new format_enum("json",user_types));
 	d->addField(&user::_age,"age");
 	d->addField(&user::_name,"name");
 }
@@ -110,7 +110,8 @@ void buildClassDescriptor_IVertex()
 	auto d = standard_class_descriptor<ivertex>::build("ivertex");
     d->addField(&ivertex::_x,"x");
     d->addField(&ivertex::_y,"y");
-	d->annotate(new format("json",new generic_writer<ivertex> () , new generic_parser<ivertex> () ));
+
+	d->annotate(new generic_format<ivertex>("json"));
 }
 
 

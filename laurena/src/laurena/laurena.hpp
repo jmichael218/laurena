@@ -106,6 +106,7 @@
 //formatters
 #include <laurena/formatting/writer.hpp>
 #include <laurena/formatting/format.hpp>
+#include <laurena/formatting/format_enum.hpp>
 
 
 #endif

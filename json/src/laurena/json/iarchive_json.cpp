@@ -147,16 +147,22 @@ token t;
 any a;
 static const descriptor* desc_int64 = classes::byType(typeid(int64));
 
-
 	if (fdesc)
 	{
-		const format* fieldFormat = dynamic_cast<const format*>(fdesc->annotations().get(JSON::ANNOTATION_NAME));
+		bool isTiny					= fdesc->desc().has(descriptor::Flags::TINY);
+		const format* fieldFormat	= dynamic_cast<const format*>(fdesc->annotations().get(JSON::ANNOTATION_NAME));
+
 		if ( fieldFormat )
 		{
 			this->readExpected(t,JSON::TOKEN_DQUOTE);
-			fieldFormat->read(this->_tokenizer,fdesc->get(object,a),true);
+			if (isTiny)
+			{
+				fieldFormat->read(this->_tokenizer,a,true);
+				fdesc->set(object, a);
+			}
+			else
+				fieldFormat->read(this->_tokenizer,fdesc->get(object, a),true);
 			this->readExpected(t,JSON::TOKEN_DQUOTE);
-			fdesc->set(object,t);
 			return;
 		}
 
@@ -165,9 +171,14 @@ static const descriptor* desc_int64 = classes::byType(typeid(int64));
 		if (typeFormat)
 		{  
 			this->readExpected(t,JSON::TOKEN_DQUOTE);
-			typeFormat->read(this->_tokenizer,fdesc ? fdesc->get(object,a) : object,true);
+			if (isTiny)
+			{
+				typeFormat->read(this->_tokenizer,a,true);
+				fdesc->set(object, a);
+			}
+			else
+				typeFormat->read(this->_tokenizer,fdesc->get(object, a),true);
 			this->readExpected(t,JSON::TOKEN_DQUOTE);
-			fdesc->set(object,t);
 			return;
 		}
 	}

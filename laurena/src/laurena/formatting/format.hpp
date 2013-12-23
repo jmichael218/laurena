@@ -45,7 +45,8 @@ public:
     /****************************************************************************/ 
     /*      constructor, destructor                                             */ 
     /****************************************************************************/ 
-    format (const char* language, writer* w, parser* f);
+	format (const char* language);
+    format (const char* language, std::shared_ptr<writer>& w, std::shared_ptr<parser> f);
 
     /****************************************************************************/ 
     /*          getters                                                         */ 
@@ -63,8 +64,22 @@ public:
     /****************************************************************************/ 
     protected:
 
-    writer*     _writer;
-    parser*     _parser;
+	// I use shared ptr because i don't know if writer and parser aren't used elsewhere, and when to free them
+    std::shared_ptr<writer>     _writer;
+    std::shared_ptr<parser>     _parser;
+};
+
+template<typename T>
+class generic_format : public format
+{
+public:
+
+	generic_format(const char* language) : format(language)
+	{
+		this->_writer = std::make_shared<generic_writer<T>>();
+		this->_parser = std::make_shared<generic_parser<T>>();
+	}
+
 };
 
 /********************************************************************************/ 

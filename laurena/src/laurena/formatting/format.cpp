@@ -13,7 +13,11 @@
 
 using namespace laurena;
 
-format::format (const char* language, writer* w, parser* f) : annotation(language), _writer(w) , _parser(f) {}
+format::format (const char* language) :  annotation(language), _writer (), _parser ()
+{ }
+
+format::format (const char* language, std::shared_ptr<writer>& w, std::shared_ptr<parser> f) : annotation(language), _writer(w) , _parser(f) 
+{ }
 
 bool format::write (std::ostream& output, any& value) const
 {

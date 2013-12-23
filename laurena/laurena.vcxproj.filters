@@ -270,6 +270,9 @@
     <ClInclude Include="src\laurena\toolboxes\time.hpp">
       <Filter>Fichiers d%27en-tête\toolboxes</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\formatting\format_enum.hpp">
+      <Filter>Fichiers d%27en-tête\formatting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">
@@ -406,6 +409,9 @@
     </ClCompile>
     <ClCompile Include="src\laurena\types\context.cpp">
       <Filter>Fichiers sources\types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\formatting\format_enum.cpp">
+      <Filter>Fichiers sources\formatting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

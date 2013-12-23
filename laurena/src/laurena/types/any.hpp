@@ -265,6 +265,20 @@ VALUETYPE anycast(any & operand)
 {
     typedef typename std::remove_reference<VALUETYPE>::type nonref;
 
+    const descriptor* ocd = operand.desc();
+    if (!ocd)
+        throw new LAURENA_EXCEPTION("anycast failed");
+
+    const descriptor* vcd = classes::byType(typeid(typename traits<VALUETYPE>::basetype));
+    if (!vcd)
+        throw new LAURENA_EXCEPTION("anycast failed");
+
+	if (ocd->has(descriptor::Flags::TINY) && vcd->has(descriptor::Flags::TINY) && (ocd != vcd))
+	{
+		any a = vcd->cast(operand);
+		return anycast<VALUETYPE>(a);
+	}
+
     nonref * result = anycast<nonref>(&operand);
     if(!result)
         throw new LAURENA_EXCEPTION("anycast failed");
