@@ -24,6 +24,8 @@
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
+#include <laurena/grammar/rule.hpp>
+
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
@@ -32,23 +34,13 @@ namespace laurena {
 /********************************************************************************/ 
 /*              interface                                                       */ 
 /********************************************************************************/ 
-class Filename {
+class Time {
     
     public:
+    static word64 parse(const std::string& format, const std::string& value, word32* len_parsed);
 
-    //<! Extract a filename from a full path filename
-    static void extractFilename(const std::string& fullpath_filename, std::string& filename) ;
-
-    //<! Extract directory from a full path filename
-    //<! The directory doesn't have a final "/"
-    static void extractDirectory(const std::string& fullpath_filename, std::string& directory) ;
-
-    //<! Extract the prefix ( the part before the .txt for example ) from a filename
-    static void extractPrefix(const std::string& filename, std::string& prefix) ;
-
-    //<! Extract the suffix ( the 'txt' part of readme.txt for example ) from a filename
-    static void extractSuffix(const std::string& filename, std::string& suffix ) ;
-};
+	static std::shared_ptr<laurena::rule<>> generate_rule(const std::string& format);
+};	
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

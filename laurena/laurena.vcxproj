@@ -53,6 +53,7 @@
     <ClInclude Include="src\laurena\formatting\format.hpp" />
     <ClInclude Include="src\laurena\formatting\format_bitset.hpp" />
     <ClInclude Include="src\laurena\formatting\format_enum.hpp" />
+    <ClInclude Include="src\laurena\formatting\format_epoch.hpp" />
     <ClInclude Include="src\laurena\formatting\writer.hpp" />
     <ClInclude Include="src\laurena\functions\parameter.hpp" />
     <ClInclude Include="src\laurena\includes\includes.hpp" />
@@ -109,6 +110,7 @@
     <ClCompile Include="src\laurena\formatting\format.cpp" />
     <ClCompile Include="src\laurena\formatting\format_bitset.cpp" />
     <ClCompile Include="src\laurena\formatting\format_enum.cpp" />
+    <ClCompile Include="src\laurena\formatting\format_epoch.cpp" />
     <ClCompile Include="src\laurena\functions\parameter.cpp" />
     <ClCompile Include="src\laurena\memory\memory_functions.cpp" />
     <ClCompile Include="src\laurena\parsing\basic_parsers.cpp" />
@@ -116,6 +118,7 @@
     <ClCompile Include="src\laurena\parsing\tokenizer.cpp" />
     <ClCompile Include="src\laurena\toolboxes\bitset.cpp" />
     <ClCompile Include="src\laurena\toolboxes\filename.cpp" />
+    <ClCompile Include="src\laurena\toolboxes\time.cpp" />
     <ClCompile Include="src\laurena\types\any.cpp" />
     <ClCompile Include="src\laurena\types\context.cpp" />
     <ClCompile Include="src\laurena\types\literator.cpp" />

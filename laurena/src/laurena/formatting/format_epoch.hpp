@@ -1,15 +1,15 @@
 ///
-/// \file     rule_ptr.hpp
-/// \brief    shared ptr rule wrapper
+/// \file     format_epoch.hpp
+/// \brief    format_epoch is a measure in seconds of a date or a duration
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-///   shared ptr rule wrapper
+/// format_epoch is a measure in seconds of a date or a duration
 ///
 
-#ifndef LAURENA_RULE_PTR_H
-#define LAURENA_RULE_PTR_H
+#ifndef LAURENA_FORMAT_EPOCH_H
+#define LAURENA_FORMAT_EPOCH_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -21,48 +21,56 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
+#include <laurena/includes/includes.hpp>
+#include <laurena/includes/types.hpp>
 
-#include <memory>
-#include <ostream>
-
-#include <laurena/types/parsing_context.hpp>
-#include <laurena/grammar/rule_basic.hpp>
-#include <laurena/grammar/rule_or.hpp>
-
+#include <laurena/formatting/format.hpp>
+#include <laurena/types/string_array.hpp>
+#include <laurena/parsing/basic_parsers.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
 namespace laurena {
 
-/********************************************************************************/ 
-/*                                                                              */ 
-/*              class rule_ptr                                                  */ 
-/*                                                                              */ 
-/********************************************************************************/ 
+/*********************************************************************************/
+/*          base class for all parser classes                                    */ 
+/*********************************************************************************/ 
+class writer_epoch : public writer
+{
+public:    
 
-// This is the class wrapping a smart rule_basic  pointer
-template 
-<
-	typename CONTEXT
->
+	writer_epoch			 ();
 
-class rule_ptr : public std::shared_ptr<rule_basic<CONTEXT>> 
+    //! a tokenizer is providing a list of tokens from a source code.
+    virtual bool write (std::ostream& output, any& value) const;
+
+};
+
+class parser_epoch : public charset_parser
+{
+public:    
+
+	parser_epoch ();
+
+    //! a tokenizer is providing a list of tokens from a source code.
+    virtual bool read (tokenizer& tokenizer, any& value, bool consume) const;
+
+};
+
+class format_epoch : public format
 {
 public:
 
-	/************************************************************************/ 
-	/*		constructor														*/ 
-	/************************************************************************/ 
-	rule_ptr()								: std::shared_ptr<rule_basic<CONTEXT>>()		{ }
-
-	rule_ptr(rule_basic<CONTEXT>* ptr)		: std::shared_ptr<rule_basic<CONTEXT>>(ptr)		{ }
+    format_epoch (const char* language);
+	format_epoch (const std::string& language);
 
 };
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 
+
 }
 #endif
 //End of file

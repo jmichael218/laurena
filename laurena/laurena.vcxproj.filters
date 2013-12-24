@@ -276,6 +276,9 @@
     <ClInclude Include="src\laurena\formatting\format_bitset.hpp">
       <Filter>Fichiers d%27en-tête\formatting</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\formatting\format_epoch.hpp">
+      <Filter>Fichiers d%27en-tête\formatting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">
@@ -418,6 +421,12 @@
     </ClCompile>
     <ClCompile Include="src\laurena\formatting\format_bitset.cpp">
       <Filter>Fichiers sources\formatting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\formatting\format_epoch.cpp">
+      <Filter>Fichiers sources\formatting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\toolboxes\time.cpp">
+      <Filter>Fichiers sources\toolboxes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
