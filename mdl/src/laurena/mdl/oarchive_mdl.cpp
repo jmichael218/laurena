@@ -49,15 +49,16 @@ const any_feature* acf = NULL;
 
         att.get(value,fieldValue);
 
-        const format* fieldFormat = dynamic_cast<const format*>(att.annotations().get(MDL::ANNOTATION_NAME));
+        const format* fieldFormat = dynamic_cast<const format*>(att.annotations().get(MDL::ANNOTATION_NAME, ANNOTATION_FORMAT_ALL));
         if ( fieldFormat )
         {
             this->_data << this->_tab << att.name() << " = " ;
             fieldFormat->write(this->_data , fieldValue);
+            this->_data << ";" << std::endl;
             continue;
         }
 
-        const format* typeFormat = dynamic_cast<const format*>(att.desc().annotations().get(MDL::ANNOTATION_NAME));
+        const format* typeFormat = dynamic_cast<const format*>(att.desc().annotations().get(MDL::ANNOTATION_NAME, ANNOTATION_FORMAT_ALL));
         if (typeFormat)
         {
             this->_data << this->_tab << att.name() << " = " ;
@@ -106,9 +107,8 @@ const any_feature* acf = NULL;
                 isString = !acd.has(descriptor::Flags::NO_QUOTE);
             else
             {
-                if ( /*!att.isEnum() &&*/ !att.isBitSet())
-                   if (acd.has(descriptor::Flags::NUMERIC_VALUE) == false)
-                        isString |= !is_integer(s);
+               if (acd.has(descriptor::Flags::NUMERIC_VALUE) == false)
+                    isString |= !is_integer(s);
             }
 
             this->_data << this->_tab << att.name() << " = " ;

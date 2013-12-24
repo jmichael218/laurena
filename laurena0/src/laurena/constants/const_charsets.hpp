@@ -51,6 +51,7 @@ class const_charsets
 	static const charset<CHARTYPE> BINARY;
 	static const charset<CHARTYPE> ACCENTS;
 	static const charset<CHARTYPE> URI;
+	static const charset<CHARTYPE> VARLIST;		// "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\r\n\t "
 };
 
 template<typename CHARTYPE>
@@ -91,6 +92,9 @@ const charset<CHARTYPE> const_charsets<CHARTYPE>::ACCENTS (sliteral<CHARTYPE> ("
 
 template<typename CHARTYPE>
 const charset<CHARTYPE> const_charsets<CHARTYPE>::URI (sliteral<CHARTYPE> ("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-/?=&%"));
+
+template<typename CHARTYPE>
+const charset<CHARTYPE> const_charsets<CHARTYPE>::VARLIST (sliteral<CHARTYPE> ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\r\n\t "));
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

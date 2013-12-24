@@ -273,6 +273,9 @@
     <ClInclude Include="src\laurena\formatting\format_enum.hpp">
       <Filter>Fichiers d%27en-tête\formatting</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\formatting\format_bitset.hpp">
+      <Filter>Fichiers d%27en-tête\formatting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">
@@ -411,6 +414,9 @@
       <Filter>Fichiers sources\types</Filter>
     </ClCompile>
     <ClCompile Include="src\laurena\formatting\format_enum.cpp">
+      <Filter>Fichiers sources\formatting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\formatting\format_bitset.cpp">
       <Filter>Fichiers sources\formatting</Filter>
     </ClCompile>
   </ItemGroup>

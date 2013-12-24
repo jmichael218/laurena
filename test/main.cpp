@@ -96,7 +96,7 @@ void buildTestClassDescriptors ()
     /****************************************************************************/
     auto d4 = standard_class_descriptor<test_bitset_bitfield>::build("test_bitset_bitfield");
     d4->addField(&test_bitset_bitfield::_w16,"w16");
-    d4->addField(&test_bitset_bitfield::_bitset,"bitset").isBitSet(the_tens);
+    d4->addField(&test_bitset_bitfield::_bitset,"bitset").annotate(new format_bitset("format.all", the_tens));
     d4->addField(&test_bitset_bitfield::_i64,"i64");
 
 

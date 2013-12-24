@@ -65,8 +65,8 @@ void buildClassDescriptor_User()
 {
     // create class descriptor for the class 'user'
 	auto d = standard_class_descriptor<user>::build("user");
-	d->addField(&user::_gender,"gender").annotate(new format_enum("json",genders));
-    d->addField(&user::_type,"type").annotate(new format_enum("json",user_types));
+	d->addField(&user::_gender,"gender").annotate(new format_enum("format.all",genders));
+    d->addField(&user::_type,"type").annotate(new format_enum("format.all",user_types));
 	d->addField(&user::_age,"age");
 	d->addField(&user::_name,"name");
 }
@@ -78,8 +78,8 @@ void buildClassDescriptor_Dragon()
     // create class descriptor for the class 'dragon'
 	auto d = standard_class_descriptor<dragon>::build("dragon");
 	d->addField(&dragon::_name,"name");
-	d->addField(&dragon::_state,"state").isBitSet(dragon_states);
-	d->addField(&dragon::_foods,"food").isBitSet(dragon_foods);
+	d->addField(&dragon::_state,"state").annotate(new format_bitset("format.all", dragon_states));
+	d->addField(&dragon::_foods,"food").annotate(new format_bitset("format.all", dragon_foods));
 }
 
 void buildClassDescriptor_Building()

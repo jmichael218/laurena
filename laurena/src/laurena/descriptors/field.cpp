@@ -148,28 +148,7 @@ std::string& field::toString(const any& object, std::string& destination) const
 
 
     destination = std::move(this->_descriptor->atos(value));
-	/*
-    if (this->_flags.test(field::FLAGS_IS_ENUM))
-    {
-        word32 index = boost::lexical_cast<word32,std::string>(destination);
-        destination = this->_values->operator[](index);
-    }
-    else*/ if (this->_flags.test(field::FLAGS_IS_BITSET))
-    {
-        if (this->_descriptor->has(descriptor::Flags::NUMERIC_VALUE))
-        {
-            word64 wbits = boost::lexical_cast<word64,std::string>(destination);
-            bitset::serialize(wbits,*this->_values,destination,CONST_SPACE);            
-        } 
-        else
-        if (const_charsets<>::BINARY.validate(destination))            
-        {
-            std::string bits = destination;
-            bitset::serialize(bits,*this->_values,destination,CONST_SPACE);
-        }
-        else
-            assert(false);
-    }
+
     return destination;
 }
 
@@ -179,68 +158,9 @@ any value;
 void* ptrObject = object.ptr();
 void* ptrAttribute = this->ptr(ptrObject);
 
-	/*
-    if (this->_flags.test(field::FLAGS_IS_ENUM))
-    {
-        int32 index = this->_values->find(svalue);
-        if (index == -1)
-        {
-            std::string message (this->_name);
-            message.append(",isEnum=true,value='").append(svalue).append("'), value not found in enum values.");
-            throw LAURENA_FAILED_PARSING_EXCEPTION(message.c_str(),svalue.c_str());
-        }
-
-        value = index;
-        this->_descriptor->set(ptrAttribute,value);
-    }
-    else*/  if (this->_flags.test(field::FLAGS_IS_BITSET))
-    {
-        if (this->_descriptor->has(descriptor::Flags::NUMERIC_VALUE))
-        {
-            word64 b = bitset::parse(*this->_values,const_charsets<>::VARNAME,svalue);
-            value = b;
-            this->_descriptor->set(ptrAttribute,value);
-        } 
-        else if (this->_descriptor->type() == typeid(boost::dynamic_bitset<>))
-        {
-            boost::dynamic_bitset<>* p = (boost::dynamic_bitset<>*) ptrAttribute;
-			if (p->size() != this->_values->size())
-				p->resize(this->_values->size());
-            bitset::parse(*p,*this->_values,const_charsets<>::VARNAME,svalue);
-        }
-        else
-            assert(false);
-    }
-    else 
-    {
-        value = svalue;
-        this->_descriptor->set(ptrAttribute,value);
-    }
-}
-/*
-field& field::isEnum(const string_array& values)
-{
-    this->_flags.set(field::FLAGS_IS_ENUM);
-    _values = &values;
-    return *this;
-}
-
-bool field::isEnum() const
-{
-    return this->_flags.test(field::FLAGS_IS_ENUM);
-}    
-*/
-
-field& field::isBitSet(const string_array& values)
-{
-    this->_flags.set(field::FLAGS_IS_BITSET);
-    _values = &values;
-    return *this;
-}
-
-bool field::isBitSet() const
-{
-   return this->_flags.test(field::FLAGS_IS_BITSET);
+	value = svalue;
+    this->_descriptor->set(ptrAttribute,value);
+    
 }
 
 /********************************************************************************/ 

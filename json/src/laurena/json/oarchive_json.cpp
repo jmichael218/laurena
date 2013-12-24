@@ -67,7 +67,7 @@ const any_feature* acf = NULL;
         this->completeLastLine();      
         att.get(value,fieldValue);       
 
-		const format* fieldFormat = dynamic_cast<const format*>(att.annotations().get(JSON::ANNOTATION_NAME));
+		const format* fieldFormat = dynamic_cast<const format*>(att.annotations().get(JSON::ANNOTATION_NAME, ANNOTATION_FORMAT_ALL));
         if ( fieldFormat )
         {                
 			this->printFieldName(att);
@@ -77,7 +77,7 @@ const any_feature* acf = NULL;
             continue;
         }
 
-        const format* typeFormat = dynamic_cast<const format*>(att.desc().annotations().get(JSON::ANNOTATION_NAME));
+        const format* typeFormat = dynamic_cast<const format*>(att.desc().annotations().get(JSON::ANNOTATION_NAME, ANNOTATION_FORMAT_ALL));
         if (typeFormat)
         {               
 			this->printFieldName(att);
@@ -122,11 +122,8 @@ const any_feature* acf = NULL;
                 isString = true;
             else
             {
-                if ( /*!att.isEnum() &&*/ !att.isBitSet())
-				{
-                   if (acd.has(descriptor::Flags::NUMERIC_VALUE) == false)
-                        isString |= !is_integer(s);
-				}
+                if (acd.has(descriptor::Flags::NUMERIC_VALUE) == false)
+                    isString |= !is_integer(s);				
 				else
 					isString = true;
             }

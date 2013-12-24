@@ -14,4 +14,5 @@ using namespace laurena;
 
 
 const std::string laurena::CONST_SPACE = " "; 
+const std::string laurena::ANNOTATION_FORMAT_ALL= "format.all";
 //end of file

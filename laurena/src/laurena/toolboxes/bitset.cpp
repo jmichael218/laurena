@@ -28,6 +28,10 @@ std::string& bitset::serialize(const boost::dynamic_bitset<>& bits, const string
                 destination.append(separator);
             destination.append(bitnames[i]);
         }
+
+	if (first)
+		destination = "0";
+
     return destination;
 
 }
@@ -49,6 +53,9 @@ std::string& bitset::serialize(word64 bits, const string_array& bitnames, std::s
         }
         mask <<= 1;
     }
+	if (first)
+		destination = "0";
+
     return destination;
     
 }
@@ -71,6 +78,9 @@ std::string& bitset::serialize(const std::string& bits, const string_array& bitn
             destination.append(bitnames[i]);
         }
     }
+	if (first)
+		destination = "0";
+
     return destination;
 }
 

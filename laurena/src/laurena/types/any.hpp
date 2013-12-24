@@ -269,7 +269,11 @@ VALUETYPE anycast(any & operand)
     if (!ocd)
         throw new LAURENA_EXCEPTION("anycast failed");
 
-    const descriptor* vcd = classes::byType(typeid(typename traits<VALUETYPE>::basetype));
+	const descriptor* vcd = classes::byType(typeid(VALUETYPE));
+
+    if (!vcd)
+		vcd = classes::byType(typeid(typename traits<VALUETYPE>::basetype));
+
     if (!vcd)
         throw new LAURENA_EXCEPTION("anycast failed");
 

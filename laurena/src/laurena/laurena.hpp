@@ -24,6 +24,9 @@
 // memory related
 #include <laurena/memory/memory_functions.hpp>
 
+// constants
+#include <laurena/constants/const_strings.hpp>
+
 // debug
 #include <laurena/debug/debug.hpp>
 #include <laurena/debug/testunit.hpp>
@@ -107,6 +110,7 @@
 #include <laurena/formatting/writer.hpp>
 #include <laurena/formatting/format.hpp>
 #include <laurena/formatting/format_enum.hpp>
+#include <laurena/formatting/format_bitset.hpp>
 
 
 #endif

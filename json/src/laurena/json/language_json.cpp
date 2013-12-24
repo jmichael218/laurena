@@ -11,7 +11,7 @@
 using namespace laurena;
 using namespace json;
 
-const std::string&  JSON::ANNOTATION_NAME = "json" ;
+const std::string&  JSON::ANNOTATION_NAME = "format.json" ;
 
 
 parsers                 JSON::_parsers;

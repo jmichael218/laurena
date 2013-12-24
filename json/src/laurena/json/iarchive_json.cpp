@@ -150,7 +150,7 @@ static const descriptor* desc_int64 = classes::byType(typeid(int64));
 	if (fdesc)
 	{
 		bool isTiny					= fdesc->desc().has(descriptor::Flags::TINY);
-		const format* fieldFormat	= dynamic_cast<const format*>(fdesc->annotations().get(JSON::ANNOTATION_NAME));
+		const format* fieldFormat	= dynamic_cast<const format*>(fdesc->annotations().get(JSON::ANNOTATION_NAME, ANNOTATION_FORMAT_ALL));
 
 		if ( fieldFormat )
 		{
@@ -167,7 +167,7 @@ static const descriptor* desc_int64 = classes::byType(typeid(int64));
 		}
 
 
-		const format* typeFormat = dynamic_cast<const format*>(fdesc->desc().annotations().get(JSON::ANNOTATION_NAME));
+		const format* typeFormat = dynamic_cast<const format*>(fdesc->desc().annotations().get(JSON::ANNOTATION_NAME, ANNOTATION_FORMAT_ALL));
 		if (typeFormat)
 		{  
 			this->readExpected(t,JSON::TOKEN_DQUOTE);

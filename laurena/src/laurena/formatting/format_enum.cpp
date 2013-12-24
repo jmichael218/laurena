@@ -47,4 +47,11 @@ format_enum::format_enum (const char* language, const string_array& values) : fo
 	this->_parser =  std::make_shared<parser_enum>(values);
 
 }
+
+format_enum::format_enum (const std::string& language, const string_array& values) : format(language.c_str())
+{ 
+	this->_writer = std::make_shared<writer_enum>(values);
+	this->_parser =  std::make_shared<parser_enum>(values);
+
+}
 //End of file

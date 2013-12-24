@@ -53,11 +53,11 @@ public:
         FLAGS_IS_PRIMARY_KEY          = 3,  // Is a primary key (uint or string)
         FLAGS_IS_UNIQUE               = 4,  // Is unique
         FLAGS_IS_SERIAL               = 5,  // Is serial ( primary key for all serializables objects )
-        //FLAGS_IS_ENUM                 = 6,  // Is an enum integer type
-        FLAGS_IS_BITSET               = 8,  // Is a bitset (integer or boost::dynamic_biset) type
+
+		// 6, 7, 8 unused
         FLAGS_IS_OWNER_SERIAL         = 9,
 		FLAGS_NO_QUOTE				  = 10, // No quote on string value. Print as it is
-		FLAGS_IS_EPOCH				  = 12, // This int is an epoch (a time value in second since 1970) - or a value in seconds.
+
         FLAGS_MAX                     = 11,
     };
 
@@ -106,12 +106,6 @@ public:
 
     bool                    isPointer()         const;
     field&        isPointer(bool mode);
-
-    //field&        isEnum(const string_array& values);
-    //bool                    isEnum() const;
-
-    field&        isBitSet(const string_array& values);
-    bool                    isBitSet() const;
 
     field&        dontArchive(bool mode);
     bool                    dontArchive() const;

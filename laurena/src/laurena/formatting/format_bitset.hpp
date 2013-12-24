@@ -1,15 +1,15 @@
 ///
-/// \file     format_enum.hpp
-/// \brief    format_enum is a keyword enum format
+/// \file     format_bitset.hpp
+/// \brief    format_bitset is a list of keyword for a bitset format
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-/// format_enum is a keyword enum format
+/// format_bitset is a list of keyword for a bitset format
 ///
 
-#ifndef LAURENA_FORMAT_ENUM_H
-#define LAURENA_FORMAT_ENUM_H
+#ifndef LAURENA_FORMAT_BITSET_H
+#define LAURENA_FORMAT_BITSET_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -36,11 +36,11 @@ namespace laurena {
 /*********************************************************************************/
 /*          base class for all parser classes                                    */ 
 /*********************************************************************************/ 
-class writer_enum : public writer
+class writer_bitset : public writer
 {
 public:    
 
-	writer_enum			 (const string_array& values);
+	writer_bitset			 (const string_array& values);
 
     //! a tokenizer is providing a list of tokens from a source code.
     virtual bool write (std::ostream& output, any& value) const;
@@ -50,11 +50,11 @@ protected:
 	const string_array&		_values;
 };
 
-class parser_enum : public charset_parser
+class parser_bitset : public charset_parser
 {
 public:    
 
-	parser_enum (const string_array& values);
+	parser_bitset (const string_array& values);
 
     //! a tokenizer is providing a list of tokens from a source code.
     virtual bool read (tokenizer& tokenizer, any& value, bool consume) const;
@@ -65,12 +65,12 @@ protected:
 
 };
 
-class format_enum : public format
+class format_bitset : public format
 {
 public:
 
-    format_enum (const char* language, const string_array& values);
-	format_enum (const std::string& language, const string_array& values);
+    format_bitset (const char* language, const string_array& values);
+	format_bitset (const std::string& language, const string_array& values);
 
 };
 

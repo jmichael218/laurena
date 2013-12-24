@@ -56,4 +56,15 @@ const annotation* annotations_map::get(const std::string& key) const
 	auto i = this->find(key);
 	return (i == this->end()) ? nullptr : i->second;
 }
+
+const annotation* annotations_map::get(const std::string& key0, const std::string& key1) const
+{
+	auto i = this->find(key0);
+	if (i != this->end())
+		return i->second;
+
+	i	   = this->find(key1);
+
+	return (i == this->end()) ? nullptr : i->second;
+}
 //End of file
