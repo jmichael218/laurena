@@ -8,7 +8,7 @@ LIBRARIES=
 
 CC=c++
 
-OBJECTS= $(CORE)/main.o
+OBJECTS= main.o
 
 TARGET=t01
 
