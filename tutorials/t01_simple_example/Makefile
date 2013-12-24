@@ -17,7 +17,7 @@ all: $(TARGET)
 clean: clear $(TARGET)
 
 $(TARGET): $(OBJECTS)    
-	cp ../bin/debug/*.a .
+	cp ../../bin/debug/*.a .
 	$(CC) $(CFLAGS) $(OBJECTS) $(ARCHIVES) $(LIBRARIES) -o $(TARGET)
 
 %.o : %.cpp
