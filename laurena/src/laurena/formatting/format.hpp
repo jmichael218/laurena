@@ -26,6 +26,7 @@
 
 #include <laurena/descriptors/classes.hpp>
 #include <laurena/parsing/parser.hpp>
+#include <laurena/parsing/basic_parsers.hpp>
 #include <laurena/parsing/tokenizer.hpp>
 #include <laurena/formatting/writer.hpp>
 #include <laurena/descriptors/annotation.hpp>
