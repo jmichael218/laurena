@@ -1,6 +1,6 @@
 CORE=src/laurena
 
-CFLAGS= -std=c++11 -Wno-write-strings -I /boost -I src -I ../include
+CFLAGS= -std=c++11 -Wno-write-strings -I src -I ../include
 
 CC=c++
 

@@ -1,6 +1,6 @@
 CORE=src/laurena
 
-CFLAGS= -std=c++11 -Wno-write-strings -I /boost -I src -I ../include
+CFLAGS= -std=c++11 -Wno-write-strings -I src -I ../include
 
 CC=c++
 
@@ -37,6 +37,8 @@ OBJECTS= $(CORE)/archives/iarchive.o \
     $(CORE)/exceptions/null_pointer_exception.o \
     $(CORE)/exceptions/unimplemented_exception.o \
     $(CORE)/formatting/format.o \
+	$(CORE)/formatting/format_bitset.o \
+	$(CORE)/formatting/format_enum.o \
 	$(CORE)/functions/parameter.o \
     $(CORE)/memory/memory_functions.o \
 	$(CORE)/parsing/basic_parsers.o \

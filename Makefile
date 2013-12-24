@@ -7,3 +7,4 @@ all:
 	cd sql; make clean
 	cd test; make clean
 	cd examples; make clean
+	cd tutorials/t01_simple_example; make clean
