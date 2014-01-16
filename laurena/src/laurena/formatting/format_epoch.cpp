@@ -9,31 +9,36 @@
 ///
 #include <laurena/formatting/format_epoch.hpp>
 #include <laurena/descriptors/field.hpp>
-#include <laurena/constants/const_charsets.hpp>
+
 
 using namespace laurena;
 
-writer_epoch::writer_epoch() : writer ()
+writer_epoch::writer_epoch (const std::string& format, std::shared_ptr<datetime_format> pformatter) : writer (), _format(format), _formatter(pformatter)
 { }
 
 // Format is d/m/Y H:M:S
 bool writer_epoch::write (std::ostream& output, any& value) const
 {
-	word64 w = anycast<word64>(value);
-	std::time_t t = (std::time_t) w;
-	char mbstr[100];
-	std::strftime(mbstr, 100, "%d/%m/%Y %H:%M:%S", std::localtime(&t));
-	output << mbstr;
+	word64 epoch = anycast<word64>(value);
+	output << _formatter->format(epoch, _format);
 	return true;
 }
 
-parser_epoch::parser_epoch () : charset_parser(const_charsets<>::VARNAME)
+parser_epoch::parser_epoch (const std::string& format, std::shared_ptr<datetime_format> pformatter) : parser(), _format(format), _formatter(pformatter)
 { }
 
 //! a tokenizer is providing a list of tokens from a source code.
 bool parser_epoch::read (tokenizer& tokenizer, any& value, bool consume) const
 {
 
+
 	return true;
+}
+
+ format_epoch::format_epoch  (const std::string& language, const std::string& format, std::shared_ptr<datetime_format> pformatter): format(language.c_str())
+{ 
+	this->_writer = std::make_shared<writer_epoch>(format, pformatter);
+	this->_parser =  std::make_shared<parser_epoch>(format, pformatter);
+
 }
 //End of file

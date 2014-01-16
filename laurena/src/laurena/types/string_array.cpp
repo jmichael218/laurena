@@ -17,26 +17,24 @@ using namespace laurena;
 
 /********************************************************************************/ 
 /*                                                                              */ 
-/*                 code for class string_array                                   */ 
+/*                 code for class string_array                                  */ 
 /*                                                                              */ 
 /********************************************************************************/ 
-string_array::string_array() : std::vector<std::string> ()
-{
-    this->_attributes = nullptr;
-}
+string_array::string_array() : std::vector<std::string> (), _attributes(nullptr)
+{ }
 
-string_array::string_array(const char* keywordList,word8 separator)
+string_array::string_array (word32 sz) : std::vector<std::string> (sz), _attributes(nullptr)
+{ }
+
+string_array::string_array(const char* keywordList, word8 separator): std::vector<std::string> (), _attributes(nullptr)
 {
-    this->_attributes = nullptr;
     this->set (keywordList,separator) ;
 }
 
 string_array::string_array(const string_array& object) :
-    std::vector<std::string>(object)
+    std::vector<std::string>(object), _attributes(object._attributes)
     
-{  
-    this->_attributes = object._attributes;
-}
+{ }
 
 void string_array::set(const char* keywordList, word8 separator)
 {

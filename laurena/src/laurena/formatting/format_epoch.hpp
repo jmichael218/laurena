@@ -27,6 +27,7 @@
 #include <laurena/formatting/format.hpp>
 #include <laurena/types/string_array.hpp>
 #include <laurena/parsing/basic_parsers.hpp>
+#include <laurena/types/datetime_format.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -40,21 +41,36 @@ class writer_epoch : public writer
 {
 public:    
 
-	writer_epoch			 ();
+	writer_epoch			 (const std::string& format, std::shared_ptr<datetime_format> pformatter);
 
     //! a tokenizer is providing a list of tokens from a source code.
     virtual bool write (std::ostream& output, any& value) const;
 
+	/****************************************************************************/ 
+	/*		protected datas														*/ 
+	/****************************************************************************/
+	protected:
+
+	std::string							_format;
+	std::shared_ptr<datetime_format>	_formatter;
 };
 
-class parser_epoch : public charset_parser
+class parser_epoch : public parser
 {
 public:    
 
-	parser_epoch ();
+	parser_epoch (const std::string& format, std::shared_ptr<datetime_format> pformatter);
 
     //! a tokenizer is providing a list of tokens from a source code.
     virtual bool read (tokenizer& tokenizer, any& value, bool consume) const;
+
+	/****************************************************************************/ 
+	/*		protected datas														*/ 
+	/****************************************************************************/
+	protected:
+
+	std::string							_format;
+	std::shared_ptr<datetime_format>	_formatter;
 
 };
 
@@ -62,9 +78,7 @@ class format_epoch : public format
 {
 public:
 
-    format_epoch (const char* language);
-	format_epoch (const std::string& language);
-
+    format_epoch  (const std::string& language, const std::string& format, std::shared_ptr<datetime_format> pformatter);
 };
 
 /********************************************************************************/ 

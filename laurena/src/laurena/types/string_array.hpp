@@ -43,6 +43,7 @@ public:
     string_array ();
     string_array (const char* value, unsigned char separator = ' ');
     string_array (const string_array& object);
+	string_array (word32 sz);
     virtual ~string_array () {}
 
     /****************************************************************************/ 

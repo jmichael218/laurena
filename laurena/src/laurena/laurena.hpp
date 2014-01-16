@@ -111,6 +111,7 @@
 #include <laurena/formatting/format.hpp>
 #include <laurena/formatting/format_enum.hpp>
 #include <laurena/formatting/format_bitset.hpp>
+#include <laurena/formatting/format_epoch.hpp>
 
 
 #endif

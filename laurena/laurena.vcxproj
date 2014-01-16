@@ -70,6 +70,7 @@
     <ClInclude Include="src\laurena\traits\laurena_traits.hpp" />
     <ClInclude Include="src\laurena\types\any.hpp" />
     <ClInclude Include="src\laurena\types\context.hpp" />
+    <ClInclude Include="src\laurena\types\datetime_format.hpp" />
     <ClInclude Include="src\laurena\types\literator.hpp" />
     <ClInclude Include="src\laurena\types\string_array.hpp" />
     <ClInclude Include="src\laurena\types\variable.hpp" />
@@ -121,6 +122,7 @@
     <ClCompile Include="src\laurena\toolboxes\time.cpp" />
     <ClCompile Include="src\laurena\types\any.cpp" />
     <ClCompile Include="src\laurena\types\context.cpp" />
+    <ClCompile Include="src\laurena\types\datetime_format.cpp" />
     <ClCompile Include="src\laurena\types\literator.cpp" />
     <ClCompile Include="src\laurena\types\string_array.cpp" />
     <ClCompile Include="src\laurena\types\variable.cpp" />

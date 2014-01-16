@@ -279,6 +279,9 @@
     <ClInclude Include="src\laurena\formatting\format_epoch.hpp">
       <Filter>Fichiers d%27en-tête\formatting</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\types\datetime_format.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">
@@ -427,6 +430,9 @@
     </ClCompile>
     <ClCompile Include="src\laurena\toolboxes\time.cpp">
       <Filter>Fichiers sources\toolboxes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\types\datetime_format.cpp">
+      <Filter>Fichiers sources\types</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
