@@ -3,6 +3,7 @@
 /// \brief    A single simple example of a POD class descriptor, serialization and parsing to json
 /// \author   Frederic Manisse
 /// \version  1.0
+/// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
 /// A single simple example of a POD class descriptor, serialization and parsing to json
 ///
@@ -13,7 +14,6 @@
 using namespace laurena;
 
 // debug_stream is a customized ostream for debugging.
-
 debug_stream GLOG;
 
 

@@ -267,9 +267,6 @@
     <ClInclude Include="src\laurena\descriptors\bool_descriptor.hpp">
       <Filter>Fichiers d%27en-tête\descriptors</Filter>
     </ClInclude>
-    <ClInclude Include="src\laurena\toolboxes\time.hpp">
-      <Filter>Fichiers d%27en-tête\toolboxes</Filter>
-    </ClInclude>
     <ClInclude Include="src\laurena\formatting\format_enum.hpp">
       <Filter>Fichiers d%27en-tête\formatting</Filter>
     </ClInclude>
@@ -427,9 +424,6 @@
     </ClCompile>
     <ClCompile Include="src\laurena\formatting\format_epoch.cpp">
       <Filter>Fichiers sources\formatting</Filter>
-    </ClCompile>
-    <ClCompile Include="src\laurena\toolboxes\time.cpp">
-      <Filter>Fichiers sources\toolboxes</Filter>
     </ClCompile>
     <ClCompile Include="src\laurena\types\datetime_format.cpp">
       <Filter>Fichiers sources\types</Filter>

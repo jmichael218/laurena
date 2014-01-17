@@ -66,7 +66,6 @@
     <ClInclude Include="src\laurena\parsing\tokenizer.hpp" />
     <ClInclude Include="src\laurena\toolboxes\bitset.hpp" />
     <ClInclude Include="src\laurena\toolboxes\filename.hpp" />
-    <ClInclude Include="src\laurena\toolboxes\time.hpp" />
     <ClInclude Include="src\laurena\traits\laurena_traits.hpp" />
     <ClInclude Include="src\laurena\types\any.hpp" />
     <ClInclude Include="src\laurena\types\context.hpp" />
@@ -119,7 +118,6 @@
     <ClCompile Include="src\laurena\parsing\tokenizer.cpp" />
     <ClCompile Include="src\laurena\toolboxes\bitset.cpp" />
     <ClCompile Include="src\laurena\toolboxes\filename.cpp" />
-    <ClCompile Include="src\laurena\toolboxes\time.cpp" />
     <ClCompile Include="src\laurena\types\any.cpp" />
     <ClCompile Include="src\laurena\types\context.cpp" />
     <ClCompile Include="src\laurena\types\datetime_format.cpp" />

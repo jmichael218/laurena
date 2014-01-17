@@ -42,7 +42,7 @@ struct td
 {
     static const descriptor* desc()
     {
-        return nullptr;
+        return classes::byType(typeid(T));;
     }
 
     static const descriptor* desc(T& t)

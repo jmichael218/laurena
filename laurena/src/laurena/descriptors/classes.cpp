@@ -50,7 +50,7 @@ const descriptor*  classes::byType(const type_info& type)
 void classes::logClasses (std::ostream& destination)
 {
 	for (auto p : classes::_classes_by_typeid)
-		destination << p.second->name() << " ";	
+		destination << p.second->name() << " (#" << p.first.hash_code() << ")" << std::endl;	
 }
 
 bool classes::areParents(const descriptor& c1, const descriptor& c2)

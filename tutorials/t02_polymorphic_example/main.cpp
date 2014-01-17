@@ -1,0 +1,108 @@
+///
+/// \file     t02_polymorphic_example.main.cpp
+/// \brief    This example describes how to build descriptor for polymorphic classes, i.e a parent class and a child class.
+/// \author   Frederic Manisse
+/// \version  1.0
+/// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
+///
+/// This example describes how to build descriptor for polymorphic classes, i.e a parent class and a child class.
+///
+#include <laurena/laurena.hpp>
+#include <laurena/json/json.hpp>
+
+// We declare using the laurena lib's namespace
+using namespace laurena;
+
+// debug_stream is a customized ostream for debugging.
+debug_stream GLOG;
+
+// Here are our classes : animal and cat :
+class animal
+{
+public:
+
+        std::string     _specie;
+        std::string     _name;
+        unsigned char   _age;
+
+        bool operator == (const animal& source)
+        { return this->_age == source._age && this->_specie == source._specie && this->_name == source._name; }
+};
+
+class cat : public animal
+{
+public:
+
+        unsigned int    _birds;
+        unsigned int    _mouses;
+
+        cat () : animal () 
+        { this->_specie = "cat" ;  }
+
+        bool operator==(const cat& c)
+        { return this->animal::operator==(c) && this->_birds == c._birds && this->_mouses == c._mouses ; }
+};
+
+// This function register the animal class to the serialization and parsing system
+void buildClassDescriptor_Animal ()
+{
+    // create class descriptor for the class 'animal'
+    auto d_animal = standard_class_descriptor<animal>::build("animal");
+    d_animal->addField(&animal::_specie,"specie");
+    d_animal->addField(&animal::_name,"name");
+    d_animal->addField(&animal::_age,"age");
+}
+
+
+// This function register the cat class to the serialization and parsing system
+void buildClassDescriptor_Cat ()
+{
+    // create class descriptor for the class 'cat'
+    // it is pretty much the same than for simple classes except you give the parent class in the creation
+	auto d = standard_class_descriptor<cat>::build("cat", td<animal>::desc());
+
+    d->addField(&cat::_birds,"birds");
+    d->addField(&cat::_mouses,"mouses");
+}
+
+int main ()
+{
+	// log setting
+	debug::_outputs.push_front(&std::cout);
+
+    // laurena's initialization
+    classes::init();
+	json::JSON::init();
+
+	// let's declare the animal class :
+	buildClassDescriptor_Animal();
+
+	// let's declare the cat class :
+	buildClassDescriptor_Cat();
+
+    // let's create a cat
+    cat kitty;
+    kitty._name = "Kitty";
+    kitty._age  = 5;
+    kitty._birds = 4;
+    kitty._mouses = 14;
+
+    // Let's serialize it into json
+    std::string destination = json::json::serialize(kitty);
+
+    // Let's display my jsoned cat :
+    std::cout << "Here is my cat details:" << std::endl << destination << std::endl;
+
+    // let's create a new cat from our serialized kitty 
+    cat kimmie;
+    json::json::parse(destination,kimmie);
+    std::cout << "Kimmie is a " << kimmie._specie << " named " << kimmie._name << ", has " << ((int)kimmie._age) << " years, killed " << kimmie._birds << " birds and " << kimmie._mouses << " mouses." << std::endl;
+
+    if (kimmie == kitty)
+		std::cout << "Kimmie is a clone of Kitty !!" << std::endl << "Laurena's serialization works fine !" << std::endl;
+    else
+        std::cout << "Kimmie is different of Kitty !!" << std::endl << "Laurena's serialization is a fake !" << std::endl ;
+
+	return 1;
+}
+//End of file
