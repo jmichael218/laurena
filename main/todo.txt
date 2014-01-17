@@ -1,41 +1,21 @@
-- epoch
-- epoch, enum et bitfield sont exclusifs => class formats globales ?
+PLANNED VERSIONS:
+
+0.2.0.1 : 
+	tutorial example 03 : list ( - code, - linux, - wiki )
+
+0.2.0.2 : 
+
+	example 04 : vector
+ 	- code
+	- linux
+	- wiki
+
+0.2.0.3 : example 05 : enum
+ 	- code
+	- linux
+	- wiki
 
 
-
-0: X rule charset templaté avec algo (readwhile, readuntil, skipwhile, skipuntil)
-
-1:
-   X stream out dans le context pour l'affichage de la sortie
-   X context->count(s) => source location + stream out.
-
-2:
-   X rules symbols
-		X implemented for KEY = chartype
-		X implemented for KEY = basic_string<chartype>
-
-4:
-    X rules integer<int>
-
-5:
-
-	X dégager grammaire de L
-
-6: 
-	X loader<chartype> dans L0
-
-7: 
-	X tabs<chartype> dans LO
-	NO utiliser std::fill ou std::space pour insérer les espaces
-
-8:
-    X deplacement des const charset en l0
-	* reduction des toolsets sauf bitset
-		X cstring, 
-		X stdstring, 
-		filename, 
-		X stdstream
-	X virer source_location
 	* faire tests dans test0 pour algos avec const char* const char[] std::string std::istream std::wstring
 
 9:
@@ -53,7 +33,7 @@
 
 10:
 	* reduction des constants dans L
-	* refonte de annotation format 
+	X refonte de annotation format 
 
 20:
 	* string array en symbols <int,string> ou <string,string>.
