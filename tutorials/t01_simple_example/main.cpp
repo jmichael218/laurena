@@ -31,7 +31,7 @@ public:
     // This operator will be used to validate a parsed cat is equal to the source
     bool operator==(const simple_cat& c)
     {
-	    return this->_name == c._name && this->_age == c._age && this->_birds == c._birds && this->_mouses == c._mouses ;
+        return this->_name == c._name && this->_age == c._age && this->_birds == c._birds && this->_mouses == c._mouses ;
     }
 };
 

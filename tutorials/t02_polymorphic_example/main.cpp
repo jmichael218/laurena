@@ -16,31 +16,34 @@ using namespace laurena;
 // debug_stream is a customized ostream for debugging.
 debug_stream GLOG;
 
-// Here are our classes : animal and cat :
+// Here is our parent class : an 'animal' class
 class animal
 {
 public:
 
-        std::string     _specie;
-        std::string     _name;
-        unsigned char   _age;
+    std::string     _specie;    //<! Name of the animal specie, like 'dog' or 'dragon'
+    std::string     _name;      //<! Name of the animal
+    unsigned char   _age;       //<! Age of the animal, in years
 
-        bool operator == (const animal& source)
-        { return this->_age == source._age && this->_specie == source._specie && this->_name == source._name; }
+    bool operator == (const animal& source)
+    { return this->_age == source._age && this->_specie == source._specie && this->_name == source._name; }
 };
 
+// Here is our child class : a cat class derivated from 'animal'
 class cat : public animal
 {
 public:
 
-        unsigned int    _birds;
-        unsigned int    _mouses;
+    unsigned int    _birds;     //<! Birds killed by the cat
+    unsigned int    _mouses;    //<! Mouses killed by the cat
 
-        cat () : animal () 
-        { this->_specie = "cat" ;  }
+    //<! Constructor : set specie
+    cat () : animal ()  
+    { this->_specie = "cat" ;  }
 
-        bool operator==(const cat& c)
-        { return this->animal::operator==(c) && this->_birds == c._birds && this->_mouses == c._mouses ; }
+    //<! == operator
+    bool operator==(const cat& c)
+    { return this->animal::operator==(c) && this->_birds == c._birds && this->_mouses == c._mouses ; }
 };
 
 // This function register the animal class to the serialization and parsing system
@@ -59,23 +62,22 @@ void buildClassDescriptor_Cat ()
 {
     // create class descriptor for the class 'cat'
     // it is pretty much the same than for simple classes except you give the parent class in the creation
-	auto d = standard_class_descriptor<cat>::build("cat", td<animal>::desc());
-
+    auto d = standard_class_descriptor<cat>::build("cat", td<animal>::desc());
     d->addField(&cat::_birds,"birds");
     d->addField(&cat::_mouses,"mouses");
 }
 
 int main ()
 {
-	// log setting
-	debug::_outputs.push_front(&std::cout);
+    // log setting
+    debug::_outputs.push_front(&std::cout);
 
     // laurena's initialization
     classes::init();
-	json::JSON::init();
+    json::JSON::init();
 
-	// let's declare the animal class :
-	buildClassDescriptor_Animal();
+    // let's declare the animal class :
+    buildClassDescriptor_Animal();
 
 	// let's declare the cat class :
 	buildClassDescriptor_Cat();
@@ -96,13 +98,18 @@ int main ()
     // let's create a new cat from our serialized kitty 
     cat kimmie;
     json::json::parse(destination,kimmie);
-    std::cout << "Kimmie is a " << kimmie._specie << " named " << kimmie._name << ", has " << ((int)kimmie._age) << " years, killed " << kimmie._birds << " birds and " << kimmie._mouses << " mouses." << std::endl;
+    std::cout << "Kimmie is a " << kimmie._specie << " named " << kimmie._name 
+               << ", has " << ((int)kimmie._age) << " years, killed " 
+               << kimmie._birds << " birds and " << kimmie._mouses << " mouses." 
+               << std::endl;
 
+    // LEt's control if kimmie is exactly the same than kitty
     if (kimmie == kitty)
-		std::cout << "Kimmie is a clone of Kitty !!" << std::endl << "Laurena's serialization works fine !" << std::endl;
+        std::cout << "Kimmie is a clone of Kitty !!" << std::endl << "Laurena's serialization works fine !" << std::endl;
     else
         std::cout << "Kimmie is different of Kitty !!" << std::endl << "Laurena's serialization is a fake !" << std::endl ;
 
-	return 1;
+    return 1;
+
 }
 //End of file
