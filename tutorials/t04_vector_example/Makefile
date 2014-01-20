@@ -10,7 +10,7 @@ CC=c++
 
 OBJECTS= main.o
 
-TARGET=t02
+TARGET=t04
 
 all: $(TARGET)
 
@@ -25,4 +25,3 @@ $(TARGET): $(OBJECTS)
 
 clear:
 	find . -type f -name "*.o" -exec rm -f {} \;
-	

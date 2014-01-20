@@ -10,3 +10,4 @@ all:
 	cd tutorials/t01_simple_example; make clean
 	cd tutorials/t02_polymorphic_example; make clean
 	cd tutorials/t03_list_example; make clean
+	cd tutorials/t04_vector_example; make clean

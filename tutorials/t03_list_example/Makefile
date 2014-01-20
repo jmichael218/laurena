@@ -10,7 +10,7 @@ CC=c++
 
 OBJECTS= main.o
 
-TARGET=t01
+TARGET=t03
 
 all: $(TARGET)
 

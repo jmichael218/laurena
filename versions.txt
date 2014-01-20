@@ -1,6 +1,9 @@
 0.2.0.0 : 
-	tutorial example 02 : polymorphic ( X code, - linux, X wiki)
+	X tutorial example 02 : polymorphic ( X code, X linux, X wiki)
 	X fixed bug in td<type>::desc() 
 
 0.2.0.1 : 
-	tutorial example 03 : list ( X code, - linux, X wiki)
+	X tutorial example 03 : list ( X code, X linux, X wiki)
+
+0.2.0.2 :
+	X tutorial example 03 : vector ( X code, X linux, X wiki)
