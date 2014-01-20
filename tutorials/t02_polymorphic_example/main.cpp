@@ -79,8 +79,8 @@ int main ()
     // let's declare the animal class :
     buildClassDescriptor_Animal();
 
-	// let's declare the cat class :
-	buildClassDescriptor_Cat();
+    // let's declare the cat class :
+    buildClassDescriptor_Cat();
 
     // let's create a cat
     cat kitty;
@@ -99,9 +99,9 @@ int main ()
     cat kimmie;
     json::json::parse(destination,kimmie);
     std::cout << "Kimmie is a " << kimmie._specie << " named " << kimmie._name 
-               << ", has " << ((int)kimmie._age) << " years, killed " 
-               << kimmie._birds << " birds and " << kimmie._mouses << " mouses." 
-               << std::endl;
+              << ", has " << ((int)kimmie._age) << " years, killed " 
+              << kimmie._birds << " birds and " << kimmie._mouses << " mouses." 
+              << std::endl;
 
     // LEt's control if kimmie is exactly the same than kitty
     if (kimmie == kitty)
