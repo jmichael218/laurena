@@ -16,7 +16,7 @@ using namespace laurena;
 // debug_stream is a customized ostream for debugging.
 debug_stream GLOG;
 
-// Here is our'animal' class
+// Here is our'soldier' class
 class soldier
 {
 public:
@@ -29,12 +29,12 @@ public:
     { return this->_rank == source._rank && this->_name == source._name && this->_name == source._name; }
 };
 
-// Here is our vector class : the zoo class which is a list of animal
+// Here is our vector class : the army class which is a list of soldier
 class army : public std::vector<soldier>
 {
 };
 
-// Here is our list class with pointers to animals
+// Here is our list class with pointers to soldiers
 class squad : public std::vector<soldier*>
 {
 };
@@ -63,31 +63,31 @@ void buildClassDescriptor_Squad()
 
 void testArmy()
 {
-	army z;
+    army z;
 
-	soldier a;
-	a._rank = "Elite Private";
-	a._name   = "John Rambi";
-	a._age    = 17;
-	z.push_back (a);
+    soldier a;
+    a._rank = "Elite Private";
+    a._name   = "John Rambi";
+    a._age    = 17;
+    z.push_back (a);
 
-	a._rank   = "Elite Private";
-	a._name   = "Chuck Norras";
-	a._age    = 45;
-	z.push_back (a);
+    a._rank   = "Elite Private";
+    a._name   = "Chuck Norras";
+    a._age    = 45;
+    z.push_back (a);
 
-	a._rank = "Captain";
-	a._name   = "James T Kirk" ;
-	a._age    = 32;
-	z.push_back(a);
+    a._rank = "Captain";
+    a._name   = "James T Kirk" ;
+    a._age    = 32;
+    z.push_back(a);
 
 	// Let's serialize it into json
 	std::string destination = json::json::serialize(z);
 
-	// Let's display my jsoned cat :
+	// Let's display my jsoned army :
 	GLOG << "Here is my army:" << std::endl << destination << std::endl;
 	
-	// Now let's instancing the zoo
+	// Now let's instancing the army
 	army z2;
 	json::json::parse(destination,z2);
 
@@ -98,25 +98,25 @@ void testArmy()
 
 void testSquad()
 {
-	squad z;
+    squad z;
 
-	soldier a;
-	a._rank = "turtle";
-	a._name   = "Walter";
-	a._age    = 7;
-	z.push_back (&a);
+    soldier a;
+    a._rank = "Sniper";
+    a._name   = "Walter Jones";
+    a._age    = 27;
+    z.push_back (&a);
 
     soldier b;
-	b._rank = "tiger";
-	b._name   = "Gerald";
-	b._age    = 45;
-	z.push_back (&b);
+    b._rank = "Sergeant";
+    b._name   = "Gerald Magh";
+    b._age    = 45;
+    z.push_back (&b);
 
     soldier c;
-	c._rank = "bear";
-	c._name   = "Winnifred" ;
-	c._age    = 12;
-	z.push_back(&c);
+    c._rank = "Major";
+    c._name   = "Lee Smith" ;
+    c._age    = 32;
+    z.push_back(&c);
 
 	// Let's serialize it into json
 	std::string destination = json::json::serialize(z);

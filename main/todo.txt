@@ -1,14 +1,5 @@
 PLANNED VERSIONS:
 
-0.2.0.1 : 
-	tutorial example 03 : list ( - code, - linux, - wiki )
-
-0.2.0.2 : 
-
-	example 04 : vector
- 	- code
-	- linux
-	- wiki
 
 0.2.0.3 : example 05 : enum
  	- code

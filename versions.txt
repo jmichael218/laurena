@@ -6,4 +6,4 @@
 	X tutorial example 03 : list ( X code, X linux, X wiki)
 
 0.2.0.2 :
-	X tutorial example 03 : vector ( X code, X linux, X wiki)
+	X tutorial example 04 : vector ( X code, X linux, X wiki)
