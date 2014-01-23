@@ -279,6 +279,9 @@
     <ClInclude Include="src\laurena\types\datetime_format.hpp">
       <Filter>Fichiers d%27en-tête\types</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\enum_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">

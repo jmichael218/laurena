@@ -7,3 +7,6 @@
 
 0.2.0.2 :
 	X tutorial example 04 : vector ( X code, X linux, X wiki)
+
+0.2.0.3 :
+    - tutorial example 05 : enums (code, linux makefile, wiki)

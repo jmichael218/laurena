@@ -64,10 +64,6 @@ public:
 
 	// OPERATORS
 	virtual bool equals(const any& a0, const any& a1) const;
-
-    // TO/FROM STRING SERIALIZATION 
-    virtual std::string     atos(const any& value) const;
-	virtual any&            stoa(const std::string& string_value, any& value) const;
        
     // OBJECT CONSTRUCTOR FOR INJECTION 
     virtual any& clear(any& value) const;
@@ -158,31 +154,6 @@ any simple_type_descriptor<T>::create() const
     T t;
     return any(t);
 }
-
-template<typename T>
-std::string simple_type_descriptor<T>::atos(const any& value) const
-{
-    T t;
-    if (value.desc() != this)
-	{		
-        t = anycast<T>(this->cast(value));    
-	}
-    else
-        t = anycast<T>(value);
-
-    return boost::lexical_cast<std::string>(t);
-}
-
-
-
-template<typename T>
-any& simple_type_descriptor<T>::stoa(const std::string& string_value, any& value) const
-{
-    T t = boost::lexical_cast<T,std::string>(string_value);
-    return value = t;
-}
-
-
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

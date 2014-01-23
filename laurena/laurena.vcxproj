@@ -25,6 +25,7 @@
     <ClInclude Include="src\laurena\descriptors\const_ptr_descriptor_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\descriptable.hpp" />
     <ClInclude Include="src\laurena\descriptors\descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\enum_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\features\any_feature.hpp" />
     <ClInclude Include="src\laurena\descriptors\features\class_feature.hpp" />
     <ClInclude Include="src\laurena\descriptors\features\class_features.hpp" />

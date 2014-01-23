@@ -48,6 +48,25 @@ public:
 			true : 
 			this->simple_type_descriptor<T>::has(flag) ;
     }
+
+    virtual std::string atos(const any& value) const
+    {
+        T t;
+        if (value.desc() != this)
+	    {		
+            t = anycast<T>(this->cast(value));    
+	    }
+        else
+            t = anycast<T>(value);
+
+        return boost::lexical_cast<std::string>(t);
+    }
+
+    virtual any& stoa(const std::string& string_value, any& value) const
+    {
+        T t = boost::lexical_cast<T,std::string>(string_value);
+        return value = t;
+    }
 };
 
 

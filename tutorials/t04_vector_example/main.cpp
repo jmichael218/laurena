@@ -16,14 +16,14 @@ using namespace laurena;
 // debug_stream is a customized ostream for debugging.
 debug_stream GLOG;
 
-// Here is our'soldier' class
+// Here is our 'soldier' class
 class soldier
 {
 public:
 
-    std::string     _rank;    //<! Name of the animal specie, like 'dog' or 'dragon'
-    std::string     _name;      //<! Name of the animal
-    unsigned char   _age;       //<! Age of the animal, in years
+    std::string     _rank;    //<! Soldier rank or occupation like 'sergeant' or 'sniper'
+    std::string     _name;    //<! Name of the soldier
+    unsigned char   _age;     //<! Age of the soldier, in years
 
     bool operator == (const soldier& source)
     { return this->_rank == source._rank && this->_name == source._name && this->_name == source._name; }
@@ -121,10 +121,10 @@ void testSquad()
 	// Let's serialize it into json
 	std::string destination = json::json::serialize(z);
 
-	// Let's display my jsoned cat :
+	// Let's display my jsoned squad :
 	GLOG << "Here is my squad:" << std::endl << destination << std::endl;
 	
-	// Now let's instancing the zoo
+	// Now let's instancing the squad
 	squad z2;
 	json::json::parse(destination,z2);
 

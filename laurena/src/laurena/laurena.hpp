@@ -55,6 +55,7 @@
 #include <laurena/descriptors/list_descriptor.hpp>
 #include <laurena/descriptors/vector_descriptor.hpp>
 #include <laurena/descriptors/bool_descriptor.hpp>
+#include <laurena/descriptors/enum_descriptor.hpp>
 
 // class features
 #include <laurena/descriptors/features/class_feature.hpp>
