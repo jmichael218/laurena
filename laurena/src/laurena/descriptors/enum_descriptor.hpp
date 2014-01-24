@@ -105,11 +105,11 @@ enum_type_descriptor<T>::enum_type_descriptor (const char* name, const string_ar
 template<typename T>
 bool enum_type_descriptor<T>::has(descriptor::Flags flag) const
 {
-	    if (flag == Flags::STRING_CAST)
+	    if (flag == descriptor::Flags::STRING_CAST)
 		    return true;
-	    if (flag == Flags::TINY)
+	    if (flag == descriptor::Flags::TINY)
 		    return true;
-        if (flag == Flags::NUMERIC_VALUE)
+        if (flag == descriptor::Flags::NUMERIC_VALUE)
             return true;
 	    return this->descriptor::has(flag) ;
 }
