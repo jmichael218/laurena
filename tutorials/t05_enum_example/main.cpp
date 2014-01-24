@@ -1,5 +1,5 @@
 ///
-/// \file     t04_enum_example.cpp
+/// \file     t05_enum_example.cpp
 /// \brief    This example describes how to build a descriptor for an 'enum' class field
 /// \author   Frederic Manisse
 /// \version  1.0

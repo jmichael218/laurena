@@ -81,6 +81,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t05_enum_example", "tutoria
 		{81D0C8C4-B6A9-4C32-A5C1-EA5F3EE587CA} = {81D0C8C4-B6A9-4C32-A5C1-EA5F3EE587CA}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t06_bitfield_example", "tutorials\t06_bitfield_example\t06_bitfield_example.vcxproj", "{49CF74F6-53CD-4D73-BB9E-AD202273E47F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{81D0C8C4-B6A9-4C32-A5C1-EA5F3EE587CA} = {81D0C8C4-B6A9-4C32-A5C1-EA5F3EE587CA}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -147,6 +152,10 @@ Global
 		{03833B06-0E28-43E6-B7EB-31DA5E8B6E7D}.Debug|Win32.Build.0 = Debug|Win32
 		{03833B06-0E28-43E6-B7EB-31DA5E8B6E7D}.Release|Win32.ActiveCfg = Release|Win32
 		{03833B06-0E28-43E6-B7EB-31DA5E8B6E7D}.Release|Win32.Build.0 = Release|Win32
+		{49CF74F6-53CD-4D73-BB9E-AD202273E47F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{49CF74F6-53CD-4D73-BB9E-AD202273E47F}.Debug|Win32.Build.0 = Debug|Win32
+		{49CF74F6-53CD-4D73-BB9E-AD202273E47F}.Release|Win32.ActiveCfg = Release|Win32
+		{49CF74F6-53CD-4D73-BB9E-AD202273E47F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,5 +166,6 @@ Global
 		{7472A9BC-E797-4EDA-B9BD-B0406AB55894} = {96549F7B-C766-4DD5-A200-2E4A0FC4C4DA}
 		{A60A6E9A-1C4F-4976-931D-1A01BF3B0B63} = {96549F7B-C766-4DD5-A200-2E4A0FC4C4DA}
 		{03833B06-0E28-43E6-B7EB-31DA5E8B6E7D} = {96549F7B-C766-4DD5-A200-2E4A0FC4C4DA}
+		{49CF74F6-53CD-4D73-BB9E-AD202273E47F} = {96549F7B-C766-4DD5-A200-2E4A0FC4C4DA}
 	EndGlobalSection
 EndGlobal
