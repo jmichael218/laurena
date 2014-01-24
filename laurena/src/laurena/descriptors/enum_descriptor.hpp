@@ -98,7 +98,7 @@ protected:
 
 // CONSTRUCTOR
 template<typename T>
-enum_type_descriptor<T>::enum_type_descriptor (const char* name, const string_array& values) : simple_type_descriptor(name), _values(values)
+enum_type_descriptor<T>::enum_type_descriptor (const char* name, const string_array& values) : simple_type_descriptor<T>(name), _values(values)
 { }
 
 // ACCESSORS
