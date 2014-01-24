@@ -10,3 +10,4 @@
 
 0.2.0.3 :
     - tutorial example 05 : enums (code, linux makefile, wiki)
+	X added template class for enum types.
