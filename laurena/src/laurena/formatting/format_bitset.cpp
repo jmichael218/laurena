@@ -68,7 +68,7 @@ const descriptor* d = value.desc();
         bitset::parse(*p,this->_values,const_charsets<>::VARNAME,str);
 	}
 	else
-    if (d->has(descriptor::Flags::NUMERIC_VALUE))
+    if (!d || d->has(descriptor::Flags::NUMERIC_VALUE))
     {
             word64 b = bitset::parse(this->_values,const_charsets<>::VARNAME,str);
             value = b;

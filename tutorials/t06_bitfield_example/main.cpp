@@ -23,9 +23,9 @@ public:
 
 	dragon () : _state(0), _name() { _foods.resize(5); };
 
-	unsigned char			_state;	// masks are 1 for 'happy', 2 for 'hungry', 4 for 'sleepy'
-	boost::dynamic_bitset<>	_foods; // 0 for knight, 1 for princess, 2 for cow, 3 for peasant, 4 for horse
-	std::string				_name;
+	unsigned char           _state;	// masks are 1 for 'happy', 2 for 'hungry', 4 for 'sleepy'
+	boost::dynamic_bitset<> _foods; // 0 for knight, 1 for princess, 2 for cow, 3 for peasant, 4 for horse
+	std::string             _name;
 };
 
 string_array dragon_states = "happy hungry sleepy";

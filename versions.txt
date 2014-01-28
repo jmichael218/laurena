@@ -9,5 +9,9 @@
 	X tutorial example 04 : vector ( X code, X linux, X wiki)
 
 0.2.0.3 :
-    - tutorial example 05 : enums (code, linux makefile, wiki)
+    X tutorial example 05 : enums (code, linux makefile, wiki)
 	X added template class for enum types.
+
+0.2.0.4
+	X tutorial example 06 : bitfield (code, linux makefile, wiki)
+	X fixed bug in bitfield parser for numerical types.
