@@ -31,7 +31,11 @@ parser_epoch::parser_epoch (const std::string& format, std::shared_ptr<datetime_
 bool parser_epoch::read (tokenizer& tokenizer, any& value, bool consume) const
 {
 
-
+    word32 len;
+    word64 epoch = _formatter->epoch(tokenizer._ptr, _format, &len);
+    if (consume)
+    tokenizer._ptr += len;
+    value = epoch;
 	return true;
 }
 

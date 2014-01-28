@@ -29,14 +29,14 @@ inline word32 DateFormatCountChar(const char* p,char symbol)
     while (*p++ == symbol ) res ++ ;
 }
 
-word64 datetime_format::epoch  (const std::string& source, const std::string& format)
+word64 datetime_format::epoch  (const std::string& source, const std::string& format, word32* len)
 {
 	char s [ 10 ];
     std::istringstream ss (source) ;
     const char* pstr = format.c_str() , *p ;
 
     char cformat ;
-    word32 count ;
+    word32 count, totalcount = 0;
 
     word32 year = 0 , month = 0 , day = 0 , hours = 0 , minutes = 0 , seconds = 0 ;
     while (*pstr)
@@ -47,49 +47,124 @@ word64 datetime_format::epoch  (const std::string& source, const std::string& fo
         count = 1; p = pstr ;
         while ( *p++ == cformat ) count ++ ;
 
-        if ( cformat == 'y' )
+        switch(cformat)
         {
-            if ( count >= 4 )
-            {
-                ss.read(s, 4);
-				year = boost::lexical_cast<word16,const char*>(s);
-                pstr += 4 ;
-            } else if ( count >= 2 )
-            {
-                ss.read(s, 2);
-				year = 1900 + boost::lexical_cast<word16,const char*>(s);
-                pstr += 2 ;
-            }
-        } 
-		else if ( cformat == 'm' )
-        {
-            if ( count >= 2)
-            {
-                ss.read(s, 2);
-				month = boost::lexical_cast<word16,const char*>(s) - 1;
-                pstr += 2 ;
-            } else if ( count == 1 )
-            {
-                assert(false);
-            }
+            /****************************************************************************/ 
+            /*              Format year                                                 */ 
+            /****************************************************************************/ 
+            case 'y' :
+                if ( count >= 4 )
+                {
+                    ss.read(s, 4);
+                    s[4] = 0;
+                    totalcount += 4;
+				    year = boost::lexical_cast<word16,const char*>(s);
+                    pstr += 4 ;
+                } else if ( count >= 2 )
+                {
+                    ss.read(s, 2);
+                    totalcount+=2; 
+				    year = 1900 + boost::lexical_cast<word16,const char*>(s);
+                    pstr += 2 ;
+                }
+                break;
+            /****************************************************************************/ 
+            /*              Format month                                                */ 
+            /****************************************************************************/ 
+            case 'm' :
+                if ( count >= 2)
+                {
+                    ss.read(s, 2);
+                    s[2] = 0;
+                    totalcount += 2;
+				    month = boost::lexical_cast<word16,const char*>(s) - 1;
+                    pstr += 2 ;
+                } else if ( count == 1 )
+                {
+                    assert(false);
+                }
+                break;
+            /****************************************************************************/ 
+            /*              Format day in month                                         */ 
+            /****************************************************************************/ 
+            case 'd' :
+                if ( count >= 2 )
+                {
+                    ss.read(s, 2);
+                    s[2] = 0;
+                    totalcount += 2;
+				    day = boost::lexical_cast<word16,const char*>(s);
+                    pstr += 2 ;               
+                }
+                else if ( count == 1 )
+                {
+                    assert(false);
+                }
+                break;
+
+            /****************************************************************************/ 
+            /*              Format hour                                                 */ 
+            /****************************************************************************/ 
+            case 'H' :
+                if ( count >= 2 )
+                {
+                    ss.read(s, 2);
+                    s[2] = 0;
+                    totalcount += 2;
+				    hours = boost::lexical_cast<word16,const char*>(s);
+                    pstr += 2 ;               
+                }
+                else if ( count == 1 )
+                {
+                    assert(false);
+                }
+                break;
+
+            /****************************************************************************/ 
+            /*              Format minutes                                              */ 
+            /****************************************************************************/ 
+            case 'M' :
+                if ( count >= 2 )
+                {
+                    ss.read(s, 2);
+                    s[2] = 0;
+                    totalcount += 2;
+				    minutes = boost::lexical_cast<word16,const char*>(s);
+                    pstr += 2 ;               
+                }
+                else if ( count == 1 )
+                {
+                    assert(false);
+                }
+                break;
+
+            /****************************************************************************/ 
+            /*              Format seconds                                              */ 
+            /****************************************************************************/ 
+            case 'S' :
+                if ( count >= 2 )
+                {
+                    ss.read(s, 2);
+                    s[2] = 0;
+                    totalcount += 2;
+				    seconds = boost::lexical_cast<word16,const char*>(s);
+                    pstr += 2 ;               
+                }
+                else if ( count == 1 )
+                {
+                    assert(false);
+                }
+                break;
+
+            /****************************************************************************/ 
+            /*              other characters                                            */ 
+            /****************************************************************************/ 
+            default :
+                totalcount += 1;
+                ss.ignore(1);
+                pstr ++ ;
+                break;
         }
-        else if ( cformat == 'D' )
-        {
-            if ( count >= 2 )
-            {
-                ss.read(s, 2);
-				day = boost::lexical_cast<word16,const char*>(s) - 1;
-                pstr += 2 ;
-            }
-            else if ( count == 1 )
-            {
-                assert(false);
-            }
-        } else
-        {
-            ss.ignore(1);
-            pstr ++ ;
-        }          
     }
     struct tm t ;
    
@@ -99,6 +174,9 @@ word64 datetime_format::epoch  (const std::string& source, const std::string& fo
     t.tm_hour = hours ;
     t.tm_min  = minutes ;
     t.tm_sec  = seconds ;
+
+    if (len)
+        *len = totalcount;
     return mktime (&t ) ;
     
 }
@@ -120,88 +198,143 @@ word32 count;
         c = *pstr  ;      
         count = 1; p = pstr + 1 ;
         while ( *p++ == c ) count ++ ;
-        
-        /****************************************************************************/ 
-        /*              Format year                                                 */ 
-        /****************************************************************************/ 
 
-        if ( c == 'y' )
+        switch (c)
         {
-            if ( count >= 4 )
-            {
-                count = 4 ;
-                ss << ( t->tm_year + 1900 ) ; 
-                
-
-            } else if ( count >=2 )
-            {
-                count = 2 ;
-                word32 year = t->tm_year % 100 ;
-
-                if ( year == 0 ) 
-					ss << "00" ;
-                else 
+            /****************************************************************************/ 
+            /*              Format year                                                 */ 
+            /****************************************************************************/ 
+            case 'y' :
+                if ( count >= 4 )
+                { 
+                    count = 4 ;
+                    ss << ( t->tm_year + 1900 ) ;                 
+                } else if ( count >=2 )
                 {
-                    if ( year < 10 ) ss << "0" ;
-                    ss << year ;
-                }
-            } else count = 0 ;
+                    count = 2 ;
+                    word32 year = t->tm_year % 100 ;
+
+                    if ( year == 0 ) 
+					    ss << "00" ;
+                    else 
+                    {
+                        if ( year < 10 ) ss << "0" ;
+                        ss << year ;
+                    }
+                } else count = 0 ;
+                break;
             
-        } 
 
-        /****************************************************************************/ 
-        /*              Format month                                                */ 
-        /****************************************************************************/
-        else if ( c == 'm' )
-        {
 
-            if ( count >= 4 )
-            {
-                count = 4 ;
-				ss << this->_months [ t->tm_mon ];                                
-            } 
-            else if ( count == 3 )
-            {
-                ss <<  this->_months_abbrev [ t->tm_mon ]; 
-            }
-            else if ( count == 2 )
-            {
-                word32 month = t->tm_mon + 1 ;
-                ss << ( month < 10 ? "0" : "" ) << month ;
-            }
-            else if ( count == 1 )
-            {
-                ss << ( t->tm_mon + 1 ) ;
-            }
-            else count = 0 ;
-        } 
+            /****************************************************************************/ 
+            /*              Format month                                                */ 
+            /****************************************************************************/
+            case 'm':
+                if ( count >= 4 )
+                {
+                    count = 4 ;
+				    ss << this->_months [ t->tm_mon ];                                
+                } 
+                else if ( count == 3 )
+                {
+                    ss <<  this->_months_abbrev [ t->tm_mon ]; 
+                }
+                else if ( count == 2 )
+                {
+                    word32 month = t->tm_mon + 1 ;
+                    ss << ( month < 10 ? "0" : "" ) << month ;
+                }
+                else if ( count == 1 )
+                {
+                    ss << ( t->tm_mon + 1 ) ;
+                }
+                else count = 0 ;
+                break;
 
-        /****************************************************************************/ 
-        /*          Format day in month                                             */ 
-        /****************************************************************************/      
-        else if ( c == 'd' )
-        {
-            if ( count >= 2 )
-            {
-                count = 2 ;
-                word32 day = t->tm_mday ;
-                ss << ( day < 10 ? "0" : "" ) << day ;
-            } else if ( count == 1 )
-            {
-                ss << t->tm_mday ;
-            } 
-            else count = 0 ;
-        } 
-        else 
-        {
-            count = 0 ;
+            /****************************************************************************/ 
+            /*          Format day in month                                             */ 
+            /****************************************************************************/   
+            case 'd':
+
+                if ( count >= 2 )
+                {
+                    count = 2 ;
+                    word32 day = t->tm_mday ;
+                    ss << ( day < 10 ? "0" : "" ) << day ;
+                } else if ( count == 1 )
+                {
+                    ss << t->tm_mday ;
+                } 
+                else count = 0 ;
+                break;
+
+            /****************************************************************************/ 
+            /*          Format hour                                                     */ 
+            /****************************************************************************/ 
+            case 'H':
+
+                if ( count >= 2 )
+                {
+                    count = 2 ;
+                    word32 hour = t->tm_hour ;
+                    ss << ( hour < 10 ? "0" : "" ) << hour ;
+                } else if ( count == 1 )
+                {
+                    ss << t->tm_hour ;
+                } 
+                else count = 0 ;
+                break;
+
+            /****************************************************************************/ 
+            /*          Format minutes                                                  */ 
+            /****************************************************************************/ 
+            case 'M':
+
+                if ( count >= 2 )
+                {
+                    count = 2 ;
+                    word32 mn = t->tm_min ;
+                    ss << ( mn < 10 ? "0" : "" ) << mn ;
+                } else if ( count == 1 )
+                {
+                    ss << t->tm_min ;
+                } 
+                else count = 0 ;
+                break;
+
+            /****************************************************************************/ 
+            /*          Format seconds                                                  */ 
+            /****************************************************************************/ 
+            case 'S':
+
+                if ( count >= 2 )
+                {
+                    count = 2 ;
+                    word32 sec = t->tm_sec ;
+                    ss << ( sec < 10 ? "0" : "" ) << sec ;
+                } else if ( count == 1 )
+                {
+                    ss << t->tm_sec ;
+                } 
+                else count = 0 ;
+                break;
+
+            /****************************************************************************/ 
+            /*          Non epoch character                                             */ 
+            /****************************************************************************/   
+            default:
+                count = 0 ;
+                break;
         }
         
         
         if (count)
 			pstr += count ; //<! Don't do pstr ++ since internal buffer _data value can be changed if string is extended
 		else
+        {
 			ss.write(&c, 1);
+            pstr ++;
+        }
 
     }    
 

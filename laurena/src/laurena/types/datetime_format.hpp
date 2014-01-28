@@ -47,7 +47,7 @@ class datetime_format
     /*          parsing  / format                                               */ 
     /****************************************************************************/ 
 
-    word64		epoch  (const std::string& source, const std::string& format) ;
+    word64		epoch  (const std::string& source, const std::string& format, word32* len=nullptr) ;
     std::string format (word64 epoch, const std::string& format) ;
 
     /****************************************************************************/ 

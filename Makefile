@@ -13,3 +13,4 @@ all:
 	cd tutorials/t04_vector_example; make clean
 	cd tutorials/t05_enum_example; make clean
 	cd tutorials/t06_bitfield_example; make clean
+	cd tutorials/t07_epoch_example; make clean
