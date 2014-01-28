@@ -16,6 +16,8 @@ using namespace laurena;
 // debug_stream is a customized ostream for debugging.
 debug_stream GLOG;
 
+//A global variable with date format strings
+//Strings are not used in this example but the datetime_format is still required
 std::shared_ptr<datetime_format> DATE_FORMAT;
 
 //A class with an epoch field
@@ -26,7 +28,7 @@ public:
 
 	article () : _epoch(0), _name() { };
 
-	word64                  _epoch;
+	unsigned long long int  _epoch;
 	std::string             _name;
 };
 

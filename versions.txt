@@ -15,3 +15,7 @@
 0.2.0.4
 	X tutorial example 06 : bitfield (code, linux makefile, wiki)
 	X fixed bug in bitfield parser for numerical types.
+
+0.2.0.5
+	X tutorial example 07 : epoch (code, linux makefile, wiki)
+	X fixed bugs in datetime parser
