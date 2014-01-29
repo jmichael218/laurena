@@ -15,9 +15,7 @@
 using namespace laurena;
 
 file_dao::file_dao (const descriptor& desc, const std::string& directory) : dao(desc), _directory(directory)
-{ 
-    std::cout << directory << std::endl;
-}
+{  }
 
 file_dao::~file_dao()
 { }

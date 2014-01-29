@@ -14,9 +14,7 @@ using namespace laurena;
 using namespace json;
 
 json_dao::json_dao (const descriptor& desc, const std::string& directory) : file_dao(desc, directory)
-{ 
-    std::cout << this->_directory << std::endl;
-}
+{  }
 
 json_dao::~json_dao()
 { }
