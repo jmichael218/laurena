@@ -39,6 +39,7 @@ OBJECTS= $(CORE)/archives/iarchive.o \
     $(CORE)/formatting/format.o \
 	$(CORE)/formatting/format_bitset.o \
 	$(CORE)/formatting/format_enum.o \
+	$(CORE)/formatting/format_epoch.o \
 	$(CORE)/functions/parameter.o \
     $(CORE)/memory/memory_functions.o \
 	$(CORE)/parsing/basic_parsers.o \
