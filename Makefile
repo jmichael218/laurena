@@ -14,3 +14,4 @@ all:
 	cd tutorials/t05_enum_example; make clean
 	cd tutorials/t06_bitfield_example; make clean
 	cd tutorials/t07_epoch_example; make clean
+	cd tutorials/t09_file_persistance_example; make clean
