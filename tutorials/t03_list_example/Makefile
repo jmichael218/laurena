@@ -2,7 +2,7 @@ CORE=src
 
 CFLAGS= -std=c++11 -Wno-write-strings -I src -I ../../include
 
-ARCHIVES=json.a sql.a laurena.a
+ARCHIVES=json.a laurena.a
 
 LIBRARIES=
 
