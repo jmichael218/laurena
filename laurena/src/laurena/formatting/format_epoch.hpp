@@ -78,7 +78,7 @@ class format_epoch : public format
 {
 public:
 
-    format_epoch  (const std::string& language, const std::string& format, std::shared_ptr<datetime_format> pformatter);
+    format_epoch  (const std::string& language, const std::string& date_format, std::shared_ptr<datetime_format> pformatter);
 };
 
 /********************************************************************************/ 

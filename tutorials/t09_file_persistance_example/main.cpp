@@ -64,8 +64,6 @@ int main ()
     json::JSON::init();
 
     descriptor* d = buildClassDescriptor_User();
-    json::json_dao* p = new json::json_dao(*d, "datas");
-    dao::sptr pdao (p);
     DISK.add("user", std::make_shared<json::json_dao>(*d, "datas"));
 
     user bob;

@@ -39,10 +39,10 @@ bool parser_epoch::read (tokenizer& tokenizer, any& value, bool consume) const
 	return true;
 }
 
- format_epoch::format_epoch  (const std::string& language, const std::string& format, std::shared_ptr<datetime_format> pformatter): format(language.c_str())
+ format_epoch::format_epoch  (const std::string& language, const std::string& date_format, std::shared_ptr<datetime_format> pformatter): format(language.c_str())
 { 
-	this->_writer = std::make_shared<writer_epoch>(format, pformatter);
-	this->_parser =  std::make_shared<parser_epoch>(format, pformatter);
+	this->_writer = std::make_shared<writer_epoch>(date_format, pformatter);
+	this->_parser =  std::make_shared<parser_epoch>(date_format, pformatter);
 
 }
 //End of file
