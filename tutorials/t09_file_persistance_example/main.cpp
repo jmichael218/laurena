@@ -72,7 +72,6 @@ int main ()
     bob._name = "tobby Snox";
     bob._type = 1; // professor
 
-    any a(bob);
-    DISK.create("user", a);
+    DISK.create("user", bob);
     return 1;
 }

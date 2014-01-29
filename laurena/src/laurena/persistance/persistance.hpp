@@ -45,7 +45,7 @@ public:
     /****************************************************************************/ 
     /*          persistance functions                                           */ 
     /****************************************************************************/ 
-    void create(const std::string& pipeline, any& object);
+    void create(const std::string& pipeline, any object);
 
     /****************************************************************************/ 
     /*          protected datas                                                 */ 

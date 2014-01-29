@@ -16,7 +16,7 @@ void persistance::add(const std::string& pipeline, dao::sptr pdao)
    this->_daos [pipeline] = pdao;
 }
 
-void persistance::create(const std::string& pipeline, any& object)
+void persistance::create(const std::string& pipeline, any object)
 {
     auto it = this->_daos.find(pipeline);
     if (it == this->_daos.end())
