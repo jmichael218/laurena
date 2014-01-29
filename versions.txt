@@ -19,3 +19,8 @@
 0.2.0.5
 	X tutorial example 07 : epoch (code, linux makefile, wiki)
 	X fixed bugs in datetime parser
+
+0.2.0.6
+    - persistance : 
+		set_dao(dao, classname);
+		dao<T> : 

@@ -13,7 +13,7 @@
 using namespace laurena;
 
 //! Default constructor
-iarchive::iarchive () : _logger(nullptr), _source_filename (), _data ()
+iarchive::iarchive () : _logger(nullptr), _source_filename ()
 { }
 
 //! destructor
@@ -23,7 +23,7 @@ iarchive::~iarchive()
 iarchive& iarchive::clear ()
 {
     this->_source_filename = "";
-    this->_data.str("");
+    this->_tokenizer.str("");
     return *this;
 }
 

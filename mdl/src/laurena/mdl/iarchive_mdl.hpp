@@ -29,7 +29,7 @@ namespace laurena {
 namespace mdl {
 
 /***********************************************************************************/ 
-/* Class IArchive                                                                   */ 
+/* Class iarchive_mdl                                                              */ 
 /***********************************************************************************/ 
 
 class iarchive_mdl : public iarchive
@@ -83,15 +83,12 @@ public:
     //! Read value of a container element
     void readElement                 (const container_feature* cf, const std::string& keyname, any& object);
 
-    inline tokenizer& reader() { return _tokenizer ; }
-
     /****************************************************************************/ 
     /*              protected datas                                             */ 
     /****************************************************************************/ 
     protected:
 
     std::string     _last_keyword;
-    tokenizer       _tokenizer;
 };
 
 /********************************************************************************/ 

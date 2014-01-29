@@ -1,14 +1,13 @@
 ///
-/// \file     iarchive.hpp
-/// \brief    Base class for an input archive i.e a class to serialize a class from a file format.
+/// \file     dao.hpp
+/// \brief    DAO base class and templated class
 /// \author   Frederic Manisse
 /// \version  1.0
-/// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-/// Base class for an input archive i.e a class to serialize a class from a file format.
+/// DAO base class and templated class
 ///
-#ifndef LAURENA_IARCHIVE_H
-#define LAURENA_IARCHIVE_H
+#ifndef LAURENA_DAO_H
+#define LAURENA_DAO_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -23,53 +22,52 @@
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
-#include <laurena/descriptors/descriptor.hpp>
-#include <laurena/parsing/tokenizer.hpp>
+#include <laurena/descriptors/classes.hpp>
+#include <laurena/types/any.hpp>
+#include <laurena/traits/laurena_traits.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
 namespace laurena {
 
-class iarchive
+/********************************************************************************/ 
+/*     dao                                                                      */ 
+/********************************************************************************/ 
+
+class dao
 {
 public:
 
     /****************************************************************************/ 
-    /*          constructors, destructor                                        */ 
+    /*          typedef                                                         */ 
     /****************************************************************************/ 
+    typedef std::shared_ptr<dao>       sptr;
 
-    //! Default constructor
-    iarchive ();
-
-    //! destructor
-    virtual ~iarchive();
-    
     /****************************************************************************/ 
-    /*          Virtual functions to redefine for each serializer class         */ 
+    /*          destructor, constructors                                        */ 
     /****************************************************************************/ 
+    dao (const descriptor& desc);
+    virtual ~dao();
 
-    //! parse a content 
-    virtual any& parse (const std::string& name, any& destination) = 0 ;
-       
-    //! clear variables of last parsing
-    virtual iarchive& clear () ;
+    /****************************************************************************/ 
+    /*          virtual functions                                               */ 
+    /****************************************************************************/ 
+    virtual any     read    (const any& primaryKey)     =0;
+    virtual any&    create  (any& object)               =0;
+    virtual any&    update  (any& object)               =0;
+    virtual void    erase   (any& object)               =0;
+    virtual void    erase   (const any& primaryKey)     =0;
 
-    /****************************************************************************/
-    /*      other functions                                                     */ 
-    /****************************************************************************/
-    inline void         logger (std::ostream* logger)   { _logger = logger ; }
-    inline tokenizer&   reader()                        { return _tokenizer ; }
-
-    /****************************************************************************/
-    /*      protected datas                                                  */ 
+    /****************************************************************************/ 
+    /*          protected datas                                                 */ 
     /****************************************************************************/ 
     protected:
-    std::ostream*           _logger;
-    std::string             _source_filename;
-    tokenizer               _tokenizer;
+
+    const descriptor&       _descriptor;
 
 };
+
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

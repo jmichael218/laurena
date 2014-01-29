@@ -7,6 +7,7 @@ CC=c++
 OBJECTS= $(CORE)/mdl/iarchive_mdl.o \
 	$(CORE)/mdl/language_mdl.o \
 	$(CORE)/mdl/mdl_interface.o \
+	$(CORE)/mdl/mdl_dao.o \
 	$(CORE)/mdl/oarchive_mdl.o
 
 TARGET=mdl

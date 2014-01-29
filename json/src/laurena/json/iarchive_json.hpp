@@ -50,8 +50,6 @@ public:
     /*          parsing sub function                                            */ 
     /****************************************************************************/ 
 
-    inline tokenizer& reader() { return _tokenizer ; }
-
 	/****************************************************************************/ 
 	/*		protected functions for parsing part of json						*/ 
 	/****************************************************************************/ 
@@ -77,7 +75,7 @@ public:
     protected:
 
     std::string     _last_keyword;
-    tokenizer       _tokenizer;
+
 	word32			_depth ;
 };
 

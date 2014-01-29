@@ -44,6 +44,9 @@ OBJECTS= $(CORE)/archives/iarchive.o \
 	$(CORE)/parsing/basic_parsers.o \
     $(CORE)/parsing/token.o \
     $(CORE)/parsing/tokenizer.o \
+	$(CORE)/persistance/dao.o \
+	$(CORE)/persistance/file_dao.o \
+	$(CORE)/persistance/persistance.o \
 	$(CORE)/toolboxes/bitset.o \
 	$(CORE)/toolboxes/filename.o \
 	$(CORE)/types/any.o \

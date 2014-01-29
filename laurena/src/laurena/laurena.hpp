@@ -114,6 +114,11 @@
 #include <laurena/formatting/format_bitset.hpp>
 #include <laurena/formatting/format_epoch.hpp>
 
+//persistance
+#include <laurena/persistance/dao.hpp>
+#include <laurena/persistance/file_dao.hpp>
+#include <laurena/persistance/persistance.hpp>
+
 
 #endif
 //end of file

@@ -22,7 +22,7 @@ void test_dao ()
 	bob._name = "Bob Smith";
 	bob._age  = 42;
 
-	sql::dao d;
+	sql::sql_dao d;
 	any key ( "Bob Smith");
 	std::string sInsertQuery = d.generateInsertStatement (*desc, bob);
 	std::string sSelectQuery = d.generateSelectByPrimaryKey(*desc, key);

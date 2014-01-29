@@ -14,7 +14,7 @@
 using namespace laurena;
 using namespace sql;
 
-std::string dao::generateInsertStatement(const descriptor& desc, const any& object)
+std::string sql_dao::generateInsertStatement(const descriptor& desc, const any& object)
 {
 std::ostringstream sFields, sValues, sQuery;
 const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(desc.annotations().get(sql_tablename::ANNOTATION_NAME));
@@ -68,7 +68,7 @@ bool first = true;
 
 }
 
-std::string dao::generateSelectByPrimaryKey(const descriptor& desc, any& primary_key)
+std::string sql_dao::generateSelectByPrimaryKey(const descriptor& desc, any& primary_key)
 {
 std::ostringstream sQuery;
 const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(desc.annotations().get(sql_tablename::ANNOTATION_NAME));
@@ -129,7 +129,7 @@ const descriptor* pdesc = &desc;
 	return sQuery.str();
 }
 
-std::string dao::generateDeleteByPrimaryKey(const descriptor& desc, any& primary_key)
+std::string sql_dao::generateDeleteByPrimaryKey(const descriptor& desc, any& primary_key)
 {
 	const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(desc.annotations().get(sql_tablename::ANNOTATION_NAME));
 	if (! original_tablename)

@@ -75,6 +75,8 @@ const descriptor* d = value.desc();
     } 
 	else
 		throw LAURENA_NULL_POINTER_EXCEPTION("class parser_bitset currently support only numerical type and boost::dynamic_bitset<>.");
+
+    return true;
 }
 
 format_bitset::format_bitset (const char* language, const string_array& values) : format(language)

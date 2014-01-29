@@ -91,6 +91,12 @@
     <Filter Include="Fichiers sources\functions">
       <UniqueIdentifier>{1b7cec9f-b381-409b-8edf-e3b27e967e83}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\persistance">
+      <UniqueIdentifier>{54d78991-add9-445c-97fe-2487feb2633b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\persistance">
+      <UniqueIdentifier>{e5432f26-2b9e-47d7-83d6-8c5b7bb092b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\laurena\includes\includes.hpp">
@@ -282,6 +288,15 @@
     <ClInclude Include="src\laurena\descriptors\enum_descriptor.hpp">
       <Filter>Fichiers d%27en-tête\descriptors</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\persistance\dao.hpp">
+      <Filter>Fichiers d%27en-tête\persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\persistance\persistance.hpp">
+      <Filter>Fichiers d%27en-tête\persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\persistance\file_dao.hpp">
+      <Filter>Fichiers d%27en-tête\persistance</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">
@@ -430,6 +445,15 @@
     </ClCompile>
     <ClCompile Include="src\laurena\types\datetime_format.cpp">
       <Filter>Fichiers sources\types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\persistance\dao.cpp">
+      <Filter>Fichiers sources\persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\persistance\file_dao.cpp">
+      <Filter>Fichiers sources\persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\persistance\persistance.cpp">
+      <Filter>Fichiers sources\persistance</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

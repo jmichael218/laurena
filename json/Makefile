@@ -7,6 +7,7 @@ CC=c++
 OBJECTS= $(CORE)/json/iarchive_json.o \
 	$(CORE)/json/language_json.o \
 	$(CORE)/json/json_interface.o \
+	$(CORE)/json/json_dao.o \
 	$(CORE)/json/oarchive_json.o
 
 TARGET=json

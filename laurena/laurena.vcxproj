@@ -65,6 +65,9 @@
     <ClInclude Include="src\laurena\parsing\parser.hpp" />
     <ClInclude Include="src\laurena\parsing\token.hpp" />
     <ClInclude Include="src\laurena\parsing\tokenizer.hpp" />
+    <ClInclude Include="src\laurena\persistance\dao.hpp" />
+    <ClInclude Include="src\laurena\persistance\file_dao.hpp" />
+    <ClInclude Include="src\laurena\persistance\persistance.hpp" />
     <ClInclude Include="src\laurena\toolboxes\bitset.hpp" />
     <ClInclude Include="src\laurena\toolboxes\filename.hpp" />
     <ClInclude Include="src\laurena\traits\laurena_traits.hpp" />
@@ -117,6 +120,9 @@
     <ClCompile Include="src\laurena\parsing\basic_parsers.cpp" />
     <ClCompile Include="src\laurena\parsing\token.cpp" />
     <ClCompile Include="src\laurena\parsing\tokenizer.cpp" />
+    <ClCompile Include="src\laurena\persistance\dao.cpp" />
+    <ClCompile Include="src\laurena\persistance\file_dao.cpp" />
+    <ClCompile Include="src\laurena\persistance\persistance.cpp" />
     <ClCompile Include="src\laurena\toolboxes\bitset.cpp" />
     <ClCompile Include="src\laurena\toolboxes\filename.cpp" />
     <ClCompile Include="src\laurena\types\any.cpp" />

@@ -45,7 +45,7 @@ any bool_descriptor::cast (const any& value) const
 	}
 
 	assert(false);
-	
+	return any();
 }
 
 // OPERATORS
@@ -85,6 +85,7 @@ any& bool_descriptor::stoa(const std::string& string_value, any& value) const
 		return value = (bool) false;
 	else
 		assert(false);
+    return value.clear();
 }    
 
 // OBJECT CONSTRUCTOR FOR INJECTION

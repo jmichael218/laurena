@@ -25,6 +25,7 @@
 #include <laurena/json/iarchive_json.hpp>
 #include <laurena/json/language_json.hpp>
 #include <laurena/json/json_interface.hpp>
+#include <laurena/json/json_dao.hpp>
 
 #endif
 //End of file

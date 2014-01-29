@@ -1,13 +1,13 @@
 ///
-/// \file     sql_dao.hpp
-/// \brief    DAO base class and templated class
+/// \file     persistance.hpp
+/// \brief    Generic persistance engine
 /// \author   Frederic Manisse
 /// \version  1.0
 ///
-/// Annotations for sql persistance
+/// Generic persistance engine
 ///
-#ifndef LAURENA_SQL_DAO_H
-#define LAURENA_SQL_DAO_H
+#ifndef LAURENA_PERSISTANCE_H
+#define LAURENA_PERSISTANCE_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -19,32 +19,45 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
-#include <laurena/laurena.hpp>
+#include <laurena/includes/includes.hpp>
+#include <laurena/includes/types.hpp>
+
+#include <laurena/descriptors/classes.hpp>
+#include <laurena/types/any.hpp>
+#include <laurena/traits/laurena_traits.hpp>
+#include <laurena/persistance/dao.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
 namespace laurena {
-namespace sql {
 
 /********************************************************************************/ 
-/* sql dao                                                                      */ 
+/*     persistance engine                                                       */ 
 /********************************************************************************/ 
 
-class sql_dao
+class persistance
 {
 public:
 
-	std::string generateInsertStatement(const descriptor& desc, const any& object);
-	std::string generateSelectByPrimaryKey(const descriptor& desc, any& primary_key);
-	std::string generateDeleteByPrimaryKey(const descriptor& desc, any& primary_key);
+    void add(const std::string& pipeline, dao::sptr pdao);
 
+    /****************************************************************************/ 
+    /*          persistance functions                                           */ 
+    /****************************************************************************/ 
+    void create(const std::string& pipeline, any& object);
+
+    /****************************************************************************/ 
+    /*          protected datas                                                 */ 
+    /****************************************************************************/ 
+    protected:
+    std::unordered_map<std::string, dao::sptr>       _daos;
 };
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 
 
-}}
+}
 #endif
 //end of file
