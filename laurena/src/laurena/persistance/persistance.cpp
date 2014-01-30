@@ -50,6 +50,6 @@ bool persistance::exist(const std::string& pipeline, const any& primaryKey)
         s.append(pipeline).append(" not found.");
         throw LAURENA_NULL_POINTER_EXCEPTION(s);
     }
-    it->second->exist(primaryKey);
+    return it->second->exist(primaryKey);
 }
 //End of file
