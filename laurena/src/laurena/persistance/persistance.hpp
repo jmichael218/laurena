@@ -47,6 +47,7 @@ public:
     /****************************************************************************/ 
     void create(const std::string& pipeline, any object);
     void read(const std::string& pipeline, const any& primaryKey, any destination);
+    bool exist(const std::string& pipeline, const any& primaryKey);
 
     /****************************************************************************/ 
     /*          protected datas                                                 */ 

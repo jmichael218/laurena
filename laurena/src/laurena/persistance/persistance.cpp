@@ -40,4 +40,16 @@ void persistance::read(const std::string& pipeline, const any& primaryKey, any d
     }
     it->second->read(primaryKey, destination);
 }
+
+bool persistance::exist(const std::string& pipeline, const any& primaryKey)
+{
+    auto it = this->_daos.find(pipeline);
+    if (it == this->_daos.end())
+    {
+        std::string s = "Pipeline " ;
+        s.append(pipeline).append(" not found.");
+        throw LAURENA_NULL_POINTER_EXCEPTION(s);
+    }
+    it->second->exist(primaryKey);
+}
 //End of file

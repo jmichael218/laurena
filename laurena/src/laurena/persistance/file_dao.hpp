@@ -61,6 +61,7 @@ public:
     virtual any&    update  (any& object);
     virtual void    erase   (any& object);
     virtual void    erase   (const any& primaryKey);
+    virtual bool    exist   (const any& primaryKey);
 
     /****************************************************************************/ 
     /*          new virtual functions                                           */ 

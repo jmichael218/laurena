@@ -61,6 +61,8 @@ public:
     virtual void    erase   (any& object)               =0;
     virtual void    erase   (const any& primaryKey)     =0;
 
+    virtual bool    exist   (const any& primaryKey)     =0;
+
     /****************************************************************************/ 
     /*          protected datas                                                 */ 
     /****************************************************************************/ 

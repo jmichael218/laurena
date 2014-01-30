@@ -104,8 +104,16 @@ void file_dao::erase   (const any& primaryKey)
 {
     std::string skey = primaryKey.tos();
 
-    boost::filesystem::path p (this->filename(skey));
+    boost::filesystem::path p (this->path(skey));
     boost::filesystem::remove(p);
+}
+
+bool file_dao::exist   (const any& primaryKey)
+{
+    std::string skey = primaryKey.tos();
+
+    boost::filesystem::path p (this->path(skey));
+    return boost::filesystem::exists(p);
 }
 //End of file
 
