@@ -98,8 +98,8 @@ public:
     /*          new functions                                                   */ 
     /****************************************************************************/ 
         
-    base_standard_class_descriptor& primaryKeyField(word8 index);
-    base_standard_class_descriptor& serialKeyField (word8 index);
+    base_standard_class_descriptor& primaryKeyField(const std::string& fieldName);
+    base_standard_class_descriptor& serialKeyField (const std::string& fieldName);
 
     inline fields& editFields() { return _fields ; }
 
@@ -110,8 +110,8 @@ public:
     protected:
     fields        _fields;
     
-    word8         _primary_key_field;
-    word8         _serial_field;
+    size_t        _primary_key_field;
+    size_t        _serial_field;
 
 };
 

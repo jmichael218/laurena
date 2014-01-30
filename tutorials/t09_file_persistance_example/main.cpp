@@ -47,8 +47,8 @@ descriptor* buildClassDescriptor_User()
     d->addField(&user::_gender,"gender");
     d->addField(&user::_type,"type").annotate(new format_enum("format.all",user_types));
     d->addField(&user::_age,"age");
-    d->addField(&user::_name,"name").isPrimaryKey(true);
-    d->primaryKeyField(3);
+    d->addField(&user::_name,"name");
+    d->primaryKeyField("name");
     return d;
 }
 

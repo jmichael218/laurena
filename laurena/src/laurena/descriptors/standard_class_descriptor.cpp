@@ -15,19 +15,14 @@ using namespace laurena;
 base_standard_class_descriptor::base_standard_class_descriptor(const char* name, const type_info& type, size_t sizeOfObject, const descriptor* parent) :
 
     polymorphic_class_descriptor(name, type, sizeOfObject, parent) ,
-    _fields()
-{
+    _fields(), _primary_key_field(0xFFFF), _serial_field(0xFFFF)
 
-    this->_primary_key_field = 0xFF ;
-    this->_serial_field = 0xFF;
-
-    this->_size_of = sizeOfObject;
-
+{ 
+    _size_of = sizeOfObject;
 }
 
 base_standard_class_descriptor::~base_standard_class_descriptor ()
-{
-}
+{ }
 
 /********************************************************************************/ 
 /*																				*/ 
@@ -138,26 +133,36 @@ const fields& base_standard_class_descriptor::getFields() const
 /*              NEW FUNCTIONS                                                   */ 
 /*                                                                              */ 
 /********************************************************************************/ 
-base_standard_class_descriptor& base_standard_class_descriptor::primaryKeyField(word8 index)
+base_standard_class_descriptor& base_standard_class_descriptor::primaryKeyField(const std::string& fieldName)
 {
-    if(index != 0xFF)
+    int index = this->_fields.index(fieldName);
+    if (index != 0xFFFF)
     {
-        field& a = *this->_fields[index];
-        a.isPrimaryKey(true);
-    }
-    this->_primary_key_field = index;    
+        this->_fields[index]->isPrimaryKey(true);
+        this->_primary_key_field = index;   
+        return *this;
+
+        std::string s = "Field ";
+        s.append(fieldName).append(" not found in class ").append(this->name());
+        throw LAURENA_EXCEPTION(s);
+    }  
     return *this;
 }
 
-base_standard_class_descriptor& base_standard_class_descriptor::serialKeyField(word8 index)
+base_standard_class_descriptor& base_standard_class_descriptor::serialKeyField(const std::string& fieldName)
 {
-    if (index != 0xFF)
+    int index = this->_fields.index(fieldName);
+    if (index != 0xFFFF)
     {
-        field& a = *this->_fields[index];
-        a.isSerial(true);
-    }
-    this->_serial_field = index; 
-    return *this;   
+        this->_fields[index]->isSerial(true);
+        this->_serial_field = index;   
+        return *this;
+
+        std::string s = "Field ";
+        s.append(fieldName).append(" not found in class ").append(this->name());
+        throw LAURENA_EXCEPTION(s);
+    }  
+    return *this;
 }
 
 

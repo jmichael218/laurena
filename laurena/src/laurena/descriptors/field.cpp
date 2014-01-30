@@ -192,6 +192,15 @@ field* fields::find(const std::string& name)
     return nullptr;
 }
 
+int fields::index(const std::string& name) const
+{
+    for(size_t i = 0; i < this->size(); ++i)
+        if (this->at(i)->name() == name)
+            return i;
+
+    return 0xFFFF;
+}
+
 const field& fields::get(const std::string& name) const
 {
     for(const std::unique_ptr<field>& f : *this)

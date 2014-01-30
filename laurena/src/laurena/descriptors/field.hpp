@@ -162,6 +162,8 @@ public:
     const field& get(const std::string& name)   const;
     const field* find(const std::string& name)  const;    
 
+    int           index(const std::string& name) const;
+
     field& get(const std::string& name);
     field* find(const std::string& name);    
 
