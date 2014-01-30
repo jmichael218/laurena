@@ -28,3 +28,16 @@ void persistance::create(const std::string& pipeline, any object)
 
     it->second->create(object);
 }
+
+void persistance::read(const std::string& pipeline, const any& primaryKey, any destination)
+{
+    auto it = this->_daos.find(pipeline);
+    if (it == this->_daos.end())
+    {
+        std::string s = "Pipeline " ;
+        s.append(pipeline).append(" not found.");
+        throw LAURENA_NULL_POINTER_EXCEPTION(s);
+    }
+    it->second->read(primaryKey, destination);
+}
+//End of file

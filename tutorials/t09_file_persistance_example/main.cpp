@@ -63,15 +63,30 @@ int main ()
     classes::init();
     json::JSON::init();
 
+    // user class initialization
     descriptor* d = buildClassDescriptor_User();
+
+    // user persistance initialization
     DISK.add("user", std::make_shared<json::json_dao>(*d, "datas"));
 
+    // let's create a user
     user bob;
     bob._age = 25;
     bob._gender = MALE;
-    bob._name = "tobby Snox";
+    bob._name = "Bob Joe";
     bob._type = 1; // professor
 
+    // let's save it on disk
     DISK.create("user", bob);
+
+    // let's test the read function
+    user bobcloned;
+    DISK.read("user", "Bob Joe", &bobcloned);
+
+    // Let's serialize it into json
+    std::string destination = json::json::serialize(bobcloned);
+
+    // Let's check create + read worked :
+    GLOG << "Here is Bob's details:" << std::endl << destination << std::endl;
     return 1;
 }

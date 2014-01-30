@@ -46,6 +46,7 @@ public:
     /*          persistance functions                                           */ 
     /****************************************************************************/ 
     void create(const std::string& pipeline, any object);
+    void read(const std::string& pipeline, const any& primaryKey, any destination);
 
     /****************************************************************************/ 
     /*          protected datas                                                 */ 

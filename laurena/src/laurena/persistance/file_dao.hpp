@@ -56,7 +56,7 @@ public:
     /****************************************************************************/ 
     /*          virtual functions from dao                                      */ 
     /****************************************************************************/ 
-    virtual any     read    (const any& primaryKey);
+    virtual any&    read    (const any& primaryKey, any& destination);
     virtual any&    create  (any& object);
     virtual any&    update  (any& object);
     virtual void    erase   (any& object);

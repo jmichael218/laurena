@@ -53,7 +53,9 @@ public:
     /****************************************************************************/ 
     /*          virtual functions                                               */ 
     /****************************************************************************/ 
-    virtual any     read    (const any& primaryKey)     =0;
+    virtual any&    read    (const any& primaryKey, any& destination)=0;
+    virtual any     read    (const any& primaryKey);
+
     virtual any&    create  (any& object)               =0;
     virtual any&    update  (any& object)               =0;
     virtual void    erase   (any& object)               =0;

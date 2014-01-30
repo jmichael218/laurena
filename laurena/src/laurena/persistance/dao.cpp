@@ -16,4 +16,10 @@ dao::dao (const descriptor& desc) : _descriptor(desc)
 dao::~dao()
 { }
 
+any dao::read    (const any& primaryKey)
+{
+    any a;
+    this->read(primaryKey, a);
+    return a;
+}
 //End of file

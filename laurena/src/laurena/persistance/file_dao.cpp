@@ -50,19 +50,18 @@ std::string file_dao::path(const std::string& key)
     return res.append("/").append(this->filename(key));
 }
 
-any file_dao::read    (const any& primaryKey)
+any& file_dao::read    (const any& primaryKey, any& destination)
 {
     std::string skey = primaryKey.tos();
 
-    std::string content = loader<>::load(this->filename(skey));
+    std::string content = loader<>::load(this->path(skey));
 
     std::shared_ptr<iarchive> arc = this->parser();
     arc->reader().str(content.c_str());
 
-    any value;
-    arc->parse(this->_descriptor.name(), value);
+    arc->parse(this->_descriptor.name(), destination);
 
-    return value;
+    return destination;
 
 }
 
