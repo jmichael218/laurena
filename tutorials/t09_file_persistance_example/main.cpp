@@ -16,7 +16,7 @@ using namespace laurena;
 // debug_stream is a customized ostream for debugging.
 debug_stream GLOG;
 
-
+// Let's reuse our user class from the enum example
 enum gender : unsigned char
 {
     UNDEFINED,
@@ -48,6 +48,8 @@ descriptor* buildClassDescriptor_User()
     d->addField(&user::_type,"type").annotate(new format_enum("format.all",user_types));
     d->addField(&user::_age,"age");
     d->addField(&user::_name,"name");
+
+    //Let"s declare name as the primary field.
     d->primaryKeyField("name");
     return d;
 }
@@ -64,10 +66,10 @@ int main ()
     json::JSON::init();
 
     // user class initialization
-    descriptor* d = buildClassDescriptor_User();
+    descriptor* userDescriptor = buildClassDescriptor_User();
 
     // user persistance initialization
-    DISK.add("user", std::make_shared<json::json_dao>(*d, "datas"));
+    DISK.add("user", std::make_shared<json::json_dao>(*userDescriptor, "datas/users"));
 
     // let's create a user
     user bob;
