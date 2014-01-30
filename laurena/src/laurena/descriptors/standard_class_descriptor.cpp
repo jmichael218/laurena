@@ -12,10 +12,12 @@
 
 using namespace laurena;
 
+const word16 base_standard_class_descriptor::FIELD_UNDEFINED = 0xFFFF;
+
 base_standard_class_descriptor::base_standard_class_descriptor(const char* name, const type_info& type, size_t sizeOfObject, const descriptor* parent) :
 
     polymorphic_class_descriptor(name, type, sizeOfObject, parent) ,
-    _fields(), _primary_key_field(0xFFFF), _serial_field(0xFFFF)
+    _fields(), _primary_key_field(FIELD_UNDEFINED), _serial_field(FIELD_UNDEFINED)
 
 { 
     _size_of = sizeOfObject;
@@ -34,12 +36,12 @@ bool base_standard_class_descriptor::has(descriptor::Flags flag) const
 	switch(flag)
 	{
 		case Flags::PRIMARY_KEY:
-			return ( this->_primary_key_field != 0xFF ) ?
+			return ( this->_primary_key_field != FIELD_UNDEFINED ) ?
 				true :
 				( this->hasParent() ? this->parent().has(Flags::PRIMARY_KEY) : false );
 
 		case Flags::SERIAL:
-            return ( this->_serial_field != 0xFF ) ?
+            return ( this->_serial_field != FIELD_UNDEFINED ) ?
                 true :
                 ( this->hasParent() ? this->parent().has(Flags::SERIAL) : false );
 
@@ -136,7 +138,7 @@ const fields& base_standard_class_descriptor::getFields() const
 base_standard_class_descriptor& base_standard_class_descriptor::primaryKeyField(const std::string& fieldName)
 {
     int index = this->_fields.index(fieldName);
-    if (index != 0xFFFF)
+    if (index != FIELD_UNDEFINED)
     {
         this->_fields[index]->isPrimaryKey(true);
         this->_primary_key_field = index;   
@@ -152,7 +154,7 @@ base_standard_class_descriptor& base_standard_class_descriptor::primaryKeyField(
 base_standard_class_descriptor& base_standard_class_descriptor::serialKeyField(const std::string& fieldName)
 {
     int index = this->_fields.index(fieldName);
-    if (index != 0xFFFF)
+    if (index != FIELD_UNDEFINED)
     {
         this->_fields[index]->isSerial(true);
         this->_serial_field = index;   

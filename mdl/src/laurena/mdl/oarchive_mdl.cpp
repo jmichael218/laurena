@@ -244,9 +244,10 @@ const descriptor* cd = value.desc();
 
     this->_data << ":" ;        
     if (cd->has(descriptor::Flags::PRIMARY_KEY))
-    {
-        std::string s;
-        cd->primaryKey().toString(value,s);
+    {        
+        any pkey;
+        cd->primaryKey().get(value, pkey);
+        std::string s = pkey.tos();
         if (s.length())
             this->_data << s;
         else

@@ -43,6 +43,11 @@ class base_standard_class_descriptor : public polymorphic_class_descriptor {
 public:
 
     /****************************************************************************/ 
+    /*          const        ants                                               */ 
+    /****************************************************************************/ 
+    static const word16 FIELD_UNDEFINED;
+
+    /****************************************************************************/ 
     /*          constructors, desctructor                                       */ 
     /****************************************************************************/ 
     base_standard_class_descriptor(const char* name, const type_info& type, size_t sizeOfObject, const descriptor* parent = nullptr);
