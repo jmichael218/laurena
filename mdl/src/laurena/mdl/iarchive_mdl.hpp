@@ -90,6 +90,10 @@ public:
     protected:
 
     std::string     _last_keyword;
+
+    // true if iarchive is called from an include directive. It means end of file is not a failure
+    bool            _included; 
+    word16          _depth;
 };
 
 /********************************************************************************/ 

@@ -14,7 +14,7 @@
 using namespace laurena;
 using namespace mdl;
 
-iarchive_mdl::iarchive_mdl() : iarchive()
+iarchive_mdl::iarchive_mdl() : iarchive(), _included(false), _depth(0)
 {
 }
 iarchive_mdl::~iarchive_mdl()
@@ -149,7 +149,13 @@ std::string keyword;
         std::string filename;
         filename.append (data_directory).append("/").append(str);
 
-        iarchive_mdl::load(filename.c_str(),_last_keyword,object) ;
+        iarchive_mdl amdl ;
+        amdl._source_filename = filename;
+        amdl._tokenizer.load(filename);
+        amdl._included = true;
+
+        amdl.readObjectContent(descriptor, object);
+        //iarchive_mdl::load(filename.c_str(),_last_keyword,object) ;
     }
     else
     {
@@ -351,6 +357,8 @@ void iarchive_mdl::readObjectContent (const descriptor& d, any& object )
 {
 token token;
 std::string keyword, safe_keyword;
+
+    this->_depth ++;
     
     /****************************************************************************/
     /*              Log parameter                                               */ 
@@ -360,6 +368,9 @@ std::string keyword, safe_keyword;
                     << std::endl ;
     while ( true )
     {        
+        this->skipTabs();
+        if (this->_included && !*this->_tokenizer._ptr && this->_depth ==1)
+            return;
 
 		this->readExpected(token,MDL::TOKEN_AT,MDL::TOKEN_BRACKET_CLOSE,MDL::TOKEN_PRIMARY_KEY, MDL::TOKEN_INTEGER);
 
@@ -370,6 +381,7 @@ std::string keyword, safe_keyword;
                 continue;
 
             case MDL::TOKEN_BRACKET_CLOSE:
+                this->_depth --;
                 return;
 
 			case MDL::TOKEN_INTEGER:

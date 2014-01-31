@@ -76,7 +76,7 @@ namespace mdl_impl
 
 		try 
 		{
-		    amdl.load(filename, expected_name, value);
+		    return amdl.load(filename, expected_name, value);
 		}
 		catch (const exception& e)
 		{        
