@@ -21,6 +21,9 @@
 /********************************************************************************/ 
 #include <laurena/laurena.hpp>
 #include <laurena/mdl/iarchive_mdl.hpp>
+#include <laurena/toolboxes/loader.hpp>
+
+#include <boost/filesystem.hpp>
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
@@ -49,6 +52,31 @@ namespace mdl_impl
 		try 
 		{
 			return amdl.parse(expected_name,value) ;
+		}
+		catch (const exception& e)
+		{        
+			std::ostringstream message ;
+			(amdl.reader().prefixErrorMessage(message)) << e.message ();
+			throw LAURENA_FAILED_PARSING_EXCEPTION( message.str().c_str(),amdl.reader()._ptr) ;      
+		}   
+	}
+
+    template<typename T>
+    inline T& parseFile(const std::string& filename, const std::string& expected_name, T& destination)
+	{
+		any a = &destination;
+		laurena::mdl::mdl_impl::parseFile(filename,expected_name,a);
+		return destination;
+	}
+
+	template <>
+	inline any& parseFile<any>(const std::string& filename, const std::string& expected_name, any& value)
+	{
+		iarchive_mdl amdl ;
+
+		try 
+		{
+		    amdl.load(filename, expected_name, value);
 		}
 		catch (const exception& e)
 		{        
@@ -110,26 +138,11 @@ public:
 		return mdl_impl::parse(src, a.desc()->name(), destination);
 	}
 
-	/*
-	template <>
-	static any& parse<any>(const std::string& mdl, const std::string& expected_name, any& value)
-	{
-		iarchive_mdl amdl ;
-		amdl.reader().str(mdl.c_str());
-
-		try 
-		{
-			return amdl.parse(expected_name,value) ;
-		}
-		catch (const exception& e)
-		{        
-			std::ostringstream message ;
-			(amdl.reader().prefixErrorMessage(message)) << e.message ();
-			throw LAURENA_FAILED_PARSING_EXCEPTION( message.str().c_str(),amdl.reader()._ptr) ;      
-		}   
-	}
-
-	*/
+    template<class T>
+    static T& parseFile(const std::string& filename, const std::string& expected_name, T& destination)
+    {
+        return mdl_impl::parseFile(filename, expected_name, destination);
+    }
 };
 
 /********************************************************************************/ 

@@ -50,7 +50,7 @@ public:
     /****************************************************************************/
     /*          static functions                                                */ 
     /****************************************************************************/ 
-    static any& load (const char* filename, const std::string& name, 
+    static any& load (const std::string& filename, const std::string& name, 
                        any& destination);
 
     static any& fromString (const char* source, const std::string& name, 

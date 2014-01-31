@@ -557,11 +557,12 @@ std::string keyword;
     return object;
 }
 
-any& iarchive_mdl::load (const char* filename, const std::string& name, 
+any& iarchive_mdl::load (const std::string& filename, const std::string& name, 
                        any& object)
 {
 
     iarchive_mdl amdl ;
+    amdl._source_filename = filename;
     amdl._tokenizer.load(filename);
 
     try 
