@@ -29,6 +29,7 @@ parser_enum::parser_enum (const string_array& values) : charset_parser(const_cha
 bool parser_enum::read (tokenizer& tokenizer, any& value, bool consume) const
 {
 	any str;
+    
 	bool res = this->charset_parser::read(tokenizer, str, consume);
 	if (!res)
 		return res;

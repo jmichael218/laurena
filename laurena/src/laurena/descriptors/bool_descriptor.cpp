@@ -27,7 +27,7 @@ bool bool_descriptor::has(descriptor::Flags flag) const
 {
 	if (flag == Flags::NUMERIC_VALUE)
 		return true;
-	if (flag == Flags::TINY)
+	if (flag == Flags::ATOMIC)
 		return true;
 	return this->descriptor::has(flag);
 }

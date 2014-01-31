@@ -61,6 +61,7 @@ public:
     /****************************************************************************/ 
     public:
 
+    void skipTabs();
 
     void readToken	(token& tk, boost::dynamic_bitset<>& allowed_tokens);
 

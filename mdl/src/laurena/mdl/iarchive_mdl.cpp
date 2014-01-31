@@ -21,6 +21,30 @@ iarchive_mdl::~iarchive_mdl()
 {
 }
 
+void iarchive_mdl::skipTabs()
+{
+token tk;
+
+    while (true)
+    {
+        int32 res = this->_tokenizer.readExpected(tk,MDL::units(),MDL::mask_tab_tokens());
+
+        if (res == -1)
+            return;
+
+        if (res == MDL::TOKEN_SINGLE_LINE_COMMENT)    
+        {
+            this->_tokenizer.skipCurrentLine();
+            continue;
+        }
+        
+        if (res == MDL::TOKEN_MULTI_LINE_COMMENT_BEGIN)
+        {
+            this->_tokenizer.skipUntil("*#",true);
+            continue;
+        }
+    }
+}
 
 void iarchive_mdl::readToken(token& tk, boost::dynamic_bitset<>& allowed_tokens)
 {
@@ -144,13 +168,26 @@ void iarchive_mdl::readField(const field& f, any& object)
 {
 const descriptor& fd = f.desc();
 token t;
+any a;
 const class_feature* ft;
 
-    /*if (f.isEnum())
-	    this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD);
-    else if (f.isBitSet())
-		this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD_LIST);
-	else */ if (f.noQuote() || fd.has(descriptor::Flags::NUMERIC_VALUE))
+    bool isAtomic               = f.desc().has(descriptor::Flags::ATOMIC);
+    const format* fieldFormat	= dynamic_cast<const format*>(f.annotations().get(MDL::ANNOTATION_NAME, ANNOTATION_FORMAT_ALL));
+
+		if ( fieldFormat )
+		{
+            this->skipTabs();
+			if (isAtomic)
+			{
+				fieldFormat->read(this->_tokenizer,a,true);
+				f.set(object, a);
+			}
+			else
+				fieldFormat->read(this->_tokenizer,f.get(object, a),true);
+			return;
+		}
+    
+    if (f.noQuote() || fd.has(descriptor::Flags::NUMERIC_VALUE))
 		this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD);
     else if ((ft = fd.feature(Feature::ANY)))
     {

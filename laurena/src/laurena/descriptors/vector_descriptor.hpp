@@ -104,7 +104,7 @@ public:
 		if (index >= c->size())
 			c->resize(index+1);
 
-		if (boost::is_pointer<ELEMENT>::value || element.desc()->has(descriptor::Flags::TINY))
+		if (boost::is_pointer<ELEMENT>::value || element.desc()->has(descriptor::Flags::ATOMIC))
 			(*c) [index] = anycast<ELEMENT>(element);
 		else
 		{

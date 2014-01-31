@@ -96,7 +96,7 @@ public:
     virtual void push(any& container, any& element) const
     {
         CONTAINER* c = anycast<CONTAINER*>(container);
-		if ( element.desc()->has(descriptor::Flags::TINY))
+		if ( element.desc()->has(descriptor::Flags::ATOMIC))
 		{
 			element = _elements_descriptor->cast(element);
 			c->push_back(anycast<ELEMENT>(element));

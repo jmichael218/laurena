@@ -55,21 +55,7 @@ public:
     // TO/FROM STRING SERIALIZATION 
     virtual std::string     atos(const any& value) const;
     virtual any&            stoa(const std::string& string_value, any& value) const;
-    /*
-    virtual std::string     atos(const any& value) const
-    {
-        T t = anycast<T>(value);
-        return this->_values[t];
-    }
-	virtual any&            stoa(const std::string& string_value, any& value) const
-    {
-        int i = this->_values.find(string_value);
-        if (i==-1)        
-            throw LAURENA_FAILED_PARSING_EXCEPTION("In enum_type_descript::stoa, failed to convert the string value",string_value);
-        
-        return value = (T) i;
-    }
-    */
+
     /****************************************************************************/
     /*          static functions                                                */ 
     /****************************************************************************/ 
@@ -107,7 +93,7 @@ bool enum_type_descriptor<T>::has(descriptor::Flags flag) const
 {
 	    if (flag == descriptor::Flags::STRING_CAST)
 		    return true;
-	    if (flag == descriptor::Flags::TINY)
+	    if (flag == descriptor::Flags::ATOMIC)
 		    return true;
         if (flag == descriptor::Flags::NUMERIC_VALUE)
             return true;

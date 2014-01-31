@@ -277,7 +277,7 @@ VALUETYPE anycast(any & operand)
     if (!vcd)
         throw new LAURENA_EXCEPTION("anycast failed");
 
-	if (ocd->has(descriptor::Flags::TINY) && vcd->has(descriptor::Flags::TINY) && (ocd != vcd))
+	if (ocd->has(descriptor::Flags::ATOMIC) && vcd->has(descriptor::Flags::ATOMIC) && (ocd != vcd))
 	{
 		any a = vcd->cast(operand);
 		return anycast<VALUETYPE>(a);

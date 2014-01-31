@@ -32,7 +32,7 @@ bool const_ptr_descriptor_descriptor::has(descriptor::Flags flag) const
 {
 	if (flag == Flags::STRING_CAST)
 		return true;
-	if (flag == Flags::TINY)
+	if (flag == Flags::ATOMIC)
 		return true;
 	return this->descriptor::has(flag);
 }

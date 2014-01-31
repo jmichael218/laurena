@@ -11,6 +11,7 @@
 #include <laurena/toolboxes/bitset.hpp>
 #include <laurena/exceptions/failed_parsing_exception.hpp>
 #include <laurena/constants/const_charsets.hpp>
+#include <laurena/validations/is_integer.hpp>
 
 using namespace laurena;
 
@@ -165,9 +166,13 @@ std::string key;
         int32 index = bitnames.find(key);
         if (index==-1)
         {
-            throw LAURENA_FAILED_PARSING_EXCEPTION("unknow flag" , key.c_str());
+            if (is_integer(key))
+                bitset::fromWord64(boost::lexical_cast<word64>(key), destination);
+            else
+                throw LAURENA_FAILED_PARSING_EXCEPTION("unknow flag" , key.c_str());
         }
-        destination.set (index);
+        else
+            destination.set (index);
         p +=i;
 
     }
@@ -201,11 +206,12 @@ std::string bitset::tos(const boost::dynamic_bitset<>& bits)
 
     return destination;
 }
-/*
-word64 BitSet::toWord64 (const boost::dynamic_bitset<>& bits)
+
+word64 bitset::toWord64 (const boost::dynamic_bitset<>& bits)
 {
 word64 res = 0 ;
 word64 one = 1 ;
+
     for (word8 i = 0 ; i < bits.size() ; i ++)
         if ( bits.test(i))
             res |= ( one << i );
@@ -213,7 +219,7 @@ word64 one = 1 ;
     return res;
 }
 
-boost::dynamic_bitset<>& BitSet::fromWord64 (word64 value, boost::dynamic_bitset<>& dest)
+boost::dynamic_bitset<>& bitset::fromWord64 (word64 value, boost::dynamic_bitset<>& dest)
 {
 word64 one = 1 ;
 
@@ -225,5 +231,4 @@ word64 one = 1 ;
     }
     return dest;
 }
-*/
 //End of file

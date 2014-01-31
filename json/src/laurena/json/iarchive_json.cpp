@@ -149,13 +149,13 @@ static const descriptor* desc_int64 = classes::byType(typeid(int64));
 
 	if (fdesc)
 	{
-		bool isTiny					= fdesc->desc().has(descriptor::Flags::TINY);
+		bool isAtomic					= fdesc->desc().has(descriptor::Flags::ATOMIC);
 		const format* fieldFormat	= dynamic_cast<const format*>(fdesc->annotations().get(JSON::ANNOTATION_NAME, ANNOTATION_FORMAT_ALL));
 
 		if ( fieldFormat )
 		{
 			this->readExpected(t,JSON::TOKEN_DQUOTE);
-			if (isTiny)
+			if (isAtomic)
 			{
 				fieldFormat->read(this->_tokenizer,a,true);
 				fdesc->set(object, a);
@@ -171,7 +171,7 @@ static const descriptor* desc_int64 = classes::byType(typeid(int64));
 		if (typeFormat)
 		{  
 			this->readExpected(t,JSON::TOKEN_DQUOTE);
-			if (isTiny)
+			if (isAtomic)
 			{
 				typeFormat->read(this->_tokenizer,a,true);
 				fdesc->set(object, a);
@@ -254,7 +254,7 @@ literator it = ccf->begin(object);
 word32 index = 0;
 any key;
 
-	bool tinyElement = ecd->has(descriptor::Flags::TINY);
+	bool isAtomic = ecd->has(descriptor::Flags::ATOMIC);
 	while (true)
 	{
 		bool ok = this->readMaybe(t,JSON::TOKEN_ARRAY_BRACKET_CLOSE, JSON::TOKEN_BRACKET_OPEN, JSON::TOKEN_COLON);
@@ -264,11 +264,11 @@ any key;
 			if ( t._token_id == JSON::TOKEN_ARRAY_BRACKET_CLOSE)
 				return ;
 
-			if (t._token_id == JSON::TOKEN_COLON && !tinyElement)
+			if (t._token_id == JSON::TOKEN_COLON && !isAtomic)
 				this->readExpected(t,JSON::TOKEN_BRACKET_OPEN);
 		}
 
-		if (tinyElement)
+		if (isAtomic)
 		{
 			this->readExpected(t,JSON::TOKEN_SINGLE_STRING, JSON::TOKEN_INTEGER);
 			element = ecd->cast(t);
