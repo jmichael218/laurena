@@ -34,11 +34,13 @@ void XML::init ()
 
     r [ XML::TOKEN_COMMENT_START ]    = new keyword_parser("<!--");
     r [ XML::TOKEN_COMMENT_END ]      = new keyword_parser("-->");
-    r [ TOKEN_INFERIOR_SLASH ]        = new keyword_parser("</");
+    r [ XML::TOKEN_INFERIOR_SLASH ]   = new keyword_parser("</");
+    r [ XML::TOKEN_SLASH_SUPERIOR ]   = new keyword_parser("/>");
     r [ XML::TOKEN_INFERIOR ]         = new single_character_parser('<');
     r [ XML::TOKEN_SUPERIOR ]         = new single_character_parser('>');        
     r [ XML::TOKEN_KEYWORD ]          = new charset_parser(const_charsets<>::VARNAME);
     r [ XML::TOKEN_EQUAL ]            = new single_character_parser('=');
+    r [ TOKEN_SLASH ]                 = new single_character_parser('/');
     r [ XML::TOKEN_STRING ]           = new string_parser();
     r [ XML::TOKEN_EOL ]              = new eol_parser();
     r [ XML::TOKEN_TABS ]             = new tabs_parser();

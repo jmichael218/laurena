@@ -120,20 +120,26 @@ boost::dynamic_bitset<> allowed;
 }
 
 
+ void iarchive_xml::readAttributes(any& object)
+ {
+
+ }
+
 any& iarchive_xml::parse   ( const std::string& name, any& object)
 {
-    /*
+
 const descriptor& descriptor = *object.desc();
 token t;
 std::string keyword;
 
     if (_logger) 
-        *_logger << "[ArchiveMDL::extract] type='" << name << ", class='" 
+        *_logger << "[ArchiveXML::extract] type='" << name << ", class='" 
               << descriptor.name() << ")." 
                     << std::endl ;
 
     //<! First keyword found in the file
-    this->readExpected(t,MDL::TOKEN_KEYWORD);
+    this->readExpected(t,XML::TOKEN_INFERIOR);
+    this->readExpected(t,XML::TOKEN_KEYWORD);
     _last_keyword = name ;
     keyword = anycast<std::string>(t);
     
@@ -147,11 +153,53 @@ std::string keyword;
         throw LAURENA_FAILED_PARSING_EXCEPTION(msg.c_str(),this->_tokenizer._ptr) ;  
     }        
 
-    // read the ':' after an object Type 
-    this->readExpected(t,MDL::TOKEN_DPOINTS);   
+    // READ ATTRIBUTES
+    this->readAttributes(object);
 
-    this->readChildObject(descriptor,object , true ) ;
-    */
+    // End of section
+    this->readExpected(t,XML::TOKEN_INFERIOR_SLASH, XML::TOKEN_SUPERIOR);
+
+    while(true)
+    {
+        std::string content = this->_tokenizer.readUntil("<",true);
+        if (*this->_tokenizer._ptr == '/')
+        {
+            // Check that incoming keyword is same than the last one
+            this->readExpected(t, XML::TOKEN_SLASH);
+            this->readExpected(t, XML::TOKEN_KEYWORD);
+
+            std::string keyword2 = anycast<std::string>(t);
+            if (keyword == keyword2)
+            {
+                this->readExpected(t, XML::TOKEN_SUPERIOR);
+                return object;
+            }
+            else
+            {
+                std::ostringstream ss;
+                ss << "Was expecting </" << keyword << "> but found </" << keyword2 << ">.";
+                throw LAURENA_FAILED_PARSING_EXCEPTION(ss.str().c_str(),this->_tokenizer._ptr);
+            }
+        }
+        else
+        {
+            // check content is tabs
+            if (!const_charsets<>::TABS.validate(content))
+            {
+                throw LAURENA_FAILED_PARSING_EXCEPTION("Syntax error",this->_tokenizer._ptr);
+            }
+
+            // read keyword
+            this->readExpected(t, XML::TOKEN_KEYWORD);
+
+            // Identification of keyword
+            this->readAttributes(object);
+            this->readExpected(t, XML::TOKEN_SUPERIOR);
+        }
+
+    }
+
+    //this->readChildObject(descriptor,object , true ) ;    
     return object;
 }
 

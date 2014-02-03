@@ -41,6 +41,8 @@ public:
         TOKEN_COMMENT_END    ,
         TOKEN_INFERIOR_SLASH ,
         TOKEN_INFERIOR       ,
+        TOKEN_SLASH_SUPERIOR ,
+        TOKEN_SLASH          ,
         TOKEN_SUPERIOR       ,
         TOKEN_KEYWORD        ,
         TOKEN_EQUAL          ,

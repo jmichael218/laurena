@@ -81,6 +81,7 @@ public:
 
     void skipCurrentLine ();
     void skipUntil (const char* keyword, bool skipKeyword = false);
+    std::string readUntil (const char* keyword, bool skipKeyword);
 
     /****************************************************************************/
     /*          straight tokenizing                                             */ 

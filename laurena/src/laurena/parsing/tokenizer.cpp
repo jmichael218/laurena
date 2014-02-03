@@ -131,6 +131,29 @@ const char* p = strstr(this->_ptr,keyword);
     }
 }
 
+std::string tokenizer::readUntil (const char* keyword, bool skipKeyword)
+{
+const char* p = strstr(this->_ptr,keyword);
+
+    if (p)
+    {       
+        word32 sz = std::distance(this->_ptr,p);
+        std::string s (this->_ptr, p);
+
+        if (skipKeyword)
+        {
+            sz += strlen(keyword);
+            p += strlen(keyword);
+        }
+
+        this->_location.count(this->_ptr, p);
+        this->_ptr += sz;
+        return s;
+    }
+    else
+        return std::string("");
+}
+
 tokenizer& tokenizer::restore(const tokenizer::state& s)
 {
     if (s._source != this->_source.c_str())
