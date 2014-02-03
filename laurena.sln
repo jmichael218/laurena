@@ -99,6 +99,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t09_file_persistance_exampl
 		{81D0C8C4-B6A9-4C32-A5C1-EA5F3EE587CA} = {81D0C8C4-B6A9-4C32-A5C1-EA5F3EE587CA}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xml", "xml\xml.vcxproj", "{FF34D06E-31F9-44E0-A255-AE22E8F41A87}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E4E38395-6C22-4954-9C6C-6F772979279D} = {E4E38395-6C22-4954-9C6C-6F772979279D}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t10_xml_serialization", "tutorials\t10_xml_serialization\t10_xml_serialization.vcxproj", "{BAD10B8D-4ADE-4DE7-A199-2FFC0664EB25}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FF34D06E-31F9-44E0-A255-AE22E8F41A87} = {FF34D06E-31F9-44E0-A255-AE22E8F41A87}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -181,6 +191,14 @@ Global
 		{10AF1C52-DF06-4AAB-814A-0BB289683994}.Debug|Win32.Build.0 = Debug|Win32
 		{10AF1C52-DF06-4AAB-814A-0BB289683994}.Release|Win32.ActiveCfg = Release|Win32
 		{10AF1C52-DF06-4AAB-814A-0BB289683994}.Release|Win32.Build.0 = Release|Win32
+		{FF34D06E-31F9-44E0-A255-AE22E8F41A87}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FF34D06E-31F9-44E0-A255-AE22E8F41A87}.Debug|Win32.Build.0 = Debug|Win32
+		{FF34D06E-31F9-44E0-A255-AE22E8F41A87}.Release|Win32.ActiveCfg = Release|Win32
+		{FF34D06E-31F9-44E0-A255-AE22E8F41A87}.Release|Win32.Build.0 = Release|Win32
+		{BAD10B8D-4ADE-4DE7-A199-2FFC0664EB25}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BAD10B8D-4ADE-4DE7-A199-2FFC0664EB25}.Debug|Win32.Build.0 = Debug|Win32
+		{BAD10B8D-4ADE-4DE7-A199-2FFC0664EB25}.Release|Win32.ActiveCfg = Release|Win32
+		{BAD10B8D-4ADE-4DE7-A199-2FFC0664EB25}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -195,5 +213,6 @@ Global
 		{305A2CE1-30EA-49B3-A1C8-3AE0F0BD72F9} = {96549F7B-C766-4DD5-A200-2E4A0FC4C4DA}
 		{9D4A7EB2-5B31-4529-8CC2-1BA325EDA332} = {96549F7B-C766-4DD5-A200-2E4A0FC4C4DA}
 		{10AF1C52-DF06-4AAB-814A-0BB289683994} = {96549F7B-C766-4DD5-A200-2E4A0FC4C4DA}
+		{BAD10B8D-4ADE-4DE7-A199-2FFC0664EB25} = {96549F7B-C766-4DD5-A200-2E4A0FC4C4DA}
 	EndGlobalSection
 EndGlobal
