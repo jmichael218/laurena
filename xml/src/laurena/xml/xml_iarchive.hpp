@@ -71,6 +71,11 @@ public:
 	void readExpected(token& tk, word8 tokenId1, word8 tokenId2, word8 tokenId3, word8 tokenId4);
 
     void readAttributes(any& object);
+    void readObject(const std::string& tag, any& object);
+
+    //! Read value of a class field
+    void readField              (const field& f, const std::string& fieldName, any& object);
+    void readEndOfField         (const field& f, const std::string& expectedName, any& object);
 
 
     /****************************************************************************/ 

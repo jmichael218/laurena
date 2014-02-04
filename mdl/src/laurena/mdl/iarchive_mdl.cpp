@@ -180,18 +180,18 @@ const class_feature* ft;
     bool isAtomic               = f.desc().has(descriptor::Flags::ATOMIC);
     const format* fieldFormat	= dynamic_cast<const format*>(f.annotations().get(MDL::ANNOTATION_NAME, ANNOTATION_FORMAT_ALL));
 
-		if ( fieldFormat )
+	if ( fieldFormat )
+    {
+        this->skipTabs();
+	    if (isAtomic)
 		{
-            this->skipTabs();
-			if (isAtomic)
-			{
-				fieldFormat->read(this->_tokenizer,a,true);
-				f.set(object, a);
-			}
-			else
-				fieldFormat->read(this->_tokenizer,f.get(object, a),true);
-			return;
+			fieldFormat->read(this->_tokenizer,a,true);
+			f.set(object, a);
 		}
+		else
+			fieldFormat->read(this->_tokenizer,f.get(object, a),true);
+		return;
+	}
     
     if (f.noQuote() || fd.has(descriptor::Flags::NUMERIC_VALUE))
 		this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD);

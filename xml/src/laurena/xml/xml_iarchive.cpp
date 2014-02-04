@@ -125,6 +125,127 @@ boost::dynamic_bitset<> allowed;
 
  }
 
+ void iarchive_xml::readEndOfField(const field& f, const std::string& expectedName, any& object)
+ {
+token t;
+
+    this->readExpected(t,XML::TOKEN_INFERIOR_SLASH);
+    this->readExpected(t, XML::TOKEN_KEYWORD);
+    std::string keyword = anycast<std::string>(t);
+
+    if (keyword != expectedName)
+    {
+        std::ostringstream ss;
+        ss << "Was expecting </" << expectedName << "> but found </" << keyword << ">.";
+        throw LAURENA_FAILED_PARSING_EXCEPTION(ss.str().c_str(),this->_tokenizer._ptr);
+    }
+
+    this->readExpected(t, XML::TOKEN_SUPERIOR);
+
+ }
+
+ //! Read value of a class field
+ void iarchive_xml::readField (const field& f, const std::string& fieldName, any& object)
+ {
+const descriptor& fd = f.desc();
+token t;
+any a;
+const class_feature* ft;
+
+    bool isAtomic               = f.desc().has(descriptor::Flags::ATOMIC);
+    const format* fieldFormat	= dynamic_cast<const format*>(f.annotations().get(XML::ANNOTATION_NAME, ANNOTATION_FORMAT_ALL));
+
+    // READ ATTRIBUTES
+    this->readAttributes(object);
+
+    // End of section
+    this->readExpected(t,XML::TOKEN_SLASH_SUPERIOR, XML::TOKEN_SUPERIOR);
+
+    if (t._token_id == XML::TOKEN_SLASH_SUPERIOR)
+        return;
+
+	if ( fieldFormat )
+    {
+	    if (isAtomic)
+		{
+			fieldFormat->read(this->_tokenizer,a,true);
+			f.set(object, a);
+		}
+		else
+			fieldFormat->read(this->_tokenizer,f.get(object, a),true);
+
+        this->readEndOfField(f, fieldName, object);
+		return;
+	}
+ }
+
+void iarchive_xml::readObject(const std::string& tag, any& object)
+{
+token t;
+std::string keyword;
+const descriptor* d = object.desc();
+
+    // READ ATTRIBUTES
+    this->readAttributes(object);
+
+    // End of section
+    this->readExpected(t,XML::TOKEN_INFERIOR_SLASH, XML::TOKEN_SUPERIOR);
+
+    while(true)
+    {
+        std::string content = this->_tokenizer.readUntil("<",true);
+        if (*this->_tokenizer._ptr == '/')
+        {
+            // Check that incoming keyword is same than the last one
+            this->readExpected(t, XML::TOKEN_SLASH);
+            this->readExpected(t, XML::TOKEN_KEYWORD);
+
+            std::string keyword = anycast<std::string>(t);
+            if (keyword == tag)
+            {
+                this->readExpected(t, XML::TOKEN_SUPERIOR);
+                object.desc()->stoa(content, object);
+                return;
+            }
+            else
+            {
+                std::ostringstream ss;
+                ss << "Was expecting </" << tag << "> but found </" << keyword << ">.";
+                throw LAURENA_FAILED_PARSING_EXCEPTION(ss.str().c_str(),this->_tokenizer._ptr);
+            }
+        }
+        else
+        {
+            // check content is tabs
+            if (!const_charsets<>::TABS.validate(content))
+            {
+                throw LAURENA_FAILED_PARSING_EXCEPTION("Syntax error",this->_tokenizer._ptr);
+            }
+
+            // read keyword
+            this->readExpected(t, XML::TOKEN_KEYWORD);
+            std::string keyword = anycast<std::string>(t);
+
+            // Identification of keyword
+	        if (d->has(descriptor::Flags::FIELDS))
+	        {
+		        const field* f = d->findField(keyword); 
+                if (f)
+                {
+                    this->readField(*f, keyword, object);
+                    continue;
+                }
+            }
+            
+            std::ostringstream ss;
+            ss << keyword << " : unknow child for class " << d->name();
+            throw LAURENA_FAILED_PARSING_EXCEPTION(ss.str().c_str(),this->_tokenizer._ptr);
+            
+        }
+
+    }
+}
+
 any& iarchive_xml::parse   ( const std::string& name, any& object)
 {
 
@@ -152,54 +273,8 @@ std::string keyword;
         std::string msg = stream.str();
         throw LAURENA_FAILED_PARSING_EXCEPTION(msg.c_str(),this->_tokenizer._ptr) ;  
     }        
-
-    // READ ATTRIBUTES
-    this->readAttributes(object);
-
-    // End of section
-    this->readExpected(t,XML::TOKEN_INFERIOR_SLASH, XML::TOKEN_SUPERIOR);
-
-    while(true)
-    {
-        std::string content = this->_tokenizer.readUntil("<",true);
-        if (*this->_tokenizer._ptr == '/')
-        {
-            // Check that incoming keyword is same than the last one
-            this->readExpected(t, XML::TOKEN_SLASH);
-            this->readExpected(t, XML::TOKEN_KEYWORD);
-
-            std::string keyword2 = anycast<std::string>(t);
-            if (keyword == keyword2)
-            {
-                this->readExpected(t, XML::TOKEN_SUPERIOR);
-                return object;
-            }
-            else
-            {
-                std::ostringstream ss;
-                ss << "Was expecting </" << keyword << "> but found </" << keyword2 << ">.";
-                throw LAURENA_FAILED_PARSING_EXCEPTION(ss.str().c_str(),this->_tokenizer._ptr);
-            }
-        }
-        else
-        {
-            // check content is tabs
-            if (!const_charsets<>::TABS.validate(content))
-            {
-                throw LAURENA_FAILED_PARSING_EXCEPTION("Syntax error",this->_tokenizer._ptr);
-            }
-
-            // read keyword
-            this->readExpected(t, XML::TOKEN_KEYWORD);
-
-            // Identification of keyword
-            this->readAttributes(object);
-            this->readExpected(t, XML::TOKEN_SUPERIOR);
-        }
-
-    }
-
-    //this->readChildObject(descriptor,object , true ) ;    
+    
+    this->readObject(name, object);  
     return object;
 }
 
