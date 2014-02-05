@@ -82,11 +82,11 @@ copy $(TargetPath) $(ProjectDir)..\bin\$(Configuration)\</Command>
     <ClInclude Include="src\laurena\mdl\mdl_dao.hpp" />
     <ClInclude Include="src\laurena\mdl\mdl_interface.hpp" />
     <ClInclude Include="src\laurena\mdl\oarchive_mdl.hpp" />
-    <ClInclude Include="src\laurena\mdl\language_mdl.hpp" />
+    <ClInclude Include="src\laurena\mdl\mdl_language.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\mdl\iarchive_mdl.cpp" />
-    <ClCompile Include="src\laurena\mdl\language_mdl.cpp" />
+    <ClCompile Include="src\laurena\mdl\mdl_language.cpp" />
     <ClCompile Include="src\laurena\mdl\mdl_dao.cpp" />
     <ClCompile Include="src\laurena\mdl\mdl_interface.cpp" />
     <ClCompile Include="src\laurena\mdl\oarchive_mdl.cpp" />

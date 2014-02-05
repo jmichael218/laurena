@@ -9,37 +9,37 @@
 ///
 #include <laurena/constants/const_charsets.hpp>
 
-#include <laurena/mdl/language_mdl.hpp>
+#include <laurena/mdl/mdl_language.hpp>
 
 using namespace laurena;
 using namespace mdl;
 
- const std::string		MDL::ANNOTATION_NAME = "format.mdl" ;
+const std::string		MDL::ANNOTATION_NAME = "format.mdl" ;
 
-parsers                 MDL::_parsers;
 bool                    MDL::_init               = false;
-boost::dynamic_bitset<> MDL::_mask_tab_tokens;
 charset<>               MDL::_charset_keywordList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\r\n\t " ;
+language                MDL::_language;
 
 void MDL::init () 
 {
     if ( MDL::_init )
         return;
 
-    MDL::_mask_tab_tokens.resize(MDL::TOKEN_MAX);
-    MDL::_mask_tab_tokens.set (MDL::TOKEN_TABS);
-    MDL::_mask_tab_tokens.set(MDL::TOKEN_EOL);
-    MDL::_mask_tab_tokens.set(MDL::TOKEN_SINGLE_LINE_COMMENT);
-    MDL::_mask_tab_tokens.set(MDL::TOKEN_MULTI_LINE_COMMENT_BEGIN);
+    MDL::_language.name ("mdl");
 
+    parsers tabs;
+    tabs.resize(4);
+    tabs[0] = new tabs_parser();
+    tabs[1] = new eol_parser();
+    tabs[2] = new keyword_to_charset_parser("##", const_charsets<>::RN);
+    tabs[3] = new keyword_to_keyword_parser("#*", "*#"); 
+    MDL::_language.tabs_parsers(std::move(tabs));
 
-    parsers& r = MDL::_parsers;
+    parsers r;
     r.resize(MDL::TOKEN_MAX);
 
     r [ MDL::TOKEN_NULLKEYWORD ]         = new single_character_parser('_');
     r [ MDL::TOKEN_NEW ]                 = new keyword_parser("new");
-    r [ MDL::TOKEN_SINGLE_LINE_COMMENT ] = new keyword_parser("##");
-    r [ MDL::TOKEN_MULTI_LINE_COMMENT_BEGIN ] = new keyword_parser("#*");
     r [ MDL::TOKEN_DPOINTS ]             = new single_character_parser(':');
     r [ MDL::TOKEN_EQUAL ]               = new single_character_parser('=');
     r [ MDL::TOKEN_BRACKET_OPEN ]        = new single_character_parser('{');
@@ -56,8 +56,8 @@ void MDL::init ()
     r [ MDL::TOKEN_HEXADECIMAL ]         = new hexadecimal_parser();
     r [ MDL::TOKEN_SINGLE_STRING ]       = new string_parser();
     r [ MDL::TOKEN_STRING ]              = new multi_string_parser();
-    r [ MDL::TOKEN_EOL ]                 = new eol_parser();
-    r [ MDL::TOKEN_TABS ]                = new tabs_parser();
+
+    MDL::_language.tokens_parsers(std::move(r));
 
     MDL::_init = true;
 }

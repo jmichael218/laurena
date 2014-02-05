@@ -359,4 +359,79 @@ bool length_parser::read (tokenizer& tokenizer, any& value, bool consume) const
     return true;
 }
 
+/********************************************************************************/ 
+/*                                                                              */ 
+/*              accept any length between a keyword and a given charset         */ 
+/*  userfull for comment like // comment until end of line                      */ 
+/*                                                                              */ 
+/********************************************************************************/ 
+keyword_to_charset_parser::keyword_to_charset_parser(const std::string& keyword, const charset<>& chars) : parser(), _keyword(keyword), _charset(chars)
+{ }
+
+keyword_to_charset_parser::~keyword_to_charset_parser()
+{ }
+
+bool keyword_to_charset_parser::read (tokenizer& tokenizer, any& value, bool consume) const
+{
+	if (! prefix(tokenizer._ptr,this->_keyword.c_str()))
+        return false;
+
+    std::string content = std::move( readuntil(tokenizer._ptr,this->_charset.condition()));
+
+    if (consume)
+    {
+        value = content;
+        if (consume)
+        {
+            tokenizer._location.count (this->_keyword);
+            tokenizer._ptr += this->_keyword.length();
+
+            tokenizer._location.count (content);
+            tokenizer._ptr += content.length();
+        }        
+    }
+    return true;
+}
+
+/********************************************************************************/ 
+/*                                                                              */ 
+/*              accept any length between two keywords                          */ 
+/*  userfull for comment like <!-- xml comment -->                              */ 
+/*                                                                              */ 
+/********************************************************************************/ 
+
+keyword_to_keyword_parser::keyword_to_keyword_parser(const std::string &start, const std::string &end) :
+       _start(start)
+    ,  _end(end)
+{ }
+keyword_to_keyword_parser::~keyword_to_keyword_parser()
+{ }
+
+bool keyword_to_keyword_parser::read (tokenizer& tokenizer, any& value, bool consume) const
+{
+	if (! prefix(tokenizer._ptr,this->_start.c_str()))
+        return false;
+
+    const char* pstart = tokenizer._ptr + this->_start.length();
+    const char* p = pstart;
+    p += this->_start.length();
+
+    while (! prefix(p, this->_end.c_str()))
+        ++p;
+
+    if (consume)
+    {
+        value = std::string(pstart, p);
+        tokenizer._location.count (this->_start);
+        tokenizer._ptr += this->_start.length();
+
+        tokenizer._location.count(pstart, p);
+        tokenizer._ptr += std::distance(pstart, p);
+
+        tokenizer._location.count (this->_end);
+        tokenizer._ptr += this->_end.length();
+    }
+    return true;
+}
+
 //end of file

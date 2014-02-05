@@ -39,8 +39,6 @@ public:
     enum TOKENS {
         TOKEN_NULLKEYWORD    =0,
         TOKEN_NEW            =1,
-        TOKEN_SINGLE_LINE_COMMENT,
-        TOKEN_MULTI_LINE_COMMENT_BEGIN,
         TOKEN_DPOINTS        ,
         TOKEN_EQUAL          ,
         TOKEN_BRACKET_OPEN   ,
@@ -58,8 +56,6 @@ public:
         TOKEN_HEXADECIMAL    ,
         TOKEN_SINGLE_STRING  ,        
         TOKEN_STRING         ,
-        TOKEN_EOL            ,
-        TOKEN_TABS           ,
         TOKEN_MAX           
     };
 
@@ -72,18 +68,14 @@ public:
 	static const std::string ANNOTATION_NAME;
 
     static void init ();
+    inline static class language& language() { return MDL::_language; }
 
-    static inline const parsers&                            units ()                    { return MDL::_parsers ; }
-    static inline const charset<>&                            charset_keywordlist ()      { return MDL::_charset_keywordList ; }
-    static inline const boost::dynamic_bitset<>             mask_tab_tokens ()          { return MDL::_mask_tab_tokens; }
-
-    
+    static inline const charset<>&                            charset_keywordlist ()      { return MDL::_charset_keywordList ; }    
 
     protected:
     static bool                     _init;
     static charset<>                  _charset_keywordList;
-    static boost::dynamic_bitset<>  _mask_tab_tokens;
-    static parsers                  _parsers;
+    static class language           _language;
 
 
 };

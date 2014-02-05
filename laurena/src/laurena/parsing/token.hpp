@@ -40,12 +40,13 @@ class token : public any
 public:
 
     token ();   
+    token (const token &tk);
+    token (      token &&tk);
 
 	token& operator=(const token& t);
-	token& operator==(const token&& t);
+	token& operator=(      token&& t);
 
 	token& operator=(const any& value);
-	token& operator=(const any&& value);
 
     /****************************************************************************/ 
     /*          protected data                                                  */ 

@@ -96,6 +96,9 @@
 #include <laurena/parsing/tokenizer.hpp>
 #include <laurena/parsing/basic_parsers.hpp>
 
+// languages
+#include <laurena/language/language.hpp>
+
 //archives
 #include <laurena/archives/oarchive.hpp>
 #include <laurena/archives/iarchive.hpp>

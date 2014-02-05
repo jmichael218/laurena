@@ -16,24 +16,27 @@ using namespace xml;
 
  const std::string		XML::ANNOTATION_NAME = "format.mdl" ;
 
-parsers                 XML::_parsers;
+class language          XML::_language;
 bool                    XML::_init               = false;
-boost::dynamic_bitset<> XML::_mask_tab_tokens;
+
 
 void XML::init () 
 {
     if ( XML::_init )
         return;
 
-    XML::_mask_tab_tokens.resize(XML::TOKEN_MAX);
-    XML::_mask_tab_tokens.set (XML::TOKEN_TABS);
-    XML::_mask_tab_tokens.set(XML::TOKEN_EOL);
+    XML::_language.name("xml");
 
-    parsers& r = XML::_parsers;
+    parsers tabs;
+    tabs.resize(3);
+    tabs[0] = new tabs_parser();
+    tabs[1] = new eol_parser();
+    tabs[3] = new keyword_to_keyword_parser("<!--", "-->"); 
+    XML::_language.tabs_parsers(std::move(tabs));
+
+    parsers r;
     r.resize(XML::TOKEN_MAX);
 
-    r [ XML::TOKEN_COMMENT_START ]    = new keyword_parser("<!--");
-    r [ XML::TOKEN_COMMENT_END ]      = new keyword_parser("-->");
     r [ XML::TOKEN_INFERIOR_SLASH ]   = new keyword_parser("</");
     r [ XML::TOKEN_SLASH_SUPERIOR ]   = new keyword_parser("/>");
     r [ XML::TOKEN_INFERIOR ]         = new single_character_parser('<');
@@ -42,8 +45,8 @@ void XML::init ()
     r [ XML::TOKEN_EQUAL ]            = new single_character_parser('=');
     r [ TOKEN_SLASH ]                 = new single_character_parser('/');
     r [ XML::TOKEN_STRING ]           = new string_parser();
-    r [ XML::TOKEN_EOL ]              = new eol_parser();
-    r [ XML::TOKEN_TABS ]             = new tabs_parser();
+
+    XML::_language.tokens_parsers(std::move(r));
 
     XML::_init = true;
 }

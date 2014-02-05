@@ -71,9 +71,11 @@ public:
 
     /****************************************************************************/ 
     /*          tokenize                                                        */ 
-    /****************************************************************************/    
+    /****************************************************************************/   
+    void skip(const parsers& ps);
+    int32 read(any& value, const parsers& ps);
+    int32 read(any& value, const parsers& ps, const boost::dynamic_bitset<>& allowed);
 
-    int32 readExpected(any& value, const parsers& ps, const boost::dynamic_bitset<>& allowed);
     int32 readExpected(any& value, const parsers& ps, const boost::dynamic_bitset<>& tabs, word8 expected);
 
     std::ostream& prefixErrorMessage(std::ostream& message) const;

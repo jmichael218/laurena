@@ -45,6 +45,9 @@ public:
     /*          Virtual functions from IArchive                                 */ 
     /****************************************************************************/ 
     virtual any& parse (const std::string& name, any& destination) ;
+    virtual const class language& language() const;
+    virtual bool read_custom_field_format(const field& f, any& object);
+
 
     /****************************************************************************/
     /*          parsing sub function                                            */ 
@@ -54,15 +57,8 @@ public:
 	/*		protected functions for parsing part of json						*/ 
 	/****************************************************************************/ 
 	protected:
-	void readToken(token& tk, boost::dynamic_bitset<>& allowed_tokens);
-	bool readMaybeToken (token& tk, boost::dynamic_bitset<>& allowed_tokens);
-
-    void readExpected(token& tk, word8 tokenId);
-    void readExpected(token& tk, word8 tokenId1, word8 tokenId2);
-    void readExpected(token& tk, word8 tokenId1, word8 tokenId2, word8 tokenId3);
-	void readExpected(token& tk, word8 tokenId1, word8 tokenId2, word8 tokenId3, word8 tokenId4);
-
-	bool readMaybe(token& token, word8 tokenId1, word8 tokenId2, word8 tokenId3);
+	bool readMaybeToken (token& tk, bitfield &allowed_tokens);
+	bool readMaybe(token& tk, word8 tokenId1, word8 tokenId2, word8 tokenId3);
 
 	void parseObject(any& destination);
 	void parseElements(any& object);

@@ -24,13 +24,13 @@
     <ClInclude Include="src\laurena\mdl\iarchive_mdl.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="src\laurena\mdl\language_mdl.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="src\laurena\mdl\mdl_interface.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="src\laurena\mdl\mdl_dao.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\mdl\mdl_language.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,13 +41,13 @@
     <ClCompile Include="src\laurena\mdl\iarchive_mdl.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\laurena\mdl\language_mdl.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="src\laurena\mdl\mdl_interface.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\laurena\mdl\mdl_dao.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\mdl\mdl_language.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

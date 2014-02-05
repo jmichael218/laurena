@@ -37,19 +37,14 @@ class XML
 public:
 
     enum TOKENS {
-        TOKEN_COMMENT_START  = 0,
-        TOKEN_COMMENT_END    ,
-        TOKEN_INFERIOR_SLASH ,
+        TOKEN_INFERIOR_SLASH =0,
         TOKEN_INFERIOR       ,
         TOKEN_SLASH_SUPERIOR ,
         TOKEN_SLASH          ,
         TOKEN_SUPERIOR       ,
         TOKEN_KEYWORD        ,
         TOKEN_EQUAL          ,
-
         TOKEN_STRING         ,
-        TOKEN_EOL            ,
-        TOKEN_TABS           ,
         TOKEN_MAX           
     };
 
@@ -61,17 +56,13 @@ public:
 
 	static const std::string ANNOTATION_NAME;
 
-    static void init ();
+    static void init (); 
 
-    static inline const parsers&                            units ()                    { return XML::_parsers ; }
-    static inline const boost::dynamic_bitset<>             mask_tab_tokens ()          { return XML::_mask_tab_tokens; }
-
-    
+    inline static class language& language() { return XML::_language; }
 
     protected:
     static bool                     _init;
-    static boost::dynamic_bitset<>  _mask_tab_tokens;
-    static parsers                  _parsers;
+    static class language           _language;
 
 
 };

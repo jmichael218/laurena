@@ -59,6 +59,7 @@
     <ClInclude Include="src\laurena\functions\parameter.hpp" />
     <ClInclude Include="src\laurena\includes\includes.hpp" />
     <ClInclude Include="src\laurena\includes\types.hpp" />
+    <ClInclude Include="src\laurena\language\language.hpp" />
     <ClInclude Include="src\laurena\laurena.hpp" />
     <ClInclude Include="src\laurena\memory\memory_functions.hpp" />
     <ClInclude Include="src\laurena\parsing\basic_parsers.hpp" />
@@ -116,6 +117,7 @@
     <ClCompile Include="src\laurena\formatting\format_enum.cpp" />
     <ClCompile Include="src\laurena\formatting\format_epoch.cpp" />
     <ClCompile Include="src\laurena\functions\parameter.cpp" />
+    <ClCompile Include="src\laurena\language\language.cpp" />
     <ClCompile Include="src\laurena\memory\memory_functions.cpp" />
     <ClCompile Include="src\laurena\parsing\basic_parsers.cpp" />
     <ClCompile Include="src\laurena\parsing\token.cpp" />

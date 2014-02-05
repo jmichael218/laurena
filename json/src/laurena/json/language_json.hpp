@@ -50,8 +50,6 @@ public:
         TOKEN_FALSE          , 
 		TOKEN_NULL			 ,
         TOKEN_SINGLE_STRING  ,        
-        TOKEN_EOL            ,
-        TOKEN_TABS           ,
 		TOKEN_DQUOTE		 ,
         TOKEN_MAX           
     };
@@ -59,18 +57,13 @@ public:
 	static const std::string& ANNOTATION_NAME ;
 
     static void init ();
-
-    static inline const parsers&                            units ()                    { return JSON::_parsers ; }
-    static inline const charset<>&                            charset_keywordlist ()      { return JSON::_charset_keywordList ; }
-    static inline const boost::dynamic_bitset<>             mask_tab_tokens ()          { return JSON::_mask_tab_tokens; }
-
-    
+    inline static class language&       language()                  { return JSON::_language; }
+    static inline const charset<>&      charset_keywordlist ()      { return JSON::_charset_keywordList ; }    
 
     protected:
     static bool                     _init;
-    static charset<>                  _charset_keywordList;
-    static boost::dynamic_bitset<>  _mask_tab_tokens;
-    static parsers                  _parsers;
+    static charset<>                _charset_keywordList;
+    static class language           _language;
 
 
 };

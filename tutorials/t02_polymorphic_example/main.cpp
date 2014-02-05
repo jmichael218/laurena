@@ -93,7 +93,7 @@ int main ()
     std::string destination = json::json::serialize(kitty);
 
     // Let's display my jsoned cat :
-    std::cout << "Here is my cat details:" << std::endl << destination << std::endl;
+    GLOG << "Here is my cat details:" << std::endl << destination << std::endl;
 
     // let's create a new cat from our serialized kitty 
     cat kimmie;
@@ -105,9 +105,9 @@ int main ()
 
     // LEt's control if kimmie is exactly the same than kitty
     if (kimmie == kitty)
-        std::cout << "Kimmie is a clone of Kitty !!" << std::endl << "Laurena's serialization works fine !" << std::endl;
+        GLOG << "Kimmie is a clone of Kitty !!" << std::endl << "Laurena's serialization works fine !" << std::endl;
     else
-        std::cout << "Kimmie is different of Kitty !!" << std::endl << "Laurena's serialization is a fake !" << std::endl ;
+        GLOG << "Kimmie is different of Kitty !!" << std::endl << "Laurena's serialization is a fake !" << std::endl ;
 
     return 1;
 

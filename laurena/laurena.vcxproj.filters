@@ -97,6 +97,12 @@
     <Filter Include="Fichiers sources\persistance">
       <UniqueIdentifier>{e5432f26-2b9e-47d7-83d6-8c5b7bb092b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\language">
+      <UniqueIdentifier>{a19115d0-2f38-44b4-90b5-03b2b5ee5d62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\languages">
+      <UniqueIdentifier>{1aa1240d-fe46-4205-962a-63272a2d0a59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\laurena\includes\includes.hpp">
@@ -297,6 +303,9 @@
     <ClInclude Include="src\laurena\persistance\file_dao.hpp">
       <Filter>Fichiers d%27en-tête\persistance</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\language\language.hpp">
+      <Filter>Fichiers d%27en-tête\language</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">
@@ -454,6 +463,9 @@
     </ClCompile>
     <ClCompile Include="src\laurena\persistance\persistance.cpp">
       <Filter>Fichiers sources\persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\language\language.cpp">
+      <Filter>Fichiers sources\languages</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

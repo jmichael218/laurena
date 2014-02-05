@@ -9,7 +9,7 @@
 ///
 
 #include <laurena/mdl/iarchive_mdl.hpp>
-#include <laurena/mdl/language_mdl.hpp>
+#include <laurena/mdl/mdl_language.hpp>
 
 using namespace laurena;
 using namespace mdl;
@@ -21,127 +21,32 @@ iarchive_mdl::~iarchive_mdl()
 {
 }
 
-void iarchive_mdl::skipTabs()
+/********************************************************************************/ 
+/*          virtual functions impl from iarchive                                */ 
+/********************************************************************************/ 
+const class language& iarchive_mdl::language() const
 {
-token tk;
-
-    while (true)
-    {
-        int32 res = this->_tokenizer.readExpected(tk,MDL::units(),MDL::mask_tab_tokens());
-
-        if (res == -1)
-            return;
-
-        if (res == MDL::TOKEN_SINGLE_LINE_COMMENT)    
-        {
-            this->_tokenizer.skipCurrentLine();
-            continue;
-        }
-        
-        if (res == MDL::TOKEN_MULTI_LINE_COMMENT_BEGIN)
-        {
-            this->_tokenizer.skipUntil("*#",true);
-            continue;
-        }
-    }
+return MDL::language();
 }
 
-void iarchive_mdl::readToken(token& tk, boost::dynamic_bitset<>& allowed_tokens)
-{
-    while (true)
-    {
-        int32 res = this->_tokenizer.readExpected(tk,MDL::units(),allowed_tokens);
 
-        if (res == -1)
-        {
-            std::ostringstream stream;
-            this->_tokenizer.prefixErrorMessage(stream);
-            stream << " syntax error." ;
-            stream.flush();
-            std::string msg = stream.str();
-            throw LAURENA_FAILED_PARSING_EXCEPTION(msg.c_str(),this->_tokenizer._ptr) ;  
-        }
-
-        tk._token_id = res;
-
-        if ( !MDL::mask_tab_tokens().test (res))
-            return;
-
-        if (res == MDL::TOKEN_SINGLE_LINE_COMMENT)         
-            this->_tokenizer.skipCurrentLine();
-        
-        if (res == MDL::TOKEN_MULTI_LINE_COMMENT_BEGIN)
-            this->_tokenizer.skipUntil("*#",true);
-    }
-}
-
-void iarchive_mdl::readExpected(token& token, word8 tokenId)
-{
-boost::dynamic_bitset<> allowed;
-
-    allowed.resize(MDL::TOKEN_MAX);
-    allowed |= MDL::mask_tab_tokens();
-    allowed.set(tokenId);
-
-    this->readToken(token,allowed);
-}
-
-void iarchive_mdl::readExpected(token& token, word8 tokenId1, word8 tokenId2)
-{
-boost::dynamic_bitset<> allowed;
-
-    allowed.resize(MDL::TOKEN_MAX);
-    allowed |= MDL::mask_tab_tokens();
-    allowed.set(tokenId1);
-	allowed.set(tokenId2);
-
-    this->readToken(token,allowed);
-}
-
-void iarchive_mdl::readExpected(token& token, word8 tokenId1, word8 tokenId2, word8 tokenId3)
-{
-boost::dynamic_bitset<> allowed;
-
-    allowed.resize(MDL::TOKEN_MAX);
-    allowed |= MDL::mask_tab_tokens();
-    allowed.set(tokenId1);
-	allowed.set(tokenId2);
-	allowed.set(tokenId3);
-
-    this->readToken(token,allowed);
-}
-
-void iarchive_mdl::readExpected(token& token, word8 tokenId1, word8 tokenId2, word8 tokenId3, word8 tokenId4)
-{
-boost::dynamic_bitset<> allowed;
-
-    allowed.resize(MDL::TOKEN_MAX);
-    allowed |= MDL::mask_tab_tokens();
-    allowed.set(tokenId1);
-	allowed.set(tokenId2);
-	allowed.set(tokenId3);
-	allowed.set(tokenId4);
-
-    this->readToken(token,allowed);
-}
 
 void iarchive_mdl::readDirective (const descriptor& descriptor, any& object )
 {
-token token;
+token tk;
 std::string keyword;
 
     /****************************************************************************/ 
     /*              read directive keyword                                      */ 
     /****************************************************************************/ 
-    this->readExpected(token,MDL::TOKEN_KEYWORD);
-    keyword = anycast<std::string>(token);
+    tk = std::move (this->read_token(MDL::TOKEN_KEYWORD));
+    keyword = anycast<std::string>(tk);
     boost::to_lower(keyword);
 
     if ( keyword == "include" )
     {
-        this->readExpected(token,MDL::TOKEN_SINGLE_STRING);
-        std::string str;
-        str = anycast<std::string>(token);
+        tk = std::move(this->read_token(MDL::TOKEN_SINGLE_STRING));
+        std::string str = anycast<std::string>(tk);
 
         std::string data_directory;
         Filename::extractDirectory(this->_tokenizer._location.filename(),data_directory);
@@ -177,32 +82,20 @@ token t;
 any a;
 const class_feature* ft;
 
-    bool isAtomic               = f.desc().has(descriptor::Flags::ATOMIC);
-    const format* fieldFormat	= dynamic_cast<const format*>(f.annotations().get(MDL::ANNOTATION_NAME, ANNOTATION_FORMAT_ALL));
+    if (this->read_custom_field_format(f, object))
+        return; 
 
-	if ( fieldFormat )
-    {
-        this->skipTabs();
-	    if (isAtomic)
-		{
-			fieldFormat->read(this->_tokenizer,a,true);
-			f.set(object, a);
-		}
-		else
-			fieldFormat->read(this->_tokenizer,f.get(object, a),true);
-		return;
-	}
     
     if (f.noQuote() || fd.has(descriptor::Flags::NUMERIC_VALUE))
-		this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD);
+		t = this->read_token(MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD);
     else if ((ft = fd.feature(Feature::ANY)))
     {
         const any_feature* acf = dynamic_cast<const any_feature*>(ft);
  
-        token classname,dummy;
-        this->readExpected(dummy,MDL::TOKEN_PARENTHESIS_OPEN);
-        this->readExpected(classname,MDL::TOKEN_KEYWORD);
-        this->readExpected(dummy,MDL::TOKEN_PARENTHESIS_CLOSE);
+        token classname;
+        this->read_token(MDL::TOKEN_PARENTHESIS_OPEN);
+        classname = this->read_token(MDL::TOKEN_KEYWORD);
+        this->read_token(MDL::TOKEN_PARENTHESIS_CLOSE);
 
         std::string sclassname = anycast<std::string>(classname);
         const descriptor* anyContentDescriptor = classes::byName(sclassname);
@@ -218,13 +111,13 @@ const class_feature* ft;
         }
         else
         {
-            this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_HEXADECIMAL,MDL::TOKEN_STRING);
+            t = std::move (this->read_token(MDL::TOKEN_INTEGER,MDL::TOKEN_HEXADECIMAL,MDL::TOKEN_STRING));
             t = std::move(anyContentDescriptor->cast(t));
         }
     }
     else
     {
-        this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_HEXADECIMAL,MDL::TOKEN_STRING);
+        t = std::move (this->read_token(MDL::TOKEN_INTEGER,MDL::TOKEN_HEXADECIMAL,MDL::TOKEN_STRING));
     }
     
     f.set(object,t);
@@ -251,7 +144,7 @@ token t;
 			if (cf->hasKey())
 				keyDescriptor->stoa(keyname, key);
 
-	    this->readExpected(t,MDL::TOKEN_INTEGER,MDL::TOKEN_HEXADECIMAL,MDL::TOKEN_STRING);
+	    t = std::move (this->read_token(MDL::TOKEN_INTEGER,MDL::TOKEN_HEXADECIMAL,MDL::TOKEN_STRING));
 
 		if (cf->hasKey())
 		{
@@ -285,14 +178,14 @@ bool doNotSet = false;
 		if (f)
 		{
             this->readField(*f,object);
-			this->readExpected(t,MDL::TOKEN_SEMICOLON);
+			this->read_token(MDL::TOKEN_SEMICOLON);
 			return ;
 		}
 	}
 	if (ccf)
 	{
 		this->readElement(ccf,attribute,object);
-		this->readExpected(t,MDL::TOKEN_SEMICOLON);
+		this->read_token(MDL::TOKEN_SEMICOLON);
         return;
 	}
 	
@@ -310,9 +203,10 @@ const descriptor* cd;
 any newO;
 const container_feature* ccf = dynamic_cast<const container_feature*>(d.feature(Feature::CONTAINER));
 
-    this->readExpected(t,MDL::TOKEN_NEW);
-    this->readExpected(t,MDL::TOKEN_KEYWORD);    
+    this->read_token(MDL::TOKEN_NEW);
+    t = std::move (this->read_token(MDL::TOKEN_KEYWORD));    
     classname = anycast<std::string>(t);
+
     cd = classes::byName(classname);
     if (!cd)
     {
@@ -320,7 +214,7 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(d.feature(
        (this->_tokenizer.prefixErrorMessage(stream)) << " Class '" << classname << "' doesn't exist.";
        throw LAURENA_FAILED_PARSING_EXCEPTION(stream.str().c_str(),this->_tokenizer._ptr) ; 
     }
-    this->readExpected(t,MDL::TOKEN_DPOINTS);
+    this->read_token(MDL::TOKEN_DPOINTS);
 
     newO = std::move(cd->create());
     std::string keyword ;
@@ -355,7 +249,7 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(d.feature(
 
 void iarchive_mdl::readObjectContent (const descriptor& d, any& object )
 {
-token token;
+token tk;
 std::string keyword, safe_keyword;
 
     this->_depth ++;
@@ -368,13 +262,13 @@ std::string keyword, safe_keyword;
                     << std::endl ;
     while ( true )
     {        
-        this->skipTabs();
+        this->skip_tabs();
         if (this->_included && !*this->_tokenizer._ptr && this->_depth ==1)
             return;
 
-		this->readExpected(token,MDL::TOKEN_AT,MDL::TOKEN_BRACKET_CLOSE,MDL::TOKEN_PRIMARY_KEY, MDL::TOKEN_INTEGER);
+		tk = std::move (this->read_token(MDL::TOKEN_AT,MDL::TOKEN_BRACKET_CLOSE,MDL::TOKEN_PRIMARY_KEY, MDL::TOKEN_INTEGER));
 
-        switch (token._token_id)
+        switch (tk._token_id)
         {
             case MDL::TOKEN_AT:
                 this->readDirective(d,object);
@@ -386,9 +280,9 @@ std::string keyword, safe_keyword;
 
 			case MDL::TOKEN_INTEGER:
             case MDL::TOKEN_PRIMARY_KEY:
-                keyword = anycast<std::string>(token);
-                this->readExpected(token,MDL::TOKEN_EQUAL, MDL::TOKEN_DPOINTS, MDL::TOKEN_INJECTION);
-                switch (token._token_id)
+                keyword = anycast<std::string>(tk);
+                tk = std::move(this->read_token(MDL::TOKEN_EQUAL, MDL::TOKEN_DPOINTS, MDL::TOKEN_INJECTION));
+                switch (tk._token_id)
                 {
                     case MDL::TOKEN_DPOINTS:
                        safe_keyword = this->_last_keyword;
@@ -414,7 +308,7 @@ std::string keyword, safe_keyword;
 void iarchive_mdl::readChildObject (const descriptor& d, any& parent , bool obj_is_parent )
 {
 any obj;
-token token;
+token tk;
 std::string primary;
 const descriptor* descriptorObj;
 const container_feature* ccf = dynamic_cast<const container_feature*>(d.feature(Feature::CONTAINER));
@@ -494,9 +388,9 @@ bool doListPush = false;
     /****************************************************************************/ 
     std::string idname ;
 
-    this->readExpected(token,MDL::TOKEN_PRIMARY_KEY,MDL::TOKEN_NULLKEYWORD,MDL::TOKEN_INTEGER);
+    tk = std::move ( this->read_token(MDL::TOKEN_PRIMARY_KEY,MDL::TOKEN_NULLKEYWORD,MDL::TOKEN_INTEGER));
 
-    switch (token._token_id)
+    switch (tk._token_id)
     {
         case MDL::TOKEN_NULLKEYWORD:
             break;
@@ -505,7 +399,7 @@ bool doListPush = false;
         case MDL::TOKEN_INTEGER:   
             if (descriptorObj->has(descriptor::Flags::PRIMARY_KEY)) 
             {
-                descriptorObj->primaryKey().set(obj,token);      
+                descriptorObj->primaryKey().set(obj, tk);      
             } else
             {
                 std::ostringstream stream;
@@ -521,7 +415,7 @@ bool doListPush = false;
 
 
     //  Parse the '{ symbol
-    this->readExpected(token,MDL::TOKEN_BRACKET_OPEN);
+    this->read_token(MDL::TOKEN_BRACKET_OPEN);
 
     // parse object content
 
@@ -547,7 +441,7 @@ std::string keyword;
                     << std::endl ;
 
     //<! First keyword found in the file
-    this->readExpected(t,MDL::TOKEN_KEYWORD);
+    t = std::move ( this->read_token(MDL::TOKEN_KEYWORD));
     _last_keyword = name ;
     keyword = anycast<std::string>(t);
     
@@ -562,7 +456,7 @@ std::string keyword;
     }        
 
     // read the ':' after an object Type 
-    this->readExpected(t,MDL::TOKEN_DPOINTS);   
+    this->read_token(MDL::TOKEN_DPOINTS);   
 
     this->readChildObject(descriptor,object , true ) ;
 

@@ -20,123 +20,63 @@ iarchive_json::~iarchive_json()
 {
 }
 
-
-void iarchive_json::readToken(token& tk, boost::dynamic_bitset<>& allowed_tokens)
+/********************************************************************************/
+/*      implementation of virtual functions from iarchive class                 */ 
+/********************************************************************************/ 
+const class language& iarchive_json::language() const
 {
-    while (true)
+return JSON::language();
+}
+
+ bool iarchive_json::read_custom_field_format(const field& f, any& object)
+ {
+    const format* fieldFormat	= dynamic_cast<const format*>(f.annotations().get(this->language().format_annotations()));
+
+	if ( fieldFormat )
     {
-        int32 res = this->_tokenizer.readExpected(tk,JSON::units(),allowed_tokens);
+        this->read_token(JSON::TOKEN_DQUOTE);
+        bool res = this->iarchive::read_custom_field_format(f, object);
+        this->read_token(JSON::TOKEN_DQUOTE);
+        return res;
+	}
+    else
+        return false;
+ }
 
-        if (res == -1)
-        {
-            std::ostringstream stream;
-            this->_tokenizer.prefixErrorMessage(stream);
-            stream << " syntax error." ;
-            stream.flush();
-            std::string msg = stream.str();
-            throw LAURENA_FAILED_PARSING_EXCEPTION(msg.c_str(),this->_tokenizer._ptr) ;  
-        }
-
-        tk._token_id = res;
-
-        if ( !JSON::mask_tab_tokens().test (res))
-            return;
-    }
-}
-
-bool iarchive_json::readMaybeToken (token& tk, boost::dynamic_bitset<>& allowed_tokens)
+bool iarchive_json::readMaybeToken (token& tk, bitfield& allowed_tokens)
 {
-    while (true)
-    {
-        int32 res = this->_tokenizer.readExpected(tk,JSON::units(),allowed_tokens);
+    this->skip_tabs();
+    int32 res = this->_tokenizer.read(tk,JSON::language().tokens_parsers(),allowed_tokens);
+    tk._token_id = res;   
 
-        if (res == -1)        
-            return false;        
-
-        tk._token_id = res;
-
-        if ( !JSON::mask_tab_tokens().test (res))
-            return true;
-    }
+    return (res != -1);
 }
 
-void iarchive_json::readExpected(token& token, word8 tokenId)
+bool iarchive_json::readMaybe(token& tk, word8 tokenId1, word8 tokenId2, word8 tokenId3)
 {
-boost::dynamic_bitset<> allowed;
-
-    allowed.resize(JSON::TOKEN_MAX);
-    allowed |= JSON::mask_tab_tokens();
-    allowed.set(tokenId);
-
-    this->readToken(token,allowed);
+    bitfield mask;
+    mask.resize(this->language().tokens_parsers().size());
+    mask.set(tokenId1);
+    mask.set(tokenId2);
+    mask.set(tokenId3);
+    return this->readMaybeToken(tk, mask);
 }
 
-void iarchive_json::readExpected(token& token, word8 tokenId1, word8 tokenId2)
-{
-boost::dynamic_bitset<> allowed;
-
-    allowed.resize(JSON::TOKEN_MAX);
-    allowed |= JSON::mask_tab_tokens();
-    allowed.set(tokenId1);
-	allowed.set(tokenId2);
-
-    this->readToken(token,allowed);
-}
-
-void iarchive_json::readExpected(token& token, word8 tokenId1, word8 tokenId2, word8 tokenId3)
-{
-boost::dynamic_bitset<> allowed;
-
-    allowed.resize(JSON::TOKEN_MAX);
-    allowed |= JSON::mask_tab_tokens();
-    allowed.set(tokenId1);
-	allowed.set(tokenId2);
-	allowed.set(tokenId3);
-
-    this->readToken(token,allowed);
-}
-
-bool iarchive_json::readMaybe(token& token, word8 tokenId1, word8 tokenId2, word8 tokenId3)
-{
-boost::dynamic_bitset<> allowed;
-
-    allowed.resize(JSON::TOKEN_MAX);
-    allowed |= JSON::mask_tab_tokens();
-    allowed.set(tokenId1);
-	allowed.set(tokenId2);
-	allowed.set(tokenId3);
-
-    return this->readMaybeToken(token,allowed);
-}
-
-void iarchive_json::readExpected(token& token, word8 tokenId1, word8 tokenId2, word8 tokenId3, word8 tokenId4)
-{
-boost::dynamic_bitset<> allowed;
-
-    allowed.resize(JSON::TOKEN_MAX);
-    allowed |= JSON::mask_tab_tokens();
-    allowed.set(tokenId1);
-	allowed.set(tokenId2);
-	allowed.set(tokenId3);
-	allowed.set(tokenId4);
-
-    this->readToken(token,allowed);
-}
 
 any& iarchive_json::parse (const std::string& name, any& destination)
 {
 token t;
 std::string keyword;
 
-	this->readExpected(t,JSON::TOKEN_BRACKET_OPEN);
-	this->readExpected(t,JSON::TOKEN_SINGLE_STRING);
+	this->read_token(JSON::TOKEN_BRACKET_OPEN);
+	t = std::move(this->read_token(JSON::TOKEN_SINGLE_STRING));
 	keyword=anycast<std::string>(t);
 	if (!boost::equals(name,keyword))
 		throw LAURENA_FAILED_PARSING_EXCEPTION("object names doesn't match", this->_tokenizer._ptr);
 	
-	this->readExpected(t,JSON::TOKEN_DPOINTS);
+	this->read_token(JSON::TOKEN_DPOINTS);
 	this->parseValue(destination);
-	this->readExpected(t,JSON::TOKEN_BRACKET_CLOSE);
+	this->read_token(JSON::TOKEN_BRACKET_CLOSE);
 
 	return destination;
 }
@@ -152,25 +92,14 @@ static const descriptor* desc_int64 = classes::byType(typeid(int64));
 		bool isAtomic					= fdesc->desc().has(descriptor::Flags::ATOMIC);
 		const format* fieldFormat	= dynamic_cast<const format*>(fdesc->annotations().get(JSON::ANNOTATION_NAME, ANNOTATION_FORMAT_ALL));
 
-		if ( fieldFormat )
-		{
-			this->readExpected(t,JSON::TOKEN_DQUOTE);
-			if (isAtomic)
-			{
-				fieldFormat->read(this->_tokenizer,a,true);
-				fdesc->set(object, a);
-			}
-			else
-				fieldFormat->read(this->_tokenizer,fdesc->get(object, a),true);
-			this->readExpected(t,JSON::TOKEN_DQUOTE);
-			return;
-		}
+        if (this->read_custom_field_format(*fdesc, object))
+            return;
 
 
 		const format* typeFormat = dynamic_cast<const format*>(fdesc->desc().annotations().get(JSON::ANNOTATION_NAME, ANNOTATION_FORMAT_ALL));
 		if (typeFormat)
 		{  
-			this->readExpected(t,JSON::TOKEN_DQUOTE);
+			this->read_token(JSON::TOKEN_DQUOTE);
 			if (isAtomic)
 			{
 				typeFormat->read(this->_tokenizer,a,true);
@@ -178,12 +107,12 @@ static const descriptor* desc_int64 = classes::byType(typeid(int64));
 			}
 			else
 				typeFormat->read(this->_tokenizer,fdesc->get(object, a),true);
-			this->readExpected(t,JSON::TOKEN_DQUOTE);
+			this->read_token(JSON::TOKEN_DQUOTE);
 			return;
 		}
 	}
 
-	this->readExpected(t,JSON::TOKEN_SINGLE_STRING, JSON::TOKEN_INTEGER, JSON::TOKEN_ARRAY_BRACKET_OPEN, JSON::TOKEN_BRACKET_OPEN);
+	t = std::move(this->read_token(JSON::TOKEN_SINGLE_STRING, JSON::TOKEN_INTEGER, JSON::TOKEN_ARRAY_BRACKET_OPEN, JSON::TOKEN_BRACKET_OPEN));
 
 	switch (t._token_id)
 	{
@@ -265,12 +194,12 @@ any key;
 				return ;
 
 			if (t._token_id == JSON::TOKEN_COLON && !isAtomic)
-				this->readExpected(t,JSON::TOKEN_BRACKET_OPEN);
+				this->read_token(JSON::TOKEN_BRACKET_OPEN);
 		}
 
 		if (isAtomic)
 		{
-			this->readExpected(t,JSON::TOKEN_SINGLE_STRING, JSON::TOKEN_INTEGER);
+			t = std::move(this->read_token(JSON::TOKEN_SINGLE_STRING, JSON::TOKEN_INTEGER));
 			element = ecd->cast(t);
 		}
 		else
@@ -299,7 +228,7 @@ const field* f;
 
 	while (true)
 	{
-		this->readExpected(t,JSON::TOKEN_SINGLE_STRING,JSON::TOKEN_BRACKET_CLOSE);
+		t = std::move(this->read_token(JSON::TOKEN_SINGLE_STRING,JSON::TOKEN_BRACKET_CLOSE));
 
 		if (t._token_id == JSON::TOKEN_BRACKET_CLOSE)
 			break;
@@ -313,11 +242,11 @@ const field* f;
 			throw LAURENA_FAILED_PARSING_EXCEPTION(stream.str().c_str(),this->_tokenizer._ptr) ; 
 		}
 
-		this->readExpected(t,JSON::TOKEN_DPOINTS);
+		this->read_token(JSON::TOKEN_DPOINTS);
 
 		this->parseValue(object,f);
 
-		this->readExpected(t,JSON::TOKEN_BRACKET_CLOSE, JSON::TOKEN_COLON);
+		t = std::move(this->read_token(JSON::TOKEN_BRACKET_CLOSE, JSON::TOKEN_COLON));
 
 		if (t._token_id == JSON::TOKEN_BRACKET_CLOSE)
 			break;

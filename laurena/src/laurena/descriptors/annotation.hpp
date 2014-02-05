@@ -90,6 +90,7 @@ class annotations_map : public std::unordered_map<std::string,annotation*>
 	/****************************************************************************/ 	
 	const annotation* get(const std::string& key) const;
 	const annotation* get(const std::string& key0, const std::string& key1) const;
+    const annotation* get(const std::vector<std::string> keys) const;
 
 	/****************************************************************************/ 
 	/*		protected fields													*/ 

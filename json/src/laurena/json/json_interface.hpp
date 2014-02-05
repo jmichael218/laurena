@@ -123,25 +123,7 @@ public:
 		return destination;
 	}
 
-	/*
-	template <>
-	static any& parse<any>(const std::string& json, const std::string& expected_name, any& value)
-	{
-		iarchive_json amdl ;
-		amdl.reader().str(json.c_str());
 
-		try 
-		{
-			return amdl.parse(expected_name,value) ;
-		}
-		catch (const exception& e)
-		{        
-			std::ostringstream message ;
-			(amdl.reader().prefixErrorMessage(message)) << e.message ();
-			throw LAURENA_FAILED_PARSING_EXCEPTION( message.str().c_str(),amdl.reader()._ptr) ;      
-		}   
-	}
-	*/
 };
 
 /********************************************************************************/ 

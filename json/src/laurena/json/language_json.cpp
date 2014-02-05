@@ -13,23 +13,25 @@ using namespace json;
 
 const std::string&  JSON::ANNOTATION_NAME = "format.json" ;
 
-
-parsers                 JSON::_parsers;
+class language          JSON::_language;
 bool                    JSON::_init               = false;
-boost::dynamic_bitset<> JSON::_mask_tab_tokens;
-charset<>                 JSON::_charset_keywordList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\r\n\t " ;
+charset<>               JSON::_charset_keywordList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\r\n\t " ;
 
 void JSON::init () 
 {
     if ( JSON::_init )
         return;
 
-    JSON::_mask_tab_tokens.resize(JSON::TOKEN_MAX);
-    JSON::_mask_tab_tokens.set (JSON::TOKEN_TABS);
-    JSON::_mask_tab_tokens.set(JSON::TOKEN_EOL);
+    JSON::_language.name("json");
+
+    parsers tabs;
+    tabs.resize(2);
+    tabs[0] = new tabs_parser();
+    tabs[1] = new eol_parser();
+    JSON::_language.tabs_parsers(std::move(tabs));
 
 
-    parsers& r = JSON::_parsers;
+    parsers r;
     r.resize(JSON::TOKEN_MAX);
 
     r [ JSON::TOKEN_DPOINTS ]             = new single_character_parser(':');
@@ -46,8 +48,8 @@ void JSON::init ()
     r [ JSON::TOKEN_FALSE ]               = new keyword_parser("false");
 	r [ JSON::TOKEN_NULL ]				  = new keyword_parser("null");
     r [ JSON::TOKEN_SINGLE_STRING ]       = new string_parser();
-    r [ JSON::TOKEN_EOL ]                 = new eol_parser();
-    r [ JSON::TOKEN_TABS ]                = new tabs_parser();
+
+    JSON::_language.tokens_parsers(std::move(r));
 
     JSON::_init = true;
 }

@@ -252,6 +252,50 @@ public:
 
 
 };
+
+/********************************************************************************/ 
+/*                                                                              */ 
+/*              accept any length between a keyword and a given charset         */ 
+/*  userfull for comment like // comment until end of line                      */ 
+/*                                                                              */ 
+/********************************************************************************/ 
+class keyword_to_charset_parser : public parser
+{
+public:
+
+    keyword_to_charset_parser(const std::string& keyword, const charset<>& chars);
+    virtual ~keyword_to_charset_parser();
+
+    virtual bool read (tokenizer& tokenizer, any& value, bool consume) const;
+
+    protected:
+
+    std::string     _keyword;
+    charset<>       _charset;
+};
+
+/********************************************************************************/ 
+/*                                                                              */ 
+/*              accept any length between two keywords                          */ 
+/*  userfull for comment like <!-- xml comment -->                              */ 
+/*                                                                              */ 
+/********************************************************************************/ 
+class keyword_to_keyword_parser : public parser
+{
+public:
+
+    keyword_to_keyword_parser(const std::string &start, const std::string &end);
+    virtual ~keyword_to_keyword_parser();
+
+    virtual bool read (tokenizer& tokenizer, any& value, bool consume) const;
+
+    protected:
+
+    std::string     _start;
+    std::string     _end;
+};
+
+
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

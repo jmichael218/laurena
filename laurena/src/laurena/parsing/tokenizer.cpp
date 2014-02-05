@@ -41,8 +41,39 @@ void tokenizer::str(const char* source)
     this->_ptr = this->_source.c_str();
 }
 
+void tokenizer::skip(const parsers& ps)
+{
+    word32 sz = ps.size();
+    any a;
+    bool round_ok = true;
 
-int32 tokenizer::readExpected(any& value, const parsers& ps, const boost::dynamic_bitset<>& allowed)
+    while (round_ok)
+    {
+        round_ok = false;
+        for (parser* p : ps)
+        {
+            if ( p->read(*this, a, true))
+            {
+                round_ok = true;
+                break;
+            }
+        }
+    }    
+}
+
+int32 tokenizer::read(any& value, const parsers& ps)
+{
+    word32 sz = ps.size();
+
+    for ( word32 i = 0 ; i < sz; i ++)
+    {
+        if ( ps [i]-> read(*this,value,true))
+            return i;
+    }
+    return -1;
+}
+
+int32 tokenizer::read(any& value, const parsers& ps, const boost::dynamic_bitset<>& allowed)
 {
     word32 sz = ps.size();
 

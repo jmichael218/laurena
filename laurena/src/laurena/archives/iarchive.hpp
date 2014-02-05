@@ -25,6 +25,7 @@
 
 #include <laurena/descriptors/descriptor.hpp>
 #include <laurena/parsing/tokenizer.hpp>
+#include <laurena/language/language.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -55,6 +56,26 @@ public:
     //! clear variables of last parsing
     virtual iarchive& clear () ;
 
+    /*
+     * \brief return language name
+     *
+     * return the language tag name. It is used to build annotation name like format.json (and so language must return "json"
+     */
+    virtual const class language& language() const = 0;
+   
+    virtual void skip_tabs();
+
+    virtual token read_token(const bitfield& allowed_tokens);
+
+    /*
+     * \brief check if the field do have a field format annotation
+     *
+     * Check if the field do have a field format annotation named "format." + this->language()
+     * If yes, read the value in svalue and set it.
+     * return false otherwhile
+     */
+    virtual bool read_custom_field_format(const field& f, any& object);
+
     /****************************************************************************/
     /*      other functions                                                     */ 
     /****************************************************************************/
@@ -62,7 +83,18 @@ public:
     inline tokenizer&   reader()                        { return _tokenizer ; }
 
     /****************************************************************************/
-    /*      protected datas                                                  */ 
+    /*      commun functions                                                    */ 
+    /****************************************************************************/ 
+
+
+
+    token read_token(word8 allowed_token_id);
+    token read_token(word8 allowed_token1_id, word8 allowed_token2_id);
+    token read_token(word8 allowed_token1_id, word8 allowed_token2_id, word8 allowed_token3_id);
+    token read_token(word8 allowed_token1_id, word8 allowed_token2_id, word8 allowed_token3_id, word8 allowed_token4_id);
+
+    /****************************************************************************/
+    /*      protected datas                                                     */ 
     /****************************************************************************/ 
     protected:
     std::ostream*           _logger;

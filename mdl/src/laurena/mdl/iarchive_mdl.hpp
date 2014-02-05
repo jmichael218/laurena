@@ -46,6 +46,7 @@ public:
     /*          Virtual functions from IArchive                                 */ 
     /****************************************************************************/ 
     virtual any& parse (const std::string& name, any& destination) ;
+    virtual const class language& language() const;
 
     /****************************************************************************/
     /*          static functions                                                */ 
@@ -60,17 +61,6 @@ public:
     /*          parsing sub function                                            */ 
     /****************************************************************************/ 
     public:
-
-    void skipTabs();
-
-    void readToken	(token& tk, boost::dynamic_bitset<>& allowed_tokens);
-
-    void readExpected(token& tk, word8 tokenId);
-    void readExpected(token& tk, word8 tokenId1, word8 tokenId2);
-    void readExpected(token& tk, word8 tokenId1, word8 tokenId2, word8 tokenId3);
-	void readExpected(token& tk, word8 tokenId1, word8 tokenId2, word8 tokenId3, word8 tokenId4);
-
-
 
     void readChildObject        (const descriptor& d, any& parent , bool obj_is_parent );
     void readObjectContent      (const descriptor& d, any& object );

@@ -50,10 +50,10 @@ void testRuleAddition()
 	rs << rptr ;
 	rs << G::expected_('H') << G::expected_('e');
 
-	const char* cc = "Hello World";
+	const char* cc = "HHello World";
 	laurena::parsing_context<> context (cc, cc+strlen(cc));
 	unsigned long int res = rs.read(context);
-	assert(res==2);
+	assert(res==3);
 
 	laurena::rule<> rs2;
 
