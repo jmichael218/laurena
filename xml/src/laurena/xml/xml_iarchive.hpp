@@ -63,11 +63,11 @@ public:
     public:
 
     void readAttributes(any& object);
-    void readObject(const std::string& tag, any& object);
+    void readObject(const std::string& tag, any& object);   
 
     //! Read value of a class field
     void readField              (const field& f, const std::string& fieldName, any& object);
-    void readEndOfField         (const field& f, const std::string& expectedName, any& object);
+    void readEndOfField         (const field& f, const std::string& expectedName);
 
     void error_tag_not_expected (const std::string& expected, const std::string& found);
 

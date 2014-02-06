@@ -40,7 +40,7 @@ std::ostringstream ss;
 
  }
 
- void iarchive_xml::readEndOfField(const field& f, const std::string& expectedName, any& object)
+ void iarchive_xml::readEndOfField(const field& f, const std::string& expectedName)
  {
     this->read_token(XML::TOKEN_INFERIOR_SLASH);
     token t = std::move(this->read_token(XML::TOKEN_KEYWORD));
@@ -69,18 +69,27 @@ any a;
     if (t._token_id == XML::TOKEN_SLASH_SUPERIOR)
         return;
 
+    // read type format
     if (this->read_custom_field_format(f, object))
     {
-        this->read_token(XML::TOKEN_INFERIOR_SLASH);
-        t = std::move(this->read_token(XML::TOKEN_KEYWORD));
-        std::string keyword = anycast<std::string>(t);
-        if (keyword != fieldName)
-            this->error_tag_not_expected(fieldName, keyword);
+        this->readEndOfField(f, fieldName);
         return; 
     }
 
-    // read type format
 
+
+    if (fd.has(descriptor::Flags::FIELDS))
+    {
+        assert(false);
+    }
+    else
+    {
+        std::string content = this->_tokenizer.readUntil("<", false);
+        this->readEndOfField(f, fieldName);
+        f.set(object, content);
+        return;
+
+    }
     // normal execution
  }
 
@@ -96,6 +105,7 @@ const descriptor* d = object.desc();
     // End of section
     t = std::move(this->read_token(XML::TOKEN_INFERIOR_SLASH, XML::TOKEN_SUPERIOR));
 
+
     while(true)
     {
         std::string content = this->_tokenizer.readUntil("<",true);
@@ -109,15 +119,11 @@ const descriptor* d = object.desc();
             if (keyword == tag)
             {
                 this->read_token(XML::TOKEN_SUPERIOR);
-                object.desc()->stoa(content, object);
+                //object.desc()->stoa(content, object);
                 return;
             }
             else
-            {
-                std::ostringstream ss;
-                ss << "Was expecting </" << tag << "> but found </" << keyword << ">.";
-                throw LAURENA_FAILED_PARSING_EXCEPTION(ss.str().c_str(),this->_tokenizer._ptr);
-            }
+                this->error_tag_not_expected(tag, keyword);
         }
         else
         {

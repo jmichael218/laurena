@@ -93,21 +93,21 @@ int main ()
     std::string destination = xml::xml::serialize(kitty);
 
     // Let's display my jsoned cat :
-    std::cout << "Here is my cat details:" << std::endl << destination << std::endl;
+    GLOG << "Here is my cat details:" << std::endl << destination << std::endl;
 
     // let's create a new cat from our serialized kitty 
     cat kimmie;
     xml::xml::parse(destination,kimmie);
-    std::cout << "Kimmie is a " << kimmie._specie << " named " << kimmie._name 
-              << ", has " << ((int)kimmie._age) << " years, killed " 
-              << kimmie._birds << " birds and " << kimmie._mouses << " mouses." 
-              << std::endl;
+    GLOG << "Kimmie is a " << kimmie._specie << " named " << kimmie._name 
+         << ", has " << ((int)kimmie._age) << " years, killed " 
+         << kimmie._birds << " birds and " << kimmie._mouses << " mouses." 
+         << std::endl;
 
     // LEt's control if kimmie is exactly the same than kitty
     if (kimmie == kitty)
-        std::cout << "Kimmie is a clone of Kitty !!" << std::endl << "Laurena's serialization works fine !" << std::endl;
+        GLOG << "Kimmie is a clone of Kitty !!" << std::endl << "Laurena's serialization works fine !" << std::endl;
     else
-        std::cout << "Kimmie is different of Kitty !!" << std::endl << "Laurena's serialization is a fake !" << std::endl ;
+        GLOG << "Kimmie is different of Kitty !!" << std::endl << "Laurena's serialization is a fake !" << std::endl ;
 
     return 1;
 

@@ -31,7 +31,7 @@ void XML::init ()
     tabs.resize(3);
     tabs[0] = new tabs_parser();
     tabs[1] = new eol_parser();
-    tabs[3] = new keyword_to_keyword_parser("<!--", "-->"); 
+    tabs[2] = new keyword_to_keyword_parser("<!--", "-->"); 
     XML::_language.tabs_parsers(std::move(tabs));
 
     parsers r;
