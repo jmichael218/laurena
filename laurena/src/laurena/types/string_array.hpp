@@ -58,6 +58,10 @@ public:
     /// 
     int32   findExact(const std::string& value) const;
 
+    // return index of first value where parameter value is a prefix, -1 if not found
+    int32   find_prefix(const std::string& value) const;
+
+
 
     void set(const char* keywordList, word8 separator=' ');
     inline void set(const std::string& keywordList, word8 separator=' ') {     this->set(keywordList.c_str(),separator); }

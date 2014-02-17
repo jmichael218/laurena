@@ -11,6 +11,7 @@
 
 #include <laurena/types/string_array.hpp>
 #include <laurena/memory/memory_functions.hpp>
+#include <laurena/algorithm/strings/prefix.hpp>
 
 using namespace laurena;
 
@@ -92,6 +93,15 @@ int32 string_array::find(const std::string& value) const
             return i;
         --i;
     }
+    return -1;
+}
+
+int32 string_array::find_prefix(const std::string& value) const
+{
+    for (size_t i = 0; i < this->size(); i ++)    
+        if (prefix(this->at(i), value))
+            return (int) i;
+
     return -1;
 }
 
