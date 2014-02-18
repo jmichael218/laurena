@@ -321,6 +321,9 @@
     <ClInclude Include="src\laurena\descriptors\serial_entry_descriptor.hpp">
       <Filter>Fichiers d%27en-tête\descriptors</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\persistance\file_serial_manager.hpp">
+      <Filter>Fichiers d%27en-tête\persistance</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">
@@ -496,6 +499,9 @@
     </ClCompile>
     <ClCompile Include="src\laurena\descriptors\serial_entry_descriptor.cpp">
       <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\persistance\file_serial_manager.cpp">
+      <Filter>Fichiers sources\persistance</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

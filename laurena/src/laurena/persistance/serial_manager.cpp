@@ -8,13 +8,14 @@
 ///
 #include <laurena/persistance/serial_manager.hpp>
 #include <laurena/descriptors/field.hpp>
+#include <laurena/persistance/persistance.hpp>
 
 using namespace laurena;
 
-serial_manager::serial_manager(const std::string& spipeline) : _pipeline(spipeline)
+serial_manager::serial_manager(persistance& engine, const std::string& spipeline) : _persistance(engine), _pipeline(spipeline)
 { }
 
-serial_manager::serial_manager(const char* spipeline) : _pipeline(spipeline)
+serial_manager::serial_manager(persistance& engine, const char* spipeline) : _persistance(engine), _pipeline(spipeline)
 { }
 
 serial_manager::~serial_manager()

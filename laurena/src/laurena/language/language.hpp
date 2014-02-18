@@ -31,6 +31,12 @@
 namespace laurena {
 
 /********************************************************************************/ 
+/*              forward declaration                                             */ 
+/********************************************************************************/ 
+class iarchive;
+class oarchive;
+
+/********************************************************************************/ 
 /*              class language                                                  */ 
 /********************************************************************************/ 
 
@@ -94,6 +100,10 @@ public:
 
 
     const std::vector<std::string>& format_annotations() const;
+
+    std::shared_ptr<iarchive>       reader();
+    std::shared_ptr<oarchive>       writer();
+
     /****************************************************************************/
     /*          member datas                                                    */ 
     /****************************************************************************/ 
@@ -104,6 +114,9 @@ public:
     class parsers               _tabs_parsers;
 
     std::vector<std::string>    _format_annotations;
+
+    std::function<std::shared_ptr<iarchive> ()>        _reader_constructor;
+    std::function<std::shared_ptr<oarchive> ()>        _writer_constructor;
 
 
 };

@@ -1,13 +1,13 @@
 ///
-/// \file     serial_manager.hpp
-/// \brief    A base manager for a table of serial ID
+/// \file     file_serial_manager.hpp
+/// \brief    A file based manager for a table of serial ID
 /// \author   Frederic Manisse
 /// \version  1.0
 ///
-/// A base manager for a table of serial ID
+/// A file based manager for a table of serial ID
 ///
-#ifndef LAURENA_SERIAL_MANAGER_H
-#define LAURENA_SERIAL_MANAGER_H
+#ifndef LAURENA_FILE_SERIAL_MANAGER_H
+#define LAURENA_FILE_SERIAL_MANAGER_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -22,9 +22,9 @@
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
-#include <laurena/descriptors/classes.hpp>
-#include <laurena/types/any.hpp>
-#include <laurena/traits/laurena_traits.hpp>
+#include <laurena/persistance/serial_manager.hpp>
+#include <laurena/persistance/persistance.hpp>
+#include <laurena/language/language.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -32,47 +32,42 @@
 namespace laurena {
 
 /********************************************************************************/ 
-/*              forward definition                                              */ 
-/********************************************************************************/ 
-class persistance;
-
-/********************************************************************************/ 
-/*     serial_manager                                                           */ 
+/*     file_serial_manager                                                      */ 
 /********************************************************************************/ 
 
-class serial_manager
+class file_serial_manager : public serial_manager
 {
     public:
 
     /****************************************************************************/ 
     /*      constructors, destructor                                            */ 
     /****************************************************************************/     
-    serial_manager(persistance& engine, const std::string& spipeline);
-    serial_manager(persistance& engine, const char* spipeline);
+    file_serial_manager(persistance& engine, const std::string& spipeline, language& fileformat, const std::string& directory);
+    file_serial_manager(persistance& engine, const char* spipeline, language& fileformat, const char* directory);
 
-    virtual ~serial_manager();
-
-    /****************************************************************************/ 
-    /*      virtual functions                                                   */ 
-    /****************************************************************************/ 
-    virtual void    create(any object)                              = 0;
-    virtual void    read  (const any& serialKey, any destination)   = 0;
-    virtual bool    exist (const any& serialKey)                    = 0;
-    virtual bool    remove(const any& serialKey)                    = 0;
+    virtual ~file_serial_manager();
 
     /****************************************************************************/ 
-    /*      other functions                                                     */ 
+    /*      virtual functions implementation                                    */ 
     /****************************************************************************/ 
-    bool remove_object(any object);
+    virtual void    create(any object)                              ;
+    virtual void    read  (const any& serialKey, any destination)   ;
+    virtual bool    exist (const any& serialKey)                    ;
+    virtual bool    remove(const any& serialKey)                    ;
 
-    inline const std::string& pipeline() { return this->_pipeline; }
     /****************************************************************************/ 
-    /*      protected datas                                                     */ 
+    /*      new functions                                                       */ 
     /****************************************************************************/ 
+
+    std::string filename(const any& serialKey);
+
+    /****************************************************************************/ 
+    /*      datas                                                               */ 
+    /****************************************************************************/   
     protected:
+    std::string         _directory;
+    language&     _language;
 
-    std::string     _pipeline;
-    persistance&    _persistance;
 };
 
 /********************************************************************************/ 

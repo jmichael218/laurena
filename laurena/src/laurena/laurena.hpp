@@ -125,6 +125,8 @@
 #include <laurena/persistance/dao.hpp>
 #include <laurena/persistance/file_dao.hpp>
 #include <laurena/persistance/persistance.hpp>
+#include <laurena/persistance/serial_manager.hpp>
+#include <laurena/persistance/file_serial_manager.hpp>
 
 
 #endif
