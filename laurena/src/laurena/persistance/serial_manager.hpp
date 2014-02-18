@@ -1,13 +1,13 @@
 ///
-/// \file     persistance.hpp
-/// \brief    Generic persistance engine
+/// \file     serial_manager.hpp
+/// \brief    A base manager for a table of serial ID
 /// \author   Frederic Manisse
 /// \version  1.0
 ///
-/// Generic persistance engine
+/// A base manager for a table of serial ID
 ///
-#ifndef LAURENA_PERSISTANCE_H
-#define LAURENA_PERSISTANCE_H
+#ifndef LAURENA_SERIAL_MANAGER_H
+#define LAURENA_SERIAL_MANAGER_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -25,7 +25,6 @@
 #include <laurena/descriptors/classes.hpp>
 #include <laurena/types/any.hpp>
 #include <laurena/traits/laurena_traits.hpp>
-#include <laurena/persistance/dao.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -33,28 +32,41 @@
 namespace laurena {
 
 /********************************************************************************/ 
-/*     persistance engine                                                       */ 
+/*     serial_manager                                                           */ 
 /********************************************************************************/ 
 
-
-class persistance
+class serial_manager
 {
-public:
-
-    void add(const std::string& pipeline, dao::sptr pdao);
+    public:
 
     /****************************************************************************/ 
-    /*          persistance functions                                           */ 
-    /****************************************************************************/ 
-    void create(const std::string& pipeline, any object);
-    void read(const std::string& pipeline, const any& primaryKey, any destination);
-    bool exist(const std::string& pipeline, const any& primaryKey);
+    /*      constructors, destructor                                            */ 
+    /****************************************************************************/     
+    serial_manager(const std::string& spipeline);
+    serial_manager(const char* spipeline);
+
+    virtual ~serial_manager();
 
     /****************************************************************************/ 
-    /*          protected datas                                                 */ 
+    /*      virtual functions                                                   */ 
+    /****************************************************************************/ 
+    virtual void    create(any object)                              = 0;
+    virtual void    read  (const any& serialKey, any destination)   = 0;
+    virtual bool    exist (const any& serialKey)                    = 0;
+    virtual bool    remove(const any& serialKey)                    = 0;
+
+    /****************************************************************************/ 
+    /*      other functions                                                     */ 
+    /****************************************************************************/ 
+    bool remove_object(any object);
+
+    inline const std::string& pipeline() { return this->_pipeline; }
+    /****************************************************************************/ 
+    /*      protected datas                                                     */ 
     /****************************************************************************/ 
     protected:
-    std::unordered_map<std::string, dao::sptr>       _daos;
+
+    std::string     _pipeline;
 };
 
 /********************************************************************************/ 

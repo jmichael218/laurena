@@ -39,10 +39,12 @@
     <ClInclude Include="src\laurena\descriptors\numeric_type_descriptors.hpp" />
     <ClInclude Include="src\laurena\descriptors\parameter_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\polymorphic_class_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\serial_entry_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\simple_type_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\standard_class_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\string_array_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\string_descriptor.hpp" />
+    <ClInclude Include="src\laurena\descriptors\unique_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\variable_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\vector_descriptor.hpp" />
     <ClInclude Include="src\laurena\exceptions\bad_cast_exception.hpp" />
@@ -69,6 +71,7 @@
     <ClInclude Include="src\laurena\persistance\dao.hpp" />
     <ClInclude Include="src\laurena\persistance\file_dao.hpp" />
     <ClInclude Include="src\laurena\persistance\persistance.hpp" />
+    <ClInclude Include="src\laurena\persistance\serial_manager.hpp" />
     <ClInclude Include="src\laurena\toolboxes\bitset.hpp" />
     <ClInclude Include="src\laurena\toolboxes\filename.hpp" />
     <ClInclude Include="src\laurena\traits\laurena_traits.hpp" />
@@ -76,7 +79,9 @@
     <ClInclude Include="src\laurena\types\context.hpp" />
     <ClInclude Include="src\laurena\types\datetime_format.hpp" />
     <ClInclude Include="src\laurena\types\literator.hpp" />
+    <ClInclude Include="src\laurena\types\serial_entry.hpp" />
     <ClInclude Include="src\laurena\types\string_array.hpp" />
+    <ClInclude Include="src\laurena\types\unique.hpp" />
     <ClInclude Include="src\laurena\types\variable.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +106,11 @@
     <ClCompile Include="src\laurena\descriptors\numeric_type_descriptors.cpp" />
     <ClCompile Include="src\laurena\descriptors\parameter_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\polymorphic_class_descriptor.cpp" />
+    <ClCompile Include="src\laurena\descriptors\serial_entry_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\standard_class_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\string_array_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\string_descriptor.cpp" />
+    <ClCompile Include="src\laurena\descriptors\unique_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\variable_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\vector_descriptor.cpp" />
     <ClCompile Include="src\laurena\exceptions\bad_cast_exception.cpp" />
@@ -125,13 +132,16 @@
     <ClCompile Include="src\laurena\persistance\dao.cpp" />
     <ClCompile Include="src\laurena\persistance\file_dao.cpp" />
     <ClCompile Include="src\laurena\persistance\persistance.cpp" />
+    <ClCompile Include="src\laurena\persistance\serial_manager.cpp" />
     <ClCompile Include="src\laurena\toolboxes\bitset.cpp" />
     <ClCompile Include="src\laurena\toolboxes\filename.cpp" />
     <ClCompile Include="src\laurena\types\any.cpp" />
     <ClCompile Include="src\laurena\types\context.cpp" />
     <ClCompile Include="src\laurena\types\datetime_format.cpp" />
     <ClCompile Include="src\laurena\types\literator.cpp" />
+    <ClCompile Include="src\laurena\types\serial_entry.cpp" />
     <ClCompile Include="src\laurena\types\string_array.cpp" />
+    <ClCompile Include="src\laurena\types\unique.cpp" />
     <ClCompile Include="src\laurena\types\variable.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,13 +1,15 @@
 ///
-/// \file     persistance.hpp
-/// \brief    Generic persistance engine
+/// \file     unique.hpp
+/// \brief    A base type to be used as base class for classes bases on the same serial table
 /// \author   Frederic Manisse
 /// \version  1.0
+/// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-/// Generic persistance engine
+/// A base type to be used as base class for classes bases on the same serial table
 ///
-#ifndef LAURENA_PERSISTANCE_H
-#define LAURENA_PERSISTANCE_H
+
+#ifndef LAURENA_UNIQUE_H
+#define LAURENA_UNIQUE_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -22,39 +24,46 @@
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
-#include <laurena/descriptors/classes.hpp>
-#include <laurena/types/any.hpp>
-#include <laurena/traits/laurena_traits.hpp>
-#include <laurena/persistance/dao.hpp>
-
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
 namespace laurena {
 
-/********************************************************************************/ 
-/*     persistance engine                                                       */ 
-/********************************************************************************/ 
+/*********************************************************************************/
+/*          class unique                                                         */ 
+/*********************************************************************************/ 
 
-
-class persistance
+class unique 
 {
 public:
 
-    void add(const std::string& pipeline, dao::sptr pdao);
+    /****************************************************************************/ 
+    /*      constants                                                           */ 
+    /****************************************************************************/ 
+    static const word64 UNDEFINED_SERIAL = 0;
 
     /****************************************************************************/ 
-    /*          persistance functions                                           */ 
+    /*      constructors, destructor                                            */ 
     /****************************************************************************/ 
-    void create(const std::string& pipeline, any object);
-    void read(const std::string& pipeline, const any& primaryKey, any destination);
-    bool exist(const std::string& pipeline, const any& primaryKey);
+    unique ();
+    unique (word64 serial);
+    unique (const unique& u);
+    unique (      unique&& u);
+
+    virtual ~unique();
 
     /****************************************************************************/ 
-    /*          protected datas                                                 */ 
+    /*      accesseurs                                                          */ 
     /****************************************************************************/ 
-    protected:
-    std::unordered_map<std::string, dao::sptr>       _daos;
+    word64 serial() const;
+    void   serial(word64 value);
+
+    /****************************************************************************/ 
+    /*      datas                                                               */ 
+    /****************************************************************************/ 
+    private:
+    word64          _serial;
+
 };
 
 /********************************************************************************/ 
@@ -63,4 +72,3 @@ public:
 
 }
 #endif
-//end of file

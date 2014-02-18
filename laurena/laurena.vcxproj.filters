@@ -306,6 +306,21 @@
     <ClInclude Include="src\laurena\language\language.hpp">
       <Filter>Fichiers d%27en-tête\language</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\types\unique.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\unique_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\persistance\serial_manager.hpp">
+      <Filter>Fichiers d%27en-tête\persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\types\serial_entry.hpp">
+      <Filter>Fichiers d%27en-tête\types</Filter>
+    </ClInclude>
+    <ClInclude Include="src\laurena\descriptors\serial_entry_descriptor.hpp">
+      <Filter>Fichiers d%27en-tête\descriptors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">
@@ -466,6 +481,21 @@
     </ClCompile>
     <ClCompile Include="src\laurena\language\language.cpp">
       <Filter>Fichiers sources\languages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\types\unique.cpp">
+      <Filter>Fichiers sources\types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\unique_descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\persistance\serial_manager.cpp">
+      <Filter>Fichiers sources\persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\types\serial_entry.cpp">
+      <Filter>Fichiers sources\types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\descriptors\serial_entry_descriptor.cpp">
+      <Filter>Fichiers sources\descriptors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

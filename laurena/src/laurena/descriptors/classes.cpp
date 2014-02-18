@@ -21,6 +21,8 @@
 #include <laurena/descriptors/const_ptr_descriptor_descriptor.hpp>
 #include <laurena/descriptors/parameter_descriptor.hpp>
 #include <laurena/descriptors/bool_descriptor.hpp>
+#include <laurena/descriptors/unique_descriptor.hpp>
+#include <laurena/descriptors/serial_entry_descriptor.hpp>
 
 #include <laurena/exceptions/exception.hpp>
 
@@ -100,6 +102,8 @@ void classes::init ()
     td<boost::dynamic_bitset<>>::desc();
 	td<parameter>::desc();
 	td<parameters>::desc();
+    td<serial_entry>::desc();
+    td<unique>::desc();
 
 }
 

@@ -1,13 +1,15 @@
 ///
-/// \file     persistance.hpp
-/// \brief    Generic persistance engine
+/// \file     serial_entry.hpp
+/// \brief    A class describing an entry for serial key managers
 /// \author   Frederic Manisse
 /// \version  1.0
+/// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-/// Generic persistance engine
+/// A class describing an entry for serial key managers
 ///
-#ifndef LAURENA_PERSISTANCE_H
-#define LAURENA_PERSISTANCE_H
+
+#ifndef LAURENA_SERIAL_ENTRY_H
+#define LAURENA_SERIAL_ENTRY_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -22,40 +24,51 @@
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
-#include <laurena/descriptors/classes.hpp>
-#include <laurena/types/any.hpp>
-#include <laurena/traits/laurena_traits.hpp>
-#include <laurena/persistance/dao.hpp>
-
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
 namespace laurena {
 
-/********************************************************************************/ 
-/*     persistance engine                                                       */ 
-/********************************************************************************/ 
+/*********************************************************************************/
+/*          class serial_entry                                                   */ 
+/*********************************************************************************/ 
 
 
-class persistance
+class serial_entry
 {
 public:
 
-    void add(const std::string& pipeline, dao::sptr pdao);
+    /****************************************************************************/ 
+    /*      constructors, destructor                                            */ 
+    /****************************************************************************/ 
+    serial_entry();
+    serial_entry(const serial_entry&  s);
+    serial_entry(      serial_entry&& s);
+    virtual ~serial_entry();
 
     /****************************************************************************/ 
-    /*          persistance functions                                           */ 
+    /*      operators                                                           */ 
     /****************************************************************************/ 
-    void create(const std::string& pipeline, any object);
-    void read(const std::string& pipeline, const any& primaryKey, any destination);
-    bool exist(const std::string& pipeline, const any& primaryKey);
+    serial_entry& operator=(const serial_entry&  s);
+    serial_entry& operator=(      serial_entry&& s);
+    
+    bool operator==(const std::string& s);
+    bool operator==(const serial_entry& s);
 
     /****************************************************************************/ 
-    /*          protected datas                                                 */ 
+    /*          datas                                                           */ 
     /****************************************************************************/ 
-    protected:
-    std::unordered_map<std::string, dao::sptr>       _daos;
+
+    // stringified (if needed) version of the serial value
+    std::string         _serial;        
+
+    // persistance pipeline
+    std::string         _pipeline;
+
+    // stringified (if nedded) version of the primary key
+    std::string         _primary_key;
 };
+
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
@@ -63,4 +76,3 @@ public:
 
 }
 #endif
-//end of file

@@ -72,6 +72,8 @@
 #include <laurena/types/variable.hpp>
 #include <laurena/types/literator.hpp>
 #include <laurena/types/context.hpp>
+#include <laurena/types/unique.hpp>
+#include <laurena/types/serial_entry.hpp>
 
 // functions
 #include <laurena/functions/parameter.hpp>
@@ -89,6 +91,8 @@
 #include <laurena/descriptors/string_array_descriptor.hpp>
 #include <laurena/descriptors/bitset_descriptor.hpp>
 #include <laurena/descriptors/parameter_descriptor.hpp>
+#include <laurena/descriptors/unique_descriptor.hpp>
+#include <laurena/descriptors/serial_entry_descriptor.hpp>
 
 //parsing
 #include <laurena/parsing/token.hpp>
