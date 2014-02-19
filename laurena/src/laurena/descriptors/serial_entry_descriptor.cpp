@@ -21,6 +21,7 @@ const descriptor* td<serial_entry>::desc()
         res->addField(&serial_entry::_serial,"serial");
         res->addField(&serial_entry::_pipeline,"persistance");
         res->addField(&serial_entry::_primary_key,"key");
+        res->addField(&serial_entry::_descriptor_name,"class");
     }
 
     return res;

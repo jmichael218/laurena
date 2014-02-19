@@ -102,6 +102,16 @@ void language::set_default_format_annotations()
     
 }
 
+void language::reader_constructor(std::function<std::shared_ptr<iarchive> ()> constructor)
+{
+    this->_reader_constructor = constructor;
+}
+
+void language::writer_constructor(std::function<std::shared_ptr<oarchive> ()> constructor)
+{
+    this->_writer_constructor = constructor;
+}
+
 /********************************************************************************/ 
 /*          creating classes related to language used                           */ 
 /********************************************************************************/ 

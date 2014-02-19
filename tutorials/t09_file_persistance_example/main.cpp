@@ -79,11 +79,11 @@ int main ()
     bob._type = 1; // professor
 
     // let's save it on disk
-    DISK.create("user", bob);
+    DISK.insert("user", bob);
 
     // let's test the read function
     user bobcloned;
-    DISK.read("user", "Bob Joe", &bobcloned);
+    DISK.select("user", "Bob Joe", &bobcloned);
 
     // Let's serialize it into json
     std::string destination = json::json::serialize(bobcloned);

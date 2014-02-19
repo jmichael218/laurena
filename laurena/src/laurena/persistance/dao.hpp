@@ -64,11 +64,25 @@ public:
     virtual bool    exist   (const any& primaryKey)     =0;
 
     /****************************************************************************/ 
+    /*          accessors                                                       */ 
+    /****************************************************************************/ 
+
+    inline
+        const std::string& serial_manager() const { return this->_serial_manager; }
+
+    inline
+        void serial_manager(const std::string& s) { this->_serial_manager = s; }
+
+    inline
+        void serial_manager(const char* s) { this->_serial_manager = s; }
+
+    /****************************************************************************/ 
     /*          protected datas                                                 */ 
     /****************************************************************************/ 
     protected:
 
     const descriptor&       _descriptor;
+    std::string             _serial_manager;
 
 };
 

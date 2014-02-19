@@ -42,6 +42,7 @@ descriptor* buildClassDescriptor_User()
     d->addField(&user::_password, "password");
     d->addField(&user::_serial, "serial");
     d->serialKeyField("serial");
+    d->primaryKeyField("name");
 
     return d;
 }
@@ -53,9 +54,12 @@ descriptor* buildClassDescriptor_Bot()
     d->addField(&bot::_id,"id");
     d->addField(&bot::_serial, "serial");
     d->serialKeyField("serial");
+    d->primaryKeyField("id");
 
     return d;
 }
+
+persistance DISK;
 
 int main ()
 {
@@ -64,7 +68,43 @@ int main ()
 
     // laurena's initialization
     classes::init();
+    json::JSON::init();
 
+    descriptor* userDescriptor = buildClassDescriptor_User();
+    descriptor* botDescriptor = buildClassDescriptor_Bot();
+
+    dao::sptr user_dao (new json::json_dao(*userDescriptor, "datas/users"));
+    user_dao->serial_manager("serials");
+
+    dao::sptr bot_dao = std::make_shared<json::json_dao>(*botDescriptor,  "datas/bots");
+    bot_dao->serial_manager("serials");
+
+    DISK.add("user", user_dao);
+    DISK.add("bot",  bot_dao);
+
+    DISK.add("serials", std::make_shared<file_serial_manager>("serials", json::JSON::language(), "datas/serials"));
+
+    // let's create a user
+    user bob;
+    bob._name = "Bob Joe";
+    bob._password = "azerty";
+    bob._serial = 1;
+
+    // let 's create a bot
+    bot robby;
+    robby._id = "Robby";
+    robby._serial = 2;
+
+    // let's save it on disk
+    DISK.insert("user", &bob);
+    DISK.insert("bot", &robby);
+
+
+    any res = DISK.serial_to_object("serials", "1");
+    user* bob_clone = anycast<user*>(res);
+
+    res = DISK.serial_to_object("serials", "2");
+    bot* robby_clone = anycast<bot*>(res);
 
     return 1;
 }

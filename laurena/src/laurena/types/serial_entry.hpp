@@ -67,6 +67,9 @@ public:
 
     // stringified (if nedded) version of the primary key
     std::string         _primary_key;
+
+    // name of the descriptor class, to call a constructor
+    std::string         _descriptor_name;
 };
 
 /********************************************************************************/ 

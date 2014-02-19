@@ -12,22 +12,22 @@
 
 using namespace laurena;
 
-serial_manager::serial_manager(persistance& engine, const std::string& spipeline) : _persistance(engine), _pipeline(spipeline)
+serial_manager::serial_manager(const std::string& spipeline) : _pipeline(spipeline)
 { }
 
-serial_manager::serial_manager(persistance& engine, const char* spipeline) : _persistance(engine), _pipeline(spipeline)
+serial_manager::serial_manager(const char* spipeline) : _pipeline(spipeline)
 { }
 
 serial_manager::~serial_manager()
 { }
 
-
+// USeless ?
 bool serial_manager::remove_object(any object)
 {
     const descriptor* d = object.desc();
     any serial_value;
     d->serial().get(object, serial_value);
-    return this->remove(serial_value);
+    return this->remove(serial_value.tos());
 }
 
 //End of file

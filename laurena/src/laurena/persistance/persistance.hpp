@@ -26,6 +26,7 @@
 #include <laurena/types/any.hpp>
 #include <laurena/traits/laurena_traits.hpp>
 #include <laurena/persistance/dao.hpp>
+#include <laurena/persistance/serial_manager.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -41,20 +42,39 @@ class persistance
 {
 public:
 
+    /****************************************************************************/
+    /*          constants                                                       */ 
+    /****************************************************************************/
+    enum SELECTOR : word8
+    {
+        PRIMARY_KEY = 0,
+        SERIAL_KEY  = 1
+    };
+
+
     void add(const std::string& pipeline, dao::sptr pdao);
+    void add (const std::string& pipeline, serial_manager::sptr pserial);
 
     /****************************************************************************/ 
     /*          persistance functions                                           */ 
     /****************************************************************************/ 
-    void create(const std::string& pipeline, any object);
-    void read(const std::string& pipeline, const any& primaryKey, any destination);
+    void insert(const std::string& pipeline, any object);
+
+    void select(const std::string& pipeline, const any& key, any destination, persistance::SELECTOR = PRIMARY_KEY);
+
+
     bool exist(const std::string& pipeline, const any& primaryKey);
+
+    void select_by_primary_key(const std::string& pipeline, const any& primaryKey, any& destination);
+    void select_by_serial_key(const std::string& pipeline, const any& serialKey, any& destination);
+    any  serial_to_object (const std::string& pipeline, const std::string& key);
 
     /****************************************************************************/ 
     /*          protected datas                                                 */ 
     /****************************************************************************/ 
     protected:
-    std::unordered_map<std::string, dao::sptr>       _daos;
+    std::unordered_map<std::string, dao::sptr>              _daos;
+    std::unordered_map<std::string, serial_manager::sptr>   _serial_managers;
 };
 
 /********************************************************************************/ 

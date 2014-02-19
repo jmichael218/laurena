@@ -7,6 +7,8 @@
 /// parsers and tokens for the mdl language
 ///
 #include <laurena/json/language_json.hpp>
+#include <laurena/json/oarchive_json.hpp>
+#include <laurena/json/iarchive_json.hpp>
 
 using namespace laurena;
 using namespace json;
@@ -17,6 +19,17 @@ class language          JSON::_language;
 bool                    JSON::_init               = false;
 charset<>               JSON::_charset_keywordList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\r\n\t " ;
 
+
+iarchive::sptr json_iarchive_constructor()
+{
+    return std::make_shared<iarchive_json>();
+}
+
+oarchive::sptr json_oarchive_constructor()
+{
+    return std::make_shared<oarchive_json>();
+
+}
 void JSON::init () 
 {
     if ( JSON::_init )
@@ -50,6 +63,8 @@ void JSON::init ()
     r [ JSON::TOKEN_SINGLE_STRING ]       = new string_parser();
 
     JSON::_language.tokens_parsers(std::move(r));
+    JSON::_language.writer_constructor(json_oarchive_constructor);
+    JSON::_language.reader_constructor(json_iarchive_constructor);
 
     JSON::_init = true;
 }

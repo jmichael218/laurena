@@ -112,6 +112,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t11_getter_setter_example", "tutorials\t11_getter_setter_example\t11_getter_setter_example.vcxproj", "{9B0DC668-8CC3-4F00-B5A2-A515BC48746A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t12_serial_key_example", "tutorials\t12_serial_key_example\t12_serial_key_example.vcxproj", "{4C41F3B7-9ED8-47FF-A365-63C236D67F7E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{81D0C8C4-B6A9-4C32-A5C1-EA5F3EE587CA} = {81D0C8C4-B6A9-4C32-A5C1-EA5F3EE587CA}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

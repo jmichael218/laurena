@@ -101,6 +101,10 @@ public:
 
     const std::vector<std::string>& format_annotations() const;
 
+    void reader_constructor(std::function<std::shared_ptr<iarchive> ()> constructor);
+    void writer_constructor(std::function<std::shared_ptr<oarchive> ()> constructor);
+
+
     std::shared_ptr<iarchive>       reader();
     std::shared_ptr<oarchive>       writer();
 

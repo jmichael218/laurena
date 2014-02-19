@@ -8,6 +8,7 @@
 ///
 #include <laurena/persistance/file_serial_manager.hpp>
 #include <laurena/descriptors/field.hpp>
+#include <laurena/toolboxes/loader.hpp>
 
 #include <laurena/archives/oarchive.hpp>
 #include <laurena/archives/iarchive.hpp>
@@ -16,34 +17,30 @@
 
 using namespace laurena;
 
-file_serial_manager::file_serial_manager(persistance& engine, const std::string& spipeline, language& fileformat, const std::string& directory) 
+file_serial_manager::file_serial_manager(const std::string& spipeline, language& fileformat, const std::string& directory) 
     
-    : serial_manager(engine, spipeline), _language(fileformat), _directory(directory)
+    : serial_manager(spipeline), _language(fileformat), _directory(directory)
 { }
 
-file_serial_manager::file_serial_manager(persistance& engine, const char* spipeline, language& fileformat, const char* directory) 
-    : serial_manager(engine, spipeline), _language(fileformat), _directory(directory)
+file_serial_manager::file_serial_manager(const char* spipeline, language& fileformat, const char* directory) 
+    : serial_manager(spipeline), _language(fileformat), _directory(directory)
 { }
 
 
 file_serial_manager::~file_serial_manager()
 { }
 
-std::string file_serial_manager::filename(const any& serialKey)
+std::string file_serial_manager::filename(const std::string& serialKey) const
 {
     std::string filename = this->_directory;
-    filename.append("/").append(serialKey.tos()).append(this->_language.name());
+    filename.append("/").append(serialKey).append(".").append(this->_language.name());
     return filename;
 }
-void file_serial_manager::create(any object)                             
+void file_serial_manager::create(const serial_entry& entry)                              
 {
-    any serialkey;
-    object.desc()->serial().get(object, serialkey);
-
-    std::string sfilename = std::move(this->filename(serialkey));
-
+    std::string sfilename = std::move(this->filename(entry._serial));
     oarchive::sptr w = this->_language.writer();
-    w->serialize("serial", object);
+    w->serialize("serial", &entry);
 
     // create directories if needed
     boost::filesystem::path p (this->_directory);
@@ -55,21 +52,31 @@ void file_serial_manager::create(any object)
 
 }
 
-void file_serial_manager::read  (const any& serialKey, any destination) 
+void file_serial_manager::read  (serial_entry& destination, const std::string& serialKey) 
 {
+    std::string content = loader<>::load(this->filename(serialKey));
+
+    iarchive::sptr reader = this->_language.reader();
+    any res = &destination;
+    reader->reader().str(content.c_str());
+    reader->parse("serial", res);
 }
 
-bool file_serial_manager::exist (const any& serialKey)
+bool file_serial_manager::exist (const std::string& serialKey)
+{
+    std::string sfilename = std::move(this->filename(serialKey));
+
+    boost::filesystem::path p (serialKey);
+    return boost::filesystem::exists(p);
+}
+
+bool file_serial_manager::remove(const std::string& serialKey)
 {
     std::string sfilename = std::move(this->filename(serialKey));
 
     boost::filesystem::path p (sfilename);
-    return boost::filesystem::exists(p);
-}
+    return boost::filesystem::remove(p);
 
-bool file_serial_manager::remove(const any& serialKey)
-{
-    return false;
 }
 
 //End of file

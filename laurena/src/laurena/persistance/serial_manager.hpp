@@ -26,6 +26,8 @@
 #include <laurena/types/any.hpp>
 #include <laurena/traits/laurena_traits.hpp>
 
+#include <laurena/types/serial_entry.hpp>
+
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
@@ -45,20 +47,27 @@ class serial_manager
     public:
 
     /****************************************************************************/ 
+    /*      typedefs                                                            */ 
+    /****************************************************************************/ 
+    typedef std::shared_ptr<serial_manager>         sptr;    
+
+    /****************************************************************************/ 
     /*      constructors, destructor                                            */ 
     /****************************************************************************/     
-    serial_manager(persistance& engine, const std::string& spipeline);
-    serial_manager(persistance& engine, const char* spipeline);
+    serial_manager(const std::string& spipeline);
+    serial_manager(const char* spipeline);
 
     virtual ~serial_manager();
 
     /****************************************************************************/ 
     /*      virtual functions                                                   */ 
     /****************************************************************************/ 
-    virtual void    create(any object)                              = 0;
-    virtual void    read  (const any& serialKey, any destination)   = 0;
-    virtual bool    exist (const any& serialKey)                    = 0;
-    virtual bool    remove(const any& serialKey)                    = 0;
+    virtual void    create(const serial_entry& entry)               = 0;
+
+    virtual void    read  (serial_entry& destination, const std::string& serialKey)      = 0;
+
+    virtual bool    exist (const std::string& serialKey)                    = 0;
+    virtual bool    remove(const std::string& serialKey)                    = 0;
 
     /****************************************************************************/ 
     /*      other functions                                                     */ 
@@ -72,7 +81,6 @@ class serial_manager
     protected:
 
     std::string     _pipeline;
-    persistance&    _persistance;
 };
 
 /********************************************************************************/ 

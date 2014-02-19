@@ -482,9 +482,6 @@
     <ClCompile Include="src\laurena\persistance\persistance.cpp">
       <Filter>Fichiers sources\persistance</Filter>
     </ClCompile>
-    <ClCompile Include="src\laurena\language\language.cpp">
-      <Filter>Fichiers sources\languages</Filter>
-    </ClCompile>
     <ClCompile Include="src\laurena\types\unique.cpp">
       <Filter>Fichiers sources\types</Filter>
     </ClCompile>
@@ -502,6 +499,9 @@
     </ClCompile>
     <ClCompile Include="src\laurena\persistance\file_serial_manager.cpp">
       <Filter>Fichiers sources\persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\language\language.cpp">
+      <Filter>Fichiers sources\languages</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
