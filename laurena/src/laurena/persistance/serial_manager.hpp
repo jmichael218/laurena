@@ -47,6 +47,12 @@ class serial_manager
     public:
 
     /****************************************************************************/ 
+    /*      constants                                                           */ 
+    /****************************************************************************/ 
+
+    static const word64 SERIAL_UNDEFINED = 0xFFFFFFFF;
+
+    /****************************************************************************/ 
     /*      typedefs                                                            */ 
     /****************************************************************************/ 
     typedef std::shared_ptr<serial_manager>         sptr;    
@@ -62,17 +68,20 @@ class serial_manager
     /****************************************************************************/ 
     /*      virtual functions                                                   */ 
     /****************************************************************************/ 
-    virtual void    create(const serial_entry& entry)               = 0;
+    virtual void    write(const serial_entry& entry)               = 0;
 
     virtual void    read  (serial_entry& destination, const std::string& serialKey)      = 0;
 
     virtual bool    exist (const std::string& serialKey)                    = 0;
     virtual bool    remove(const std::string& serialKey)                    = 0;
 
+    virtual void    load_last_serial()                                      = 0;
+    virtual void    save_last_serial()                                      = 0;
     /****************************************************************************/ 
     /*      other functions                                                     */ 
     /****************************************************************************/ 
     bool remove_object(any object);
+    word64 new_serial();
 
     inline const std::string& pipeline() { return this->_pipeline; }
     /****************************************************************************/ 
@@ -81,6 +90,8 @@ class serial_manager
     protected:
 
     std::string     _pipeline;
+
+    word64          _last_serial;
 };
 
 /********************************************************************************/ 

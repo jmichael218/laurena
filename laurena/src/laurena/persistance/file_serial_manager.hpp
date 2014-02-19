@@ -50,12 +50,13 @@ class file_serial_manager : public serial_manager
     /****************************************************************************/ 
     /*      virtual functions implementation                                    */ 
     /****************************************************************************/ 
-    virtual void    create(const serial_entry& entry)        ;
+    virtual void    write(const serial_entry& entry)        ;
 
     virtual void    read  (serial_entry& destination, const std::string& serialKey)                    ;
     virtual bool    exist (const std::string& serialKey)                    ;
     virtual bool    remove(const std::string& serialKey)                    ;
-
+    virtual void    load_last_serial()                                      ;
+    virtual void    save_last_serial()                                      ;
     /****************************************************************************/ 
     /*      new functions                                                       */ 
     /****************************************************************************/ 

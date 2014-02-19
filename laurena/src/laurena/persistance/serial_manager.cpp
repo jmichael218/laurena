@@ -12,10 +12,10 @@
 
 using namespace laurena;
 
-serial_manager::serial_manager(const std::string& spipeline) : _pipeline(spipeline)
+serial_manager::serial_manager(const std::string& spipeline) : _pipeline(spipeline), _last_serial(SERIAL_UNDEFINED)
 { }
 
-serial_manager::serial_manager(const char* spipeline) : _pipeline(spipeline)
+serial_manager::serial_manager(const char* spipeline) : _pipeline(spipeline), _last_serial(SERIAL_UNDEFINED)
 { }
 
 serial_manager::~serial_manager()
@@ -28,6 +28,19 @@ bool serial_manager::remove_object(any object)
     any serial_value;
     d->serial().get(object, serial_value);
     return this->remove(serial_value.tos());
+}
+
+word64 serial_manager::new_serial()
+{
+    if (this->_last_serial == SERIAL_UNDEFINED)
+    {
+        this->load_last_serial();
+        assert(this->_last_serial != SERIAL_UNDEFINED);
+    }
+
+    ++this->_last_serial;
+    this->save_last_serial();
+    return this->_last_serial;
 }
 
 //End of file

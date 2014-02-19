@@ -25,6 +25,19 @@ void getter_unique_serial(const any& obj, any& value)
     value = p->serial();
 }
 
+void setter_unique_owner(any& obj, const any& value)
+{
+    unique* p = anycast<unique*>(obj);
+    word64  s = anycast<word64>(value);
+    p->owner(s);
+}
+
+void getter_unique_owner(const any& obj, any& value)
+{
+    unique* p = anycast<unique*>(obj);
+    value = p->owner();
+}
+
 
 const descriptor* td<unique>::desc()
 {
@@ -33,6 +46,7 @@ const descriptor* td<unique>::desc()
     {
         res = standard_class_descriptor<unique>::build("unique");       
 		res->addField<word64>("serial", setter_unique_serial, getter_unique_serial);
+        res->addField<word64>("owner",  setter_unique_owner, getter_unique_owner);
         res->serialKeyField("serial");
     }
 

@@ -11,26 +11,38 @@
 
 using namespace laurena;
 
-unique::unique () : _serial (UNDEFINED_SERIAL)
+unique::unique () : _serial (UNDEFINED_SERIAL), _owner_serial(UNDEFINED_SERIAL), _owner()
 { }
 
-unique::unique (word64 serial) : _serial (serial)
+unique::unique (word64 serial) : _serial (serial), _owner_serial(UNDEFINED_SERIAL), _owner()
 { }
 
-unique::unique (const unique& u) : _serial(u._serial)
+unique::unique (const unique& u) : _serial(u._serial), _owner_serial(u._owner_serial), _owner(u._owner)
 { }
 
-unique::unique (unique&& u) : _serial(u._serial)
+unique::unique (unique&& u) : _serial(u._serial), _owner_serial(u._owner_serial), _owner(u._owner)
 { }
 
 unique::~unique()
 { }
 
-word64 unique::serial() const
-{ return this->_serial; }
+void unique::owner(unique::sptr& ptr)
+{
+    this->_owner = ptr;
+    this->_owner_serial =  (ptr == nullptr) ? UNDEFINED_SERIAL : ptr->serial();
+}
 
-
-void unique::serial(word64 value)
-{ this->_serial = value; }
-
+void unique::owner(word64 value)
+{    
+    this->_owner_serial = value; 
+    if (value == UNDEFINED_SERIAL)
+        this->_owner.reset();
+    else
+        if (!this->_owner.expired())
+        {
+            sptr p = this->_owner.lock();
+            if (p->serial() != value)
+                this->_owner.reset();
+        }
+}
 //End of file

@@ -36,7 +36,36 @@ std::string file_serial_manager::filename(const std::string& serialKey) const
     filename.append("/").append(serialKey).append(".").append(this->_language.name());
     return filename;
 }
-void file_serial_manager::create(const serial_entry& entry)                              
+
+void file_serial_manager::load_last_serial()
+{
+    std::string filename = this->_directory;
+    filename.append("/index.txt");
+
+    boost::filesystem::path p (filename);
+    if (!boost::filesystem::exists(p))
+    {
+        this->_last_serial = 0;
+        return;
+    }
+
+    std::string s = std::move(loader<>::load(filename));
+    this->_last_serial = boost::lexical_cast<word64>(s);
+}
+
+void file_serial_manager::save_last_serial()
+{
+    boost::filesystem::path p (this->_directory);
+    boost::filesystem::create_directories(p);
+
+    std::string filename = this->_directory;
+    filename.append("/index.txt");
+    std::ofstream out(filename);
+    out << this->_last_serial;
+    out.close();
+}
+
+void file_serial_manager::write(const serial_entry& entry)                              
 {
     std::string sfilename = std::move(this->filename(entry._serial));
     oarchive::sptr w = this->_language.writer();

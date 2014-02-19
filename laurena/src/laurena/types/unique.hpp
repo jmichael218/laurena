@@ -38,6 +38,12 @@ class unique
 public:
 
     /****************************************************************************/ 
+    /*      typedefs                                                            */ 
+    /****************************************************************************/ 
+    typedef std::shared_ptr<unique>             sptr;
+    typedef std::weak_ptr<unique>               wptr;
+
+    /****************************************************************************/ 
     /*      constants                                                           */ 
     /****************************************************************************/ 
     static const word64 UNDEFINED_SERIAL = 0;
@@ -58,13 +64,34 @@ public:
     word64 serial() const;
     void   serial(word64 value);
 
+    sptr   owner();
+    void   owner(word64 owner_serial);
+    void   owner(unique::sptr& ptr);
+
     /****************************************************************************/ 
     /*      datas                                                               */ 
     /****************************************************************************/ 
     private:
     word64          _serial;
-
+    word64          _owner_serial;
+    wptr            _owner;
 };
+
+/********************************************************************************/ 
+/*          inline functions                                                    */ 
+/********************************************************************************/ 
+
+inline
+word64 unique::serial() const
+{ return this->_serial; }
+
+inline
+void unique::serial(word64 value)
+{ this->_serial = value; }
+
+inline
+unique::sptr unique::owner()
+{ return this->_owner.lock(); }
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

@@ -10,6 +10,8 @@
 #include <laurena/constants/const_charsets.hpp>
 
 #include <laurena/mdl/mdl_language.hpp>
+#include <laurena/mdl/iarchive_mdl.hpp>
+#include <laurena/mdl/oarchive_mdl.hpp>
 
 using namespace laurena;
 using namespace mdl;
@@ -20,6 +22,17 @@ bool                    MDL::_init               = false;
 charset<>               MDL::_charset_keywordList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\r\n\t " ;
 language                MDL::_language;
 
+iarchive::sptr mdl_iarchive_constructor()
+{
+    return std::make_shared<iarchive_mdl>();
+}
+
+oarchive::sptr mdl_oarchive_constructor()
+{
+    return std::make_shared<oarchive_mdl>();
+
+
+}
 void MDL::init () 
 {
     if ( MDL::_init )
@@ -58,6 +71,8 @@ void MDL::init ()
     r [ MDL::TOKEN_STRING ]              = new multi_string_parser();
 
     MDL::_language.tokens_parsers(std::move(r));
+    MDL::_language.writer_constructor(mdl_oarchive_constructor);
+    MDL::_language.reader_constructor(mdl_iarchive_constructor);
 
     MDL::_init = true;
 }

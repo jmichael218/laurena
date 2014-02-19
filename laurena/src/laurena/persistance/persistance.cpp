@@ -54,7 +54,7 @@ void persistance::insert(const std::string& pipeline, any object)
                 throw LAURENA_NULL_POINTER_EXCEPTION("Class descriptor not found");
             }
             entry._descriptor_name = desc->name();
-            ser->create(entry);
+            ser->write(entry);
         }
     }
 }
