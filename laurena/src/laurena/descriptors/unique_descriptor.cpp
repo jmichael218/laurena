@@ -38,7 +38,8 @@ void setter_unique_owner(any& obj, const any& value)
 void getter_unique_owner(const any& obj, any& value)
 {
     unique* p = anycast<unique*>(obj);
-    value = p->owner();
+    unique::sptr spowner = p->owner();
+    value = (spowner == nullptr) ? unique::UNDEFINED_SERIAL : spowner->serial() ;
 }
 
 

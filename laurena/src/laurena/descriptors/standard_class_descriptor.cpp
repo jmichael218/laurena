@@ -66,7 +66,9 @@ const field&  base_standard_class_descriptor::primaryKey() const
         if (this->hasParent())
             return this->parent().primaryKey();
 
-        throw LAURENA_NULL_POINTER_EXCEPTION("class doesn't have any primary key.");
+        std::string message = "Class ";
+        message.append(this->name()).append (" doesn't have any primary key defined.");        
+        throw LAURENA_NULL_POINTER_EXCEPTION(message);
     }
     else
         return *this->_fields[this->_primary_key_field];
@@ -79,7 +81,9 @@ const field& base_standard_class_descriptor::serial() const
         if (this->hasParent())
             return this->parent().serial();
 
-        throw LAURENA_NULL_POINTER_EXCEPTION("class doesn't have any serial key.");
+        std::string message = "Class ";
+        message.append(this->name()).append (" doesn't have any serial key defined.");        
+        throw LAURENA_NULL_POINTER_EXCEPTION(message);
     }
     else
         return *this->_fields[this->_serial_field];
