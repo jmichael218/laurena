@@ -77,11 +77,14 @@ class serial_manager
 
     virtual void    load_last_serial()                                      = 0;
     virtual void    save_last_serial()                                      = 0;
+
+    virtual bool    is_valid_serial(const std::string& serialKey)          ;
     /****************************************************************************/ 
     /*      other functions                                                     */ 
     /****************************************************************************/ 
     bool remove_object(any object);
     word64 new_serial();
+    
 
     inline const std::string& pipeline() { return this->_pipeline; }
     /****************************************************************************/ 

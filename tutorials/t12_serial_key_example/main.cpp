@@ -20,9 +20,11 @@ class user
 {
 public:
 
+    user() : _serial(0) {}
+
     std::string     _name;
     std::string     _password;
-    word32          _serial;
+    word64          _serial;
 
 };
 
@@ -30,8 +32,10 @@ class bot : public unique
 {
 public:
 
+    bot () : _serial(0) {}
+
     std::string     _id;
-    word32          _serial;
+    word64          _serial;
 };
 
 descriptor* buildClassDescriptor_User()
@@ -88,22 +92,23 @@ int main ()
     user bob;
     bob._name = "Bob Joe";
     bob._password = "azerty";
-    bob._serial = 1;
+    
 
     // let 's create a bot
     bot robby;
     robby._id = "Robby";
-    robby._serial = 2;
+
 
     // let's save it on disk
     DISK.insert("user", &bob);
     DISK.insert("bot", &robby);
 
-
-    any res = DISK.serial_to_object("serials", "1");
+    std::string sid = boost::lexical_cast<std::string>(bob._serial);
+    any res = DISK.serial_to_object("serials", sid);
     user* bob_clone = anycast<user*>(res);
 
-    res = DISK.serial_to_object("serials", "2");
+    sid = boost::lexical_cast<std::string>(robby._serial);
+    res = DISK.serial_to_object("serials", sid);
     bot* robby_clone = anycast<bot*>(res);
 
     return 1;

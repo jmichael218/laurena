@@ -21,8 +21,11 @@ void setter_unique_serial(any& obj, const any& value)
 
 void getter_unique_serial(const any& obj, any& value)
 {
-    unique* p = anycast<unique*>(obj);
-    value = p->serial();
+    unique* p = anycast<unique*>(obj);    
+    if (p->serial())
+        value = p->serial();
+    else 
+        value = std::string("");
 }
 
 void setter_unique_owner(any& obj, const any& value)

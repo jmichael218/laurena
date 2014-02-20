@@ -33,7 +33,7 @@ void persistance::insert(const std::string& pipeline, any object)
     }    
 
     dao::sptr& d = it->second;
-    d->create(object);
+
     if (!d->serial_manager().empty())
     {
         auto it2 = this->_serial_managers.find(d->serial_manager());
@@ -46,6 +46,12 @@ void persistance::insert(const std::string& pipeline, any object)
 
             serial_entry entry;
             entry._serial = serialKey.tos();
+            if (!ser->is_valid_serial(entry._serial))
+            {
+                entry._serial = boost::lexical_cast<std::string>(ser->new_serial());
+                any a (entry._serial);
+                object.desc()->serial().set(object, a);
+            }
             entry._pipeline = pipeline;
             entry._primary_key = primaryKey.tos();
             const descriptor *desc = object.desc();
@@ -57,6 +63,8 @@ void persistance::insert(const std::string& pipeline, any object)
             ser->write(entry);
         }
     }
+
+    d->create(object);
 }
 
 void persistance::select(const std::string& pipeline, const any& key, any destination, persistance::SELECTOR selector)

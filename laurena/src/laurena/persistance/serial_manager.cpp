@@ -43,4 +43,12 @@ word64 serial_manager::new_serial()
     return this->_last_serial;
 }
 
+bool serial_manager::is_valid_serial(const std::string& serialKey)
+{
+    if (serialKey == "")
+        return false;
+    
+    return boost::lexical_cast<word64>(serialKey) > 0;
+}
+
 //End of file
