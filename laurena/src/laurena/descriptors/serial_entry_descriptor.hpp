@@ -24,6 +24,7 @@
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
 
+#include <laurena/descriptors/classes.hpp>
 #include <laurena/types/serial_entry.hpp>
 #include <laurena/traits/laurena_traits.hpp>
 
