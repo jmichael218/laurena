@@ -24,6 +24,8 @@ void persistance::add (const std::string& pipeline, serial_manager::sptr pserial
 
 void persistance::insert(const std::string& pipeline, any object)
 {
+const descriptor* desc = object.desc();
+
     auto it = this->_daos.find(pipeline);
     if (it == this->_daos.end())
     {
@@ -41,8 +43,19 @@ void persistance::insert(const std::string& pipeline, any object)
         {
             serial_manager::sptr ser = it2->second;
             any serialKey, primaryKey;
-            object.desc()->serial().get(object, serialKey);
-            object.desc()->primaryKey().get(object, primaryKey);
+
+            if (!desc->has(descriptor::Flags::SERIAL))
+            {
+                std::ostringstream ss;
+                ss << "An instance of class '" << desc->name() << "' has been asked to persistance with pipeline serial '" 
+                   << d->serial_manager () << "' but the class doesn't have any serial key."
+                   ;
+                throw LAURENA_EXCEPTION(ss.str());
+
+            }
+
+            desc->serial().get(object, serialKey);
+            desc->primaryKey().get(object, primaryKey);
 
             serial_entry entry;
             entry._serial = serialKey.tos();

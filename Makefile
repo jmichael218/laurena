@@ -15,3 +15,5 @@ all:
 	cd tutorials/t06_bitfield_example; make clean
 	cd tutorials/t07_epoch_example; make clean
 	cd tutorials/t09_file_persistance_example; make clean
+	cd tutorials/t10_xml_serialization; make clean
+	cd tutorials/t12_serial_key_example; make clean
