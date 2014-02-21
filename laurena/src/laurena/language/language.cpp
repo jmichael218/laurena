@@ -97,7 +97,7 @@ language& language::operator=(      language &&source)
 void language::set_default_format_annotations()
 {
     this->_format_annotations.resize(2);
-    this->_format_annotations[1] = ANNOTATION_FORMAT_ALL;
+    this->_format_annotations[1] = "format.all";
     (this->_format_annotations[0] = "format.").append(this->_name);
     
 }

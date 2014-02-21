@@ -25,6 +25,9 @@
     <ClCompile Include="src\laurena\xml\xml_language.cpp" />
     <ClCompile Include="src\laurena\xml\xml_oarchive.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Makefile" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FF34D06E-31F9-44E0-A255-AE22E8F41A87}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
