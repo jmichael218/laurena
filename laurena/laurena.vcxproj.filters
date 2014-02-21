@@ -100,7 +100,7 @@
     <Filter Include="Fichiers d%27en-tête\language">
       <UniqueIdentifier>{a19115d0-2f38-44b4-90b5-03b2b5ee5d62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\languages">
+    <Filter Include="Fichiers sources\language">
       <UniqueIdentifier>{1aa1240d-fe46-4205-962a-63272a2d0a59}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -501,7 +501,7 @@
       <Filter>Fichiers sources\persistance</Filter>
     </ClCompile>
     <ClCompile Include="src\laurena\language\language.cpp">
-      <Filter>Fichiers sources\languages</Filter>
+      <Filter>Fichiers sources\language</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

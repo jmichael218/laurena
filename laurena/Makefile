@@ -43,7 +43,7 @@ OBJECTS= $(CORE)/archives/iarchive.o \
 	$(CORE)/formatting/format_enum.o \
 	$(CORE)/formatting/format_epoch.o \
 	$(CORE)/functions/parameter.o \
-	$(CORE)/languages/language.o \
+	$(CORE)/language/language.o \
     $(CORE)/memory/memory_functions.o \
 	$(CORE)/parsing/basic_parsers.o \
     $(CORE)/parsing/token.o \
