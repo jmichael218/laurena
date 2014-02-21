@@ -20,7 +20,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Makefile.txt">
+    <Text Include="Makefile">
       <Filter>Fichiers de ressources</Filter>
     </Text>
   </ItemGroup>

@@ -4,7 +4,7 @@ CFLAGS= -std=c++11 -Wno-write-strings -I src -I ../include
 
 ARCHIVES=mdl.a json.a sql.a velocity.a laurena.a
 
-LIBRARIES=
+LIBRARIES=-lboost_system -lboost_filesystem
 
 CC=c++
 

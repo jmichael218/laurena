@@ -79,7 +79,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Makefile.txt" />
+    <Text Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
