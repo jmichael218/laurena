@@ -45,4 +45,21 @@ void unique::owner(word64 value)
                 this->_owner.reset();
         }
 }
+
+unique& unique::operator=(const unique&  source)
+{
+    this->_serial = source._serial;
+    this->_owner = source._owner;
+    this->_owner_serial = source._owner_serial;
+    return *this;
+}
+
+unique& unique::operator=(      unique&& source)
+{
+    this->_serial = source._serial;
+    this->_owner = source._owner;
+    this->_owner_serial = source._owner_serial;
+    return *this;
+}
+
 //End of file
