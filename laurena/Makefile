@@ -25,9 +25,11 @@ OBJECTS= $(CORE)/archives/iarchive.o \
 	$(CORE)/descriptors/numeric_type_descriptors.o \
 	$(CORE)/descriptors/parameter_descriptor.o \
     $(CORE)/descriptors/polymorphic_class_descriptor.o \
+	$(CORE)/descriptors/serial_entry_descriptor.o \
 	$(CORE)/descriptors/standard_class_descriptor.o \
     $(CORE)/descriptors/string_array_descriptor.o \
     $(CORE)/descriptors/string_descriptor.o \
+	$(CORE)/descriptors/unique_descriptor.o \
     $(CORE)/descriptors/variable_descriptor.o \
 	$(CORE)/descriptors/vector_descriptor.o \
     $(CORE)/exceptions/bad_cast_exception.o \
@@ -41,20 +43,25 @@ OBJECTS= $(CORE)/archives/iarchive.o \
 	$(CORE)/formatting/format_enum.o \
 	$(CORE)/formatting/format_epoch.o \
 	$(CORE)/functions/parameter.o \
+	$(CORE)/languages/language.o \
     $(CORE)/memory/memory_functions.o \
 	$(CORE)/parsing/basic_parsers.o \
     $(CORE)/parsing/token.o \
     $(CORE)/parsing/tokenizer.o \
 	$(CORE)/persistance/dao.o \
 	$(CORE)/persistance/file_dao.o \
+	$(CORE)/persistance/file_serial_manager.o \
 	$(CORE)/persistance/persistance.o \
+	$(CORE)/persistance/serial_manager.o \
 	$(CORE)/toolboxes/bitset.o \
 	$(CORE)/toolboxes/filename.o \
 	$(CORE)/types/any.o \
 	$(CORE)/types/context.o \
 	$(CORE)/types/datetime_format.o \
 	$(CORE)/types/literator.o \
+	$(CORE)/types/serial_entry.o \
 	$(CORE)/types/string_array.o \
+	$(CORE)/types/unique.o \
 	$(CORE)/types/variable.o
 
 TARGET=laurena
