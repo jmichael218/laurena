@@ -9,6 +9,7 @@
 ///
 
 #include <laurena/descriptors/string_array_descriptor.hpp>
+#include <laurena/descriptors/numeric_type_descriptors.hpp>
 
 using namespace laurena;
 
