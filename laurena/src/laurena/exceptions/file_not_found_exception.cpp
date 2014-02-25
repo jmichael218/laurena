@@ -14,9 +14,8 @@ using namespace laurena;
 
 
 file_not_found_exception::file_not_found_exception (const char* message, const std::string& fileNotFound, const char* filename, const char* function, word32 line)
-                    : exception(message, filename, function, line)
+                    : exception(message, filename, function, line), _file_not_found(fileNotFound)
 {
-    this->_file_not_found = fileNotFound;
     this->ready();
 }
 

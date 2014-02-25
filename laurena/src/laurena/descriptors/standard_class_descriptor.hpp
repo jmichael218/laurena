@@ -29,6 +29,7 @@
 #include <laurena/descriptors/field.hpp>
 #include <laurena/descriptors/method_descriptor.hpp>
 #include <laurena/exceptions/null_pointer_exception.hpp>
+#include <laurena/exceptions/class_not_found_exception.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -141,6 +142,10 @@ public:
 	{
 		typedef typename traits<FIELDTYPE>::basetype basetype;
 		const descriptor* fdesc = classes::byType(typeid(basetype));
+        if (!fdesc)
+        {
+            throw LAURENA_CLASS_NOT_FOUND_EXCEPTION(typeid(basetype), "Unresolved field type");
+        }
 		word32 offset = (word32) &(((T*)(0))->*f);
 		bool bIsPointer = std::is_pointer<FIELDTYPE>::value;
 		return this->editFields().unused().init(name, fdesc, offset).isPointer(bIsPointer);
@@ -151,6 +156,10 @@ public:
 	{
 		typedef typename traits<FIELDTYPE>::basetype basetype;
 		const descriptor* fdesc = classes::byType(typeid(basetype));
+        if (!fdesc)
+        {
+            throw LAURENA_CLASS_NOT_FOUND_EXCEPTION(typeid(basetype), "Unresolved field type");
+        }
 		bool bIsPointer = std::is_pointer<FIELDTYPE>::value;
 		return this->editFields().unused().init(name, fdesc, setter, getter);
 	}

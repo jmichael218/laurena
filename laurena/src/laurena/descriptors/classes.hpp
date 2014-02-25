@@ -109,7 +109,7 @@ class classes
     static std::unordered_map<std::string,const descriptor*>		_classes_by_name;		
 
 	//! \brief map of class descriptors, indexed by type_index. See std::type_index
-    static std::unordered_map<std::type_index,const descriptor*>    _classes_by_typeid;
+    static std::unordered_map<size_t,const descriptor*>    _classes_by_typeid;
 };
 
 

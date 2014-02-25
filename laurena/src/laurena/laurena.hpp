@@ -35,6 +35,7 @@
 // exceptions
 #include <laurena/exceptions/exception.hpp>
 #include <laurena/exceptions/bad_cast_exception.hpp>
+#include <laurena/exceptions/class_not_found_exception.hpp>
 #include <laurena/exceptions/failed_parsing_exception.hpp>
 #include <laurena/exceptions/file_not_found_exception.hpp>
 #include <laurena/exceptions/null_pointer_exception.hpp>

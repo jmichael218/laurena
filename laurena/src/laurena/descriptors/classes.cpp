@@ -29,12 +29,12 @@
 using namespace laurena;
 
 std::unordered_map<std::string,const descriptor*>      classes::_classes_by_name;
-std::unordered_map<std::type_index,const descriptor*>           classes::_classes_by_typeid;
+std::unordered_map<size_t,const descriptor*>           classes::_classes_by_typeid;
 
 void classes::add(const descriptor* myClass)
 {
     _classes_by_name[myClass->name()] = myClass;
-    _classes_by_typeid[std::type_index(myClass->type())] = myClass;
+    _classes_by_typeid[std::type_index(myClass->type()).hash_code()] = myClass;
 }
 
 const descriptor*  classes::byName(const std::string& name)
@@ -45,14 +45,14 @@ const descriptor*  classes::byName(const std::string& name)
 
 const descriptor*  classes::byType(const type_info& type)
 {
-    auto i = classes::_classes_by_typeid.find(std::type_index(type));
+    auto i = classes::_classes_by_typeid.find(std::type_index(type).hash_code());
 	return i == classes::_classes_by_typeid.end () ? nullptr : i->second;  
 }
 
 void classes::logClasses (std::ostream& destination)
 {
 	for (auto p : classes::_classes_by_typeid)
-		destination << p.second->name() << " (#" << p.first.hash_code() << ")" << std::endl;	
+		destination << p.second->name() << " (#" << p.first << ")" << std::endl;	
 }
 
 bool classes::areParents(const descriptor& c1, const descriptor& c2)
@@ -77,34 +77,40 @@ void classes::errorTypeNotFound(const type_info& type)
 
 void classes::init ()
 {
-    // std::string descriptor stored
-    td<std::string>::desc();
+    try
+    {
+        // std::string descriptor stored
+        td<std::string>::desc();
 
-    // numeric types
-    td<word8>::desc();
-    td<int8>::desc();
+        // numeric types
+        td<word8>::desc();
+        td<int8>::desc();
 	
-    td<word16>::desc();
-    td<int16>::desc();
-    td<word32>::desc();
-    td<int32>::desc();
-    td<word64>::desc();
-    td<int64>::desc();
+        td<word16>::desc();
+        td<int16>::desc();
+        td<word32>::desc();
+        td<int32>::desc();
+        td<word64>::desc();
+        td<int64>::desc();
 
-	td<bool>::desc();
+	    td<bool>::desc();
 
-    // types descriptors
-	td<const descriptor *>::desc();
-    td<any>::desc();
-    td<variable>::desc();
-    td<variable_list>::desc();
-    td<string_array>::desc();
-    td<boost::dynamic_bitset<>>::desc();
-	td<parameter>::desc();
-	td<parameters>::desc();
-    td<serial_entry>::desc();
-    td<unique>::desc();
-
+        // types descriptors
+	    td<const descriptor *>::desc();
+        td<any>::desc();
+        td<variable>::desc();
+        td<variable_list>::desc();
+        td<string_array>::desc();
+        td<boost::dynamic_bitset<>>::desc();
+	    td<parameter>::desc();
+	    td<parameters>::desc();
+        td<serial_entry>::desc();
+        td<unique>::desc();
+    }
+    catch(const exception& e)
+    {
+		std::cerr << e.what();
+    }
 }
 
 //end of file

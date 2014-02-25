@@ -48,6 +48,7 @@
     <ClInclude Include="src\laurena\descriptors\variable_descriptor.hpp" />
     <ClInclude Include="src\laurena\descriptors\vector_descriptor.hpp" />
     <ClInclude Include="src\laurena\exceptions\bad_cast_exception.hpp" />
+    <ClInclude Include="src\laurena\exceptions\class_not_found_exception.hpp" />
     <ClInclude Include="src\laurena\exceptions\exception.hpp" />
     <ClInclude Include="src\laurena\exceptions\failed_parsing_exception.hpp" />
     <ClInclude Include="src\laurena\exceptions\file_not_found_exception.hpp" />
@@ -115,6 +116,7 @@
     <ClCompile Include="src\laurena\descriptors\variable_descriptor.cpp" />
     <ClCompile Include="src\laurena\descriptors\vector_descriptor.cpp" />
     <ClCompile Include="src\laurena\exceptions\bad_cast_exception.cpp" />
+    <ClCompile Include="src\laurena\exceptions\class_not_found_exception.cpp" />
     <ClCompile Include="src\laurena\exceptions\exception.cpp" />
     <ClCompile Include="src\laurena\exceptions\failed_parsing_exception.cpp" />
     <ClCompile Include="src\laurena\exceptions\file_not_found_exception.cpp" />

@@ -324,6 +324,9 @@
     <ClInclude Include="src\laurena\persistance\file_serial_manager.hpp">
       <Filter>Fichiers d%27en-tête\persistance</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\exceptions\class_not_found_exception.hpp">
+      <Filter>Fichiers d%27en-tête\exceptions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\laurena\debug\debug.cpp">
@@ -502,6 +505,9 @@
     </ClCompile>
     <ClCompile Include="src\laurena\language\language.cpp">
       <Filter>Fichiers sources\language</Filter>
+    </ClCompile>
+    <ClCompile Include="src\laurena\exceptions\class_not_found_exception.cpp">
+      <Filter>Fichiers sources\exceptions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

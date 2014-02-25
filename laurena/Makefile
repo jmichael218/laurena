@@ -33,6 +33,7 @@ OBJECTS= $(CORE)/archives/iarchive.o \
     $(CORE)/descriptors/variable_descriptor.o \
 	$(CORE)/descriptors/vector_descriptor.o \
     $(CORE)/exceptions/bad_cast_exception.o \
+	$(CORE)/exceptions/class_not_found.o \
 	$(CORE)/exceptions/exception.o \
     $(CORE)/exceptions/failed_parsing_exception.o \
     $(CORE)/exceptions/file_not_found_exception.o \
