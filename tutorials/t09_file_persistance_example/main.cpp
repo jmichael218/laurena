@@ -44,10 +44,10 @@ descriptor* buildClassDescriptor_User()
 
     // create class descriptor for the class 'user'
     auto d = standard_class_descriptor<user>::build("user");
-    d->addField(&user::_gender,"gender");
-    d->addField(&user::_type,"type").annotate(new format_enum("format.all",user_types));
-    d->addField(&user::_age,"age");
-    d->addField(&user::_name,"name");
+    d->add_field(&user::_gender,"gender");
+    d->add_field(&user::_type,"type").annotate(new format_enum("format.all",user_types));
+    d->add_field(&user::_age,"age");
+    d->add_field(&user::_name,"name");
 
     //Let"s declare name as the primary field.
     d->primaryKeyField("name");

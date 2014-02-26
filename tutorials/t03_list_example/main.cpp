@@ -44,9 +44,9 @@ void buildClassDescriptor_Animal ()
 {
     // create class descriptor for the class 'animal'
     auto d_animal = standard_class_descriptor<animal>::build("animal");
-    d_animal->addField(&animal::_specie,"specie");
-    d_animal->addField(&animal::_name,"name");
-    d_animal->addField(&animal::_age,"age");
+    d_animal->add_field(&animal::_specie,"specie");
+    d_animal->add_field(&animal::_name,"name");
+    d_animal->add_field(&animal::_age,"age");
 }
 
 // This function register the zoo class to the serialization and parsing system

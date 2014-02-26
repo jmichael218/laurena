@@ -49,8 +49,8 @@ const descriptor* td<unique>::desc()
     if (res == nullptr)
     {
         res = standard_class_descriptor<unique>::build("unique");       
-		res->addField<word64>("serial", setter_unique_serial, getter_unique_serial);
-        res->addField<word64>("owner",  setter_unique_owner, getter_unique_owner);
+		res->add_field<word64>("serial", setter_unique_serial, getter_unique_serial);
+        res->add_field<word64>("owner",  setter_unique_owner, getter_unique_owner);
         res->serialKeyField("serial");
     }
 

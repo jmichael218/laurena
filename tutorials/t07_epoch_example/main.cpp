@@ -36,8 +36,8 @@ void buildClassDescriptor_Article()
 {
     // create class descriptor for the class 'article'
 	auto d = standard_class_descriptor<article>::build("article");
-	d->addField(&article::_name,"name");
-	d->addField(&article::_epoch,"epoch").annotate(new format_epoch("format.all", "dd/mm/yyyy HH:MM:SS", DATE_FORMAT));
+	d->add_field(&article::_name,"name");
+	d->add_field(&article::_epoch,"epoch").annotate(new format_epoch("format.all", "dd/mm/yyyy HH:MM:SS", DATE_FORMAT));
 }
 
 void testArticle ()

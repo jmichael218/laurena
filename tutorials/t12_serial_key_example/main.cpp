@@ -42,9 +42,9 @@ descriptor* buildClassDescriptor_User()
 {
     // create class descriptor for the class 'user'
     auto d = standard_class_descriptor<user>::build("user");
-    d->addField(&user::_name,"name");
-    d->addField(&user::_password, "password");
-    d->addField(&user::_serial, "serial");
+    d->add_field(&user::_name,"name");
+    d->add_field(&user::_password, "password");
+    d->add_field(&user::_serial, "serial");
     d->serialKeyField("serial");
     d->primaryKeyField("name");
 
@@ -55,8 +55,8 @@ descriptor* buildClassDescriptor_Bot()
 {
     // create class descriptor for the class 'user'
     auto d = standard_class_descriptor<bot>::build("bot");
-    d->addField(&bot::_id,"id");
-    d->addField(&bot::_serial, "serial");
+    d->add_field(&bot::_id,"id");
+    d->add_field(&bot::_serial, "serial");
     d->serialKeyField("serial");
     d->primaryKeyField("id");
 

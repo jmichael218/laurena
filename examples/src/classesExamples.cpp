@@ -22,19 +22,19 @@ void buildClassDescriptor_SimpleCat ()
     auto d = standard_class_descriptor<simple_cat>::build("simple_cat");
 
 	// to be able to serialize fields, call descriptor->init_field(CLASS,"fieldname",field)
-    d->addField(&simple_cat::_name,"name");
-    d->addField(&simple_cat::_age,"age");
-	d->addField(&simple_cat::_birds,"birds");
-	d->addField(&simple_cat::_mouses,"mouses");
+    d->add_field(&simple_cat::_name,"name");
+    d->add_field(&simple_cat::_age,"age");
+	d->add_field(&simple_cat::_birds,"birds");
+	d->add_field(&simple_cat::_mouses,"mouses");
 }
 
 void buildClassDescriptor_Animal()
 {
     // create class descriptor for the class 'animal'
 	auto d_animal = standard_class_descriptor<animal>::build("animal");
-	d_animal->addField(&animal::_specie,"specie");
-    d_animal->addField(&animal::_name,"name");
-    d_animal->addField(&animal::_age,"age");
+	d_animal->add_field(&animal::_specie,"specie");
+    d_animal->add_field(&animal::_name,"name");
+    d_animal->add_field(&animal::_age,"age");
 }
 
 void buildClassDescriptor_Cat()
@@ -44,8 +44,8 @@ void buildClassDescriptor_Cat()
     auto d = standard_class_descriptor<cat>::build("cat", classes::byName("animal"));
 
 	// to be able to serialize fields, call descriptor->init_field(CLASS,"fieldname",field)
-	d->addField(&cat::_birds,"birds");
-	d->addField(&cat::_mouses,"mouses");
+	d->add_field(&cat::_birds,"birds");
+	d->add_field(&cat::_mouses,"mouses");
 }
 
 void buildClassDescriptor_Zoo()
@@ -65,10 +65,10 @@ void buildClassDescriptor_User()
 {
     // create class descriptor for the class 'user'
 	auto d = standard_class_descriptor<user>::build("user");
-	d->addField(&user::_gender,"gender").annotate(new format_enum("format.all",genders));
-    d->addField(&user::_type,"type").annotate(new format_enum("format.all",user_types));
-	d->addField(&user::_age,"age");
-	d->addField(&user::_name,"name");
+	d->add_field(&user::_gender,"gender").annotate(new format_enum("format.all",genders));
+    d->add_field(&user::_type,"type").annotate(new format_enum("format.all",user_types));
+	d->add_field(&user::_age,"age");
+	d->add_field(&user::_name,"name");
 }
 
 string_array dragon_states = "happy hungry sleepy";
@@ -77,9 +77,9 @@ void buildClassDescriptor_Dragon()
 {
     // create class descriptor for the class 'dragon'
 	auto d = standard_class_descriptor<dragon>::build("dragon");
-	d->addField(&dragon::_name,"name");
-	d->addField(&dragon::_state,"state").annotate(new format_bitset("format.all", dragon_states));
-	d->addField(&dragon::_foods,"food").annotate(new format_bitset("format.all", dragon_foods));
+	d->add_field(&dragon::_name,"name");
+	d->add_field(&dragon::_state,"state").annotate(new format_bitset("format.all", dragon_states));
+	d->add_field(&dragon::_foods,"food").annotate(new format_bitset("format.all", dragon_foods));
 }
 
 void buildClassDescriptor_Building()
@@ -88,11 +88,11 @@ void buildClassDescriptor_Building()
 
 	field::getter sgname = [] (const any& object, any& value) { building* b = anycast<building*>(object); value = b->name(); };
 	field::setter ssname = [] (any& object, const any& value) { building* b = anycast<building*>(object); b->name(anycast<const std::string&>(value));};
-	d->addField<std::string>("name", ssname,sgname);
+	d->add_field<std::string>("name", ssname,sgname);
 
 	field::getter sgfloors = [] (const any& object, any& value) { building* b = anycast<building*>(object); value = b->floors(); };
 	field::setter ssfloors = [] (any& object, const any& value) { building* b = anycast<building*>(object); b->floors(anycast<unsigned char>(value));};
-	d->addField<unsigned char>("floors", ssfloors, sgfloors);
+	d->add_field<unsigned char>("floors", ssfloors, sgfloors);
 }
 
 std::ostream& operator << (std::ostream& dest, const ivertex& v)
@@ -108,8 +108,8 @@ tokenizer& operator >> (tokenizer& source, ivertex& v)
 void buildClassDescriptor_IVertex()
 {
 	auto d = standard_class_descriptor<ivertex>::build("ivertex");
-    d->addField(&ivertex::_x,"x");
-    d->addField(&ivertex::_y,"y");
+    d->add_field(&ivertex::_x,"x");
+    d->add_field(&ivertex::_y,"y");
 
 	d->annotate(new generic_format<ivertex>("json"));
 }
@@ -118,9 +118,9 @@ void buildClassDescriptor_IVertex()
 void buildClassDescriptor_ITriangle()
 {
 	auto d = standard_class_descriptor<itriangle>::build("itriangle");
-	d->addField(&itriangle::_v0,"v0");
-	d->addField(&itriangle::_v1,"v1");
-	d->addField(&itriangle::_v2,"v2");
+	d->add_field(&itriangle::_v0,"v0");
+	d->add_field(&itriangle::_v1,"v1");
+	d->add_field(&itriangle::_v2,"v2");
 };
 
 //End of file

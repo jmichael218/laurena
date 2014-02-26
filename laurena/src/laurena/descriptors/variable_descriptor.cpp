@@ -20,8 +20,8 @@ using namespace laurena;
 
 variable_descriptor::variable_descriptor () : standard_class_descriptor<variable>("variable",nullptr)
 {
-    this->addField(&variable::_name,"name");
-    this->addField(&variable::_value,"value");
+    this->add_field(&variable::_name,"name");
+    this->add_field(&variable::_value,"value");
 }
 
 /********************************************************************************/ 

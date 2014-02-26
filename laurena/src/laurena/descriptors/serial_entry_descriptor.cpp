@@ -18,10 +18,10 @@ const descriptor* td<serial_entry>::desc()
     if (res == nullptr)
     {
         res = standard_class_descriptor<serial_entry>::build("serial_entry");       
-        res->addField(&serial_entry::_serial,"serial");
-        res->addField(&serial_entry::_pipeline,"persistance");
-        res->addField(&serial_entry::_primary_key,"key");
-        res->addField(&serial_entry::_descriptor_name,"class");
+        res->add_field(&serial_entry::_serial,"serial");
+        res->add_field(&serial_entry::_pipeline,"persistance");
+        res->add_field(&serial_entry::_primary_key,"key");
+        res->add_field(&serial_entry::_descriptor_name,"class");
     }
 
     return res;

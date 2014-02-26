@@ -35,9 +35,9 @@ void buildClassDescriptor_Dragon()
 {
     // create class descriptor for the class 'dragon'
 	auto d = standard_class_descriptor<dragon>::build("dragon");
-	d->addField(&dragon::_name,"name");
-	d->addField(&dragon::_state,"state").annotate(new format_bitset("format.all", dragon_states));
-	d->addField(&dragon::_foods,"food").annotate(new format_bitset("format.all", dragon_foods));
+	d->add_field(&dragon::_name,"name");
+	d->add_field(&dragon::_state,"state").annotate(new format_bitset("format.all", dragon_states));
+	d->add_field(&dragon::_foods,"food").annotate(new format_bitset("format.all", dragon_foods));
 }
 
 void testDragon ()

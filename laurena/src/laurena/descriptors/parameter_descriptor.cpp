@@ -23,12 +23,12 @@ const descriptor* td<parameter>::desc()
     {
         res = standard_class_descriptor<parameter>::build("parameter");       
 
-		res->addField(&parameter::_name, "name");
+		res->add_field(&parameter::_name, "name");
 
 		const descriptor * cdesc = td<const descriptor *>::desc();
 		res->editFields().unused().init("type", cdesc, offsetof(parameter, _descriptor)).isPointer(true).noQuote(true);
 	
-		res->addField(&parameter::_flags, "flags").annotate(new format_bitset(ANNOTATION_FORMAT_ALL, parameter::FlagsKeywords));
+		res->add_field(&parameter::_flags, "flags").annotate(new format_bitset(ANNOTATION_FORMAT_ALL, parameter::FlagsKeywords));
     }
 
     return res;

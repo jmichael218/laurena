@@ -51,9 +51,9 @@ void buildClassDescriptor_Animal ()
 {
     // create class descriptor for the class 'animal'
     auto d_animal = standard_class_descriptor<animal>::build("animal");
-    d_animal->addField(&animal::_specie,"specie");
-    d_animal->addField(&animal::_name,"name");
-    d_animal->addField(&animal::_age,"age");
+    d_animal->add_field(&animal::_specie,"specie");
+    d_animal->add_field(&animal::_name,"name");
+    d_animal->add_field(&animal::_age,"age");
 }
 
 
@@ -63,8 +63,8 @@ void buildClassDescriptor_Cat ()
     // create class descriptor for the class 'cat'
     // it is pretty much the same than for simple classes except you give the parent class in the creation
     auto d = standard_class_descriptor<cat>::build("cat", td<animal>::desc());
-    d->addField(&cat::_birds,"birds");
-    d->addField(&cat::_mouses,"mouses");
+    d->add_field(&cat::_birds,"birds");
+    d->add_field(&cat::_mouses,"mouses");
 }
 
 int main ()

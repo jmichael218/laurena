@@ -103,7 +103,7 @@ const descriptor* td<string_array>::desc()
 		// setter for the vector size
 		field::setter setsize = [] (any& object, const any& value) { string_array* b = anycast<string_array*>(object); b->resize(anycast<word32>(value));};
 
-		res->addField<word32>("size", setsize, getsize).supportTag("vector.size");
+		res->add_field<word32>("size", setsize, getsize).supportTag("vector.size");
     }
 
     return res;

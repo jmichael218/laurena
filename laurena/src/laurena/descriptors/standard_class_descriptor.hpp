@@ -138,7 +138,7 @@ public:
     /*          field edition							                        */ 
     /****************************************************************************/ 
 	template<typename FIELDTYPE>
-	inline field& addField(FIELDTYPE T::*f, const char* name)
+	inline field& add_field(FIELDTYPE T::*f, const char* name)
 	{
 		typedef typename traits<FIELDTYPE>::basetype basetype;
 		const descriptor* fdesc = classes::byType(typeid(basetype));
@@ -152,7 +152,7 @@ public:
 	}
 
 	template<typename FIELDTYPE>
-	inline field& addField(const char* name, field::setter setter, field::getter getter)
+	inline field& add_field(const char* name, field::setter setter, field::getter getter)
 	{
 		typedef typename traits<FIELDTYPE>::basetype basetype;
 		const descriptor* fdesc = classes::byType(typeid(basetype));

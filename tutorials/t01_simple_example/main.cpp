@@ -44,11 +44,11 @@ void buildClassDescriptor_SimpleCat ()
     // calling ::build will also add the class descriptor to the global classes list.
     auto d = standard_class_descriptor<simple_cat>::build("simple_cat");
 
-    // to be able to serialize fields, call descriptor->addField(FIELD, "fieldname")
-    d->addField(&simple_cat::_name,"name");
-    d->addField(&simple_cat::_age,"age");
-    d->addField(&simple_cat::_birds,"birds");
-    d->addField(&simple_cat::_mouses,"mouses");
+    // to be able to serialize fields, call descriptor->add_field(FIELD, "fieldname")
+    d->add_field(&simple_cat::_name,"name");
+    d->add_field(&simple_cat::_age,"age");
+    d->add_field(&simple_cat::_birds,"birds");
+    d->add_field(&simple_cat::_mouses,"mouses");
 }
 
 int main ()
