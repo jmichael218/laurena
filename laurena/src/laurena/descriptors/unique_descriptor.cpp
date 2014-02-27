@@ -51,7 +51,7 @@ const descriptor* td<unique>::desc()
         res = standard_class_descriptor<unique>::build("unique");       
 		res->add_field<word64>("serial", setter_unique_serial, getter_unique_serial);
         res->add_field<word64>("owner",  setter_unique_owner, getter_unique_owner);
-        res->serialKeyField("serial");
+        res->serial_key("serial");
     }
 
     return res;

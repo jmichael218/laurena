@@ -50,7 +50,7 @@ descriptor* buildClassDescriptor_User()
     d->add_field(&user::_name,"name");
 
     //Let"s declare name as the primary field.
-    d->primaryKeyField("name");
+    d->primary_key("name");
     return d;
 }
 

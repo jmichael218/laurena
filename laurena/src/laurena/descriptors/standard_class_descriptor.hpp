@@ -104,8 +104,8 @@ public:
     /*          new functions                                                   */ 
     /****************************************************************************/ 
         
-    base_standard_class_descriptor& primaryKeyField(const std::string& fieldName);
-    base_standard_class_descriptor& serialKeyField (const std::string& fieldName);
+    base_standard_class_descriptor& primary_key(const std::string& fieldName);
+    base_standard_class_descriptor& serial_key(const std::string& fieldName);
 
     inline fields& editFields() { return _fields ; }
 

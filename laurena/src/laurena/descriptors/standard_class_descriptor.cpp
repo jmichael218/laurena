@@ -139,7 +139,7 @@ const fields& base_standard_class_descriptor::getFields() const
 /*              NEW FUNCTIONS                                                   */ 
 /*                                                                              */ 
 /********************************************************************************/ 
-base_standard_class_descriptor& base_standard_class_descriptor::primaryKeyField(const std::string& fieldName)
+base_standard_class_descriptor& base_standard_class_descriptor::primary_key(const std::string& fieldName)
 {
     int index = this->_fields.index(fieldName);
     if (index != FIELD_UNDEFINED)
@@ -155,7 +155,7 @@ base_standard_class_descriptor& base_standard_class_descriptor::primaryKeyField(
     return *this;
 }
 
-base_standard_class_descriptor& base_standard_class_descriptor::serialKeyField(const std::string& fieldName)
+base_standard_class_descriptor& base_standard_class_descriptor::serial_key(const std::string& fieldName)
 {
     int index = this->_fields.index(fieldName);
     if (index != FIELD_UNDEFINED)
