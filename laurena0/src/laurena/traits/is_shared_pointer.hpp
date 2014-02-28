@@ -1,15 +1,15 @@
 ///
-/// \file     character.hpp
-/// \brief    test classes
+/// \file     is_shared_pointer.hpp
+/// \brief    Deduce if a type is a shared pointer
 /// \author   Frederic Manisse
 /// \version  1.0
 /// \licence  LGPL. See http://www.gnu.org/copyleft/lesser.html
 ///
-///  test classes
+///  Deduce if a type is a shared pointer
 ///
 
-#ifndef LAURENA_TEST_CHARACTER_H
-#define LAURENA_TEST_CHARACTER_H
+#ifndef LAURENA_IS_SHARED_POINTER_H
+#define LAURENA_IS_SHARED_POINTER_H
 
 /********************************************************************************/
 /*                      pragma once support                                     */ 
@@ -21,87 +21,26 @@
 /********************************************************************************/ 
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
-#include <laurena/laurena.hpp>
+
+#include <memory>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
 namespace laurena {
-namespace test {
 
-class character
-{
-public:
+/*********************************************************************************/
+/*          trait is shared pointer                                              */ 
+/*********************************************************************************/ 
+template<typename T> 
+struct is_shared_pointer : std::false_type {};
 
-    std::string     _name;
-    word16          _age;
+template<typename T > 
+struct is_shared_pointer<std::shared_ptr<T>> : std::true_type {};
 
-};
-
-class characters : public std::vector<character*>
-{
-
-};
-
-class mariage 
-{
-public:
-
-	mariage () : _husband (nullptr) , _wife (nullptr) {}
-
-	character*	_husband;
-	character*	_wife;
-	characters	_children;
-};
-
-
-
-
-class test_bitset_binary
-{
-public:
-
-    word8                       _w8;
-    boost::dynamic_bitset<>     _bitset;
-    int32                       _i32;
-};
-
-
-class test_bitset_bitfield
-{
-public:
-
-    word16                      _w16;
-    boost::dynamic_bitset<>     _bitset;
-    int64                       _i64;
-
-};
-
-class LWord32 : public std::list<word32>
-{ };
-
-class LString : public std::list<std::string>
-{ };
-
-class test_bool
-{
-public:
-
-	bool		_a;
-	bool		_b;
-
-};
-
-class avatar
-{
-public:
-
-    std::shared_ptr<character>  _player;
-    std::shared_ptr<character>  _character;
-};
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 
 
-}}
+}
 #endif

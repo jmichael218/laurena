@@ -131,7 +131,7 @@ static const descriptor* desc_int64 = classes::byType(typeid(int64));
 			if (!fdesc)
 				this->parseObject(object);
 			else 
-			if (fdesc->isPointer())
+			if (fdesc->is_pointer())
 			{
 				a = std::move(fdesc->desc().create());
 				this->parseObject(a);
@@ -148,7 +148,7 @@ static const descriptor* desc_int64 = classes::byType(typeid(int64));
 			if (!fdesc)
 				this->parseElements(object);
 			else 
-			if (fdesc->isPointer())
+			if (fdesc->is_pointer())
 			{
 				a = std::move(fdesc->desc().create());
 				this->parseElements(a);

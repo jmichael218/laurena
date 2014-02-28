@@ -53,6 +53,7 @@ public:
         FLAGS_IS_PRIMARY_KEY          = 3,  // Is a primary key (uint or string)
         FLAGS_IS_UNIQUE               = 4,  // Is unique
         FLAGS_IS_SERIAL               = 5,  // Is serial ( primary key for all serializables objects )
+        FLAGS_IS_SHARED_POINTER       = 6,
 
 		// 6, 7, 8 unused
         FLAGS_IS_OWNER_SERIAL         = 9,
@@ -95,39 +96,44 @@ public:
     word32                  offset()            const;
     void*                   ptr(void* object)   const;
 
-    bool                    isPrimaryKey ()     const;
-    field&        isPrimaryKey(bool mode);
+    bool          is_primary_key ()     const;
+    field&        is_primary_key(bool mode);
 
-    bool                    isSerial()          const;
-    field&        isSerial(bool mode);
+    bool          is_serial()          const;
+    field&        is_serial(bool mode);
 
-    bool                    isOwnerSerial()     const;
-    field&        isOwnerSerial(bool mode);
+    bool          is_owner_serial()     const;
+    field&        is_owner_serial(bool mode);
 
-    bool                    isPointer()         const;
-    field&        isPointer(bool mode);
+    bool          is_pointer()         const;
+    field&        is_pointer(bool mode);
 
-    field&        dontArchive(bool mode);
-    bool                    dontArchive() const;
+    bool          is_shared_pointer()  const;
+    field&        is_shared_pointer(bool mode);
 
-    field&        ignoreIfDefaultValue(bool mode);
-    bool          ignoreIfDefaultValue() const;
+    field&        dont_archive(bool mode);
+    bool          dont_archive() const;
 
-	field&		  noQuote(bool mode);
-	bool		  noQuote() const;
+    field&        ignore_if_default_value(bool mode);
+    bool          ignore_if_default_value() const;
 
-    std::string&            toString(const any& object, std::string& destination) const;
-    void                    fromString(any& object, const std::string& svalue) const;
+	field&		  no_quote(bool mode);
+	bool		  no_quote() const;
 
-	field&		hasSetter(setter callback);
-	field&		hasGetter(getter callback);
+    std::string&   tos(const any& object, std::string& destination) const;
+    void           froms(any& object, const std::string& svalue) const;
 
-    const any&              defaultValue () const;
-    field&        defaultValue(const any&);
+	field&		   set_callback(setter callback);
+	field&		   get_callback(getter callback);
 
-    const std::string&		supportTag() const;
-	field&					supportTag(const std::string& tag);
-	bool					needSupport() const;
+    const any&    default_value () const;
+    field&        default_value(const any&);
+
+
+
+    const std::string&		support_tag() const;
+	field&					support_tag(const std::string& tag);
+	bool					need_support() const;
     
 
     /****************************************************************************/ 
@@ -194,20 +200,20 @@ word32 field::offset() const
 }
 
 inline
-const std::string&	field::supportTag() const
+const std::string&	field::support_tag() const
 { 
 	return this->_support_tag;
 }
 
 inline
-field&	field::supportTag(const std::string& tag)
+field&	field::support_tag(const std::string& tag)
 {
 	this->_support_tag = tag;
 	return *this;
 }
 
 inline
-bool field::needSupport() const
+bool field::need_support() const
 {
 	return this->_support_tag.length() > 0;
 }
@@ -219,104 +225,117 @@ void* field::ptr(void* object) const
 }
 
 inline
-field&	field::noQuote(bool mode)
+field&	field::no_quote(bool mode)
 {
     _flags.set(FLAGS_NO_QUOTE,mode);
     return *this;
 }
 
 inline
-bool	field::noQuote() const
+bool	field::no_quote() const
 {
     return _flags.test(FLAGS_NO_QUOTE);
 }
 
 inline 
-bool field::isPrimaryKey () const  
+bool field::is_primary_key () const  
 { 
     return _flags.test(FLAGS_IS_PRIMARY_KEY);
 }
 
-inline field& field::isPrimaryKey(bool mode)
+inline field& field::is_primary_key(bool mode)
 {
     _flags.set(FLAGS_IS_PRIMARY_KEY,mode);
     return *this;
 }
 
 inline 
-bool field::isSerial()          const
+bool field::is_serial()          const
 {
     return _flags.test(FLAGS_IS_SERIAL);
 }
 
 inline
-field&  field::isSerial(bool mode)
+field&  field::is_serial(bool mode)
 {
     _flags.set(FLAGS_IS_SERIAL,mode);
     return *this;
 }
 
 inline
-bool field::isOwnerSerial()     const
+bool field::is_owner_serial()     const
 {
     return _flags.test(FLAGS_IS_OWNER_SERIAL);
 }
  
 inline
-field& field::isOwnerSerial(bool mode)
+field& field::is_owner_serial(bool mode)
 {
     _flags.set(FLAGS_IS_OWNER_SERIAL,mode);
     return *this;
 }    
 
 inline
-bool  field::isPointer() const
+bool  field::is_pointer() const
 {
     return _flags.test(FLAGS_IS_POINTER);  
 }
 
 inline
-field&  field::isPointer(bool mode)
+field&  field::is_pointer(bool mode)
 {
     this->_flags.set(FLAGS_IS_POINTER,mode);
     return *this;
 }
 
 inline
-bool  field::dontArchive() const
+bool  field::is_shared_pointer()  const
+{
+    return this->_flags.test(FLAGS_IS_SHARED_POINTER);
+}
+
+inline
+field& field::is_shared_pointer(bool mode)
+{
+    this->_flags.set(FLAGS_IS_SHARED_POINTER, mode);
+    return *this;
+}
+
+inline
+bool  field::dont_archive() const
 {
     return _flags.test(FLAGS_DONT_ARCHIVE);  
 }
 
 inline
-field& field::ignoreIfDefaultValue(bool mode)
+field& field::ignore_if_default_value(bool mode)
 {
     this->_flags.set(FLAGS_IGNORE_IF_DEFAULT_VALUE);
     return *this;
 }
 
 inline
-bool field::ignoreIfDefaultValue() const
+bool field::ignore_if_default_value() const
 {
     return _flags.test(FLAGS_IGNORE_IF_DEFAULT_VALUE);
 }
 
 
 inline
-const any& field::defaultValue () const
+const any& field::default_value () const
 {
     return this->_default_value;
 }
 
 inline 
-field&  field::defaultValue(const any& value)
+field&  field::default_value(const any& value)
 {
     this->_default_value = value;
     return *this;
 }
 
 inline
-field& field::dontArchive(bool mode)
+field& field::dont_archive(bool mode)
 {
     this->_flags.set(FLAGS_DONT_ARCHIVE,mode);
     return *this;
@@ -324,14 +343,14 @@ field& field::dontArchive(bool mode)
 
 
 inline
-field& field::hasSetter(setter callback)
+field& field::set_callback(setter callback)
 {
 	this->_setter = callback;
 	return *this;
 }
 
 inline
-field& field::hasGetter(getter callback)
+field& field::get_callback(getter callback)
 {
 	this->_getter = callback;
 	return *this;

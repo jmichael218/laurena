@@ -23,6 +23,8 @@
 /********************************************************************************/ 
 #include <laurena/includes/includes.hpp>
 #include <laurena/includes/types.hpp>
+#include <laurena/traits/type_traits.hpp>
+#include <laurena/traits/is_shared_pointer.hpp>
 
 #include <laurena/descriptors/classes.hpp>
 #include <laurena/descriptors/polymorphic_class_descriptor.hpp>
@@ -147,8 +149,11 @@ public:
             throw LAURENA_CLASS_NOT_FOUND_EXCEPTION(typeid(basetype), "Unresolved field type");
         }
 		word32 offset = (word32) &(((T*)(0))->*f);
+
 		bool bIsPointer = std::is_pointer<FIELDTYPE>::value;
-		return this->editFields().unused().init(name, fdesc, offset).isPointer(bIsPointer);
+        bool bIsSharedPtr = is_shared_pointer<FIELDTYPE>::value;
+
+		return this->editFields().unused().init(name, fdesc, offset).is_pointer(bIsPointer).is_shared_pointer(bIsSharedPtr);
 	}
 
 	template<typename FIELDTYPE>

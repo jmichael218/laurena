@@ -26,7 +26,7 @@ const descriptor* td<parameter>::desc()
 		res->add_field(&parameter::_name, "name");
 
 		const descriptor * cdesc = td<const descriptor *>::desc();
-		res->editFields().unused().init("type", cdesc, offsetof(parameter, _descriptor)).isPointer(true).noQuote(true);
+		res->editFields().unused().init("type", cdesc, offsetof(parameter, _descriptor)).is_pointer(true).no_quote(true);
 	
 		res->add_field(&parameter::_flags, "flags").annotate(new format_bitset(ANNOTATION_FORMAT_ALL, parameter::FlagsKeywords));
     }

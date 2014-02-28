@@ -38,7 +38,7 @@ void testVelocity();
 void testStringArrayGetFieldValue();
 void testNewFieldInit();
 void testParameters();
-
+void testSharedPointerFields ();
 
 extern void cstring_test ();
 
@@ -107,6 +107,14 @@ void buildTestClassDescriptors ()
     d5->add_field(&test_bool::_a,"a");
     d5->add_field(&test_bool::_b,"b");
 
+    /****************************************************************************/ 
+    /*          build class avatar              								*/ 
+    /****************************************************************************/
+    // to test shared pointer serialization
+    auto d6 = standard_class_descriptor<avatar>::build("avatar");
+    d6->add_field(&avatar::_player, "player");
+    d6->add_field(&avatar::_character, "character");
+
 }
 
 
@@ -144,6 +152,8 @@ int main ()
     testStringArrayDescriptor();
     testBitsetDescriptor();
 	//test_sql();
+
+    testSharedPointerFields();
 
     testunit::displayResults();
     return 0;

@@ -144,7 +144,7 @@ base_standard_class_descriptor& base_standard_class_descriptor::primary_key(cons
     int index = this->_fields.index(fieldName);
     if (index != FIELD_UNDEFINED)
     {
-        this->_fields[index]->isPrimaryKey(true);
+        this->_fields[index]->is_primary_key(true);
         this->_primary_key_field = index;   
         return *this;
 
@@ -160,7 +160,7 @@ base_standard_class_descriptor& base_standard_class_descriptor::serial_key(const
     int index = this->_fields.index(fieldName);
     if (index != FIELD_UNDEFINED)
     {
-        this->_fields[index]->isSerial(true);
+        this->_fields[index]->is_serial(true);
         this->_serial_field = index;   
         return *this;
 

@@ -21,7 +21,8 @@
 /*              dependencies                                                    */ 
 /********************************************************************************/ 
 
-#include  <type_traits>
+#include <type_traits>
+#include <memory>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -39,6 +40,14 @@ public:
 
 	typedef typename std::remove_pointer< typename std::remove_reference<typename std::remove_const<T>::type>::type>::type basetype;
 
+};
+
+template<typename T>
+struct traits<std::shared_ptr<T>>
+{
+public:
+
+    typedef typename traits<T>::basetype basetype;
 };
 
 template<>

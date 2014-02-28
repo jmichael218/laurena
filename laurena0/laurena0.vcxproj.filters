@@ -162,6 +162,9 @@
     <ClInclude Include="src\laurena\grammar\rule_hexadecimal.hpp">
       <Filter>Fichiers d%27en-tête\grammar</Filter>
     </ClInclude>
+    <ClInclude Include="src\laurena\traits\is_shared_pointer.hpp">
+      <Filter>Fichiers d%27en-tête\traits</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile">

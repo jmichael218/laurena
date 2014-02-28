@@ -86,7 +86,7 @@ const class_feature* ft;
         return; 
 
     
-    if (f.noQuote() || fd.has(descriptor::Flags::NUMERIC_VALUE))
+    if (f.no_quote() || fd.has(descriptor::Flags::NUMERIC_VALUE))
 		t = this->read_token(MDL::TOKEN_INTEGER,MDL::TOKEN_KEYWORD);
     else if ((ft = fd.feature(Feature::ANY)))
     {

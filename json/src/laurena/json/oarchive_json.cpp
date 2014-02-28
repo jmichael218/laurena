@@ -61,7 +61,7 @@ const any_feature* acf = NULL;
     for (const std::unique_ptr<field>& patt : cd.getFields())
     {                
 		const field& att = *patt;
-		if (att.needSupport())
+		if (att.need_support())
 			continue;
 
         this->completeLastLine();      
@@ -107,9 +107,9 @@ const any_feature* acf = NULL;
 		}
         else                
         {
-            if ( att.ignoreIfDefaultValue())
+            if ( att.ignore_if_default_value())
             {
-                if (acd.equals(att.defaultValue(),fieldValue))
+                if (acd.equals(att.default_value(),fieldValue))
                     continue;
             }
 
@@ -117,7 +117,7 @@ const any_feature* acf = NULL;
             bool isString = false;
             
 
-            att.toString(value,s);
+            att.tos(value,s);
             if (acd.type() == typeid(std::string))
                 isString = true;
             else

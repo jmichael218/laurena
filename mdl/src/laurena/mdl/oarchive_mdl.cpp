@@ -40,7 +40,7 @@ const any_feature* acf = NULL;
     for (const std::unique_ptr<field>& patt : cd.getFields())
     {             
 		field& att = *patt;
-        if (att.isPrimaryKey())
+        if (att.is_primary_key())
             continue;
 
         att.get(value,fieldValue);
@@ -89,16 +89,16 @@ const any_feature* acf = NULL;
         }
         else                
         {
-            if ( att.ignoreIfDefaultValue())
+            if ( att.ignore_if_default_value())
             {
-                if (acd.equals(att.defaultValue(),fieldValue))
+                if (acd.equals(att.default_value(),fieldValue))
                     continue;
             }
 
             bool isString = false;
             
 
-            att.toString(value,s);
+            att.tos(value,s);
             if (acd.type() == typeid(std::string))
                 isString = !acd.has(descriptor::Flags::NO_QUOTE);
             else
@@ -115,12 +115,12 @@ const any_feature* acf = NULL;
                 this->_data << "(" << acf->desc(vptr).name() << ") ";  
             }
 
-            if (isString && !att.noQuote())
+            if (isString && !att.no_quote())
                 this->_data << "\"";
 
             this->_data << s;
 
-            if (isString && !att.noQuote())
+            if (isString && !att.no_quote())
                 this->_data << "\"";
 
             this->_data << ";" << std::endl;           

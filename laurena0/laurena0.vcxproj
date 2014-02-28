@@ -40,6 +40,7 @@
     <ClInclude Include="src\laurena\literals\string_literal.hpp" />
     <ClInclude Include="src\laurena\toolboxes\loader.hpp" />
     <ClInclude Include="src\laurena\traits\in_traits.hpp" />
+    <ClInclude Include="src\laurena\traits\is_shared_pointer.hpp" />
     <ClInclude Include="src\laurena\traits\string_traits.hpp" />
     <ClInclude Include="src\laurena\traits\type_traits.hpp" />
     <ClInclude Include="src\laurena\types\charset.hpp" />

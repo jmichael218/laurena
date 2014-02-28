@@ -173,7 +173,7 @@ public:
 
 		field& f = cd->template add_field<word32>("size", setsize, getsize);
 		
-		f.supportTag("vector.size");
+		f.support_tag("vector.size");
 
         return cd;
 	}

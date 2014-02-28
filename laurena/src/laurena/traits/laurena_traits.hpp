@@ -61,18 +61,6 @@ const descriptor* desc_of(T& t)
   return d ? d : td<basetype>::desc();
 }
 
-template<typename T>
-bool is_pointer(T& t)
-{
-	return false;
-}
-
-template<typename T>
-bool is_pointer(T* t)
-{
-	return true;
-}
-
 #define field_descriptor(CLASSNAME,FIELD) ([] () -> const descriptor* { CLASSNAME ST_DESCRIPTOR; return desc_of(ST_DESCRIPTOR.FIELD); } ())
 #define field_is_pointer(CLASSNAME,FIELD) ([] () -> bool { CLASSNAME ST_IS_POINTER; return is_pointer(ST_IS_POINTER.FIELD); } ())
 

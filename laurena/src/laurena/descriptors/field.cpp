@@ -109,7 +109,7 @@ void field::set(any& o, const any& value) const
         if (value.type() == typeid(std::string))
         {
             std::string svalue = anycast<std::string>(value);
-            this->fromString(o,svalue);
+            this->froms(o,svalue);
         }
         else   
             this->_descriptor->set(ptr,value);       
@@ -125,14 +125,14 @@ any& field::get(const any& object, any& value) const
 	}
 
     word8** ptr = memory::ptr(object.ptr(),this->_offset);
-    if (this->isPointer())
+    if (this->is_pointer())
         this->_descriptor->get(*ptr,value);
     else
         this->_descriptor->get(ptr,value);
     return value;
 }
 
-std::string& field::toString(const any& object, std::string& destination) const
+std::string& field::tos(const any& object, std::string& destination) const
 {
     any value;
 
@@ -152,7 +152,7 @@ std::string& field::toString(const any& object, std::string& destination) const
     return destination;
 }
 
-void field::fromString(any& object, const std::string& svalue) const
+void field::froms(any& object, const std::string& svalue) const
 {
 any value;
 void* ptrObject = object.ptr();
