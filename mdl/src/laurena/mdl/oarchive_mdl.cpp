@@ -27,6 +27,7 @@ void oarchive_mdl::serializeFields(const descriptor& cd, const any& value)
 std::string s;
 const polymorphic_feature* pcf = dynamic_cast<const polymorphic_feature*>(cd.feature(Feature::POLYMORPHIC));
 const any_feature* acf = NULL;
+bool skip_null_values ;
 
     if (pcf && pcf->hasParent())
         this->serializeFields(pcf->parent(),value);
@@ -62,6 +63,7 @@ const any_feature* acf = NULL;
             this->_data << ";" << std::endl;
             continue;            
         }
+   
 
         const descriptor& acd = att.desc();
         acf = dynamic_cast<const any_feature*>(acd.feature(Feature::ANY));
@@ -84,7 +86,14 @@ const any_feature* acf = NULL;
 
         if (acd.has(descriptor::Flags::FIELDS))
         {
-            this->serialize(att.name(),fieldValue,false);
+            if (att.is_pointer() || att.is_shared_pointer())
+            {
+                if (!fieldValue.ptr())
+                    continue;
+                this->serialize(att.name(),fieldValue,true);
+            }
+            else
+                this->serialize(att.name(),fieldValue,false);
 
         }
         else                

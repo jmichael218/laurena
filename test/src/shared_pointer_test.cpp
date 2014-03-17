@@ -35,11 +35,14 @@ void testSharedPointerFields ()
 
     avatar a;
     a._player = pl;
-    a._character = ch;
+    //a._character = ch;
 
     std::string serialized_avatar;
     oarchive_mdl::tostring(serialized_avatar, "avatar", &a);
     testunit::log() << serialized_avatar << std::endl;    
+
+    avatar b;
+	laurena::mdl::mdl::parse(serialized_avatar, b);
 
     return;
 }

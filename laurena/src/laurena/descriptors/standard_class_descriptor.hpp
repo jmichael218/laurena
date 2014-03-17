@@ -176,7 +176,7 @@ public:
 
         field::getter g = [=](const any& obj, any& value){ T* t=anycast<T*>(obj); value = (t->*f).get(); } ;
         field::setter s = [=](any& obj, const any& value){ T* t=anycast<T*>(obj); t->*f = std::shared_ptr<FIELDTYPE>(anycast<FIELDTYPE*>(value)); } ;
-        return this->editFields().unused().init(name, fdesc, s, g);        
+        return this->editFields().unused().init(name, fdesc, s, g).is_shared_pointer(true).is_pointer(true);        
 	}
 
 
