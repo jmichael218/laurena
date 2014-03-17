@@ -115,6 +115,7 @@ void buildTestClassDescriptors ()
     d6->add_field(&avatar::_player, "player");
     d6->add_field(&avatar::_character, "character");
 
+    return;
 }
 
 

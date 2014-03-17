@@ -15,8 +15,33 @@ using namespace laurena;
 using namespace test;
 using namespace mdl;
 
+/*
+class avatar
+{
+public:
+
+    std::shared_ptr<character>  _player;
+    std::shared_ptr<character>  _character;
+*/
 void testSharedPointerFields ()
 {
+    std::shared_ptr<character>  pl = std::make_shared<character>();
+    pl->_name = "Reeloy Kenjins";
+    pl->_age  = 15;
+
+    std::shared_ptr<character>  ch = std::make_shared<character>();
+    ch->_name = "Lord Gardakan";
+    ch->_age  = 57;
+
+    avatar a;
+    a._player = pl;
+    a._character = ch;
+
+    std::string serialized_avatar;
+    oarchive_mdl::tostring(serialized_avatar, "avatar", &a);
+    testunit::log() << serialized_avatar << std::endl;    
+
+    return;
 }
 
 //End of file

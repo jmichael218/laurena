@@ -153,8 +153,33 @@ public:
 		bool bIsPointer = std::is_pointer<FIELDTYPE>::value;
         bool bIsSharedPtr = is_shared_pointer<FIELDTYPE>::value;
 
-		return this->editFields().unused().init(name, fdesc, offset).is_pointer(bIsPointer).is_shared_pointer(bIsSharedPtr);
+        assert(!bIsSharedPtr);
+
+		return this->editFields().unused().init(name, fdesc, offset).is_pointer(bIsPointer);
+
 	}
+
+	template<typename FIELDTYPE>
+	inline field& add_field(std::shared_ptr<FIELDTYPE> T::*f, const char* name)
+	{
+		typedef typename traits<FIELDTYPE>::basetype basetype;
+		const descriptor* fdesc = classes::byType(typeid(basetype));
+        if (!fdesc)
+        {
+            throw LAURENA_CLASS_NOT_FOUND_EXCEPTION(typeid(basetype), "Unresolved field type");
+        }
+
+		bool bIsPointer = std::is_pointer<FIELDTYPE>::value;
+        bool bIsSharedPtr = true;
+
+        assert(bIsSharedPtr && !bIsPointer);
+
+        field::getter g = [=](const any& obj, any& value){ T* t=anycast<T*>(obj); value = (t->*f).get(); } ;
+        field::setter s = [=](any& obj, const any& value){ T* t=anycast<T*>(obj); t->*f = std::shared_ptr<FIELDTYPE>(anycast<FIELDTYPE*>(value)); } ;
+        return this->editFields().unused().init(name, fdesc, s, g);        
+	}
+
+
 
 	template<typename FIELDTYPE>
 	inline field& add_field(const char* name, field::setter setter, field::getter getter)
