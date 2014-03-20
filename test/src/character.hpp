@@ -96,9 +96,14 @@ class avatar
 {
 public:
 
+    typedef std::shared_ptr<avatar>     sptr;
+
     std::shared_ptr<character>  _player;
     std::shared_ptr<character>  _character;
 };
+
+class avatars : public std::list<avatar::sptr> {};
+
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

@@ -115,6 +115,11 @@ void buildTestClassDescriptors ()
     d6->add_field(&avatar::_player, "player");
     d6->add_field(&avatar::_character, "character");
 
+    /****************************************************************************/ 
+    /*          build class avatars              								*/ 
+    /****************************************************************************/
+    // to test shared pointer serialization
+    auto d7 = list_descriptor<avatars, avatar::sptr>::build("avatars");
     return;
 }
 

@@ -25,6 +25,9 @@ public:
 */
 void testSharedPointerFields ()
 {
+    /****************************************************************************/ 
+    /*          test shared pointer fields                                      */ 
+    /****************************************************************************/ 
     std::shared_ptr<character>  pl = std::make_shared<character>();
     pl->_name = "Reeloy Kenjins";
     pl->_age  = 15;
@@ -43,6 +46,22 @@ void testSharedPointerFields ()
 
     avatar b;
 	laurena::mdl::mdl::parse(serialized_avatar, b);
+
+    /****************************************************************************/ 
+    /*          test shared pointer as list elements                            */ 
+    /****************************************************************************/ 
+    avatars as;
+    avatar::sptr sas = std::make_shared<avatar>();
+    sas->_player = pl;
+    sas->_character = ch;
+    as.push_back(sas);
+
+    oarchive_mdl::tostring(serialized_avatar, "avatars", &as);
+    testunit::log() << serialized_avatar << std::endl;   
+
+    avatars sb;
+	laurena::mdl::mdl::parse(serialized_avatar, sb);
+
 
     return;
 }

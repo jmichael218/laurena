@@ -70,12 +70,49 @@ protected:
 
 
 template<typename CONTAINER, typename ELEMENT>
+struct list_container_feature_push_impl
+{
+    static void impl(CONTAINER* c, const descriptor* element_descriptor, any& element)
+    {
+        if ( element.desc()->has(descriptor::Flags::ATOMIC))
+	    {
+		    element = element_descriptor->cast(element);
+		    c->push_back(anycast<ELEMENT>(element));
+	    }
+	    else
+	    {
+		    ELEMENT* e = anycast<ELEMENT*>(element);
+		    c->push_back(*e);
+	    }
+    }
+};
+
+template<typename CONTAINER, typename ELEMENT>
+struct list_container_feature_push_impl<CONTAINER, ELEMENT*>
+{
+    static void impl(CONTAINER* c, const descriptor* element_descriptor, any& element)
+    {
+        c->push_back(anycast<ELEMENT>(element));
+    }
+};
+
+template<typename CONTAINER, typename ELEMENT>
+struct list_container_feature_push_impl<CONTAINER, std::shared_ptr<ELEMENT>>
+{
+    static void impl(CONTAINER* c, const descriptor* element_descriptor, any& element)
+    {
+        c->push_back(std::shared_ptr<ELEMENT>(anycast<ELEMENT*>(element)));
+    }
+};
+
+
+template<typename CONTAINER, typename ELEMENT>
 class list_container_feature : public base_list_container_feature
 {
 public:
 
     list_container_feature(const descriptor* listDescriptor, const descriptor* elementDescriptor) 
-        : base_list_container_feature (listDescriptor, elementDescriptor, boost::is_pointer<ELEMENT>::value)
+        : base_list_container_feature (listDescriptor, elementDescriptor, boost::is_pointer<ELEMENT>::value || is_shared_pointer<ELEMENT>::value)
         { }
 
     /****************************************************************************/ 
@@ -95,25 +132,12 @@ public:
 
     virtual void push(any& container, any& element) const
     {
-        CONTAINER* c = anycast<CONTAINER*>(container);
-		if ( element.desc()->has(descriptor::Flags::ATOMIC))
-		{
-			element = _elements_descriptor->cast(element);
-			c->push_back(anycast<ELEMENT>(element));
-		}
-		else if (boost::is_pointer<ELEMENT>::value)
-		{
-			c->push_back(anycast<ELEMENT>(element));
-		}
-		else
-		{
-			ELEMENT* e = anycast<ELEMENT*>(element);
-			c->push_back(*e);
-		}
+        list_container_feature_push_impl<CONTAINER, ELEMENT>::impl(anycast<CONTAINER*>(container), _elements_descriptor, element);
         
     }
 
 };
+
 
 /*********************************************************************************/
 /*          list_descriptor                                                      */ 
