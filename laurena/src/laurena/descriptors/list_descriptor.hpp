@@ -92,7 +92,7 @@ struct list_container_feature_push_impl<CONTAINER, ELEMENT*>
 {
     static void impl(CONTAINER* c, const descriptor* element_descriptor, any& element)
     {
-        c->push_back(anycast<ELEMENT>(element));
+        c->push_back(anycast<ELEMENT*>(element));
     }
 };
 
