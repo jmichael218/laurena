@@ -376,7 +376,8 @@ bool keyword_to_charset_parser::read (tokenizer& tokenizer, any& value, bool con
 	if (! prefix(tokenizer._ptr,this->_keyword.c_str()))
         return false;
 
-    std::string content = std::move( readuntil(tokenizer._ptr,this->_charset.condition()));
+    const char* base = tokenizer._ptr + this->_keyword.length();
+    std::string content = std::move( readuntil(base, this->_charset.condition()));
 
     if (consume)
     {

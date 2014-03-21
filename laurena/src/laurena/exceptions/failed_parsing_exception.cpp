@@ -16,14 +16,15 @@ using namespace laurena;
 failed_parsing_exception::failed_parsing_exception (const char* message, const char* source, const char* filename, const char* function, word32 line)
                     : exception(message, filename, function, line)
 {
-    _source = source;
+    if (source)
+        _source = source;
     this->ready();
 }
 
 failed_parsing_exception::failed_parsing_exception  (const char* message, const std::string& source, const char* filename, const char* function, word32 line) 
-     : exception(message, filename, function, line)
+     : exception(message, filename, function, line), _source(source)
 {
-    _source = source;
+    
     this->ready();
 
 }
