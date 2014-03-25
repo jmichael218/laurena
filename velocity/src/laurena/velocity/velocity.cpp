@@ -96,9 +96,8 @@ bool useBracket = *src == '{';
 
 	if (!v)
 	{
-		std::string msg = varname;
-		msg.append(" is an unknow variable name.");
-		throw LAURENA_FAILED_PARSING_EXCEPTION(msg.c_str(), src);
+        output << "$";
+        return src;
 	}
 	
 	value = v->_value;
