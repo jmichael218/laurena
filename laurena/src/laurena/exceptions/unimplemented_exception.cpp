@@ -19,7 +19,7 @@ unimplemented_exception::unimplemented_exception (const char* message, const cha
     this->ready();
 }
 
-const char* unimplemented_exception::exceptionType () const
+const char* unimplemented_exception::type () const
 {
 static const char* type = "Unimplemented code Exception" ;
 

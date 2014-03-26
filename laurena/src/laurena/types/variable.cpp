@@ -21,10 +21,18 @@ variable::variable () : _name () , _value () {}
 
 variable::variable (const variable& source) : _name (source._name) , _value(source._value) {}
 
+variable::variable (variable&& source) : _name(source._name), _value(source._value) {}
+
 variable::variable (const std::string& name, const any& value) : _name(name) , _value(value) {}
 
  variable::~variable ()
 { }
+
+variable& variable::operator=(const variable&  source)
+{ this->_name = source._name; this->_value = source._value; return *this; }
+
+variable& variable::operator=(      variable&& source)
+{ this->_name = source._name; this->_value = source._value; return *this; }
 
 /********************************************************************************/ 
 /*      code for class variable_list                                            */ 

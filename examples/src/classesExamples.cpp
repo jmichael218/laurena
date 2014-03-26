@@ -41,7 +41,7 @@ void buildClassDescriptor_Cat()
 {
 	// create class descriptor for the class 'cat'
 	// it is pretty much the same than for simple classes except you give the parent class in the creation
-    auto d = standard_class_descriptor<cat>::build("cat", classes::byName("animal"));
+    auto d = standard_class_descriptor<cat>::build("cat", classes::by_name("animal"));
 
 	// to be able to serialize fields, call descriptor->init_field(CLASS,"fieldname",field)
 	d->add_field(&cat::_birds,"birds");

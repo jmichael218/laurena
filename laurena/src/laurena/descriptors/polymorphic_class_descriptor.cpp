@@ -35,19 +35,6 @@ polymorphic_class_descriptor::~polymorphic_class_descriptor()
 
 /********************************************************************************/ 
 /*                                                                              */ 
-/*              new functions                                                   */ 
-/*                                                                              */ 
-/********************************************************************************/ 
-
-/*
-polymorphic_class_descriptor& polymorphic_class_descriptor::setDescriptorIdentifier(DescriptorIdentifier* identifier)
-{
-    this->_descriptor_identifier = identifier;
-    return *this;
-}
-*/
-/********************************************************************************/ 
-/*                                                                              */ 
 /*              ACCESSORS                                                       */ 
 /*                                                                              */ 
 /********************************************************************************/ 
@@ -59,7 +46,7 @@ const class_feature* polymorphic_class_descriptor::feature(Feature featureId) co
     return this->descriptor::feature(featureId);
 }
 
-size_t polymorphic_class_descriptor::sizeOf() const 
+size_t polymorphic_class_descriptor::size_of() const 
 {
     return this->_size_of;
 }

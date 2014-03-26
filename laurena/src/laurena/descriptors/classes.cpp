@@ -37,25 +37,25 @@ void classes::add(const descriptor* myClass)
     _classes_by_typeid[std::type_index(myClass->type()).hash_code()] = myClass;
 }
 
-const descriptor*  classes::byName(const std::string& name)
+const descriptor*  classes::by_name(const std::string& name)
 {
 	auto i = classes::_classes_by_name.find(name);
 	return i == classes::_classes_by_name.end () ? nullptr : i->second;    
 }
 
-const descriptor*  classes::byType(const type_info& type)
+const descriptor*  classes::by_type(const type_info& type)
 {
     auto i = classes::_classes_by_typeid.find(std::type_index(type).hash_code());
 	return i == classes::_classes_by_typeid.end () ? nullptr : i->second;  
 }
 
-void classes::logClasses (std::ostream& destination)
+void classes::log_classes (std::ostream& destination)
 {
 	for (auto p : classes::_classes_by_typeid)
 		destination << p.second->name() << " (#" << p.first << ")" << std::endl;	
 }
 
-bool classes::areParents(const descriptor& c1, const descriptor& c2)
+bool classes::are_parents(const descriptor& c1, const descriptor& c2)
 {
     if (c1.type() == c2.type())
         return true;

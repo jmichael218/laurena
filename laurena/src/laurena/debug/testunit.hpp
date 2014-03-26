@@ -38,10 +38,10 @@ class testunit {
 
     static void type(const char* typeName);
     static void function(const char* function);
-    static void startTest(const char* testmessage);
+    static void start(const char* testmessage);
 
     //! return ok
-    static bool endTest (bool ok);
+    static bool end(bool ok);
     static void setLogger(std::ostream* log);
     inline static std::ostream& log() { return *_log; }
 
@@ -62,9 +62,9 @@ class testunit {
 
 };
 
-#define TEST_UNIT_CONDITION(code,testmessage) try { testunit::startTest(testmessage); bool testUnitResult = (code); testunit::endTest(testUnitResult);} catch (...) {testunit::endTest(false);}
+#define TEST_UNIT_CONDITION(code,testmessage) try { testunit::start(testmessage); bool testUnitResult = (code); testunit::end(testUnitResult);} catch (...) {testunit::end(false);}
 
-#define TEST_UNIT_EXCEPTION(code,testmessage,exceptionType) try { testunit::startTest(testmessage); code; testunit::endTest(false);} catch (const exceptionType&) {testunit::endTest(true);} catch (...) {testunit::endTest(false);}
+#define TEST_UNIT_EXCEPTION(code,testmessage,exceptionType) try { testunit::start(testmessage); code; testunit::end(false);} catch (const exceptionType&) {testunit::end(true);} catch (...) {testunit::end(false);}
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

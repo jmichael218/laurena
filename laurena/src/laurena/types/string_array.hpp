@@ -64,12 +64,11 @@ public:
 
 
     void set(const char* keywordList, word8 separator=' ');
-    inline void set(const std::string& keywordList, word8 separator=' ') {     this->set(keywordList.c_str(),separator); }
+    void set(const std::string& keywords, word8 separator=' ');
     
     void all (const std::string& value);
 
-    inline const string_array* attributes() const 
-            { return this->_attributes ; }
+    const string_array* attributes() const;
 
     void attributes(const string_array* attributesArray);
 
@@ -82,6 +81,19 @@ public:
 
     const string_array*        _attributes;
 };
+
+/*********************************************************************************/
+/*          inline functions                                                     */ 
+/*********************************************************************************/ 
+
+inline 
+const string_array* string_array::attributes() const 
+{ return this->_attributes ; }
+
+inline 
+void string_array::set(const std::string& keywords, word8 separator) 
+{ this->set(keywords.c_str(), separator); }
+
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

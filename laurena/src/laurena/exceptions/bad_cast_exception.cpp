@@ -21,7 +21,7 @@ bad_cast_exception::bad_cast_exception (const char* message, const char* castTyp
     this->ready();
 }
 
-const char* bad_cast_exception::exceptionType () const
+const char* bad_cast_exception::type () const
 {
 static const char* type = "Bad Cast Exception" ;
 

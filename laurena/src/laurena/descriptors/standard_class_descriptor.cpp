@@ -129,7 +129,7 @@ const field* base_standard_class_descriptor::findField(const std::string& field_
 
 }
 
-const fields& base_standard_class_descriptor::getFields() const
+const fields& base_standard_class_descriptor::get_fields() const
 {
     return this->_fields;
 }

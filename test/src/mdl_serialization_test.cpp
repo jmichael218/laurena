@@ -33,7 +33,7 @@ void testBasicMdlSerialization ()
     any a2 = &bob2;
     iarchive_mdl::fromString(serialized_bob.c_str(),"character",a2);
     
-    testunit::endTest(bob2._name == "Bob" && bob2._age == 28 );
+    testunit::end(bob2._name == "Bob" && bob2._age == 28 );
 
     return;
 }

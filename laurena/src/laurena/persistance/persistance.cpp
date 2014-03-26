@@ -108,7 +108,7 @@ any persistance::serial_to_object (const std::string& pipeline, const std::strin
     serial_entry entry;
     it->second->read(entry, key);
 
-    const descriptor* desc = classes::byName(entry._descriptor_name);
+    const descriptor* desc = classes::by_name(entry._descriptor_name);
     if (!desc)
     {
         std::string s = "Class " ;

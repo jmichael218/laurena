@@ -25,7 +25,7 @@ class_not_found_exception::class_not_found_exception(const type_info& type, cons
     this->ready();
 }
 
-const char* class_not_found_exception::exceptionType () const
+const char* class_not_found_exception::type () const
 {
 static const char* type = "Class Not Found Exception" ;
 

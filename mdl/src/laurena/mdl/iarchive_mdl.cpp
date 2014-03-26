@@ -98,7 +98,7 @@ const class_feature* ft;
         this->read_token(MDL::TOKEN_PARENTHESIS_CLOSE);
 
         std::string sclassname = anycast<std::string>(classname);
-        const descriptor* anyContentDescriptor = classes::byName(sclassname);
+        const descriptor* anyContentDescriptor = classes::by_name(sclassname);
         if (!anyContentDescriptor)
         {
 	        std::ostringstream message;
@@ -207,7 +207,7 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(d.feature(
     t = std::move (this->read_token(MDL::TOKEN_KEYWORD));    
     classname = anycast<std::string>(t);
 
-    cd = classes::byName(classname);
+    cd = classes::by_name(classname);
     if (!cd)
     {
        std::ostringstream stream;

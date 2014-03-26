@@ -43,7 +43,7 @@ failed_parsing_exception::failed_parsing_exception (const char* message, std::is
 
 }
 
-const char* failed_parsing_exception::exceptionType () const
+const char* failed_parsing_exception::type () const
 {
 static const char* type = "Failed Parsing Exception" ;
 

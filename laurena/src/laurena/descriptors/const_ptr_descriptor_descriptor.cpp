@@ -54,7 +54,7 @@ void const_ptr_descriptor_descriptor::set(void* ptr, const any& value)  const
 {
 	const descriptor** destination = (const descriptor**) ptr; 
 	if (value.desc() == td<std::string>::desc())
-		*destination = classes::byName(anycast<std::string>(value));
+		*destination = classes::by_name(anycast<std::string>(value));
 	else
 		*destination = anycast<const descriptor*>(value);
 }
@@ -74,7 +74,7 @@ std::string const_ptr_descriptor_descriptor::atos(const any& value) const
 
 any& const_ptr_descriptor_descriptor::stoa(const std::string& string_value, any& value) const
 {
-    return value = classes::byName(string_value);
+    return value = classes::by_name(string_value);
 }    
 
 // OBJECT CONSTRUCTOR FOR INJECTION

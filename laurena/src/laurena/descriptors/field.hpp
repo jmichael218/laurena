@@ -357,7 +357,7 @@ field& field::get_callback(getter callback)
 }
  
 //#define init_field(CLASSNAME,NAME,FIELD)	editFields().unused().init(NAME, field_descriptor(CLASSNAME,FIELD), offsetof(CLASSNAME,FIELD)).isPointer(field_is_pointer(CLASSNAME,FIELD))
-//#define init_virtual_field(NAME,FIELDCLASS,SETTER,GETTER)    editFields().unused().init(NAME,classes::byType(typeid(FIELDCLASS)),SETTER,GETTER)
+//#define init_virtual_field(NAME,FIELDCLASS,SETTER,GETTER)    editFields().unused().init(NAME,classes::by_type(typeid(FIELDCLASS)),SETTER,GETTER)
 
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 

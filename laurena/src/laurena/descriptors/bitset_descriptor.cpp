@@ -34,9 +34,8 @@ any& bitset_descriptor::clear(any& value) const
 
 bool bitset_descriptor::has(descriptor::Flags flag) const
 {
-	if (flag == Flags::STRING_CAST)
-		return true;
-	return this->descriptor::has(flag);
+    // Only descriptor flag concerned by bitset is the to_string feature. 
+	return (flag == Flags::STRING_CAST) ? true : this->descriptor::has(flag);
 }
 
 //CAST
@@ -109,8 +108,8 @@ any bitset_descriptor::create() const
 
 const descriptor* td<boost::dynamic_bitset<> >::desc()
 {
-    static const descriptor* res = NULL;
-    if (res == NULL)
+    static const descriptor* res = nullptr;
+    if (res == nullptr)
     {
         res = new bitset_descriptor();
         classes::add(res);

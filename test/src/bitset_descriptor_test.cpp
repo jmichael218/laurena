@@ -27,11 +27,11 @@ void testBitsetDescriptor()
     testunit::type("descriptor<boost::dynamic_bitset<>>");
     
     // is the descriptor existing ?
-    testunit::startTest("is descriptor<boost::dynamic_bitset<>> defined ?");
+    testunit::start("is descriptor<boost::dynamic_bitset<>> defined ?");
     const descriptor* cd = td<string_array>::desc();
-    testunit::endTest(cd != nullptr);
+    testunit::end(cd != nullptr);
 
-    testunit::startTest("serialize a dynamic bitset in binary format");
+    testunit::start("serialize a dynamic bitset in binary format");
     test_bitset_binary tbb;
     tbb._w8 = 254;
     tbb._i32 = -5;
@@ -45,7 +45,7 @@ void testBitsetDescriptor()
     testunit::log() << serialized << std::endl;   
 
 
-    testunit::startTest("serialize a dynamic bitset in bitfield format");
+    testunit::start("serialize a dynamic bitset in bitfield format");
     test_bitset_bitfield tbbf;
     tbbf._w16 = 65535;
     tbbf._i64 = -5;

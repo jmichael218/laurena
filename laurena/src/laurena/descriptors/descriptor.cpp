@@ -72,9 +72,9 @@ const descriptor& descriptor::resolve(const any& value) const
 /*                                                                              */ 
 /********************************************************************************/ 
 
-size_t descriptor::sizeOf() const 
+size_t descriptor::size_of() const 
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("sizeOf not implemented for this class");
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("size_of not implemented for this class");
 }
 
 any descriptor::cast (const any& value) const
@@ -142,9 +142,9 @@ const field& descriptor::getField(const std::string& field_name) const
 }
 
 
-const fields& descriptor::getFields() const
+const fields& descriptor::get_fields() const
 {
-    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("this class doesn't have field members.");
+    throw new LAURENA_UNIMPLEMENTED_EXCEPTION("This class doesn't have field members.");
 }
 
 

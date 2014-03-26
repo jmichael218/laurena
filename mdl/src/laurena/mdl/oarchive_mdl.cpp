@@ -27,7 +27,6 @@ void oarchive_mdl::serializeFields(const descriptor& cd, const any& value)
 std::string s;
 const polymorphic_feature* pcf = dynamic_cast<const polymorphic_feature*>(cd.feature(Feature::POLYMORPHIC));
 const any_feature* acf = NULL;
-bool skip_null_values ;
 
     if (pcf && pcf->hasParent())
         this->serializeFields(pcf->parent(),value);
@@ -38,7 +37,7 @@ bool skip_null_values ;
     void* ptrObject = value.ptr();
     any fieldValue;
 
-    for (const std::unique_ptr<field>& patt : cd.getFields())
+    for (const std::unique_ptr<field>& patt : cd.get_fields())
     {             
 		field& att = *patt;
         if (att.is_primary_key())

@@ -43,9 +43,16 @@ public:
     /****************************************************************************/ 
     variable ();
     variable (const variable& source);
+    variable (variable&& source);
     variable (const std::string& name, const any& value);
 
     virtual ~variable ();
+
+    /****************************************************************************/ 
+    /*      operators                                                           */ 
+    /****************************************************************************/ 
+    variable& operator=(const variable&  source);
+    variable& operator=(      variable&& source);
 
     /****************************************************************************/ 
     /*          protected data                                                  */ 

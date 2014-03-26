@@ -15,7 +15,7 @@ using namespace test;
 
 void test_dao ()
 {
-	const descriptor* desc = classes::byName("character");
+	const descriptor* desc = classes::by_name("character");
 	assert(desc);
 
 	character bob;

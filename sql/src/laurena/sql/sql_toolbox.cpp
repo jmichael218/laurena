@@ -16,7 +16,7 @@ const field* sql_toolbox::primaryKeyField(const descriptor& desc)
 {
 const sql_column* col;
 
-	const fields& fs = desc.getFields();
+	const fields& fs = desc.get_fields();
 	for (const std::unique_ptr<field>& pf : fs)
 	{
 		const field* f = pf.get();

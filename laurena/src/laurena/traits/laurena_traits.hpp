@@ -42,7 +42,7 @@ struct td
 {
     static const descriptor* desc()
     {
-        return classes::byType(typeid(T));;
+        return classes::by_type(typeid(T));;
     }
 
     static const descriptor* desc(T& t)
@@ -57,7 +57,7 @@ template<typename T>
 const descriptor* desc_of(T& t)
 {
   typedef typename traits<T>::basetype basetype;
-  const descriptor* d = classes::byType(typeid(basetype));
+  const descriptor* d = classes::by_type(typeid(basetype));
   return d ? d : td<basetype>::desc();
 }
 

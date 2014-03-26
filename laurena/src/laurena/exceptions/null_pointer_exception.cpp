@@ -25,7 +25,7 @@ null_pointer_exception::null_pointer_exception(const std::string& message, const
     this->ready();
 }
 
-const char* null_pointer_exception::exceptionType () const
+const char* null_pointer_exception::type () const
 {
 static const char* type = "Null Pointer Exception" ;
 

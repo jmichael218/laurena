@@ -60,7 +60,7 @@ void buildTestClassDescriptors ()
 		;
 
     // testing descriptors
-    const descriptor* d2 = classes::byName("character");
+    const descriptor* d2 = classes::by_name("character");
     character bob ;    
     d2->setObjectField(&bob,"name",std::string("Bob"));
     d2->setObjectField(&bob,"age",31);

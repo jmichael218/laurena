@@ -50,7 +50,7 @@ exception::exception (const std::ostringstream& message, const char* filename, c
 /********************************************************************************/ 
 /*              implementation of virtual functions                             */
 /********************************************************************************/ 
-const char* exception::exceptionType () const
+const char* exception::type () const
 {
 static const char* type = "Laurena's Standard Exception" ;
 
@@ -61,7 +61,7 @@ static const char* type = "Laurena's Standard Exception" ;
 void exception::report(std::ostream& destination) const
 {    
 
-    destination << this->exceptionType() 
+    destination << this->type() 
         << " raised in file " << this->_filename 
 		<< ", in function " << this->_function
         << ", at line " << this->_line 

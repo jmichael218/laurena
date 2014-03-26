@@ -50,7 +50,7 @@ public:
     // ACCESSORS  
     virtual const class_feature*      feature(Feature featureId) const;
 
-    virtual size_t                      sizeOf() const;
+    virtual size_t                      size_of() const;
 
     /****************************************************************************/ 
     /*          new functions                                                   */ 

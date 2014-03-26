@@ -123,7 +123,7 @@ class descriptor : public descriptable {
     /****************************************************************************/ 
 
     //! Return size for static sized pod objects like int, float, ...
-    virtual size_t sizeOf() const;
+    virtual size_t size_of() const;
 
     //! Set default value, when defined
     virtual any& clear(any& value) const;
@@ -182,7 +182,7 @@ class descriptor : public descriptable {
     /****************************************************************************/ 
 
     //! Return attributes if any, raise exception if hasAttributes() return false. Doesn't return fields of the parent class.    
-    virtual const fields& getFields() const;
+    virtual const fields& get_fields() const;
 
 	//! Return a pointer to the requested field, nullptr if not exist
 	virtual const field* findField(const std::string& field_name) const;

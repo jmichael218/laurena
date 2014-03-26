@@ -144,7 +144,7 @@ public:
     vector_descriptor(const char* name, const descriptor* parent = nullptr) 
 
     :   standard_class_descriptor<CONTAINER>(name, parent) ,
-        _container_class_feature (this,classes::byType(typeid(typename traits<ELEMENT>::basetype)))
+        _container_class_feature (this,classes::by_type(typeid(typename traits<ELEMENT>::basetype)))
     { }
 
 

@@ -52,7 +52,7 @@ public:
     /****************************************************************************/ 
 
     // ACCESSORS
-    virtual size_t  sizeOf()            const;
+    virtual size_t  size_of()            const;
     virtual bool    has(descriptor::Flags flag) const;
 
 	//CAST
@@ -82,7 +82,7 @@ simple_type_descriptor<T>::simple_type_descriptor (const char* name) : descripto
 
 // ACCESSORS
 template<typename T>
-size_t simple_type_descriptor<T>::sizeOf() const
+size_t simple_type_descriptor<T>::size_of() const
 {
     return sizeof(T);
 }

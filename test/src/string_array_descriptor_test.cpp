@@ -41,11 +41,11 @@ void testStringArrayDescriptor()
     testunit::type("descriptor<string_array>");
     
     // is the descriptor existing ?
-    testunit::startTest("is descriptor<string_array> defined ?");
+    testunit::start("is descriptor<string_array> defined ?");
     const descriptor* cd = td<string_array>::desc();
-    testunit::endTest(cd != nullptr);
+    testunit::end(cd != nullptr);
 
-    testunit::startTest("serialize a string array");
+    testunit::start("serialize a string array");
     string_array sa ;
     sa.push_back("one");
     sa.push_back("two");
@@ -54,9 +54,9 @@ void testStringArrayDescriptor()
     std::string serialized;
     oarchive_mdl::tostring(serialized, "stringArray", &sa);
     testunit::log() << serialized << std::endl;  
-	testunit::endTest(true);
+	testunit::end(true);
 
-    testunit::startTest("test string array's key mapper");
+    testunit::start("test string array's key mapper");
 	string_array sa3;
 	sa3.attributes(&sa);
 	sa3 [0] = "un";
@@ -70,7 +70,7 @@ void testStringArrayDescriptor()
 	sa4.attributes(&sa);
 	laurena::mdl::mdl::parse(serialized, sa4);
 
-	testunit::endTest(sa4[0] == "un");
+	testunit::end(sa4[0] == "un");
 
 	testStringArrayGetFieldValue();
 

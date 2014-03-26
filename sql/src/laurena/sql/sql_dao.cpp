@@ -32,7 +32,7 @@ bool first = true;
 	{
 		if (pdesc->has(descriptor::Flags::FIELDS))
 		{
-			const fields& fs = pdesc->getFields();
+			const fields& fs = pdesc->get_fields();
 			for (const std::unique_ptr<field>& pf : fs)
 			{
 				const field& f = *pf;
@@ -89,7 +89,7 @@ const descriptor* pdesc = &desc;
 	{
 		if (pdesc->has(descriptor::Flags::FIELDS))
 		{
-			const fields& fs = pdesc->getFields();
+			const fields& fs = pdesc->get_fields();
 			for (const std::unique_ptr<field>& pf : fs)
 			{
 				const field& f = *pf;

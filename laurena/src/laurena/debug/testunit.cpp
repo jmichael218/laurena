@@ -17,14 +17,14 @@ word32 testunit::_ok   = 0;  // number of test succesfull
 word32 testunit::_nok  = 0;  // number of test failed
 std::ostream* testunit::_log = nullptr; // log used
 
-void testunit::startTest(const char* testmessage)
+void testunit::start(const char* testmessage)
 {
     ++_tests;
     if (_log)
         (*_log) << "  " << testmessage << " ...";
 }
 
-bool testunit::endTest (bool ok)
+bool testunit::end(bool ok)
 {
     if (ok)
     {

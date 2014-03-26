@@ -20,7 +20,7 @@ file_not_found_exception::file_not_found_exception (const char* message, const s
 }
 
 
-const char* file_not_found_exception::exceptionType () const
+const char* file_not_found_exception::type () const
 {
 static const char* type = "File Not Found Exception" ;
 

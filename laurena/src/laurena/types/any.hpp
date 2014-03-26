@@ -125,7 +125,7 @@ class any
 	any(any&& other);
 
 	template<typename VALUETYPE> any (const VALUETYPE & value)  : 
-		_content(new content<VALUETYPE>(value , classes::byType(typeid(typename traits<VALUETYPE>::basetype)))) 
+		_content(new content<VALUETYPE>(value , classes::by_type(typeid(typename traits<VALUETYPE>::basetype)))) 
 	{ }
 
 	virtual ~any();
@@ -138,9 +138,9 @@ class any
     any & operator=(const VALUETYPE & value)
     {
 
-        const descriptor* cd = classes::byType(typeid(typename traits<VALUETYPE>::basetype));
+        const descriptor* cd = classes::by_type(typeid(typename traits<VALUETYPE>::basetype));
         if (!cd)
-            cd = classes::byType(typeid(VALUETYPE));
+            cd = classes::by_type(typeid(VALUETYPE));
         if (!cd)
             classes::errorTypeNotFound(typeid(typename traits<VALUETYPE>::basetype));
 
@@ -226,11 +226,11 @@ VALUETYPE* dynamic_anycast(any* operand)
     if (!ocd)
         return 0;
 
-    const descriptor* vcd = classes::byType(typeid(typename traits<VALUETYPE>::basetype));
+    const descriptor* vcd = classes::by_type(typeid(typename traits<VALUETYPE>::basetype));
     if (!vcd)
         return 0;
 
-    return classes::areParents(*ocd,*vcd) ?  &static_cast<any::content<VALUETYPE> *>(operand->_content)->_value : 0;
+    return classes::are_parents(*ocd,*vcd) ?  &static_cast<any::content<VALUETYPE> *>(operand->_content)->_value : 0;
 }
 
 template<typename VALUETYPE>
@@ -269,10 +269,10 @@ VALUETYPE anycast(any & operand)
     if (!ocd)
         throw new LAURENA_EXCEPTION("anycast failed");
 
-	const descriptor* vcd = classes::byType(typeid(VALUETYPE));
+	const descriptor* vcd = classes::by_type(typeid(VALUETYPE));
 
     if (!vcd)
-		vcd = classes::byType(typeid(typename traits<VALUETYPE>::basetype));
+		vcd = classes::by_type(typeid(typename traits<VALUETYPE>::basetype));
 
     if (!vcd)
         throw new LAURENA_EXCEPTION("anycast failed");

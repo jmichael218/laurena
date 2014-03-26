@@ -81,7 +81,7 @@ public:
     ///
     /// Doesn't return fields of the parent class.
     ///
-    virtual const fields& getFields() const;
+    virtual const fields& get_fields() const;
 
 	virtual const field* findField(const std::string& field_name) const;
 
@@ -143,7 +143,7 @@ public:
 	inline field& add_field(FIELDTYPE T::*f, const char* name)
 	{
 		typedef typename traits<FIELDTYPE>::basetype basetype;
-		const descriptor* fdesc = classes::byType(typeid(basetype));
+		const descriptor* fdesc = classes::by_type(typeid(basetype));
         if (!fdesc)
         {
             throw LAURENA_CLASS_NOT_FOUND_EXCEPTION(typeid(basetype), "Unresolved field type");
@@ -163,7 +163,7 @@ public:
 	inline field& add_field(std::shared_ptr<FIELDTYPE> T::*f, const char* name)
 	{
 		typedef typename traits<FIELDTYPE>::basetype basetype;
-		const descriptor* fdesc = classes::byType(typeid(basetype));
+		const descriptor* fdesc = classes::by_type(typeid(basetype));
         if (!fdesc)
         {
             throw LAURENA_CLASS_NOT_FOUND_EXCEPTION(typeid(basetype), "Unresolved field type");
@@ -185,7 +185,7 @@ public:
 	inline field& add_field(const char* name, field::setter setter, field::getter getter)
 	{
 		typedef typename traits<FIELDTYPE>::basetype basetype;
-		const descriptor* fdesc = classes::byType(typeid(basetype));
+		const descriptor* fdesc = classes::by_type(typeid(basetype));
         if (!fdesc)
         {
             throw LAURENA_CLASS_NOT_FOUND_EXCEPTION(typeid(basetype), "Unresolved field type");

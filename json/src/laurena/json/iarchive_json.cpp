@@ -85,7 +85,7 @@ void iarchive_json::parseValue(any& object,const field* fdesc)
 {
 token t;
 any a;
-static const descriptor* desc_int64 = classes::byType(typeid(int64));
+static const descriptor* desc_int64 = classes::by_type(typeid(int64));
 
 	if (fdesc)
 	{

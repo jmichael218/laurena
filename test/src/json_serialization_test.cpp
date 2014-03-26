@@ -34,7 +34,7 @@ void testBasicJsonSerialization ()
     character bob2;
     laurena::json::json::parse(serialized_bob,"character",bob2);
     
-    testunit::endTest(bob2._name == "Bob" && bob2._age == 28 );
+    testunit::end(bob2._name == "Bob" && bob2._age == 28 );
 
 	testunit::function("oarchive_json::toString + iarchive_json::fromString - object with sub object");
 	character marie ;
@@ -67,7 +67,7 @@ void testBasicJsonSerialization ()
 	mariage m2 ;
 	laurena::json::json::parse(serialized_mariage,"mariage",m2);
 
-	testunit::endTest(m2._husband->_name == "Bob" && m2._husband->_age == 28 && m2._wife->_name == "marie" && m2._wife->_age == 26);
+	testunit::end(m2._husband->_name == "Bob" && m2._husband->_age == 28 && m2._wife->_name == "marie" && m2._wife->_age == 26);
 
 
     return;

@@ -61,7 +61,7 @@ class classes
 	//! This static function search for a class descriptor by its name.
 	//! The name must match the string parameter used as 'name' when the descriptor was built.
 	//! The function return nullptr if no class found.
-    static const descriptor*  byName (const std::string& name);
+    static const descriptor*  by_name (const std::string& name);
 
 	//! \brief Find a class descriptor using is type_info as search parameter.
 	//! \param type : The type_info registered when descriptor was built
@@ -69,7 +69,7 @@ class classes
 	//!
 	//! This static function search for a class descriptor by the type_info of the described class.	
 	//! The function return nullptr if no class found.
-    static const descriptor*  byType (const type_info& type);
+    static const descriptor*  by_type (const type_info& type);
 	
 
     /****************************************************************************/ 
@@ -80,7 +80,7 @@ class classes
 	//!
 	//! This function exists for debug purpose. 
 	//! It list names of all registered classes.
-    static void logClasses (std::ostream& destination);
+    static void log_classes (std::ostream& destination);
 
 	//! \brief check if classes are related through polymorphism.
 	//! \param c1 : first class
@@ -88,7 +88,7 @@ class classes
 	//!
 	//! The function return true if c1 and c2 are related through polymorphism.
 	//! In a C++ way, it means c1 can be dynamic_casted to c2 or than c2 can be dynamic_casted to c1.
-    static bool areParents(const descriptor& c1, const descriptor& c2);
+    static bool are_parents(const descriptor& c1, const descriptor& c2);
 
 	//! \brief Register class descriptors for basic types and laurena inner types.
 	//! 
@@ -106,10 +106,10 @@ class classes
     protected:    
 
 	//! \brief map of class descriptors, indexed by class name.
-    static std::unordered_map<std::string,const descriptor*>		_classes_by_name;		
+    static std::unordered_map<std::string,const descriptor*>	_classes_by_name;		
 
 	//! \brief map of class descriptors, indexed by type_index. See std::type_index
-    static std::unordered_map<size_t,const descriptor*>    _classes_by_typeid;
+    static std::unordered_map<size_t,const descriptor*>         _classes_by_typeid;
 };
 
 

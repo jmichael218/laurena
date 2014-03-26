@@ -47,7 +47,7 @@ class failed_parsing_exception : public exception
     /****************************************************************************/ 
     /*          virtual functions                                               */ 
     /****************************************************************************/ 
-    virtual const char*     exceptionType ()                  const ;
+    virtual const char*     type ()                  const ;
     virtual void            report(std::ostream& destination) const ;
 
 

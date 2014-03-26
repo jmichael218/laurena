@@ -123,7 +123,7 @@ public:
     map_descriptor(const char* name, word8 nbFields=0, const descriptor* parent = nullptr) 
 
     :   standard_class_descriptor<CONTAINER>(name,nbFields,parent) ,
-        _container_class_feature (this,  classes::byType(typeid(basetype<KEY>::type)), classes::byType(typeid(basetype<ELEMENT>::type)))
+        _container_class_feature (this,  classes::by_type(typeid(basetype<KEY>::type)), classes::by_type(typeid(basetype<ELEMENT>::type)))
     { }
 
 

@@ -48,7 +48,7 @@ int main ()
 	buildClassDescriptor_ITriangle();
 
 
-	classes::logClasses(GLOG);
+	classes::log_classes(GLOG);
 	GLOG << std::endl;
 
 	// to test ASimpleClass ();

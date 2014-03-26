@@ -101,7 +101,7 @@ bool parameters::syntax (const std::string& src)
 			p._flags.set(parameter::FLAG_LINE);
 		}
 		else
-			p._descriptor = classes::byName(classtype);
+			p._descriptor = classes::by_name(classtype);
 
 		if (!p._descriptor)
 			return false;

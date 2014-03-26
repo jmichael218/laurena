@@ -58,7 +58,7 @@ const any_feature* acf = NULL;
     void* ptrObject = value.ptr();
     any fieldValue;
 
-    for (const std::unique_ptr<field>& patt : cd.getFields())
+    for (const std::unique_ptr<field>& patt : cd.get_fields())
     {                
 		const field& att = *patt;
 		if (att.need_support())
