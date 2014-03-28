@@ -20,8 +20,9 @@ OBJECTS= $(CORE)/any_descriptor_test.o \
 	$(CORE)/parameters_test.o \
 	$(CORE)/sql_test.o \
 	$(CORE)/string_array_descriptor_test.o \
+	$(CORE)/shared_pointer_test.o \
 	$(CORE)/velocity_test.o
-
+	
 TARGET=test
 
 all: $(TARGET)
