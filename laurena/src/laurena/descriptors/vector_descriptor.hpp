@@ -65,6 +65,51 @@ protected:
     bool                                _are_elements_pointer;
 };
 
+template<typename CONTAINER, typename ELEMENT>
+struct vector_container_feature_set_impl
+{
+    static void impl(CONTAINER* c, word32 index, const descriptor* element_descriptor, any& element)
+    {
+		if (index >= c->size())
+			c->resize(index+1);
+
+        if ( element.desc()->has(descriptor::Flags::ATOMIC))
+	    {
+		    element = element_descriptor->cast(element);
+			(*c) [index] = anycast<ELEMENT>(element);
+	    }
+	    else
+	    {
+		    ELEMENT* e = anycast<ELEMENT*>(element);
+			(*c) [index] = *e ;
+	    }
+    }
+};
+
+template<typename CONTAINER, typename ELEMENT>
+struct vector_container_feature_set_impl<CONTAINER, ELEMENT*>
+{
+    static void impl(CONTAINER* c, word32 index, const descriptor* element_descriptor, any& element)
+    {
+		if (index >= c->size())
+			c->resize(index+1);
+
+        (*c) [index] = anycast<ELEMENT*>(element);
+    }
+};
+
+template<typename CONTAINER, typename ELEMENT>
+struct vector_container_feature_set_impl<CONTAINER, std::shared_ptr<ELEMENT>>
+{
+    static void impl(CONTAINER* c, word32 index, const descriptor* element_descriptor, any& element)
+    {
+		if (index >= c->size())
+			c->resize(index+1);
+
+        (*c) [index] = std::shared_ptr<ELEMENT>(anycast<ELEMENT*>(element));
+    }
+};
+
 
 template<typename CONTAINER, typename ELEMENT>
 class vector_container_feature : public base_vector_container_feature
@@ -72,7 +117,7 @@ class vector_container_feature : public base_vector_container_feature
 public:
 
     vector_container_feature(const descriptor* vectorDescriptor, const descriptor* elementDescriptor) 
-        : base_vector_container_feature (vectorDescriptor, elementDescriptor, boost::is_pointer<ELEMENT>::value)
+        : base_vector_container_feature (vectorDescriptor, elementDescriptor, std::is_pointer<ELEMENT>::value || is_shared_pointer<ELEMENT>::value)
         { }
 
     /****************************************************************************/ 
@@ -101,18 +146,8 @@ public:
     {
 		CONTAINER* c = anycast<CONTAINER*>(container);
 		word32 index = anycast<word32>(key);
-		if (index >= c->size())
-			c->resize(index+1);
 
-		if (boost::is_pointer<ELEMENT>::value || element.desc()->has(descriptor::Flags::ATOMIC))
-			(*c) [index] = anycast<ELEMENT>(element);
-		else
-		{
-			ELEMENT* e = anycast<ELEMENT*>(element);
-			(*c) [index] = *e ;
-		}
-
-		
+        vector_container_feature_set_impl<CONTAINER, ELEMENT>::impl(c, index, _elements_descriptor, element);
 	}
 
     virtual void get(any& container, const any& key, any& element) const

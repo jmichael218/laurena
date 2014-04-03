@@ -36,6 +36,14 @@ void testSharedPointerFields ()
     ch->_name = "Lord Gardakan";
     ch->_age  = 57;
 
+    std::shared_ptr<character> pl2 = std::make_shared<character>();
+    pl->_name = "Raoul Rakar";
+    pl->_age  = 16;
+
+    std::shared_ptr<character>  ch2 = std::make_shared<character>();
+    ch->_name = "Magister Mordak";
+    ch->_age  = 147;
+
     avatar a;
     a._player = pl;
     //a._character = ch;
@@ -61,6 +69,28 @@ void testSharedPointerFields ()
 
     avatars sb;
 	laurena::mdl::mdl::parse(serialized_avatar, sb);
+
+    /****************************************************************************/ 
+    /*          test shared pointer as vector elements                          */ 
+    /****************************************************************************/ 
+    guild g;
+    g.resize(2);
+
+    avatar::sptr g0 = std::make_shared<avatar>();
+    g0->_player = pl;
+    g0->_character = ch;
+    g[0] = g0;
+
+    avatar::sptr g1 = std::make_shared<avatar>();
+    g1->_player = pl2;
+    g1->_character = ch2;
+    g[1] = g1;
+
+    oarchive_mdl::tostring(serialized_avatar, "guild", &g);
+    testunit::log() << serialized_avatar << std::endl; 
+
+    guild gb;
+	laurena::mdl::mdl::parse(serialized_avatar, gb);
 
 
     return;

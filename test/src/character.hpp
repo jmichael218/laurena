@@ -104,6 +104,8 @@ public:
 
 class avatars : public std::list<avatar::sptr> {};
 
+class guild  : public std::vector<avatar::sptr> {};
+
 /********************************************************************************/ 
 /*          bottom file block                                                   */ 
 /********************************************************************************/ 

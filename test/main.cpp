@@ -118,9 +118,16 @@ void buildTestClassDescriptors ()
     /****************************************************************************/ 
     /*          build class avatars              								*/ 
     /****************************************************************************/
-    // to test shared pointer serialization
+    // to test list of shared pointers serialization 
     auto d7 = list_descriptor<avatars, avatar::sptr>::build("avatars");
-    return;
+    
+
+    /****************************************************************************/ 
+    /*          build class guild                                               */ 
+    /****************************************************************************/
+    // to test vector of shared pointers serialization
+    auto d8 = vector_descriptor<guild, avatar::sptr>::build("guild");
+    
 }
 
 

@@ -112,7 +112,7 @@ class list_container_feature : public base_list_container_feature
 public:
 
     list_container_feature(const descriptor* listDescriptor, const descriptor* elementDescriptor) 
-        : base_list_container_feature (listDescriptor, elementDescriptor, boost::is_pointer<ELEMENT>::value || is_shared_pointer<ELEMENT>::value)
+        : base_list_container_feature (listDescriptor, elementDescriptor, std::is_pointer<ELEMENT>::value || is_shared_pointer<ELEMENT>::value)
         { }
 
     /****************************************************************************/ 
