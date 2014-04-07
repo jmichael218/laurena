@@ -14,10 +14,42 @@
 using namespace laurena;
 using namespace sql;
 
-std::string sql_dao::generateInsertStatement(const descriptor& desc, const any& object)
+sql_dao::sql_dao(const descriptor& desc, sql_database& db, const std::string& table_name) : dao (desc), _db(db), _tablename(table_name)
+{ }
+
+sql_dao::~sql_dao()
+{ }
+
+any& sql_dao::read    (const any& primaryKey, any& destination)
+{
+    return destination;
+}
+
+any& sql_dao::create  (any& object)
+{
+    return object;
+}
+
+any& sql_dao::update  (any& object)
+{
+    return object;
+}
+
+void sql_dao::erase   (any& object)
+{
+}
+
+void sql_dao::erase   (const any& primaryKey)
+{
+
+}
+
+    virtual bool    exist   (const any& primaryKey);
+
+std::string sql_dao::insert_query(const any& object)
 {
 std::ostringstream sFields, sValues, sQuery;
-const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(desc.annotations().get(sql_tablename::ANNOTATION_NAME));
+const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(this->_desc.annotations().get(sql_tablename::ANNOTATION_NAME));
 const sql_column* col;
 const polymorphic_feature* pcf = dynamic_cast<const polymorphic_feature*>(desc.feature(Feature::POLYMORPHIC));
 any v;
@@ -68,7 +100,7 @@ bool first = true;
 
 }
 
-std::string sql_dao::generateSelectByPrimaryKey(const descriptor& desc, any& primary_key)
+std::string sql_dao::select_by_primary_key_query(const descriptor& desc, any& primary_key)
 {
 std::ostringstream sQuery;
 const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(desc.annotations().get(sql_tablename::ANNOTATION_NAME));
@@ -129,7 +161,7 @@ const descriptor* pdesc = &desc;
 	return sQuery.str();
 }
 
-std::string sql_dao::generateDeleteByPrimaryKey(const descriptor& desc, any& primary_key)
+std::string sql_dao::delete_by_primary_key_query(const descriptor& desc, any& primary_key)
 {
 	const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(desc.annotations().get(sql_tablename::ANNOTATION_NAME));
 	if (! original_tablename)
