@@ -164,11 +164,13 @@ int main ()
     testanyDescriptor();
     testStringArrayDescriptor();
     testBitsetDescriptor();
-	//test_sql();
+
 
     testSharedPointerFields();
 
     testunit::displayResults();
+
+	test_sql();
     return 0;
 }
 

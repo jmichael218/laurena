@@ -59,7 +59,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../bin/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>laurena.lib;mdl.lib;json.lib;sql.lib;velocity.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>laurena.lib;mdl.lib;json.lib;sql.lib;sqlite.lib;velocity.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

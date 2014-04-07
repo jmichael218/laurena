@@ -21,5 +21,8 @@
     <Text Include="todo.txt">
       <Filter>Fichiers de ressources</Filter>
     </Text>
+    <Text Include="net_ressources.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </Text>
   </ItemGroup>
 </Project>

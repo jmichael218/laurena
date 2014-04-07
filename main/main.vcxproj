@@ -65,6 +65,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="..\Makefile" />
+    <Text Include="net_ressources.txt" />
     <Text Include="todo.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -10,6 +10,8 @@
 #include <laurena/sql/sql.hpp>
 #include "character.hpp"
 
+#include <laurena/sql/sqlite/sqlite_database.hpp>
+
 using namespace laurena;
 using namespace test;
 
@@ -34,9 +36,35 @@ void test_dao ()
 }
 
 
+void test_sqlite()
+{
+    sql::sqlite_database db ("datas/test");
+
+	const descriptor* desc = classes::by_name("character");
+	assert(desc);
+
+	character bob;
+	bob._name = "Bob Smith";
+	bob._age  = 42;
+
+	sql::sql_dao d;
+	any key ( "Bob Smith");
+	std::string sInsertQuery = d.generateInsertStatement (*desc, bob);
+
+    std::shared_ptr<sql::sql_statement> st = db.query(sInsertQuery);
+
+    st = nullptr;
+    db.close();
+    return;
+    
+}
+
 void test_sql()
 {
 	//sql::query q = sql::select ( field0, field1, sql::max(field3)) << sql::from ( descriptor ) << sql::where ( field (0) , sql::equals , 'XXXX');
 
 	test_dao();
+    test_sqlite();
+
+    return;
 }

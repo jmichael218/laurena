@@ -24,6 +24,8 @@
 
 #include <laurena/sql/sql_annotations.hpp>
 #include <laurena/sql/sql_dao.hpp>
+#include <laurena/sql/sql_database.hpp>
+#include <laurena/sql/sql_statement.hpp>
 
 #endif
 //End of file
