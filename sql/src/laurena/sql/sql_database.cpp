@@ -23,4 +23,9 @@ std::shared_ptr<sql_statement>   sql_database::query   (const std::string& str_q
     return std::make_shared<sql_statement>(*this, str_query);
 }
 
+std::string sql_database::column (const field& f) const
+{
+    return std::string("");
+}
+
 //End of file

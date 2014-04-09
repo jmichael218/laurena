@@ -39,7 +39,7 @@ public:
     /****************************************************************************/ 
     /*          destructor, constructors                                        */ 
     /****************************************************************************/ 
-    sql_dao(const descriptor& desc, sql_database& db, const std::string& tablename); 
+    sql_dao(const descriptor& desc, sql_database& db); 
     virtual ~sql_dao();
 
     /****************************************************************************/ 
@@ -67,7 +67,6 @@ public:
     /****************************************************************************/ 
     protected:
 
-    std::string         _tablename;
     sql_database&       _db;
 
 };

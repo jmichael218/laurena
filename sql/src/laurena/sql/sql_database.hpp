@@ -53,6 +53,13 @@ public:
     virtual bool open    () = 0;
     virtual bool close   () = 0;
 
+    /*
+        return a column definition:
+        Exemple : a field of type std::string will return "NAME           TEXT    NOT NULL" for a SQLite database
+        Return "" for an unsupported type
+    */ 
+    virtual std::string column (const field& f) const;
+
     virtual std::shared_ptr<sql_statement>   query   (const std::string& str_query);
 };
 

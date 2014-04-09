@@ -48,6 +48,7 @@ public:
     /****************************************************************************/ 
     virtual bool open    ();
     virtual bool close   ();
+    virtual std::string column (const field& f) const;
     virtual std::shared_ptr<sql_statement>   query   (const std::string& str_query);
 
     /****************************************************************************/

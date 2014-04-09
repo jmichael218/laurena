@@ -14,7 +14,7 @@
 using namespace laurena;
 using namespace sql;
 
-sql_dao::sql_dao(const descriptor& desc, sql_database& db, const std::string& table_name) : dao (desc), _db(db), _tablename(table_name)
+sql_dao::sql_dao(const descriptor& desc, sql_database& db) : dao (desc), _db(db)
 { }
 
 sql_dao::~sql_dao()
@@ -44,20 +44,36 @@ void sql_dao::erase   (const any& primaryKey)
 
 }
 
-    virtual bool    exist   (const any& primaryKey);
+bool sql_dao::exist   (const any& primaryKey)
+{
+    return false;
+}
 
+    std::string sql_dao::create_table_query()
+    {
+        return "";
+    }
+    /*
+std::string sql_dao::create_table_query(const descriptor& desc, const sql_tablename& table)
+{
+    const fields& fs = pdesc->get_fields();
+	for (const std::unique_ptr<field>& pf : fs)
+	{
+	    const field& f = *pf;
+}
+*/
 std::string sql_dao::insert_query(const any& object)
 {
 std::ostringstream sFields, sValues, sQuery;
-const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(this->_desc.annotations().get(sql_tablename::ANNOTATION_NAME));
+const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(this->_descriptor.annotations().get(sql_tablename::ANNOTATION_NAME));
 const sql_column* col;
-const polymorphic_feature* pcf = dynamic_cast<const polymorphic_feature*>(desc.feature(Feature::POLYMORPHIC));
+const polymorphic_feature* pcf = dynamic_cast<const polymorphic_feature*>(this->_descriptor.feature(Feature::POLYMORPHIC));
 any v;
-const descriptor* pdesc = &desc;
+const descriptor* pdesc = &this->_descriptor;
 bool first = true;
 
 	if (!original_tablename)
-		sql_error::noTablename(desc);
+		sql_error::noTablename(this->_descriptor);
 
 	const sql_tablename* current = original_tablename;
 	while (current->name() == original_tablename->name())
@@ -100,18 +116,18 @@ bool first = true;
 
 }
 
-std::string sql_dao::select_by_primary_key_query(const descriptor& desc, any& primary_key)
+std::string sql_dao::select_by_primary_key_query(any& primary_key)
 {
 std::ostringstream sQuery;
-const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(desc.annotations().get(sql_tablename::ANNOTATION_NAME));
+const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(this->_descriptor.annotations().get(sql_tablename::ANNOTATION_NAME));
 const sql_column* col;
 const sql_column* primary_key_col = nullptr;
-const polymorphic_feature* pcf = dynamic_cast<const polymorphic_feature*>(desc.feature(Feature::POLYMORPHIC));
+const polymorphic_feature* pcf = dynamic_cast<const polymorphic_feature*>(this->_descriptor.feature(Feature::POLYMORPHIC));
 any v;
-const descriptor* pdesc = &desc;
+const descriptor* pdesc = &this->_descriptor;
 
 	if (!original_tablename)
-		sql_error::noTablename(desc);
+		sql_error::noTablename(this->_descriptor);
 
 	sQuery << "SELECT ";
 
@@ -131,7 +147,7 @@ const descriptor* pdesc = &desc;
 				if (col->isPrimaryKey())
 				{
 					if (primary_key_col)
-						sql_error::twoPrimaryKeys(desc);
+						sql_error::twoPrimaryKeys(this->_descriptor);
 					primary_key_col = col;
 				}
 
@@ -155,22 +171,22 @@ const descriptor* pdesc = &desc;
 	}
 
 	if (!primary_key_col)
-		sql_error::noPrimaryKey(desc);
+		sql_error::noPrimaryKey(this->_descriptor);
 
 	sQuery << " FROM " << original_tablename->tablename() << " WHERE " << primary_key_col->column() << "='" << primary_key.tos() << "';";
 	return sQuery.str();
 }
 
-std::string sql_dao::delete_by_primary_key_query(const descriptor& desc, any& primary_key)
+std::string sql_dao::delete_by_primary_key_query(any& primary_key)
 {
-	const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(desc.annotations().get(sql_tablename::ANNOTATION_NAME));
+	const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(this->_descriptor.annotations().get(sql_tablename::ANNOTATION_NAME));
 	if (! original_tablename)
 	{
 
 	}
-	const field* pkField = sql_toolbox::primaryKeyField(desc);
+	const field* pkField = sql_toolbox::primaryKeyField(this->_descriptor);
 	if (!pkField)
-		sql_error::noPrimaryKey(desc);
+		sql_error::noPrimaryKey(this->_descriptor);
 
 	const sql_column* col = dynamic_cast<const sql_column*>(pkField->annotations().get(sql_column::ANNOTATION_NAME));
 	assert(col); 

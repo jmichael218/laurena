@@ -51,6 +51,28 @@ bool sqlite_database::close   ()
     return false;
 }
 
+std::string sqlite_database::column (const field& f) const
+{
+    const sql_column* col = dynamic_cast<const sql_column*>(f.annotations().get(sql_column::ANNOTATION_NAME));
+    if (!col) 
+        return std::string("");
+
+    std::ostringstream ss;
+    ss << col->column() << " ";
+
+    if (f.desc().name() == "string")
+        ss << "TEXT" ;
+
+    else
+        return std::string("");
+
+    if (f.is_primary_key())
+    ss << " PRIMARY KEY NOT NULL";
+
+    return ss.str();
+
+}
+
 std::shared_ptr<sql_statement>   sqlite_database::query   (const std::string& str_query)
 {
     if (!this->_db)
