@@ -32,6 +32,7 @@ namespace sql {
 /********************************************************************************/ 
 
 class sql_statement;
+class sql_dao;
 
 /********************************************************************************/ 
 /* sql database                                                                 */ 
@@ -59,6 +60,12 @@ public:
         Return "" for an unsupported type
     */ 
     virtual std::string column (const field& f) const;
+
+    /*
+        return a table create definition with the IF EXISTS clause
+        in the sql language supported by the database.
+    */
+    virtual std::string create_table_query(const sql_dao& dao);
 
     virtual std::shared_ptr<sql_statement>   query   (const std::string& str_query);
 };

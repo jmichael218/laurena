@@ -31,7 +31,7 @@ const sql_column* col;
 	if (!pcf)
 		return nullptr;
 
-	if (!pcf->hasParent())
+	if (!pcf->has_parent())
 		return nullptr;
 
 	return sql_toolbox::primaryKeyField(pcf->parent());

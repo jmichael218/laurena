@@ -73,6 +73,35 @@ std::string sqlite_database::column (const field& f) const
 
 }
 
+std::string sqlite_database::create_table_query(const sql_dao& dao)
+{
+    const descriptor& desc = dao.desc();
+    const sql_tablename* original_tablename = dynamic_cast<const sql_tablename*>(desc.annotations().get(sql_tablename::ANNOTATION_NAME));
+    const polymorphic_feature* pcf = dynamic_cast<const polymorphic_feature*>(desc.feature(Feature::POLYMORPHIC));
+
+    if (original_tablename == nullptr)
+        return std::string("");
+
+    std::ostringstream ss;
+    ss << "CREATE TABLE " << original_tablename->name() << "(" << std::endl;
+
+	const sql_tablename* current_table = original_tablename;
+    const descriptor*    current_desc  = &desc;
+	while (true)
+    {
+
+
+        if (!pcf->has_parent())
+            break;
+
+        current_desc = &pcf->parent();
+    }
+
+    ss << ");";
+
+    return ss.str();
+}
+
 std::shared_ptr<sql_statement>   sqlite_database::query   (const std::string& str_query)
 {
     if (!this->_db)

@@ -56,7 +56,7 @@ public:
     /*          new functions                                                   */ 
     /****************************************************************************/         
 
-    inline bool              hasParent () const     { return this->_polymorphic_class_feature.hasParent();}
+    inline bool              has_parent () const    { return this->_polymorphic_class_feature.has_parent();}
     inline const descriptor& parent()     const     { return this->_polymorphic_class_feature.parent();}
 
 

@@ -38,17 +38,17 @@ bool base_standard_class_descriptor::has(descriptor::Flags flag) const
 		case Flags::PRIMARY_KEY:
 			return ( this->_primary_key_field != FIELD_UNDEFINED ) ?
 				true :
-				( this->hasParent() ? this->parent().has(Flags::PRIMARY_KEY) : false );
+				( this->has_parent() ? this->parent().has(Flags::PRIMARY_KEY) : false );
 
 		case Flags::SERIAL:
             return ( this->_serial_field != FIELD_UNDEFINED ) ?
                 true :
-                ( this->hasParent() ? this->parent().has(Flags::SERIAL) : false );
+                ( this->has_parent() ? this->parent().has(Flags::SERIAL) : false );
 
         case Flags::FIELDS:
             return (this->_fields.size() > 0) ? 
                 true :
-                ( this->hasParent() ? this->parent().has(Flags::FIELDS) : false ) ;
+                ( this->has_parent() ? this->parent().has(Flags::FIELDS) : false ) ;
 		default:
 			return this->polymorphic_class_descriptor::has(flag);
 	}
@@ -63,7 +63,7 @@ const field&  base_standard_class_descriptor::primaryKey() const
 {   
     if (this->_primary_key_field >= this->_fields.size())
     {
-        if (this->hasParent())
+        if (this->has_parent())
             return this->parent().primaryKey();
 
         std::string message = "Class ";
@@ -78,7 +78,7 @@ const field& base_standard_class_descriptor::serial() const
 {
     if (this->_serial_field >= this->_fields.size())
     {
-        if (this->hasParent())
+        if (this->has_parent())
             return this->parent().serial();
 
         std::string message = "Class ";
@@ -103,7 +103,7 @@ const field& base_standard_class_descriptor::getField(const std::string& field_n
             return *f;
     }
 
-    if (!this->hasParent())
+    if (!this->has_parent())
     {
         std::string message (field_name);
         message.append("' is an unknow field member");
@@ -122,7 +122,7 @@ const field* base_standard_class_descriptor::findField(const std::string& field_
             return f.get();
     }
 
-	if (this->hasParent() == false)
+	if (this->has_parent() == false)
 		return nullptr;
     else
         return this->parent().findField(field_name);

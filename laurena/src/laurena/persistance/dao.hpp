@@ -68,13 +68,16 @@ public:
     /****************************************************************************/ 
 
     inline
-        const std::string& serial_manager() const { return this->_serial_manager; }
+    const std::string& serial_manager() const { return this->_serial_manager; }
 
     inline
-        void serial_manager(const std::string& s) { this->_serial_manager = s; }
+    void serial_manager(const std::string& s) { this->_serial_manager = s; }
 
     inline
-        void serial_manager(const char* s) { this->_serial_manager = s; }
+    void serial_manager(const char* s) { this->_serial_manager = s; }
+
+    inline
+    const descriptor& desc() const { return this->_descriptor; }
 
     /****************************************************************************/ 
     /*          protected datas                                                 */ 

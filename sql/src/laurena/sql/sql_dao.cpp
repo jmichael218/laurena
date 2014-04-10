@@ -102,7 +102,7 @@ bool first = true;
 
 		if (!pcf)
 			break;
-		if (!pcf->hasParent())
+		if (!pcf->has_parent())
 			break;
 
 		pdesc = &pcf->parent();
@@ -162,7 +162,7 @@ const descriptor* pdesc = &this->_descriptor;
 
 		if (!pcf)
 			break;
-		if (!pcf->hasParent())
+		if (!pcf->has_parent())
 			break;
 
 		pdesc = &pcf->parent();

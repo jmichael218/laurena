@@ -32,7 +32,7 @@ polymorphic_feature::~polymorphic_feature()
     }
 }
 
-bool polymorphic_feature::hasParent () const
+bool polymorphic_feature::has_parent () const
 {
     return (_parent != nullptr);
 }
@@ -60,7 +60,7 @@ bool polymorphic_feature::isParentClass(const descriptor& childClass) const
     if (!pcf)
         return false;
 
-    if (!pcf->hasParent())
+    if (!pcf->has_parent())
         return false;
 
     return ( (pcf->parent().name()) == this->desc().name()) ? true : this->isParentClass(pcf->parent());

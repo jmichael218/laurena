@@ -49,6 +49,7 @@ public:
     virtual bool open    ();
     virtual bool close   ();
     virtual std::string column (const field& f) const;
+    virtual std::string create_table_query(const sql_dao& dao);
     virtual std::shared_ptr<sql_statement>   query   (const std::string& str_query);
 
     /****************************************************************************/

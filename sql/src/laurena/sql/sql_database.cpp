@@ -28,4 +28,8 @@ std::string sql_database::column (const field& f) const
     return std::string("");
 }
 
+std::string sql_database::create_table_query(const sql_dao& dao)
+{
+    return std::string("");
+}
 //End of file

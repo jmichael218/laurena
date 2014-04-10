@@ -28,7 +28,7 @@ std::string s;
 const polymorphic_feature* pcf = dynamic_cast<const polymorphic_feature*>(cd.feature(Feature::POLYMORPHIC));
 const any_feature* acf = NULL;
 
-    if (pcf && pcf->hasParent())
+    if (pcf && pcf->has_parent())
         this->serializeFields(pcf->parent(),value);
 
     if (cd.has(descriptor::Flags::FIELDS) == false) 

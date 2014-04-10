@@ -45,7 +45,7 @@ public:
     /****************************************************************************/ 
     /*          polymorphic class functions                                     */ 
     /****************************************************************************/ 
-    virtual bool hasParent () const;
+    virtual bool has_parent () const;
     virtual const descriptor& parent() const;
 
     ///
