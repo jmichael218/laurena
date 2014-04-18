@@ -31,7 +31,7 @@ public:
 string_array dragon_states = "happy hungry sleepy";
 string_array dragon_foods  = "knight princess cow peasant horse" ;
 
-void buildClassDescriptor_Dragon()
+void build_dragon_descriptor()
 {
     // create class descriptor for the class 'dragon'
 	auto d = standard_class_descriptor<dragon>::build("dragon");
@@ -40,7 +40,7 @@ void buildClassDescriptor_Dragon()
 	d->add_field(&dragon::_foods,"food").annotate(new format_bitset("format.all", dragon_foods));
 }
 
-void testDragon ()
+void test_dragon ()
 {
 
 	// let's create our dragon
@@ -54,7 +54,7 @@ void testDragon ()
 	std::string destination = json::json::serialize(smaug);
 
 	// Let's display my jsoned dragon :
-	GLOG << "Details of our dragon are :" << std::endl << destination << std::endl;
+	std::cout << "Details of our dragon are :" << std::endl << destination << std::endl;
 
 	// let's clone smaug with marshalling
 	dragon d;
@@ -63,7 +63,7 @@ void testDragon ()
 
 	bitset::serialize((word64)d._state,dragon_states,states,",");
 	bitset::serialize(d._foods,dragon_foods,foods,",");
-	GLOG << "Cloned dragon details are : name=" << d._name << ", state=(" << states << "), foods=(" << foods << ")" << std::endl;
+	std::cout << "Cloned dragon details are : name=" << d._name << ", state=(" << states << "), foods=(" << foods << ")" << std::endl;
 
 
 }
@@ -79,10 +79,10 @@ int main ()
     json::JSON::init();
 
     // let's declare the classes :
-    buildClassDescriptor_Dragon();
+    build_dragon_descriptor();
 
     // Let's test the user class and its enum fields
-    testDragon();
+    test_dragon();
 
     return 1;
 }

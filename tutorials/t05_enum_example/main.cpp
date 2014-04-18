@@ -38,7 +38,7 @@ public:
 string_array genders    = "undefined male female" ;
 string_array user_types = "student professor visitor" ;
 
-void buildClassDescriptor_User()
+void build_user_descriptor()
 {
     auto denum = enum_type_descriptor<gender>::build("gender", genders);
 
@@ -50,7 +50,7 @@ void buildClassDescriptor_User()
     d->add_field(&user::_name,"name");
 }
 
-void testUser ()
+void test_user ()
 {
 
     // let's create our user
@@ -64,13 +64,13 @@ void testUser ()
     std::string destination = json::json::serialize(Paulo);
 
     // Let's display my jsoned Paulo :
-    GLOG << "Details of Paulo are :" << std::endl << destination << std::endl;
+    std::cout << "Details of Paulo are :" << std::endl << destination << std::endl;
 
     // let's clone Paulo with marshalling
     user PauloCloned;
     json::json::parse(destination,PauloCloned);
 
-    GLOG << "Paulo's clone details are : name=" << PauloCloned._name 
+    std::cout << "Paulo's clone details are : name=" << PauloCloned._name 
          << ", gender=" << (genders [PauloCloned._gender]) 
          << ", type=" << (user_types[PauloCloned._type]) 
          << ", age=" << ((int) PauloCloned._age) 
@@ -87,10 +87,10 @@ int main ()
     json::JSON::init();
 
     // let's declare the classes :
-    buildClassDescriptor_User();
+    build_user_descriptor();
 
     // Let's test the user class and its enum fields
-    testUser();
+    test_user();
 
     return 1;
 }

@@ -39,29 +39,31 @@ class squad : public std::vector<soldier*>
 {
 };
 
-// This function register the animal class to the serialization and parsing system
-void buildClassDescriptor_Soldier ()
+// This function register the soldier class to the serialization and parsing system
+void build_soldier_descriptor ()
 {
-    // create class descriptor for the class 'animal'
+    // create class descriptor for the class 'soldier'
     auto d = standard_class_descriptor<soldier>::build("soldier");
     d->add_field(&soldier::_rank,"rank");
     d->add_field(&soldier::_name,"name");
     d->add_field(&soldier::_age,"age");
 }
 
-// This function register the zoo class to the serialization and parsing system
-void buildClassDescriptor_Army()
+// This function register the army class to the serialization and parsing system
+// 'army' is a container of soldier
+void build_army_descriptor()
 {
 	auto d = list_descriptor<army,soldier>::build("army");
 }
 
-// This function register the circus class to the serialization and parsing system
-void buildClassDescriptor_Squad()
+// This function register the squad class to the serialization and parsing system
+// 'squad' is a container of pointer to soldiers
+void build_squad_descriptor()
 {
 	auto d = list_descriptor<squad,soldier*>::build("squad");
 }
 
-void testArmy()
+void test_army()
 {
     army z;
 
@@ -96,7 +98,7 @@ void testArmy()
 	GLOG << std::endl ;
 }
 
-void testSquad()
+void test_squad()
 {
     squad z;
 
@@ -143,15 +145,15 @@ int main ()
     json::JSON::init();
 
     // let's declare the classes :
-    buildClassDescriptor_Soldier();
-    buildClassDescriptor_Army();
-    buildClassDescriptor_Squad();
+    build_soldier_descriptor();
+    build_army_descriptor();
+    build_squad_descriptor();
 
     // Let's test the vector<soldier> class
-    testArmy();
+    test_army();
 
     // Let's test the vector<soldier*> class
-    testSquad();
+    test_squad();
 
     return 1;
 }

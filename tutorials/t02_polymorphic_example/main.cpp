@@ -60,8 +60,11 @@ void buildClassDescriptor_Animal ()
 // This function register the cat class to the serialization and parsing system
 void buildClassDescriptor_Cat ()
 {
-    // create class descriptor for the class 'cat'
-    // it is pretty much the same than for simple classes except you give the parent class in the creation
+    // Creating class descriptor for the class 'cat'
+    // It is pretty much the same than for simple classes except we need to 
+    // pass the parent class descriptor as second parameter to standard_class_descriptor::build
+    // To get the descriptor of any registered class, use td<CLASS>::desc() 
+    // Therefore, to get cat's class parent descriptor, we use td<animal>::desc()
     auto d = standard_class_descriptor<cat>::build("cat", td<animal>::desc());
     d->add_field(&cat::_birds,"birds");
     d->add_field(&cat::_mouses,"mouses");
