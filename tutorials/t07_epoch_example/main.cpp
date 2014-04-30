@@ -32,7 +32,7 @@ public:
 	std::string             _name;
 };
 
-void buildClassDescriptor_Article()
+void build_article_descriptor()
 {
     // create class descriptor for the class 'article'
 	auto d = standard_class_descriptor<article>::build("article");
@@ -40,7 +40,7 @@ void buildClassDescriptor_Article()
 	d->add_field(&article::_epoch,"epoch").annotate(new format_epoch("format.all", "dd/mm/yyyy HH:MM:SS", DATE_FORMAT));
 }
 
-void testArticle ()
+void test_article ()
 {
 
 	// let's create our dragon
@@ -52,13 +52,13 @@ void testArticle ()
 	std::string destination = json::json::serialize(watergate);
 
 	// Let's display my jsoned dragon :
-	GLOG << "Details of our article are :" << std::endl << destination << std::endl;
+	std::cout << "Details of our article are :" << std::endl << destination << std::endl;
 
 	// let's clone the article with marshalling
 	article a;
 	json::json::parse(destination,a);
 
-	GLOG << "Cloned article details are : name=" << a._name << ", epoch=" << a._epoch << std::endl;
+	std::cout << "Cloned article details are : name=" << a._name << ", epoch=" << a._epoch << std::endl;
 }
 
 
@@ -74,10 +74,10 @@ int main ()
     DATE_FORMAT = std::make_shared<datetime_format>();
 
     // let's declare the classes :
-    buildClassDescriptor_Article();
+    build_article_descriptor();
 
     // Let's test the user class and its enum fields
-    testArticle();
+    test_article();
 
     return 1;
 }

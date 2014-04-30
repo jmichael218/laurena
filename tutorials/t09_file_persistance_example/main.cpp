@@ -38,7 +38,7 @@ public:
 string_array genders    = "undefined male female" ;
 string_array user_types = "student professor visitor" ;
 
-descriptor* buildClassDescriptor_User()
+descriptor* build_user_descriptor()
 {
     auto denum = enum_type_descriptor<gender>::build("gender", genders);
 
@@ -66,7 +66,7 @@ int main ()
     json::JSON::init();
 
     // user class initialization
-    descriptor* userDescriptor = buildClassDescriptor_User();
+    descriptor* userDescriptor = build_user_descriptor();
 
     // user persistance initialization
     DISK.add("user", std::make_shared<json::json_dao>(*userDescriptor, "datas/users"));
@@ -89,6 +89,6 @@ int main ()
     std::string destination = json::json::serialize(bobcloned);
 
     // Let's check create + read worked :
-    GLOG << "Here is Bob's details:" << std::endl << destination << std::endl;
+    std::cout << "Here is Bob's details:" << std::endl << destination << std::endl;
     return 1;
 }

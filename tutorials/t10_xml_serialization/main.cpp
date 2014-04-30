@@ -47,7 +47,7 @@ public:
 };
 
 // This function register the animal class to the serialization and parsing system
-void buildClassDescriptor_Animal ()
+void build_animal_descriptor ()
 {
     // create class descriptor for the class 'animal'
     auto d_animal = standard_class_descriptor<animal>::build("animal");
@@ -58,7 +58,7 @@ void buildClassDescriptor_Animal ()
 
 
 // This function register the cat class to the serialization and parsing system
-void buildClassDescriptor_Cat ()
+void build_cat_descriptor ()
 {
     // create class descriptor for the class 'cat'
     // it is pretty much the same than for simple classes except you give the parent class in the creation
@@ -77,10 +77,10 @@ int main ()
     xml::XML::init();
 
     // let's declare the animal class :
-    buildClassDescriptor_Animal();
+    build_animal_descriptor();
 
     // let's declare the cat class :
-    buildClassDescriptor_Cat();
+    build_cat_descriptor();
 
     // let's create a cat
     cat kitty;
@@ -93,21 +93,21 @@ int main ()
     std::string destination = xml::xml::serialize(kitty);
 
     // Let's display my jsoned cat :
-    GLOG << "Here is my cat details:" << std::endl << destination << std::endl;
+    std::cout << "Here is my cat details:" << std::endl << destination << std::endl;
 
     // let's create a new cat from our serialized kitty 
     cat kimmie;
     xml::xml::parse(destination,kimmie);
-    GLOG << "Kimmie is a " << kimmie._specie << " named " << kimmie._name 
+    std::cout << "Kimmie is a " << kimmie._specie << " named " << kimmie._name 
          << ", has " << ((int)kimmie._age) << " years, killed " 
          << kimmie._birds << " birds and " << kimmie._mouses << " mouses." 
          << std::endl;
 
     // LEt's control if kimmie is exactly the same than kitty
     if (kimmie == kitty)
-        GLOG << "Kimmie is a clone of Kitty !!" << std::endl << "Laurena's serialization works fine !" << std::endl;
+        std::cout << "Kimmie is a clone of Kitty !!" << std::endl << "Laurena's serialization works fine !" << std::endl;
     else
-        GLOG << "Kimmie is different of Kitty !!" << std::endl << "Laurena's serialization is a fake !" << std::endl ;
+        std::cout << "Kimmie is different of Kitty !!" << std::endl << "Laurena's serialization is a fake !" << std::endl ;
 
     return 1;
 
