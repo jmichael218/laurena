@@ -124,7 +124,9 @@ class any
 	any(const any& other);
 	any(any&& other);
 
-	template<typename VALUETYPE> any (const VALUETYPE & value)  : 
+	template<typename VALUETYPE> 
+	any (const VALUETYPE & value)  : 
+	
 		_content(new content<VALUETYPE>(value , classes::by_type(typeid(typename traits<VALUETYPE>::basetype)))) 
 	{ }
 
@@ -151,6 +153,7 @@ class any
         return *this;
     }
 
+    inline
 	any& operator=(const char* str)
 	{
 		return this->operator=(std::string(str));
@@ -161,7 +164,9 @@ class any
 
 	bool operator==(const any& value);
 
-    inline bool operator != (const any& value)		 { return  ! this->operator== (value) ; }
+    inline 
+    bool operator != (const any& value)		 
+    { return  ! this->operator== (value) ; }
 
     /****************************************************************************/ 
     /*          METHODS                                                         */ 
@@ -170,7 +175,8 @@ class any
 
 	std::string tos () const;			
     
-    inline any& clear ()
+    inline 
+    any& clear ()
     {
 		if (_content)
             delete _content;            
@@ -178,7 +184,9 @@ class any
     }   
 
 
-    inline bool isEmpty() const						{ return !_content; }
+    inline 
+    bool empty() const
+    { return _content==nullptr; }
 
     void* ptr() const
     {
@@ -189,14 +197,16 @@ class any
         return _content->ptr();
     }
 
-    inline const std::type_info & type() const
+    inline 
+    const std::type_info& type() const
     {
         return _content ? _content->type() : typeid(void);
     }
 
 
  
-    inline const descriptor* desc() const
+    inline 
+    const descriptor* desc() const
     {
         return _content ? _content->desc() : nullptr ;
     }
@@ -224,11 +234,11 @@ VALUETYPE* dynamic_anycast(any* operand)
 {
     const descriptor* ocd = operand->desc();
     if (!ocd)
-        return 0;
+        return nullptr;
 
     const descriptor* vcd = classes::by_type(typeid(typename traits<VALUETYPE>::basetype));
     if (!vcd)
-        return 0;
+        return nullptr;
 
     return classes::are_parents(*ocd,*vcd) ?  &static_cast<any::content<VALUETYPE> *>(operand->_content)->_value : 0;
 }
@@ -240,7 +250,7 @@ VALUETYPE * anycast(any * operand)
             &static_cast<any::content<VALUETYPE> *>(operand->_content)->_value
         : dynamic_anycast<VALUETYPE>(operand) ;
 
-    if (res == 0)
+    if (res == nullptr)
     {
         const type_info& operand_info = operand->type();
         const char* operand_name = operand_info.name();
@@ -255,13 +265,14 @@ VALUETYPE * anycast(any * operand)
 }  
 
 template<typename VALUETYPE>
-inline const VALUETYPE * anycast(const any * operand)
+inline 
+const VALUETYPE* anycast(const any * operand)
 {
-    return anycast<VALUETYPE>(const_cast<any *>(operand));
+    return anycast<VALUETYPE>(const_cast<any*>(operand));
 }
 
 template<typename VALUETYPE>
-VALUETYPE anycast(any & operand)
+VALUETYPE anycast(any& operand)
 {
     typedef typename std::remove_reference<VALUETYPE>::type nonref;
 
@@ -291,7 +302,8 @@ VALUETYPE anycast(any & operand)
 }
 
 template<typename VALUETYPE>
-inline VALUETYPE anycast(const any & operand)
+inline 
+VALUETYPE anycast(const any & operand)
 {
     typedef typename std::remove_reference<VALUETYPE>::type nonref;
 

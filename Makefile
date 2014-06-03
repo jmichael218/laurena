@@ -6,7 +6,6 @@ all:
 	cd xml; make clean
 	cd velocity; make clean
 	cd sql; make clean
-	cd sqlite; make clean
 	cd test; make clean
 	cd examples; make clean
 	cd tutorials/t01_simple_example; make clean

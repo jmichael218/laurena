@@ -160,7 +160,7 @@ const keymapper_feature* mapper = dynamic_cast<const keymapper_feature*>(cd.feat
         {
 			if (ccf->areElementsPointers())
 			{
-                if (element.isEmpty())
+                if (element.empty())
                     continue;
 
 				this->serialize(keystr,element,true);

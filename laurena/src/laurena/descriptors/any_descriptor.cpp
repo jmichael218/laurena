@@ -44,7 +44,7 @@ bool any_feature_impl::isEmpty (void* ptrValue) const
 {
 any* pany = (any*) ptrValue;
 
-    return pany->isEmpty();
+    return pany->empty();
 }
 
 /********************************************************************************/ 

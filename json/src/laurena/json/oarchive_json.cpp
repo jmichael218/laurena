@@ -193,7 +193,7 @@ const container_feature* ccf = dynamic_cast<const container_feature*>(cd.feature
         {
 			if (ccf->areElementsPointers())
 			{
-                if (element.isEmpty())
+                if (element.empty())
                     continue;
 
 				this->serializeObject(element);

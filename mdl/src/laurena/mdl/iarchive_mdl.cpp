@@ -362,7 +362,7 @@ bool doListPush = false;
                 }
             }
         }
-        if (obj.isEmpty())
+        if (obj.empty())
         {
             const field& f = d.getField(this->_last_keyword);
             f.get(parent,obj);
