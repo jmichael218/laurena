@@ -55,7 +55,13 @@ public:
     protected:
 
     #if defined(_MSC_VER)
-        static void printCrtDbgReport(const char* message);
+	    //! \brief For visual studio, display the debug message into visual studio console
+	    //! \param message : The message to be displayed
+	    //!
+	    //! Print a message into visual studio console.
+	    //! This function doesn't add a terminal '\n', assuming it's already in the message 
+	    //! or that message is multiline
+        static void crt_dbg_report(const char* message);
     #endif
 
     /****************************************************************************/ 

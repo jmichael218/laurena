@@ -75,7 +75,7 @@ void exception::report(std::ostream& destination) const
 void exception::print () const
 {
     debug::println (this->_what) ;
-    debug::printStackTrace () ;
+    debug::stack_trace () ;
 }
 
 void exception::ready()

@@ -66,7 +66,7 @@ void debug::printStackTrace ()
 #if defined(_MSC_VER) 
 /// visual studio only
 /// implementation of debug::printCrtDbgReport
-void debug::printCrtDbgReport(const char* message)
+void debug::crt_dbg_report(const char* message)
 {
 	#ifdef _DEBUG
 		word32 s = strlen(message);
@@ -98,7 +98,7 @@ void debug::println(const char* message)
 
     // display debug message in the visual studio console
     #if defined(_MSC_VER)        
-        debug::printCrtDbgReport(message);
+        debug::crt_dbg_report(message);
 
 		#ifdef _DEBUG
 			if (!is_last_endl)
@@ -124,7 +124,7 @@ void debug::println(const std::string& message)
         if ( message.length () <= 10000 )  
             _CrtDbgReport(_CRT_WARN, nullptr , 0 , nullptr , message.data()) ;
         else
-            debug::printCrtDbgReport(message.data());
+            debug::crt_dbg_report(message.data());
        
          if (!is_last_endl)
             _CrtDbgReport(_CRT_WARN, nullptr , 0 , nullptr , "\r\n" ) ;
