@@ -68,6 +68,10 @@ struct in_traits
 			stream.putback(c);
 		return current;		
 	}
+	
+	inline
+	static size_t length(type& stream)
+	{ return std::distance(begin(stream), end(stream)); }
 };
 
 template<typename T>
@@ -109,6 +113,10 @@ struct in_traits<const CHARTYPE[N]>
 		current -= s.size();
 		return current;		
 	}
+	
+	inline
+	static size_t length(type& carray)
+	{ return N; }
 };
 
 template<typename CHARTYPE>
@@ -137,6 +145,10 @@ struct in_traits<std::basic_string<CHARTYPE>>
 		--current;
 		return current;
 	}
+	
+	inline
+	static size_t length(type& str)
+	{ return str.length(); }
 };
 
 template<typename CHARTYPE>
@@ -164,6 +176,12 @@ struct in_traits<const CHARTYPE*>
 	{ 
 		--current;
 		return current;
+	}
+	
+	inline
+	static size_t length(type str)
+	{
+	    return str ? strlen(str) : 0;
 	}
 };
 
@@ -193,6 +211,10 @@ struct in_traits<CHARTYPE[N]>
 		--current;
 		return current;
 	}
+	
+	inline
+	static size_t length(type str)
+	{ return N; }
 };
 
 template<class CHARTYPE>
@@ -221,6 +243,10 @@ struct in_traits<CHARTYPE[]>
 		--current;
 		return current;
 	}
+	
+	inline
+	static size_t length(type str)
+	{ return std::char_traits<CHARTYPE>::length(str); }
 };
 
 
