@@ -44,7 +44,7 @@ public:
     /****************************************************************************/ 
     /*          print functions                                                 */ 
     /****************************************************************************/
-    static void printStackTrace () ;
+    static void stack_trace () ;
     
     static void println (const char* message) ;
     static void println (const std::string& message) ;

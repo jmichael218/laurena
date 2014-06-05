@@ -41,7 +41,7 @@ any string_descriptor::cast (const any& value) const
 // OPERATORS
 bool string_descriptor::equals(const any& a0, const any& a1) const
 {
-	return boost::equals(anycast<std::string>(a0),anycast<std::string>(a1));
+	return anycast<std::string>(a0) == anycast<std::string>(a1);
 }
 
 // RAW VALUE SERIALIZATION

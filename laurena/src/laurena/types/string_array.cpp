@@ -12,6 +12,7 @@
 #include <laurena/types/string_array.hpp>
 #include <laurena/memory/memory_functions.hpp>
 #include <laurena/algorithm/strings/prefix.hpp>
+#include <laurena/algorithm/strings/iequals.hpp>
 
 using namespace laurena;
 
@@ -89,7 +90,7 @@ int32 string_array::find(const std::string& value) const
     int32 i = sz-1;
     while(i > -1)   
     {
-        if (boost::iequals(this->operator[](i),value))
+        if (iequals(this->operator[](i),value))
             return i;
         --i;
     }

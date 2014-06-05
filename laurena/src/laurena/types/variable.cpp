@@ -49,7 +49,7 @@ variable_list::~variable_list ()
 variable*   variable_list::find(const std::string& name)
 {
     for(variable& v : *this)
-        if (boost::equals(name,v._name))
+        if (name == v._name)
             return &v;
 
     return nullptr;

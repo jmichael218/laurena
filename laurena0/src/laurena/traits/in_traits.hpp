@@ -122,18 +122,50 @@ struct in_traits<const CHARTYPE[N]>
 template<typename CHARTYPE>
 struct in_traits<std::basic_string<CHARTYPE>>
 {
-	typedef const std::basic_string<CHARTYPE>						type;
+	typedef std::basic_string<CHARTYPE>						        type;
 	typedef CHARTYPE												chartype;
-	typedef const CHARTYPE*											iterator;
+	typedef typename std::basic_string<CHARTYPE>::iterator			iterator;
 	typedef std::basic_string<CHARTYPE, std::char_traits<CHARTYPE>, std::allocator<char>>	string;
 
 	inline
-	static iterator begin(const type& str)
-	{ return str.data(); }
+	static iterator begin(type& str)
+	{ return str.begin(); }
 
 	inline
-	static iterator end(const type& str)
-	{ return str.data() + str.length(); }
+	static iterator end(type& str)
+	{ return str.end(); }
+
+	inline
+	static iterator readed(iterator it, unsigned long int length) 
+	{ return it + length; }
+
+	inline
+	static iterator back(type& str, iterator current, chartype c)
+	{ 
+		--current;
+		return current;
+	}
+	
+	inline
+	static size_t length(type& str)
+	{ return str.length(); }
+};
+
+template<typename CHARTYPE>
+struct in_traits<const std::basic_string<CHARTYPE>>
+{
+	typedef const std::basic_string<CHARTYPE>						        type;
+	typedef CHARTYPE												        chartype;
+	typedef typename std::basic_string<CHARTYPE>::const_iterator			iterator;
+	typedef std::basic_string<CHARTYPE, std::char_traits<CHARTYPE>, std::allocator<char>>	string;
+
+	inline
+	static iterator begin(type& str)
+	{ return str.cbegin(); }
+
+	inline
+	static iterator end(type& str)
+	{ return str.cend(); }
 
 	inline
 	static iterator readed(iterator it, unsigned long int length) 

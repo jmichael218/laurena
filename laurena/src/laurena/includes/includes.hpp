@@ -103,10 +103,7 @@
 #include <boost/lexical_cast.hpp>
 
 // for iequals
-#include <boost/algorithm/string.hpp>
-
-// for any
-#include <boost/type_traits/remove_reference.hpp>
+//#include <boost/algorithm/string.hpp>
 
 /********************************************************************************/ 
 /*              macros                                                          */ 

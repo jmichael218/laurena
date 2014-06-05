@@ -10,6 +10,7 @@
 
 #include <laurena/xml/xml_iarchive.hpp>
 #include <laurena/xml/xml_language.hpp>
+#include <laurena/algorithm/strings/iequals.hpp>
 
 using namespace laurena;
 using namespace xml;
@@ -176,7 +177,7 @@ std::string keyword;
     keyword = anycast<std::string>(t);
     
     //<! Check than keyword matches
-    if (!boost::iequals(name,keyword))      
+    if (!iequals(name,keyword))      
         this->error_tag_not_expected(name, keyword);
 
     this->readObject(name, object);  

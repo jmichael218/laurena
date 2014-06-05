@@ -36,7 +36,7 @@ std::list<std::ostream*> debug::_outputs;
 /// implementation of debug::printStackTrace
 ///
 /// TODO: implementation for windows visual studio
-void debug::printStackTrace ()
+void debug::stack_trace ()
 {
     #if defined (_MSC_VER)
 

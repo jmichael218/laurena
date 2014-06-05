@@ -35,11 +35,11 @@ namespace laurena {
 /*********************************************************************************/ 
 
 template<typename ITERATOR_ARG0, typename ITERATOR_ARG1>
-bool iequals(ITERATOR_ARG0 arg0, ITERATOR_ARG1 arg1First, ITERATOR_PREFIX arg1Last)
+bool iequals(ITERATOR_ARG0 arg0, ITERATOR_ARG1 arg1First, ITERATOR_ARG1 arg1Last)
 {
 
 	while (arg1First != arg1Last)
-		if (* std::tolower(arg0) ++ != * std::tolower(arg1First) ++)
+		if ( std::tolower(*arg0++) != std::tolower(*arg1First++))
 			return false;
 
 	return true;
@@ -47,9 +47,14 @@ bool iequals(ITERATOR_ARG0 arg0, ITERATOR_ARG1 arg1First, ITERATOR_PREFIX arg1La
 
 template<typename T0, typename T1>
 inline
-bool iequals(T0& arg0, const T1& arg1)
+bool iequals(T0& arg0, T1& arg1)
 {
-	return iequals<typename in_traits<T0>::iterator, typename in_traits<T1>::iterator>(in_traits<T0>::begin(source), in_traits<T1>::begin(tprefix), in_traits<T1>::end(tprefix));
+	return 
+	(in_traits<T0>::length(arg0) == in_traits<T1>::length(arg1)) ?
+	
+	    iequals<typename in_traits<T0>::iterator, typename in_traits<T1>::iterator>(in_traits<T0>::begin(arg0), in_traits<T1>::begin(arg1), in_traits<T1>::end(arg1))
+	    : false;
+	
 }
 
 /********************************************************************************/ 

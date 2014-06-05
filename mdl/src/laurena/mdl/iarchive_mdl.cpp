@@ -10,6 +10,8 @@
 
 #include <laurena/mdl/iarchive_mdl.hpp>
 #include <laurena/mdl/mdl_language.hpp>
+#include <laurena/algorithm/strings/iequals.hpp>
+#include <laurena/algorithm/strings/tolower.hpp>
 
 using namespace laurena;
 using namespace mdl;
@@ -41,7 +43,7 @@ std::string keyword;
     /****************************************************************************/ 
     tk = std::move (this->read_token(MDL::TOKEN_KEYWORD));
     keyword = anycast<std::string>(tk);
-    boost::to_lower(keyword);
+    tolower(keyword);
 
     if ( keyword == "include" )
     {
@@ -446,7 +448,7 @@ std::string keyword;
     keyword = anycast<std::string>(t);
     
     //<! Check than keyword matches
-    if (!boost::iequals(name,keyword))        
+    if (!iequals(name,keyword))        
     {
         std::ostringstream stream;
         this->_tokenizer.prefixErrorMessage(stream);

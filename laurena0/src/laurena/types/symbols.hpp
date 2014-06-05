@@ -73,7 +73,7 @@ template
 struct symbols_implementation<false, true, KEY, VALUE>
 {
 	typedef typename in_traits<KEY>::iterator		iterator;
-	typedef in_traits<KEY>							traits;
+	typedef in_traits<const KEY>					traits;
 	
 	static inline
 	bool is_prefix (const KEY& sprefix,  const KEY& key )

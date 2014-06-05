@@ -71,7 +71,7 @@ std::string keyword;
 	this->read_token(JSON::TOKEN_BRACKET_OPEN);
 	t = std::move(this->read_token(JSON::TOKEN_SINGLE_STRING));
 	keyword=anycast<std::string>(t);
-	if (!boost::equals(name,keyword))
+	if (name != keyword)
 		throw LAURENA_FAILED_PARSING_EXCEPTION("object names doesn't match", this->_tokenizer._ptr);
 	
 	this->read_token(JSON::TOKEN_DPOINTS);
