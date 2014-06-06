@@ -97,9 +97,6 @@ class classes
 	//! but also for laurena inner types like stringarray or variable.
     static void init ();
 
-
-	static void errorTypeNotFound(const type_info& type);
-
     /****************************************************************************/ 
     /*          protected data                                                  */ 
     /****************************************************************************/

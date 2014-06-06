@@ -68,13 +68,6 @@ bool classes::are_parents(const descriptor& c1, const descriptor& c2)
     return ( pcf1!= NULL && pcf2 != NULL ) ? ( pcf1->isParentClass(c2) || pcf2->isParentClass(c1)) : false ;
 }
 
-void classes::errorTypeNotFound(const type_info& type)
-{
-	std::ostringstream ss;
-	ss << "No class descriptor found for type " << type.name();
-	throw LAURENA_EXCEPTION(ss.str());
-}
-
 void classes::init ()
 {
     try

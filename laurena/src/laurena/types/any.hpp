@@ -33,6 +33,7 @@
 
 
 #include <laurena/exceptions/exception.hpp>
+#include <laurena/exceptions/class_not_found_exception.hpp>
 
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
@@ -140,11 +141,17 @@ class any
     any & operator=(const VALUETYPE & value)
     {
 
-        const descriptor* cd = classes::by_type(typeid(typename traits<VALUETYPE>::basetype));
+        // get a reference to the type info
+        const std::type_info& infoBaseType =  typeid(typename traits<VALUETYPE>::basetype);
+        
+        // get pointer to the class descriptor
+        const descriptor* cd = classes::by_type(infoBaseType);
         if (!cd)
             cd = classes::by_type(typeid(VALUETYPE));
+            
+            
         if (!cd)
-            classes::errorTypeNotFound(typeid(typename traits<VALUETYPE>::basetype));
+            throw LAURENA_CLASS_NOT_FOUND_EXCEPTION(infoBaseType, "Unregistered type");
 
 		if (_content)
             delete _content;

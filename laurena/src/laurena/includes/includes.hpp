@@ -97,13 +97,11 @@
 /********************************************************************************/ 
 /* boost includes                                                               */ 
 /********************************************************************************/ 
-#include <boost/type_traits.hpp>
+
 #include <boost/dynamic_bitset.hpp>
 #include <boost/iostreams/stream.hpp>
 #include <boost/lexical_cast.hpp>
 
-// for iequals
-//#include <boost/algorithm/string.hpp>
 
 /********************************************************************************/ 
 /*              macros                                                          */ 
