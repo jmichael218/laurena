@@ -1,5 +1,5 @@
 ///
-/// \file     voi_cast.h
+/// \file     void_cast.hpp
 /// \brief    cast a pointer or a reference to a (void*) ptr
 /// \author   Frederic Manisse
 /// \version  1.0

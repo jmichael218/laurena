@@ -27,6 +27,8 @@
 #include <laurena/descriptors/classes.hpp>
 #include <laurena/descriptors/simple_type_descriptor.hpp>
 
+#include <laurena/casting/lexical_cast.hpp>
+
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
@@ -59,12 +61,12 @@ public:
         else
             t = anycast<T>(value);
 
-        return boost::lexical_cast<std::string>(t);
+        return lexical_cast<std::string>(t);
     }
 
     virtual any& stoa(const std::string& string_value, any& value) const
     {
-        T t = boost::lexical_cast<T,std::string>(string_value);
+        T t = lexical_cast<T,std::string>(string_value);
         return value = t;
     }
 };

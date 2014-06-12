@@ -13,6 +13,8 @@
 #include <laurena/archives/oarchive.hpp>
 #include <laurena/archives/iarchive.hpp>
 
+#include <laurena/casting/lexical_cast.hpp>
+
 #include <boost/filesystem.hpp>
 
 using namespace laurena;
@@ -50,7 +52,7 @@ void file_serial_manager::load_last_serial()
     }
 
     std::string s = std::move(loader<>::load(filename));
-    this->_last_serial = boost::lexical_cast<word64>(s);
+    this->_last_serial = lexical_cast<word64>(s);
 }
 
 void file_serial_manager::save_last_serial()

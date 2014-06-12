@@ -24,12 +24,12 @@ word8_type_descriptor::word8_type_descriptor () : numeric_type_descriptor<word8>
 std::string word8_type_descriptor::atos(const any& value) const
 {
     word16 t = anycast<word8>(value);
-    return boost::lexical_cast<std::string,word16>(t);
+    return lexical_cast<std::string,word16>(t);
 }
 
 any& word8_type_descriptor::stoa(const std::string& string_value, any& value) const
 {
-    word16 t = boost::lexical_cast<word16,std::string>(string_value);
+    word16 t = lexical_cast<word16,std::string>(string_value);
     if (t > 255)
         throw new LAURENA_FAILED_PARSING_EXCEPTION("value is out of bounds",string_value);
     return value = (word8)t;
@@ -46,12 +46,12 @@ int8_type_descriptor::int8_type_descriptor () : numeric_type_descriptor<int8>("i
 std::string int8_type_descriptor::atos(const any& value) const
 {
     int16 t = anycast<int8>(value);
-    return boost::lexical_cast<std::string,int16>(t);
+    return lexical_cast<std::string,int16>(t);
 }
 
 any& int8_type_descriptor:: stoa(const std::string& string_value, any& value) const
 {
-    int16 t = boost::lexical_cast<int16,std::string>(string_value);
+    int16 t = lexical_cast<int16,std::string>(string_value);
        if ( t < SCHAR_MIN || t > SCHAR_MAX )
         throw new LAURENA_FAILED_PARSING_EXCEPTION("value is out of bounds",string_value);
     return value = (int8)t;

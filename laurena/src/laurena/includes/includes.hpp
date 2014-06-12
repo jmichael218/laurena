@@ -100,7 +100,7 @@
 
 #include <boost/dynamic_bitset.hpp>
 #include <boost/iostreams/stream.hpp>
-#include <boost/lexical_cast.hpp>
+//#include <boost/lexical_cast.hpp>
 
 
 /********************************************************************************/ 

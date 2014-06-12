@@ -14,10 +14,11 @@ OBJECTS= $(CORE)/test_alphabet.o \
 	$(CORE)/test_readwhile.o \
 	$(CORE)/test_rules.o \
 	$(CORE)/test_tabs.o \
-	main.o \
+	$(CORE)/main.o \
 	$(CORE)/test_charset.o \
 	$(CORE)/test_const_charset.o \
-	$(CORE)/test_sliteral.o
+	$(CORE)/test_sliteral.o \
+	$(CORE)/test_lexical_cast.o
 
 TARGET=test0
 

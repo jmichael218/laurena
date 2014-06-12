@@ -9,6 +9,7 @@
 ///
 #include <laurena/types/datetime_format.hpp>
 #include <laurena/debug/debug.hpp>
+#include <laurena/casting/lexical_cast.hpp>
 
 using namespace laurena;
 
@@ -58,13 +59,13 @@ word64 datetime_format::epoch  (const std::string& source, const std::string& fo
                     ss.read(s, 4);
                     s[4] = 0;
                     totalcount += 4;
-				    year = boost::lexical_cast<word16,const char*>(s);
+				    year = lexical_cast<word16,const char*>(s);
                     pstr += 4 ;
                 } else if ( count >= 2 )
                 {
                     ss.read(s, 2);
                     totalcount+=2; 
-				    year = 1900 + boost::lexical_cast<word16,const char*>(s);
+				    year = 1900 + lexical_cast<word16,const char*>(s);
                     pstr += 2 ;
                 }
                 break;
@@ -77,7 +78,7 @@ word64 datetime_format::epoch  (const std::string& source, const std::string& fo
                     ss.read(s, 2);
                     s[2] = 0;
                     totalcount += 2;
-				    month = boost::lexical_cast<word16,const char*>(s) - 1;
+				    month = lexical_cast<word16,const char*>(s) - 1;
                     pstr += 2 ;
                 } else if ( count == 1 )
                 {
@@ -93,7 +94,7 @@ word64 datetime_format::epoch  (const std::string& source, const std::string& fo
                     ss.read(s, 2);
                     s[2] = 0;
                     totalcount += 2;
-				    day = boost::lexical_cast<word16,const char*>(s);
+				    day = lexical_cast<word16,const char*>(s);
                     pstr += 2 ;               
                 }
                 else if ( count == 1 )
@@ -111,7 +112,7 @@ word64 datetime_format::epoch  (const std::string& source, const std::string& fo
                     ss.read(s, 2);
                     s[2] = 0;
                     totalcount += 2;
-				    hours = boost::lexical_cast<word16,const char*>(s);
+				    hours = lexical_cast<word16,const char*>(s);
                     pstr += 2 ;               
                 }
                 else if ( count == 1 )
@@ -129,7 +130,7 @@ word64 datetime_format::epoch  (const std::string& source, const std::string& fo
                     ss.read(s, 2);
                     s[2] = 0;
                     totalcount += 2;
-				    minutes = boost::lexical_cast<word16,const char*>(s);
+				    minutes = lexical_cast<word16,const char*>(s);
                     pstr += 2 ;               
                 }
                 else if ( count == 1 )
@@ -147,7 +148,7 @@ word64 datetime_format::epoch  (const std::string& source, const std::string& fo
                     ss.read(s, 2);
                     s[2] = 0;
                     totalcount += 2;
-				    seconds = boost::lexical_cast<word16,const char*>(s);
+				    seconds = lexical_cast<word16,const char*>(s);
                     pstr += 2 ;               
                 }
                 else if ( count == 1 )

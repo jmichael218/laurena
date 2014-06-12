@@ -12,6 +12,7 @@
 #include <laurena/exceptions/failed_parsing_exception.hpp>
 #include <laurena/constants/const_charsets.hpp>
 #include <laurena/validations/is_integer.hpp>
+#include <laurena/casting/lexical_cast.hpp>
 
 using namespace laurena;
 
@@ -167,7 +168,7 @@ std::string key;
         if (index==-1)
         {
             if (is_integer(key))
-                bitset::fromWord64(boost::lexical_cast<word64>(key), destination);
+                bitset::fromWord64(lexical_cast<word64>(key), destination);
             else
                 throw LAURENA_FAILED_PARSING_EXCEPTION("unknow flag" , key.c_str());
         }

@@ -9,6 +9,7 @@
 #include <laurena/persistance/serial_manager.hpp>
 #include <laurena/descriptors/field.hpp>
 #include <laurena/persistance/persistance.hpp>
+#include <laurena/casting/lexical_cast.hpp>
 
 using namespace laurena;
 
@@ -48,7 +49,7 @@ bool serial_manager::is_valid_serial(const std::string& serialKey)
     if (serialKey == "")
         return false;
     
-    return boost::lexical_cast<word64>(serialKey) > 0;
+    return lexical_cast<word64>(serialKey) > 0;
 }
 
 //End of file

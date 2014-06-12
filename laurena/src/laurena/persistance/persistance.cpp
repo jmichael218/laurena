@@ -9,6 +9,7 @@
 #include <laurena/persistance/persistance.hpp>
 #include <laurena/exceptions/null_pointer_exception.hpp>
 #include <laurena/descriptors/field.hpp>
+#include <laurena/casting/lexical_cast.hpp>
 
 using namespace laurena;
 
@@ -61,7 +62,7 @@ const descriptor* desc = object.desc();
             entry._serial = serialKey.tos();
             if (!ser->is_valid_serial(entry._serial))
             {
-                entry._serial = boost::lexical_cast<std::string>(ser->new_serial());
+                entry._serial = lexical_cast<std::string>(ser->new_serial());
                 any a (entry._serial);
                 object.desc()->serial().set(object, a);
             }

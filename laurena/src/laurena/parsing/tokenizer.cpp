@@ -10,6 +10,7 @@
 
 #include <laurena/toolboxes/loader.hpp>
 #include <laurena/algorithm/strings/readinteger.hpp>
+#include <laurena/casting/lexical_cast.hpp>
 
 #include <laurena/parsing/tokenizer.hpp>
 #include <laurena/exceptions/failed_parsing_exception.hpp>
@@ -224,7 +225,7 @@ tokenizer& tokenizer::operator >> (int32& i)
     word32 v = svalue.length();
     if (v)
 	{
-        i = boost::lexical_cast<int32,std::string>(svalue);
+        i = lexical_cast<int32,std::string>(svalue);
 		this->_ptr += svalue.length();
 		this->_location.count(svalue);
 	}
@@ -239,7 +240,7 @@ tokenizer& tokenizer::operator >> (word32& w)
 	word32 v = svalue.length();
     if (v)
 	{
-        w = boost::lexical_cast<word32,std::string>(svalue);     
+        w = lexical_cast<word32,std::string>(svalue);     
 		this->_ptr += svalue.length();
 		this->_location.count(svalue);
 	}
@@ -254,7 +255,7 @@ tokenizer& tokenizer::operator>>  (int16& i)
 	word32 v = svalue.length();
     if (v)
 	{
-        i = boost::lexical_cast<int16,std::string>(svalue);       
+        i = lexical_cast<int16,std::string>(svalue);       
 		this->_ptr += svalue.length();
 		this->_location.count(svalue);
 	}
@@ -269,7 +270,7 @@ tokenizer& tokenizer::operator>>  (word16& w)
 	word32 v = svalue.length();
     if (v)
 	{
-        w = boost::lexical_cast<word16,std::string>(svalue);       
+        w = lexical_cast<word16,std::string>(svalue);       
 		this->_ptr += svalue.length();
 		this->_location.count(svalue);
 	}
