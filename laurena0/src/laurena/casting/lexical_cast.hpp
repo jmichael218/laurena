@@ -214,6 +214,30 @@ struct lexical_cast_impl<unsigned long long int, std::string>
 };
 
 
+/*********************************************************************************/ 
+/*				from const char*    											 */ 
+/*********************************************************************************/ 
+
+template<>
+struct lexical_cast_impl<unsigned int, const char*>
+{
+	inline static unsigned int cast(const char* source)
+	{ return (unsigned int) std::stoul(std::string(source)); }
+};
+
+template<>
+struct lexical_cast_impl<int, const char*>
+{
+	inline static int cast(const char* source)
+	{ return atoi(source); }
+};
+
+template<>
+struct lexical_cast_impl<unsigned short int, const char*>
+{
+	inline static unsigned short int cast(const char* source)
+	{ return (unsigned short int) atoi(source); }
+};
 
 /*********************************************************************************/ 
 /*				lexical_cast function 											 */ 

@@ -9,6 +9,7 @@
 ///
 #include <laurena/laurena.hpp>
 #include <laurena/json/json.hpp>
+#include <laurena/casting/lexical_cast.hpp>
 
 // We declare using the laurena lib's namespace
 using namespace laurena;
@@ -103,11 +104,11 @@ int main ()
     DISK.insert("user", &bob);
     DISK.insert("bot", &robby);
 
-    std::string sid = boost::lexical_cast<std::string>(bob._serial);
+    std::string sid = lexical_cast<std::string>(bob._serial);
     any res = DISK.serial_to_object("serials", sid);
     user* bob_clone = anycast<user*>(res);
 
-    sid = boost::lexical_cast<std::string>(robby._serial);
+    sid = lexical_cast<std::string>(robby._serial);
     res = DISK.serial_to_object("serials", sid);
     bot* robby_clone = anycast<bot*>(res);
 
