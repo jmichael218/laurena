@@ -46,7 +46,8 @@ public:
     /****************************************************************************/ 
     /*          flag values                                                     */ 
     /****************************************************************************/ 
-    enum Flags {
+    enum Flags : unsigned char 
+    {
         FLAGS_IGNORE_IF_DEFAULT_VALUE = 0,  // Don't archive it if it's default value
         FLAGS_DONT_ARCHIVE            = 1,  // Don't archive, atribute is here for internal uses
         FLAGS_IS_POINTER              = 2,  // Is a pointer type.
@@ -143,7 +144,7 @@ public:
 
     word32                      _offset;
     const descriptor*           _descriptor;
-    boost::dynamic_bitset<>     _flags;
+    std::bitset<FLAGS_MAX>      _flags;
     const string_array*         _values;
 
 	std::string					_support_tag;

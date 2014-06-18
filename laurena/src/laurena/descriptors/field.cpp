@@ -21,11 +21,11 @@
 using namespace laurena;
 
 
-field::field() : descriptable(""), _flags(field::FLAGS_MAX,0), _setter(nullptr), _getter(nullptr), _descriptor(nullptr), _values(nullptr)
+field::field() : descriptable(""), _flags(), _setter(nullptr), _getter(nullptr), _descriptor(nullptr), _values(nullptr)
 { }
 
 field::field (const char* name, const descriptor* cd, word32 offset) : 
-	descriptable(name) , _offset(offset), _descriptor(cd), _flags (field::FLAGS_MAX,0),  _setter(nullptr), _getter(nullptr), _values(nullptr)
+	descriptable(name) , _offset(offset), _descriptor(cd), _flags (),  _setter(nullptr), _getter(nullptr), _values(nullptr)
 {
 }
 

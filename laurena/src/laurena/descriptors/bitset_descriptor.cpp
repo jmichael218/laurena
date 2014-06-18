@@ -8,8 +8,9 @@
 /// Describe a serializable class composed of serializable fields 
 ///
 #include <laurena/descriptors/bitset_descriptor.hpp>
-#include <laurena/toolboxes/bitset.hpp>
+//#include <laurena/toolboxes/bitset.hpp>
 #include <laurena/types/any.hpp>
+#include <laurena/traits/toolbox/toolbox_boost_dynamic_bitset.hpp>
 
 using namespace laurena;
 
@@ -84,14 +85,39 @@ any& bitset_descriptor::get(void* ptr, any& value)  const
 std::string bitset_descriptor::atos(const any& value) const
 {
     boost::dynamic_bitset<>* p = anycast<boost::dynamic_bitset<>*>(value);
-    return bitset::tos(*p);
+    
+    return toolbox<boost::dynamic_bitset<>>::tos(*p);
+    /*
+	std::string destination;
+    if (p->size() <= 0)    
+        return destination; 
+
+    destination.assign (p->size(),'0');
+
+    for ( word32 i = 0 ; i < p->size() ; i ++ )
+        if ( p->test(i))
+            destination [i] = '1' ;
+
+    return destination;
+    */ 
 }
 
 any& bitset_descriptor::stoa(const std::string& string_value, any& value) const
 {
     boost::dynamic_bitset<>* p = anycast<boost::dynamic_bitset<>*>(value);
-    bitset::parse(*p,string_value);
+    
+    *p = toolbox<boost::dynamic_bitset<>>::froms(string_value);
+    /*
+    p->resize(string_value.length());
+    p->reset();
+    
+    const char* ps = string_value.c_str();
+    word32 index = 0;
+    while (*ps)    
+        p->set(index++,(*ps++) == '0');
+    */ 
     return value;
+    
 }    
 
 // OBJECT CONSTRUCTOR FOR INJECTION

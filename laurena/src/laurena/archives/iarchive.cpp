@@ -37,7 +37,7 @@ void iarchive::skip_tabs()
     this->_tokenizer.skip(this->language().tabs_parsers());
 }
 
-token iarchive::read_token(const bitfield& allowed_tokens)
+token iarchive::read_token(const bitfield_t& allowed_tokens)
 {
 token tk;
 
@@ -60,40 +60,36 @@ token tk;
 
 token iarchive::read_token(word8 allowed_token_id)
 {
-    bitfield b;
-    b.resize(this->language().tokens_parsers().size());
-    b.set(allowed_token_id);
+    bitfield_t b (this->language().tokens_parsers().size(), false);
+    b[allowed_token_id] = true;
     return this->read_token(b);
 }
 
 token iarchive::read_token(word8 allowed_token1_id, word8 allowed_token2_id)
 {
-    bitfield b;
-    b.resize(this->language().tokens_parsers().size());
-    b.set(allowed_token1_id);
-    b.set(allowed_token2_id);
+    bitfield_t b (this->language().tokens_parsers().size(), false);
+    b[allowed_token1_id] = true;
+    b[allowed_token2_id] = true;
     return this->read_token(b);
 }
 
 
 token iarchive::read_token (word8 allowed_token1_id, word8 allowed_token2_id, word8 allowed_token3_id)
 {
-    bitfield b;
-    b.resize(this->language().tokens_parsers().size());
-    b.set(allowed_token1_id);
-    b.set(allowed_token2_id);
-    b.set(allowed_token3_id);
+    bitfield_t b (this->language().tokens_parsers().size(), false);
+    b[allowed_token1_id] = true;
+    b[allowed_token2_id] = true;
+    b[allowed_token3_id] = true;
     return this->read_token(b);
 }
 
 token iarchive::read_token(word8 allowed_token1_id, word8 allowed_token2_id, word8 allowed_token3_id, word8 allowed_token4_id)
 {
-    bitfield b;
-    b.resize(this->language().tokens_parsers().size());
-    b.set(allowed_token1_id);
-    b.set(allowed_token2_id);
-    b.set(allowed_token3_id);
-    b.set(allowed_token4_id);
+    bitfield_t b (this->language().tokens_parsers().size(), false);
+    b[allowed_token1_id] = true;
+    b[allowed_token2_id] = true;
+    b[allowed_token3_id] = true;
+    b[allowed_token4_id] = true;
     return this->read_token(b);
 }
 

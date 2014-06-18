@@ -55,7 +55,7 @@ class bitset {
     /// \param separator : separator characters between each flag. 
     ///
     /// \return The serialized bitset as a string
-    static std::string& serialize(const boost::dynamic_bitset<>& bits, const string_array& flagnames, std::string& destination, const std::string& separator);
+    static std::string& serialize(const bitfield_t& bits, const string_array& flagnames, std::string& destination, const std::string& separator);
 
     /// \brief serialize a bitset as a stringified list of flags
     ///
@@ -90,7 +90,7 @@ class bitset {
     /// \param binary : a string made of 0 and 1   
     ///
     /// \return A reference to parameter bits
-    static boost::dynamic_bitset<>& binary(boost::dynamic_bitset<>& bits, const std::string& binary);
+    static bitfield_t& binary(bitfield_t& bits, const std::string& binary);
 
     /// \brief compute a word64 as a stringified list of flags
     ///
@@ -110,14 +110,14 @@ class bitset {
     /// \param separator : a separator character
     ///
     /// \return A computed bitset value
-    static boost::dynamic_bitset<>& parse(boost::dynamic_bitset<>& destination, const string_array& bitnames, const charset<>& charset, const std::string& names);
+    static bitfield_t& parse(bitfield_t& destination, const string_array& bitnames, const charset<>& charset, const std::string& names);
 
     /// \brief compute a bitset from a string made of 0 and 1
-    static boost::dynamic_bitset<>& parse(boost::dynamic_bitset<>& destination, const std::string& value);
+    static bitfield_t& parse(bitfield_t& destination, const std::string& value);
 
-    static std::string tos(const boost::dynamic_bitset<>& bits);
-    static word64 toWord64 (const boost::dynamic_bitset<>& bits);
-    static boost::dynamic_bitset<>& fromWord64 (word64 value, boost::dynamic_bitset<>& dest);
+    static std::string tos(const bitfield_t& bits);
+    static word64 toWord64 (const bitfield_t& bits);
+    static bitfield_t& fromWord64 (word64 value, bitfield_t& dest);
 
     ///@}
 };

@@ -70,7 +70,7 @@ public:
    
     virtual void skip_tabs();
 
-    virtual token read_token(const bitfield& allowed_tokens);
+    virtual token read_token(const bitfield_t& allowed_tokens);
 
     /*
      * \brief check if the field do have a field format annotation

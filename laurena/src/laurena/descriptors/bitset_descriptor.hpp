@@ -20,6 +20,8 @@
 #include <laurena/descriptors/classes.hpp>
 #include <laurena/traits/laurena_traits.hpp>
 
+#include <boost/dynamic_bitset.hpp>
+
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 

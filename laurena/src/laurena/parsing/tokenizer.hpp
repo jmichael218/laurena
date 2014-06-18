@@ -74,9 +74,9 @@ public:
     /****************************************************************************/   
     void skip(const parsers& ps);
     int32 read(any& value, const parsers& ps);
-    int32 read(any& value, const parsers& ps, const boost::dynamic_bitset<>& allowed);
+    int32 read(any& value, const parsers& ps, const bitfield_t& allowed);
 
-    int32 readExpected(any& value, const parsers& ps, const boost::dynamic_bitset<>& tabs, word8 expected);
+    int32 readExpected(any& value, const parsers& ps, const bitfield_t& tabs, word8 expected);
 
     std::ostream& prefixErrorMessage(std::ostream& message) const;
     void syntaxError (const std::string& message) const;

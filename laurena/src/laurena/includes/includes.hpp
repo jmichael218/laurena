@@ -93,15 +93,14 @@
 #include <unordered_map>
 #include <typeindex>			// used in classes.hpp
 #include <memory>
+#include <bitset>
 		
 /********************************************************************************/ 
 /* boost includes                                                               */ 
 /********************************************************************************/ 
 
-#include <boost/dynamic_bitset.hpp>
+//#include <boost/dynamic_bitset.hpp>
 #include <boost/iostreams/stream.hpp>
-//#include <boost/lexical_cast.hpp>
-
 
 /********************************************************************************/ 
 /*              macros                                                          */ 

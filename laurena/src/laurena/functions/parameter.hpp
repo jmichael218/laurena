@@ -83,7 +83,7 @@ public:
     public:
     std::string                   _name;
     const descriptor*			  _descriptor;
-    boost::dynamic_bitset<>       _flags;   
+    std::bitset<MAX_FLAGS>        _flags;   
     
 };
 

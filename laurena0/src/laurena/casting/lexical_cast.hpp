@@ -26,6 +26,8 @@
 #include <string>
 #include <limits>
 
+#include <laurena/traits/toolbox/toolbox.hpp>
+
 /********************************************************************************/ 
 /*              opening namespace(s)                                            */ 
 /********************************************************************************/ 
@@ -63,161 +65,36 @@ struct lexical_cast_to_string
 	{ return std::to_string(source); }
 };
 
-template<>
-struct lexical_cast_impl<std::string, signed char>
+template<typename SOURCE>
+struct lexical_cast_impl<std::string, SOURCE>
 {
-	inline static std::string cast(signed char c)
-	{ return std::to_string((int) c); }
+	inline static std::string cast(SOURCE s)
+	{ return toolbox<SOURCE>::tos(s); }
 };
 
-template<>
-struct lexical_cast_impl<std::string, unsigned char>
-{
-	inline static std::string cast(unsigned char c)
-	{ return std::to_string((int) c); }
-};
-
-template<>
-struct lexical_cast_impl<std::string, unsigned int> : public lexical_cast_to_string<unsigned int> {};
-
-template<>
-struct lexical_cast_impl<std::string, int> : public lexical_cast_to_string<int> {};
-
-template<>
-struct lexical_cast_impl<std::string, unsigned short int> : public lexical_cast_to_string<unsigned short int> {};
-
-template<>
-struct lexical_cast_impl<std::string, short int> : public lexical_cast_to_string<short int> {};
-
-template<>
-struct lexical_cast_impl<std::string, unsigned long int> : public lexical_cast_to_string<unsigned long int> {};
-
-template<>
-struct lexical_cast_impl<std::string, long int> : public lexical_cast_to_string<long int> {};
-
-template<>
-struct lexical_cast_impl<std::string, unsigned long long int> : public lexical_cast_to_string<unsigned long long int> {};
-
-template<>
-struct lexical_cast_impl<std::string, long long int> : public lexical_cast_to_string<long long int> {};
-
-template<>
-struct lexical_cast_impl<std::string, float> : public lexical_cast_to_string<float> {};
-
-template<>
-struct lexical_cast_impl<std::string, double> : public lexical_cast_to_string<double> {};
-
-template<>
-struct lexical_cast_impl<std::string, long double> : public lexical_cast_to_string<long double> {};
 
 /*********************************************************************************/ 
 /*				from string														 */ 
 /*********************************************************************************/ 
-template<>
-struct lexical_cast_impl<signed char, std::string>
+template<typename SOURCE>
+struct lexical_cast_impl<SOURCE, std::string>
 {
-	static signed char cast(const std::string& source)	
-	{ 
-		int i = std::stoi(source); 
-		if (
-			(i < (int) std::numeric_limits<char>::min()) ||
-			(i > (int) std::numeric_limits<char>::max())
-		   )
-		throw std::out_of_range("Outside char range");
-		return (char) i;
-	}
-};
-
-template<>
-struct lexical_cast_impl<unsigned char, std::string>
-{
-	static unsigned char cast(const std::string& source)	
-	{ 
-		unsigned long int i = std::stoul(source); 
-		if (
-			(i > (unsigned long int) std::numeric_limits<unsigned char>::max())
-		   )
-		throw std::out_of_range("Outside unsigned char range");
-		return (unsigned char) i;
-	}
-};
-
-template<>
-struct lexical_cast_impl<short int, std::string>
-{
-	static short int cast(const std::string& source)	
-	{ 
-		int i = std::stoi(source); 
-		if (
-			(i < (int) std::numeric_limits<short int>::min()) ||
-			(i > (int) std::numeric_limits<short int>::max())
-		   )
-		throw std::out_of_range("Outside short int range");
-		return (short int) i;
-	}
-};
-
-template<>
-struct lexical_cast_impl<unsigned short int, std::string>
-{
-	static unsigned short int cast(const std::string& source)	
-	{ 
-		unsigned long int i = std::stoul(source); 
-		if (
-			(i > (unsigned long int) std::numeric_limits<unsigned short int>::max())
-		   )
-		throw std::out_of_range("Outside unsigned short int range");
-		return (unsigned short int) i;
-	}
-};
-
-template<>
-struct lexical_cast_impl<unsigned int, std::string>
-{
-	inline static unsigned int cast(const std::string& source)
-	{ return (unsigned int) std::stoul(source); }	
-};
-
-template<>
-struct lexical_cast_impl<int, std::string>
-{
-	inline static int cast(const std::string& source)
-	{ return std::stoi (source); }	
-};
-
-template<>
-struct lexical_cast_impl<long int, std::string>
-{
-	inline static long int cast(const std::string& source)
-	{ return std::stol(source); }
-};
-
-template<>
-struct lexical_cast_impl<unsigned long int, std::string>
-{
-	inline static unsigned long int cast(const std::string& source)
-	{ return std::stoul(source); }
-};
-
-template<>
-struct lexical_cast_impl<long long int, std::string>
-{
-	inline static long long int cast(const std::string& source)
-	{ return std::stoll(source); }
-};
-
-template<>
-struct lexical_cast_impl<unsigned long long int, std::string>
-{
-	inline static unsigned long long int cast(const std::string& source)
-	{ return std::stoull(source); }
+	inline static SOURCE cast(const std::string& s)
+	{ return toolbox<SOURCE>::froms(s); }
 };
 
 
 /*********************************************************************************/ 
 /*				from const char*    											 */ 
 /*********************************************************************************/ 
+template<typename SOURCE>
+struct lexical_cast_impl<SOURCE, const char*>
+{
+    inline static SOURCE cast(const char* source)
+    { return toolbox<SOURCE>::fromcc(source); }
+};
 
+/*
 template<>
 struct lexical_cast_impl<unsigned int, const char*>
 {
@@ -238,7 +115,7 @@ struct lexical_cast_impl<unsigned short int, const char*>
 	inline static unsigned short int cast(const char* source)
 	{ return (unsigned short int) atoi(source); }
 };
-
+*/
 /*********************************************************************************/ 
 /*				lexical_cast function 											 */ 
 /*********************************************************************************/ 

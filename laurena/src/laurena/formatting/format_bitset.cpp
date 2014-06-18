@@ -16,6 +16,9 @@
 #include <laurena/exceptions/unimplemented_exception.hpp>
 #include <laurena/toolboxes/bitset.hpp>
 
+#include <boost/dynamic_bitset.hpp>
+#include <laurena/traits/toolbox/toolbox_boost_dynamic_bitset.hpp>
+
 using namespace laurena;
 
 writer_bitset::writer_bitset(const string_array& values) : writer (), _values(values)
@@ -36,8 +39,8 @@ std::string destination;
     } 
     else                
     {
-		boost::dynamic_bitset<>* bset = anycast<boost::dynamic_bitset<>*>(value);        
-        bitset::serialize(*bset,this->_values,destination,CONST_SPACE);
+		boost::dynamic_bitset<>* bset = anycast<boost::dynamic_bitset<>*>(value);   
+		destination = toolbox<boost::dynamic_bitset<>>::mask_to_string(*bset,this->_values,CONST_SPACE);
     }
 
 	output << destination ; 
